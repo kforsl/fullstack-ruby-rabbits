@@ -1,5 +1,44 @@
+@font-face {
+    font-family: dankosaurus;
+    src: url(/fonts/dankosaurus.rounded.ttf);
+}
+
+@font-face {
+    font-family: alone-on-earth;
+    src: url(../public/fonts/Alone.otf);
+}
+
+:root {
+    --logo-font: dankosaurus;
+    --title-font: alone-on-earth;
+    --bread-font: Arial, Helvetica, sans-serif;
+
+    --primary-bg: #FEFAF1;
+    --secondary-bg: #EF7D37;
+    --CTA: #9ED8C2;
+    --accent: #FFC7C5;
+    --black: #333333;
+
+    --text-font-s: .75rem;
+    --text-font-m: 1rem;
+    --text-font-l: 1.5rem;
+    --text-font-xl: 2rem;
+
+    --spacing-s: 1rem;
+    --spacing-m: 2rem;
+    --spacing-l: 3rem;
+    --spacing-xl: 4rem;
+
+    --main-grid: repeat(8, minmax(0, 1fr));
+}
+
 * {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
+
+}
+
+body {
+    background-color: var(--primary-bg);
 }
