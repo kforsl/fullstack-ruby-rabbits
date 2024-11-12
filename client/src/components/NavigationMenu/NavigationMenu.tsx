@@ -1,18 +1,20 @@
+import { Link } from 'react-router-dom';
 import './navigationMenu.css';
 
 const NavigationMenu: React.FC = () => {
     const navigation = [
-        { name: 'MENU', route: '/menu' },
+        { name: 'MENU', route: '/' },
         { name: 'OM OSS', route: '/om-oss' },
         { name: 'PROFIL', route: '/profil' },
-        { name: 'VARUKORG', route: '/varukorg' },
     ];
     return (
         <nav className='navigation-menu'>
             <ul className='navigation-menu__list'>
                 {navigation.map((navigationItem) => (
                     <li className='navigation-menu__list-item' key={navigationItem.route}>
-                        <p className='navigation-menu__link'>{navigationItem.name}</p>
+                        <Link to={navigationItem.route} className='navigation-menu__link'>
+                            {navigationItem.name}
+                        </Link>
                     </li>
                 ))}
             </ul>

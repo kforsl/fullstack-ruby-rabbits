@@ -1,11 +1,14 @@
 import './App.css';
 import NavigationMenu from './components/NavigationMenu/NavigationMenu';
+import RoutesComponent from './routes/Routes';
 
 function App() {
     return (
-        <div>
+        <>
             <NavigationMenu />
-        </div>
+
+            <RoutesComponent />
+        </>
     );
 }
 
