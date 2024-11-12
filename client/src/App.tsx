@@ -1,7 +1,12 @@
-import "./App.css";
+import './App.css';
+import RoutesComponent from './routes/Routes';
 
 function App() {
-    return <div>Hello World</div>;
+    return (
+        <div>
+            <RoutesComponent />
+        </div>
+    );
 }
 
 export default App;
