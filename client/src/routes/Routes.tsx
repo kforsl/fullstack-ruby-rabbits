@@ -1,4 +1,4 @@
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 import MenuPage from '../pages/MenuPage/MenuPage';
 import AboutUsPage from '../pages/AboutUsPage/AboutUsPage';
 import ProfilePage from '../pages/ProfilePage/ProfilePage';
@@ -6,14 +6,12 @@ import FinalizeOrder from '../pages/FinalizeOrderPage/FinalizeOrder';
 
 const RoutesComponent: React.FC = () => {
     return (
-        <BrowserRouter>
-            <Routes>
-                <Route path='/' element={<MenuPage />} />
-                <Route path='/om-oss' element={<AboutUsPage />} />
-                <Route path='/profil' element={<ProfilePage />} />
-                <Route path='/orderbekraftelse' element={<FinalizeOrder />} />
-            </Routes>
-        </BrowserRouter>
+        <Routes>
+            <Route path='/' element={<MenuPage />} />
+            <Route path='/om-oss' element={<AboutUsPage />} />
+            <Route path='/profil' element={<ProfilePage />} />
+            <Route path='/orderbekraftelse' element={<FinalizeOrder />} />
+        </Routes>
     );
 };
 

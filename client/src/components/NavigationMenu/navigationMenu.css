@@ -1,0 +1,21 @@
+.navigation-menu {
+    justify-self: end;
+}
+
+.navigation-menu__list {
+    display: grid;
+    gap: var(--spacing-l);
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.navigation-menu__list-item {
+    list-style-type: none;
+    padding: var(--spacing-s);
+}
+
+.navigation-menu__link {
+    text-decoration: none;
+    color: var(--secondary-bg);
+    font-family: var(--title-font);
+    font-size: var(--text-font-l);
+}
