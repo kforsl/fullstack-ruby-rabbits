@@ -6,8 +6,8 @@ interface Props {
 
 const ProductSizeQuantityItem = ({ price }: Props) => {
     return (
-        <section>
-            <p> {price} kr </p>
+        <section className='ProductSizeQuantityItem'>
+            <p className='ProductSizeQuantityItem__price'> {price} kr </p>
         </section>
     );
 };

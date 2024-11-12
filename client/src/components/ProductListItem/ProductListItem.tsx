@@ -3,16 +3,26 @@ import ProductSizeQuantityItem from '../ProductSizeQuantityItem/ProductSizeQuant
 import { MenuItemType } from '../../interfaces';
 
 interface Props {
-    menuItem: MenuItemType;
+    productItem: MenuItemType;
 }
 
-const ProductListItem = ({ menuItem }: Props) => {
+const ProductListItem = ({ productItem }: Props) => {
     return (
-        <article>
-            {menuItem.sizes.map((item) => (
-                <ProductSizeQuantityItem price={item.price} />
-            ))}
-        </article>
+        <li className='ProductListItem'>
+            <section>
+                <h2 className='ProductListItem__title'> {productItem.name}</h2>
+                <section className='ProductListItem__ingredients-wrapper'>
+                    {productItem.sizes[0].ingredients.map((product) => (
+                        <p key={product.ingredientItem._id}>{product.ingredientItem.name},</p>
+                    ))}
+                </section>
+            </section>
+            <section className='ProductListItem__price-wrapper'>
+                {productItem.sizes.map((item) => (
+                    <ProductSizeQuantityItem price={item.price} key={item.price} />
+                ))}
+            </section>
+        </li>
     );
 };
 

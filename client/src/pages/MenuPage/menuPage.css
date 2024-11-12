@@ -1,0 +1,28 @@
+.menu-page {
+    max-width: 1100px;
+    margin: 0 auto;
+    margin-block: var(--spacing-xl);
+}
+
+.menu-page__title {
+    font-size: 8rem;
+    font-family: var(--logo-font);
+    text-align: center;
+    color: var(--black);
+    text-shadow: 8px 8px var(--accent);
+    margin-bottom: var(--spacing-l);
+}
+
+.menu-page__popular-wrapper {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--spacing-s);
+    margin-bottom: var(--spacing-l);
+}
+
+.menu-page__menu-wrapper {
+    display: grid;
+    grid-template-columns: var(--main-grid);
+    row-gap: var(--spacing-m);
+}

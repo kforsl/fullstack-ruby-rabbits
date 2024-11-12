@@ -1,0 +1,11 @@
+.ProductSizeQuantityItem {
+    width: fit-content;
+    height: 100%;
+    padding-inline: 0.5rem;
+}
+
+.ProductSizeQuantityItem__price {
+    font-family: var(--title-font);
+    font-size: var(--text-font-l);
+    color: var(--black);
+}

@@ -1,0 +1,28 @@
+.ProductListItem {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    justify-content: space-between;
+    width: 100%;
+    margin-bottom: var(--spacing-m);
+}
+
+.ProductListItem__title {
+    font-size: var(--text-font-l);
+    font-family: var(--title-font);
+    margin-bottom: var(--spacing-s);
+    grid-column: span 8;
+}
+
+.ProductListItem__ingredients-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.25rem;
+    font-size: var(--text-font-m);
+    font-family: var(--bread-font);
+}
+
+.ProductListItem__price-wrapper {
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.5rem;
+}
