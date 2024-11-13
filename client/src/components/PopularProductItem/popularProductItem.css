@@ -1,4 +1,4 @@
-.popularProductItem {
+.popular-product-item {
     width: 100%;
     list-style: none;
     overflow: hidden;
@@ -7,7 +7,7 @@
     text-align: center;
 }
 
-.popularProductItem__image {
+.popular-product-item__image {
     width: 100%;
     margin-bottom: var(--spacing-s);
     border-radius: 1rem;

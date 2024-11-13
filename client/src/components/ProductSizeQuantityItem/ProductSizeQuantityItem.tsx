@@ -6,10 +6,15 @@ interface Props {
 
 const ProductSizeQuantityItem = ({ price }: Props) => {
     return (
-        <section className='ProductSizeQuantityItem'>
-            <p className='ProductSizeQuantityItem__price'> {price} kr </p>
+        <section className='product-size-quantity-item'>
+            <p className='product-size-quantity-item__price'> {price} kr </p>
         </section>
     );
 };
 
 export default ProductSizeQuantityItem;
+
+/**
+ * Författare: Kim
+ * Komponent som tar emot ett pris och trycker ut priset på skärmen.
+ */

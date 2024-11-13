@@ -10,9 +10,9 @@ interface Props {
 
 const ProductList = ({ title, position, productItems }: Props) => {
     return (
-        <section className={`productList productList--${position}`}>
-            <h2 className='productList__title'>{title}</h2>
-            <ul className='productList__menu-list'>
+        <section className={`product-list product-list--${position}`}>
+            <h2 className='product-list__title'>{title}</h2>
+            <ul className='product-list__menu-list'>
                 {productItems.map((productItem) => (
                     <ProductListItem productItem={productItem} key={productItem._id} />
                 ))}
@@ -22,3 +22,8 @@ const ProductList = ({ title, position, productItems }: Props) => {
 };
 
 export default ProductList;
+
+/**
+ * Författare: Kim
+ * Komponent som tar emot title, en produktlistan, "left" eller "right" position för placering. och trycker ut en lista av alla produkter i produktlistan.
+ */

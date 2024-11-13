@@ -29,3 +29,8 @@ interface AllergensType {
     type: string;
     description: string;
 }
+
+/**
+ * Författare: Kim
+ * Skapat interface för MenuItemType, SizeType, IngredientType, IngredientItemType, AllergensType
+ */
