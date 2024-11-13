@@ -14,49 +14,6 @@ const productItems: MenuItemType[] = [
         imageUrl: '../../../public/images/choco-loco-shake.jpg',
         sizes: [
             {
-                size: 'Small',
-                price: 35,
-                ingredients: [
-                    {
-                        ingredientItem: {
-                            _id: 'i1',
-                            name: 'Chokladglass',
-                            description: 'Krämig chokladglass gjord på belgisk choklad.',
-                            allergens: [
-                                {
-                                    type: 'mjölk',
-                                    description: 'Innehåller mjölkprodukter.',
-                                },
-                            ],
-                        },
-                        quantity: 150,
-                    },
-                    {
-                        ingredientItem: {
-                            _id: 'i2',
-                            name: 'Vispgrädde',
-                            description: 'Luftig och sötad grädde för topping.',
-                            allergens: [
-                                {
-                                    type: 'mjölk',
-                                    description: 'Innehåller mjölk.',
-                                },
-                            ],
-                        },
-                        quantity: 20,
-                    },
-                    {
-                        ingredientItem: {
-                            _id: 'i3',
-                            name: 'Chokladsås',
-                            description: 'En mörk och söt chokladsås för extra smak.',
-                            allergens: [],
-                        },
-                        quantity: 10,
-                    },
-                ],
-            },
-            {
                 size: 'medium',
                 price: 45,
                 ingredients: [
