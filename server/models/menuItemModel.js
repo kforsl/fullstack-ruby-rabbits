@@ -17,7 +17,7 @@ const IngredientSchema = new Schema({ //Denna är speciellt för varje objekt in
 const SizeListSchema = new Schema({
     size:{
         type: Schema.Types.ObjectId, 
-        ref: 'Size'
+        ref: 'Size',
     },
     prize:{
         type: Number,
@@ -50,10 +50,12 @@ const MenuItemSchema = new Schema({
         type: String,
         required: false,
     },
-    sizes:[SizeListSchema]
+    sizes:[{
+        type: SizeListSchema,
+        required: true}
+    ]
 });
 
 const MenuItemModel = model('menuItem', MenuItemSchema);
-
 
 module.exports = { MenuItemModel, MenuItemSchema }

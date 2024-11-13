@@ -7,5 +7,6 @@ const router = express.Router();
 //Get all menu items
 router.get('/', controller.getAllMenuItems);
 router.post('/', controller.createMenuItem);
+router.put('/:id', controller.updateMenuItem);
 
 module.exports = router;
