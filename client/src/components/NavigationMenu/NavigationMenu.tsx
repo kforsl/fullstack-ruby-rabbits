@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import './navigationMenu.css';
+import Cart from '../Cart/Cart';
 
 const NavigationMenu: React.FC = () => {
     const navigation = [
@@ -18,6 +19,7 @@ const NavigationMenu: React.FC = () => {
                     </li>
                 ))}
             </ul>
+            <Cart />
         </nav>
     );
 };

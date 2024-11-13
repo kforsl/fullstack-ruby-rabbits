@@ -40,7 +40,7 @@
 
 body {
     background-color: var(--primary-bg);
-
+    font-family: var(--bread-font);
 }
 
 .wrapper {

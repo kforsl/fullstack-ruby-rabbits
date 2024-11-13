@@ -1,4 +1,6 @@
 .navigation-menu {
+    display: grid;
+    grid-template-columns: 1fr auto;
     justify-self: end;
 }
 
