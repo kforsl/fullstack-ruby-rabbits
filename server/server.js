@@ -12,10 +12,10 @@ const PORT = process.env.PORT | 3000;
 
 app.use(express.json());
 
-app.use('/menu-items', menuRoute);
-app.use('/ingredients', ingredientRoute);
-app.use('/sizes', sizeRoute);
-app.use('/allergens', allergenRoute);
+app.use('/api/menu-items', menuRoute);
+app.use('/api/ingredients', ingredientRoute);
+app.use('/api/sizes', sizeRoute);
+app.use('/api/allergens', allergenRoute);
 
 const run = async () => {
     try {
