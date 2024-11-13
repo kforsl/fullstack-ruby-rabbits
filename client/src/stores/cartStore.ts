@@ -43,5 +43,5 @@ const useCartStore = create<CartStore>((set) => ({
 export default useCartStore;
 /*
  *Författare: Magnus
- *Startat upp en array för cart samt funktionalitet att lägga till och ta bort cart items.
+ *Startat upp en array för cart samt funktionalitet att lägga till och ta bort cart items. removeFromCart filtrerar bort cart item istället för att visa 0.
  */

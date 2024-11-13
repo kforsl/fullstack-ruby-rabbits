@@ -87,3 +87,8 @@ const Cart: React.FC = () => {
 };
 
 export default Cart;
+
+/*
+ *Författare: Magnus
+ *Komponent för cart. Knapp med ikon som öppnar meny där samtliga cartItems samlas Kopplas till zustand useCartStore. Endast testad med utkommenterat dummy-data.
+ */

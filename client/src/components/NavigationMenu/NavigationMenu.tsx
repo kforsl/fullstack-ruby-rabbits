@@ -26,7 +26,7 @@ const NavigationMenu: React.FC = () => {
 
 export default NavigationMenu;
 
-/**
+/*
  * Författare: Magnus
  * Komponent som ger oss våra länkar för navigation.
- * **/
+ */

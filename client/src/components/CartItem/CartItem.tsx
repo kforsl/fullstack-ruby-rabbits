@@ -27,3 +27,8 @@ const CartItemComponent: React.FC<Props> = ({ cartItem }) => {
 };
 
 export default CartItemComponent;
+
+/*
+ *Författare: Magnus
+ *Komponent för cart-items. Varje item har 2 knappar och totalpris för item. Knapparna är kopplade till funktioner i zustand useCartStore.
+ */
