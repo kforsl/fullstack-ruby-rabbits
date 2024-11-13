@@ -4,17 +4,11 @@ const {MenuItemModel} = require("../models/menuItemModel");
 exports.getAllMenuItems = asyncHandler(async (req, res) => {
 
     const menuItems = await MenuItemModel.find({});
-    if(!menuItems) {
-        res.status(200).json({
-            message:'Menu items successfully found.',
-            data: menuItems
-        });
-    }
-    else{
-        res.status(404).json({
-            message:'Menu items not found.',
-        });
-    }
+    res.status(200).json({
+        message:'Menu items successfully found.',
+        data: menuItems
+    });
+
 });
 
 exports.createMenuItem = asyncHandler(async (req, res) => {

@@ -43,7 +43,8 @@ const MenuItemSchema = new Schema({
         enum:{
             values: ['Milkshake','Ice cream'],
             message: '{VALUE} is not supported.'
-        }
+        },
+        required: true,
     },
     imageUrl:{
         type: String,
