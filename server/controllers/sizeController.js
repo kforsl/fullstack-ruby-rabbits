@@ -15,7 +15,6 @@ exports.createSize = asyncHandler(async (req, res) => {
 
         await size.save();
         res.json({size:size});
-
     }
     catch (error){
         res.status(400).json({

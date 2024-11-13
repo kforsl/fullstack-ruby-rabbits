@@ -10,10 +10,11 @@ const IngredientItemSchema = new Schema({
         type: String,
         required:[false, 'Description is required']
     },
-    allergens: {
-        type:[AllergenSchema],
+    allergens: [{
+        type:Schema.Types.ObjectId, 
+        ref:'Allergen',
         required:false
-    }
+    }]
 });
 
 const IngredientItemModel = model('IngredientItem', IngredientItemSchema);

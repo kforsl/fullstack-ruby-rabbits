@@ -1,6 +1,5 @@
 const { Schema, model } = require('mongoose');
 
-
 const IngredientSchema = new Schema({ //Denna är speciellt för varje objekt inne i menuItem.
     ingredientItem: {
         type: Schema.Types.ObjectId, ref: 'IngredientItem'
@@ -17,7 +16,8 @@ const IngredientSchema = new Schema({ //Denna är speciellt för varje objekt in
 
 const SizeListSchema = new Schema({
     size:{
-        type: Schema.Types.ObjectId, ref: 'Size'
+        type: Schema.Types.ObjectId, 
+        ref: 'Size'
     },
     prize:{
         type: Number,
@@ -40,7 +40,10 @@ const MenuItemSchema = new Schema({
     },
     type:{
         type: String,
-        required: true,
+        enum:{
+            values: ['Milkshake','Ice cream'],
+            message: '{VALUE} is not supported.'
+        }
     },
     imageUrl:{
         type: String,

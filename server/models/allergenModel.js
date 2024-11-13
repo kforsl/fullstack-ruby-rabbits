@@ -1,10 +1,9 @@
-const mongoose = require('mongoose');
+const {Schema, model} = require('mongoose');
 
-const AllergenSchema = new mongoose.Schema({
+const AllergenSchema = new Schema({
     type: {
         type: String,
         required: true,
-        unique:true
     },
     description: {
         type: String,
@@ -12,6 +11,6 @@ const AllergenSchema = new mongoose.Schema({
     }
 });
 
-const AllergenModel = mongoose.model('Allergen', AllergenSchema);
+const AllergenModel = model('Allergen', AllergenSchema);
 
 module.exports = {AllergenSchema, AllergenModel}
