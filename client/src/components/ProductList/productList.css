@@ -1,0 +1,30 @@
+.product-list {
+    border: 4px solid var(--CTA);
+    position: relative;
+    margin-top: var(--spacing-m);
+    width: 100%;
+    padding: var(--spacing-m);
+    padding-top: var(--spacing-l);
+    background-color: var(--primary-bg);
+}
+
+.product-list--left {
+    grid-column: 1 / span 6;
+}
+.product-list--right {
+    grid-column: 3 / span 6;
+}
+
+.product-list__title {
+    font-size: var(--text-font-xl);
+    width: fit-content;
+    position: absolute;
+    left: var(--spacing-m);
+    top: 0;
+    transform: translateY(calc(-50% - 4px));
+    background-color: var(--primary-bg);
+}
+
+.product-list__menu-list {
+    width: 100%;
+}
