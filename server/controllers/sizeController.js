@@ -1,9 +1,12 @@
-const asyncHandler = require("express-async-handler");
-const {SizeModel} = require("../models/sizeModel");
+const asyncHandler = require('express-async-handler');
+const {SizeModel} = require('../models/sizeModel');
 
 exports.getAllSizes = asyncHandler(async (req, res) => {
     const sizes = await SizeModel.find({});
-    res.json({sizes});
+    res.json({
+        message:'Sizes succesfully found',
+        data: sizes
+    });
 });
 
 exports.createSize = asyncHandler(async (req, res) => {
@@ -14,12 +17,15 @@ exports.createSize = asyncHandler(async (req, res) => {
         const size = new SizeModel(req.body);
 
         await size.save();
-        res.json({size:size});
+        res.status(200).json({
+            message:'Succesfully created Size',
+            data:size
+        });
     }
     catch (error){
-        res.status(400).json({
-            status: 400,
-            message: error.message
+        res.status(500).json({
+            message: 'Error',
+            data: error
         });
     }
 });

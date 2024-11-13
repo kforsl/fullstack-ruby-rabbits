@@ -1,5 +1,5 @@
-const asyncHandler = require("express-async-handler");
-const {IngredientItemModel} = require("../models/ingredientItemModel");
+const asyncHandler = require('express-async-handler');
+const {IngredientItemModel} = require('../models/ingredientItemModel');
 
 
 
@@ -10,12 +10,12 @@ exports.createIngredient = asyncHandler(async (req, res) => {
         await ingredientItem.save();
 
         res.status(201).json({
-            message: 'Created menu item',
+            message: 'Succesfully created Menu-item',
             data:ingredientItem
         });
     
     }catch(error){
-        res.status(400).json({
+        res.status(500).json({
             message: 'Error',
             data: error
         });
@@ -28,7 +28,6 @@ exports.getAllIngredients = asyncHandler(async (req,res) => {
         res.status(200).json({ingredientItems});
     }catch(error){
         res.status(400).json({
-            status: 400,
             message: error.message
         });
     }
