@@ -13,13 +13,13 @@
     --title-font: alone-on-earth;
     --bread-font: Arial, Helvetica, sans-serif;
 
-    --primary-bg: #FEFAF1;
-    --secondary-bg: #EF7D37;
-    --CTA: #9ED8C2;
-    --accent: #FFC7C5;
+    --primary-bg: #fefaf1;
+    --secondary-bg: #ef7d37;
+    --CTA: #9ed8c2;
+    --accent: #ffc7c5;
     --black: #333333;
 
-    --text-font-s: .75rem;
+    --text-font-s: 0.75rem;
     --text-font-m: 1rem;
     --text-font-l: 1.5rem;
     --text-font-xl: 2rem;
@@ -30,6 +30,7 @@
     --spacing-xl: 4rem;
 
     --main-grid: repeat(8, minmax(0, 1fr));
+    --max-width: 1180px;
 }
 
 * {
@@ -45,6 +46,6 @@ body {
 
 .wrapper {
     display: grid;
-    max-width: 1180px;
+    max-width: var(--max-width);
     margin: 0 auto;
 }

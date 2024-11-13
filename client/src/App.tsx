@@ -1,13 +1,16 @@
-import './App.css';
+import Footer from './components/Footer/Footer';
 import NavigationMenu from './components/NavigationMenu/NavigationMenu';
 import RoutesComponent from './routes/Routes';
 
 function App() {
     return (
         <>
-            <NavigationMenu />
+            <div className='wrapper'>
+                <NavigationMenu />
 
-            <RoutesComponent />
+                <RoutesComponent />
+            </div>
+            <Footer />
         </>
     );
 }
