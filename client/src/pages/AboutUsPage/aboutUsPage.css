@@ -1,0 +1,15 @@
+.menu-page {
+    margin-block: var(--spacing-xl);
+    padding-block: var(--spacing-xl);
+}
+
+.menu-page__bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: -1;
+    object-fit: cover;
+    height: 100svh;
+    object-position: bottom;
+}
