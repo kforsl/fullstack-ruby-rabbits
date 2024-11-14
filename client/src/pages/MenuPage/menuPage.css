@@ -3,27 +3,6 @@
     padding-block: var(--spacing-xl);
 }
 
-.menu-page__bg {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    z-index: -1;
-    object-fit: cover;
-    height: 100svh;
-    object-position: bottom;
-}
-
-.menu-page__title {
-    font-size: 8rem;
-    font-family: var(--logo-font);
-    text-align: center;
-    color: var(--black);
-    text-shadow: 8px 8px var(--accent);
-    padding-bottom: var(--spacing-xl);
-    margin-bottom: var(--spacing-xl);
-}
-
 .menu-page__popular-wrapper {
     width: 100%;
     display: grid;

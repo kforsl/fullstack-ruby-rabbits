@@ -18,6 +18,8 @@
     --CTA: #9ed8c2;
     --accent: #ffc7c5;
     --black: #333333;
+    --pink: #FF9FC5;
+    --shadow-s: 2px 2px 0 var(--black);
 
     --text-font-s: 0.75rem;
     --text-font-m: 1rem;

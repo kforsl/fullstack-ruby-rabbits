@@ -1,8 +1,9 @@
 .text-button {
     min-width: fit-content;
     padding: .5rem 1rem;
-    background-color: var(--secondary-bg);
-    color: white;
+    background-color: var(--pink);
+    color: var(--black);
+    box-shadow: 3px 4px 0 0 var(--black);
     font-family: var(--title-font);
     font-size: var(--text-font-l);
     cursor: pointer;
