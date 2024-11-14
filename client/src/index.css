@@ -44,6 +44,22 @@
 body {
     background-color: var(--primary-bg);
     font-family: var(--bread-font);
+
+    background-image:
+        url(../../../public/images/blotches/by0-pink-cola-blue.svg),
+        url(../../../public/images/blotches/cSe-cola-pink-blue.svg),
+        url(../../../public/images/blotches/491-blue-pink-cola.svg),
+        url(../../../public/images/blotches/dotHb-cola-blue-pink.svg),
+        url(../../../public/images/blotches/cSe-cola-pink-blue.svg);
+    background-position:
+        left 70svh,
+        right 1000svh,
+        right 110svh,
+        left 150svh,
+        right bottom;
+    background-repeat: no-repeat;
+
+
 }
 
 #root {

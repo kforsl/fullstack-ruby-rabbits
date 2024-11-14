@@ -16,7 +16,7 @@ const PopularProductItem = ({ product }: Props) => {
 
 export default PopularProductItem;
 
-/**
+/*
  * Författare: Kim
  * Komponent som tar emot en produkt och trycker ut ett produktkort med bild och produktnamn.
  */
