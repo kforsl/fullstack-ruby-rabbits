@@ -18,7 +18,7 @@
     --CTA: #9ed8c2;
     --accent: #ffc7c5;
     --black: #333333;
-    --pink: #FF9FC5;
+    --pink: #ff9fc5;
     --shadow-s: 2px 2px 0 var(--black);
 
     --text-font-s: 0.75rem;
@@ -60,6 +60,13 @@ body {
     background-repeat: no-repeat;
 
 
+}
+
+#root {
+    min-height: 100svh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
 .wrapper {

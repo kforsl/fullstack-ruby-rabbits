@@ -456,18 +456,20 @@ const MenuPage: React.FC = () => {
 
     return (
         <main className='menu-page'>
-            <ul className='menu-page__popular-wrapper'>
-                {iceCreamProducts[0] && <PopularProductItem product={iceCreamProducts[0]} />}
-                {iceCreamProducts[3] && <PopularProductItem product={iceCreamProducts[1]} />}
-                {milkshakeProducts[2] && <PopularProductItem product={milkshakeProducts[0]} />}
-                {milkshakeProducts[1] && <PopularProductItem product={milkshakeProducts[1]} />}
-                {iceCreamProducts[3] && <PopularProductItem product={iceCreamProducts[1]} />}
-            </ul>
+            <div className='wrapper'>
+                <ul className='menu-page__popular-wrapper'>
+                    {iceCreamProducts[0] && <PopularProductItem product={iceCreamProducts[0]} />}
+                    {iceCreamProducts[3] && <PopularProductItem product={iceCreamProducts[1]} />}
+                    {milkshakeProducts[2] && <PopularProductItem product={milkshakeProducts[0]} />}
+                    {milkshakeProducts[1] && <PopularProductItem product={milkshakeProducts[1]} />}
+                    {iceCreamProducts[3] && <PopularProductItem product={iceCreamProducts[1]} />}
+                </ul>
 
-            <section className='menu-page__menu-wrapper'>
-                <ProductList title='Ice Cream' position='left' productItems={iceCreamProducts} />
-                <ProductList title='Milkshake' position='right' productItems={milkshakeProducts} />
-            </section>
+                <section className='menu-page__menu-wrapper'>
+                    <ProductList title='Ice Cream' position='left' productItems={iceCreamProducts} />
+                    <ProductList title='Milkshake' position='right' productItems={milkshakeProducts} />
+                </section>
+            </div>
         </main>
     );
 };
@@ -480,4 +482,9 @@ export default MenuPage;
  *
  * Ändrat: Magnus
  * Tog bort svg-image och titel med css och lade den i headerkomponent.
+ */
+
+/**
+ * Ändrat: Kim
+ * Lagt till div med wrapper
  */

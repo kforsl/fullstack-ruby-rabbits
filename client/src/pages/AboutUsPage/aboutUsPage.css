@@ -3,6 +3,8 @@
     padding: var(--spacing-xl) var(--spacing-s);
     display: grid;
     grid-template-columns: var(--main-grid);
+    max-width: var(--max-width);
+    margin: 0 auto;
 }
 
 .about-page__info-wrapper {
@@ -11,7 +13,7 @@
     padding: var(--spacing-m);
     background-color: var(--primary-bg);
     color: var(--black);
-    box-shadow: 3px 3px 10px 1px rgba(55, 55, 55, .2);
+    box-shadow: 3px 3px 10px 1px rgba(55, 55, 55, 0.2);
 }
 
 .about-page__title {
@@ -24,9 +26,8 @@
 .about-page__paragraph {
     font-family: var(--bread-font);
     font-weight: 400;
-    letter-spacing: .05rem;
+    letter-spacing: 0.05rem;
     padding-bottom: var(--spacing-s);
-
 }
 
 .about-page__image-wrapper {
@@ -38,11 +39,10 @@
 .about-page__image {
     object-fit: contain;
     width: 100%;
-    max-width: fit-content
+    max-width: fit-content;
 }
 
-@media (max-width:700px) {
-
+@media (max-width: 700px) {
     .about-page__info-wrapper,
     .about-page__image-wrapper {
         grid-column: 1 / span 8;

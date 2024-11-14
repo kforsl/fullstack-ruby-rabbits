@@ -5,6 +5,14 @@
     min-height: 65svh;
 }
 
+.header--small {
+    display: grid;
+    width: 100%;
+    max-width: var(--max-width);
+    min-height: 70px;
+    margin: 0 auto;
+}
+
 .header__inner-wrapper {
     display: grid;
     grid-template-rows: repeat(3, minmax(0, 1fr));
@@ -21,49 +29,46 @@
     grid-row: 2/3;
     place-self: center;
     font-family: var(--logo-font);
-    color: #FF9FC5;
+    color: #ff9fc5;
     font-weight: 400;
     filter: drop-shadow(4px 4px 0 #444);
-    -webkit-text-stroke: 3px #FF5196;
+    -webkit-text-stroke: 3px #ff5196;
     letter-spacing: 3px;
 }
 
 .header__logotype--letter0,
 .header__logotype--letter8 {
     font-size: var(--letter-size);
-    transform: translateY(clamp(-.5rem, .5vw, -1rem));
+    transform: translateY(clamp(-0.5rem, 0.5vw, -1rem));
 }
 
 .header__logotype--letter1,
 .header__logotype--letter7 {
-    font-size: calc(var(--letter-size) * .9);
+    font-size: calc(var(--letter-size) * 0.9);
     transform: translateY(clamp(1rem, 1vw, 2rem));
-
 }
 
 .header__logotype--letter2,
 .header__logotype--letter6 {
-    font-size: calc(var(--letter-size) * .8);
+    font-size: calc(var(--letter-size) * 0.8);
     transform: translateY(clamp(1.5rem, 1vw, 3rem));
-
 }
 
 .header__logotype--letter3,
 .header__logotype--letter5 {
-    font-size: calc(var(--letter-size) * .7);
+    font-size: calc(var(--letter-size) * 0.7);
     transform: translateY(clamp(2rem, 1vw, 4rem));
 }
 
 .header__logotype--letter4 {
-    font-size: calc(var(--letter-size) * .6);
+    font-size: calc(var(--letter-size) * 0.6);
     transform: translateY(clamp(2.5rem, 1vw, 5rem));
 }
-
 
 @media screen and (max-width: 1000px) {
     .header__logotype {
         filter: drop-shadow(3px 3px 0 #444);
-        -webkit-text-stroke: 2px #FF5196;
+        -webkit-text-stroke: 2px #ff5196;
         letter-spacing: 2px;
     }
 }
@@ -71,7 +76,7 @@
 @media screen and (max-width: 500px) {
     .header__logotype {
         filter: drop-shadow(2px 2px 0 #444);
-        -webkit-text-stroke: 1px #FF5196;
+        -webkit-text-stroke: 1px #ff5196;
         letter-spacing: 1px;
     }
 }
