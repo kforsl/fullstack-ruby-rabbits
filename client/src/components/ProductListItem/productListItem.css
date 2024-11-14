@@ -11,6 +11,7 @@
     font-family: var(--title-font);
     margin-bottom: var(--spacing-s);
     grid-column: span 8;
+    font-weight: 400;
 }
 
 .product-list-item__ingredients-list {

@@ -1,0 +1,10 @@
+.under-construction {
+    max-width: var(--max-width);
+    display: grid;
+    justify-content: center;
+    height: 100%;
+}
+
+.under-construction__image {
+    width: 100%;
+}

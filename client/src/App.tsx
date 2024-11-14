@@ -6,9 +6,9 @@ function App() {
     return (
         <>
             <Header />
-            <div className='wrapper'>
-                <RoutesComponent />
-            </div>
+
+            <RoutesComponent />
+
             <Footer />
         </>
     );
@@ -19,4 +19,9 @@ export default App;
 /*
  *Ändrat: Magnus
  * Lade till header och flyttade in navigation in i header. Då header inte finns på varje sida bör den renderas ut conditionellt.
+ */
+
+/**
+ * Ändrat: Kim
+ * Flyttat div med wrapper in i varje page istället.
  */

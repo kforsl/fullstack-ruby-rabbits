@@ -7,9 +7,9 @@ const Footer = () => {
                 <h2 className='footer__logo'> Happymess </h2>
                 <ul className='footer__list'>
                     <h4 className='footer__list-title'>Öppettider</h4>
-                    <li className='footer__list-item'>Måndag - Fredag: 10:00 - 18:00</li>
-                    <li className='footer__list-item'>Lördag: 11:00 - 17:00</li>
-                    <li className='footer__list-item'>Söndag: Stängt</li>
+                    <li className='footer__list-item'>Mån - Fre: 10:00 - 18:00</li>
+                    <li className='footer__list-item'>Lör: 11:00 - 17:00</li>
+                    <li className='footer__list-item'>Sön: Stängt</li>
                 </ul>
                 <ul className='footer__list'>
                     <h4 className='footer__list-title'>Adress</h4>
@@ -34,4 +34,8 @@ export default Footer;
 /**
  * Författare: Kim
  * Skapat grundläggande layout av footer.
+ */
+/**
+ * Ändrat: Kim
+ * ändrat spacing i footer och ändrat text-align
  */
