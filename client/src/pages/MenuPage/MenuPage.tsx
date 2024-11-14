@@ -474,7 +474,7 @@ const MenuPage: React.FC = () => {
 
 export default MenuPage;
 
-/**
+/*
  * Författare: Kim
  * grundläggande layout av Page för meny där "företagsnamn" populära produkter och menyn renderas ut på sidan.
  *

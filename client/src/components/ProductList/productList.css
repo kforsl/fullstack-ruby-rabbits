@@ -1,5 +1,6 @@
 .product-list {
-    border: 4px solid var(--CTA);
+    border: 4px solid var(--black);
+    border-radius: .5rem;
     position: relative;
     margin-top: var(--spacing-m);
     width: 100%;
@@ -11,6 +12,7 @@
 .product-list--left {
     grid-column: 1 / span 6;
 }
+
 .product-list--right {
     grid-column: 3 / span 6;
 }
