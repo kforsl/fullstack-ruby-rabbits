@@ -3,7 +3,6 @@ import PopularProductItem from '../../components/PopularProductItem/PopularProdu
 import ProductList from '../../components/ProductList/ProductList';
 import { MenuItemType } from '../../interfaces';
 import './menuPage.css';
-import waves from '../../../public/images/layered-waves-haikei.svg';
 
 const productItems: MenuItemType[] = [
     {
@@ -457,9 +456,6 @@ const MenuPage: React.FC = () => {
 
     return (
         <main className='menu-page'>
-            <img className='menu-page__bg' src={waves} alt='melting ice cream background' />
-            <h2 className='menu-page__title'> HappyMess </h2>
-
             <ul className='menu-page__popular-wrapper'>
                 {iceCreamProducts[0] && <PopularProductItem product={iceCreamProducts[0]} />}
                 {iceCreamProducts[3] && <PopularProductItem product={iceCreamProducts[1]} />}
@@ -481,4 +477,7 @@ export default MenuPage;
 /**
  * Författare: Kim
  * grundläggande layout av Page för meny där "företagsnamn" populära produkter och menyn renderas ut på sidan.
+ *
+ * Ändrat: Magnus
+ * Tog bort svg-image och titel med css och lade den i headerkomponent.
  */

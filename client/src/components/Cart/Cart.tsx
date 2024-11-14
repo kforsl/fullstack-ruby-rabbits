@@ -4,20 +4,22 @@ import useCartStore from '../../stores/cartStore';
 import { useNavigate } from 'react-router-dom';
 import CartItemComponent from '../CartItem/CartItem';
 import TextButton from '../TextButton/TextButton';
+import { CartItem } from '../../interfaces/interfaceCart';
 // import { useEffect } from 'react';
 // import { CartItem } from '../../interfaces/interfaceCart';
 
 const Cart: React.FC = () => {
-    const [isOpen, setIsOpen] = useState(false);
+    const [isOpen, setIsOpen] = useState<boolean>(false);
     const { cart } = useCartStore();
+    const isCartEmpty: boolean = cart.length === 0;
     // const { setCart } = useCartStore();
     const navigate = useNavigate();
 
     const calculateTotalPrice = (): number =>
-        cart.reduce((totalCost, cartItem) => totalCost + cartItem.price * cartItem.quantity, 0); // totalCost är vad vi kallar returnerade värdet, 0 är initiala värdet.
+        cart.reduce((totalCost: number, cartItem: CartItem) => totalCost + cartItem.price * cartItem.quantity, 0); // totalCost är vad vi kallar returnerade värdet, 0 är initiala värdet.
 
     const calculateAmountOfIcreams = (): number =>
-        cart.reduce((totalAmount, cartItem) => totalAmount + cartItem.quantity, 0);
+        cart.reduce((totalAmount: number, cartItem: CartItem) => totalAmount + cartItem.quantity, 0);
 
     // const iceCreams: CartItem[] = [
     //     {
@@ -60,9 +62,9 @@ const Cart: React.FC = () => {
             <button
                 aria-label='Öppna varukorgen'
                 onClick={(): void => setIsOpen((prev) => !prev)}
-                className='cart__button'
-                id='cartButton'>
-                {cart.length > 0 && <span className='cart__counter'>{calculateAmountOfIcreams()}</span>}
+                className={`cart__button ${isCartEmpty ? 'cart__button--disabled' : ''}`}
+                disabled={isCartEmpty}>
+                {!isCartEmpty && <span className='cart__counter'>{calculateAmountOfIcreams()}</span>}
             </button>
 
             {isOpen && (
@@ -91,4 +93,6 @@ export default Cart;
 /*
  *Författare: Magnus
  *Komponent för cart. Knapp med ikon som öppnar meny där samtliga cartItems samlas Kopplas till zustand useCartStore. Endast testad med utkommenterat dummy-data.
+ *Ändrat: Magnus
+ *När cart är tom så är nu knappen disabled samt har sänkt opacity.
  */

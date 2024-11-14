@@ -2,12 +2,17 @@
     display: grid;
     grid-template-columns: 1fr auto;
     justify-self: end;
+    position: fixed;
+    z-index: 999;
+    backdrop-filter: blur(10rem);
+    -webkit-backdrop-filter: blur(10rem);
 }
 
 .navigation-menu__list {
     display: grid;
     gap: var(--spacing-l);
     grid-template-columns: repeat(3, minmax(0, 1fr));
+
 }
 
 .navigation-menu__list-item {
@@ -17,7 +22,8 @@
 
 .navigation-menu__link {
     text-decoration: none;
-    color: var(--secondary-bg);
+    color: #FE9FC5;
+    filter: drop-shadow(var(--shadow-s));
     font-family: var(--title-font);
-    font-size: var(--text-font-l);
+    font-size: var(--text-font-xl);
 }

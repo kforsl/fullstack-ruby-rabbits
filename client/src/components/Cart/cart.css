@@ -6,8 +6,10 @@
 }
 
 .cart__button {
+    filter: drop-shadow(var(--shadow-s));
     position: relative;
-    padding: .8rem;
+    padding: var(--spacing-s);
+    margin-right: var(--spacing-s);
     border: none;
     background-color: transparent;
     cursor: pointer;
@@ -16,6 +18,11 @@
     background-position: center;
     background-size: cover;
     transition: all .2s ease-in-out;
+}
+
+.cart__button--disabled {
+    cursor: default;
+    opacity: .5;
 }
 
 .cart__counter {
@@ -65,5 +72,10 @@
     .cart__button:hover {
         scale: 1.02;
         transform: translateY(-5px);
+    }
+
+    .cart__button--disabled:hover {
+        scale: 1;
+        transform: none;
     }
 }

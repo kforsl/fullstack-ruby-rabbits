@@ -1,13 +1,12 @@
 import Footer from './components/Footer/Footer';
-import NavigationMenu from './components/NavigationMenu/NavigationMenu';
+import Header from './components/Header/Header';
 import RoutesComponent from './routes/Routes';
 
 function App() {
     return (
         <>
+            <Header />
             <div className='wrapper'>
-                <NavigationMenu />
-
                 <RoutesComponent />
             </div>
             <Footer />
@@ -16,3 +15,8 @@ function App() {
 }
 
 export default App;
+
+/*
+ *Ändrat: Magnus
+ * Lade till header och flyttade in navigation in i header. Då header inte finns på varje sida bör den renderas ut conditionellt.
+ */
