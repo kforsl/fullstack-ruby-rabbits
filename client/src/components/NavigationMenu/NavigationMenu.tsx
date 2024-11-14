@@ -19,6 +19,7 @@ const NavigationMenu: React.FC = () => {
                     </li>
                 ))}
             </ul>
+            
             <Cart />
         </nav>
     );
