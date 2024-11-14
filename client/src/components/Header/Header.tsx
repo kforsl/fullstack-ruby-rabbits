@@ -17,3 +17,9 @@ const Header: React.FC = () => {
 };
 
 export default Header;
+
+/*
+ *Författare: Magnus
+ * Skapat header. Lagt in navigationsmenyn i header, kommer att behöva rendera ut den beroende av sida och då också göra det möjligt att rendera ut navigationsmenyn utanför header.
+ * titeln renderas ut med span för att kunna sätta storlek och position per bokstav. Svg bakgrund behöver fixas för responsivitet.
+ */

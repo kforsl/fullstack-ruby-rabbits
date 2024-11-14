@@ -1,6 +1,5 @@
 import Footer from './components/Footer/Footer';
 import Header from './components/Header/Header';
-import NavigationMenu from './components/NavigationMenu/NavigationMenu';
 import RoutesComponent from './routes/Routes';
 
 function App() {
@@ -16,3 +15,8 @@ function App() {
 }
 
 export default App;
+
+/*
+ *Ändrat: Magnus
+ * Lade till header och flyttade in navigation in i header. Då header inte finns på varje sida bör den renderas ut conditionellt.
+ */
