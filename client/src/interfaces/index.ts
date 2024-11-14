@@ -25,7 +25,7 @@ interface IngredientItemType {
     allergens: AllergensType[];
 }
 
-interface AllergensType {
+export interface AllergensType {
     type: string;
     description: string;
 }
