@@ -4,6 +4,7 @@ import ProductList from '../../components/ProductList/ProductList';
 import { MenuItemType } from '../../interfaces';
 import './menuPage.css';
 import waves from '../../../public/images/layered-waves-haikei.svg';
+import AuthenticationForm from '../../components/AuthenticationForm/AuthenticationForm';
 
 const productItems: MenuItemType[] = [
     {

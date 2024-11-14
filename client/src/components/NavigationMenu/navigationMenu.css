@@ -21,3 +21,6 @@
     font-family: var(--title-font);
     font-size: var(--text-font-l);
 }
+.navigation-menu__link-to-form {
+    cursor: pointer;
+}
