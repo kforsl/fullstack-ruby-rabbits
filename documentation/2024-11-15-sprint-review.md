@@ -16,5 +16,3 @@ Möjlig idé:
 -   Kim demoar designen.
 -   Magnus frontend koden.
 -   Johan kollar på backend.
-
-### Vad har vi inte gjort?
