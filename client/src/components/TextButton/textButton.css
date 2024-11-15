@@ -1,0 +1,20 @@
+.text-button {
+    min-width: fit-content;
+    padding: .5rem 1rem;
+    background-color: var(--color-accent1);
+    color: var(--color-black);
+    box-shadow: 3px 4px 0 0 var(--color-black);
+    font-family: var(--title-font);
+    font-size: var(--font-size-l);
+    cursor: pointer;
+    border: none;
+    border-radius: 2rem;
+    transition: all .2s ease-in-out;
+}
+
+@media (hover: hover) and (pointer: fine) {
+    .text-button:hover {
+        scale: 1.02;
+        transform: translateY(-5px);
+    }
+}

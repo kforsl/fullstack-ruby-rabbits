@@ -1,0 +1,29 @@
+.navigation-menu {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    justify-self: end;
+    position: fixed;
+    z-index: 999;
+    backdrop-filter: blur(10rem);
+    -webkit-backdrop-filter: blur(10rem);
+}
+
+.navigation-menu__list {
+    display: grid;
+    gap: var(--spacing-l);
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+
+}
+
+.navigation-menu__list-item {
+    list-style-type: none;
+    padding: var(--spacing-s);
+}
+
+.navigation-menu__link {
+    text-decoration: none;
+    color: #FE9FC5;
+    filter: drop-shadow(var(--shadow-s));
+    font-family: var(--title-font);
+    font-size: var(--font-size-xl);
+}
