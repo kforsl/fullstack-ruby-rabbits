@@ -6,6 +6,6 @@
 
 .product-size-quantity-item__price {
     font-family: var(--title-font);
-    font-size: var(--text-font-l);
-    color: var(--black);
+    font-size: var(--font-size-l);
+    color: var(--color-black);
 }

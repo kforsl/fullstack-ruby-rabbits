@@ -13,23 +13,32 @@
     --title-font: alone-on-earth;
     --bread-font: Arial, Helvetica, sans-serif;
 
-    --primary-bg: #fefaf1;
-    --secondary-bg: #ef7d37;
-    --CTA: #9ed8c2;
-    --accent: #ffc7c5;
-    --black: #333333;
-    --pink: #ff9fc5;
-    --shadow-s: 2px 2px 0 var(--black);
+    --font-size-s: clamp(0.75rem, 0.7061rem + 0.1951vw, 0.85rem);
+    --font-size-m: clamp(1rem, 0.8902rem + 0.4878vw, 1.25rem);
+    --font-size-l: clamp(1.25rem, 1.1402rem + 0.4878vw, 1.5rem);
+    --font-size-xl: clamp(1.625rem, 1.4604rem + 0.7317vw, 2rem);
+    --font-size-2xl: clamp(2rem, 1.561rem + 1.9512vw, 3rem);
+    --font-size-3xl: clamp(3rem, 2.561rem + 1.9512vw, 4rem);
 
-    --text-font-s: 0.75rem;
-    --text-font-m: 1rem;
-    --text-font-l: 1.5rem;
-    --text-font-xl: 2rem;
+    --bg-primary: #fefaf1;
+    --bg-dark: #333333;
+    --bg-light: #FFFEFB;
+
+    --color-black: #333333;
+    --color-white: white;
+    --color-CTA: yellowgreen;
+    --color-accent1: #ff9fc5;
+    --color-accent2: #82DFFF;
+    --color-accent3: #F2AC81;
+
+    --shadow-s: 2px 2px 0 var(--color-black);
 
     --spacing-s: 1rem;
     --spacing-m: 2rem;
     --spacing-l: 3rem;
     --spacing-xl: 4rem;
+    --spacing-2xl: 8rem;
+    --spacing-3xl: 10rem;
 
     --main-grid: repeat(8, minmax(0, 1fr));
     --max-width: 1180px;
@@ -39,18 +48,18 @@
     box-sizing: border-box;
     margin: 0;
     padding: 0;
+    font-weight: 400;
 }
 
 body {
-    background-color: var(--primary-bg);
+    background-color: var(--bg-primary);
     font-family: var(--bread-font);
-
     background-image:
-        url(../../../public/images/blotches/by0-pink-cola-blue.svg),
-        url(../../../public/images/blotches/cSe-cola-pink-blue.svg),
-        url(../../../public/images/blotches/491-blue-pink-cola.svg),
-        url(../../../public/images/blotches/dotHb-cola-blue-pink.svg),
-        url(../../../public/images/blotches/cSe-cola-pink-blue.svg);
+        url(/images/blotches/by0-pink-cola-blue.svg),
+        url(/images/blotches/cSe-cola-pink-blue.svg),
+        url(/images/blotches/491-blue-pink-cola.svg),
+        url(/images/blotches/dotHb-cola-blue-pink.svg),
+        url(/images/blotches/cSe-cola-pink-blue.svg);
     background-position:
         left 70svh,
         right 1000svh,
@@ -58,8 +67,7 @@ body {
         left 150svh,
         right bottom;
     background-repeat: no-repeat;
-
-
+    overflow-y: scroll;
 }
 
 #root {

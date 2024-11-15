@@ -28,20 +28,20 @@
 .cart__counter {
     display: grid;
     place-items: center;
-    background-color: var(--black);
+    background-color: var(--bg-dark);
     aspect-ratio: 1;
     width: 1.2rem;
     border-radius: 50%;
     position: absolute;
     bottom: -1rem;
     right: -1rem;
-    color: white;
+    color: var(--color-white);
     font-weight: bold;
-    font-size: var(--text-font-m);
+    font-size: var(--font-size-m);
 }
 
 .cart__innerwrapper {
-    background-color: white;
+    background-color: var(--bg-light);
     box-shadow: 2px 2px 1rem rgba(0, 0, 0, 0.2);
     display: grid;
     padding: var(--spacing-m);

@@ -11,14 +11,14 @@
     grid-column: 1 / span 4;
     margin-block: var(--spacing-s);
     padding: var(--spacing-m);
-    background-color: var(--primary-bg);
-    color: var(--black);
+    background-color: var(--bg-primary);
+    color: var(--color-black);
     box-shadow: 3px 3px 10px 1px rgba(55, 55, 55, 0.2);
 }
 
 .about-page__title {
     font-family: var(--title-font);
-    font-size: var(--text-font-xl);
+    font-size: var(--font-size-xl);
     font-weight: 400;
     padding-bottom: var(--spacing-m);
 }
@@ -43,6 +43,7 @@
 }
 
 @media (max-width: 700px) {
+
     .about-page__info-wrapper,
     .about-page__image-wrapper {
         grid-column: 1 / span 8;

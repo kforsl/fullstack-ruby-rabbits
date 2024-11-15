@@ -3,7 +3,7 @@
     grid-template-columns: repeat(2, minmax(0, 1fr));
     min-width: fit-content;
     text-wrap: nowrap;
-    border: 2px solid white;
+    border: 2px solid var(--color-white);
     padding: var(--spacing-s);
     gap: var(--spacing-s);
 }
@@ -21,7 +21,8 @@
 .cart-item__button {
     aspect-ratio: 1;
     width: var(--spacing-m);
-    background-color: var(--secondary-bg);
+    background-color: var(--color-accent1);
+    box-shadow: var(--shadow-s);
     border: none;
     border-radius: 50%;
     font-weight: 900;
