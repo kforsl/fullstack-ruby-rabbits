@@ -1,12 +1,12 @@
 import { Link } from 'react-router-dom';
 import './navigationMenu.css';
 import Cart from '../Cart/Cart';
-import AuthenticationForm from '../AuthenticationForm/AuthenticationForm';
 import { useEffect, useState } from 'react';
+import useAuthStore from '../../stores/authStore';
 
 const NavigationMenu: React.FC = () => {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
-    const [isShowingForm, setIsShowingForm] = useState(false);
+    const { setIsShowingForm } = useAuthStore();
 
     useEffect(() => {
         const isLoggedIn = localStorage.getItem('isLoggedIn');
@@ -36,7 +36,7 @@ const NavigationMenu: React.FC = () => {
                         </Link>
                     ) : (
                         <a
-                            onClick={() => setIsShowingForm(true)}
+                            onClick={(): void => setIsShowingForm(true)}
                             className='navigation-menu__link navigation-menu__link-to-form'>
                             LOGGA IN
                         </a>
@@ -44,7 +44,6 @@ const NavigationMenu: React.FC = () => {
                 </li>
             </ul>
             <Cart />
-            <AuthenticationForm isShowing={isShowingForm} onCancel={() => setIsShowingForm(false)} />
         </nav>
     );
 };

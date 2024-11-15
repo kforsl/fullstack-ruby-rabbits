@@ -1,3 +1,4 @@
+import AuthenticationForm from './components/AuthenticationForm/AuthenticationForm';
 import Footer from './components/Footer/Footer';
 import Header from './components/Header/Header';
 import RoutesComponent from './routes/Routes';
@@ -6,6 +7,8 @@ function App() {
     return (
         <>
             <Header />
+            <AuthenticationForm />
+
             <div className='wrapper'>
                 <RoutesComponent />
             </div>

@@ -1,88 +1,96 @@
-import { FormEvent, useRef, useState } from 'react';
+import { FormEvent, useRef } from 'react';
+import useAuthStore from '../../stores/authStore';
 
 import './authenticationForm.css';
 import TextButton from '../TextButton/TextButton';
 
-interface Props {
-    isShowing: boolean;
-    onCancel?: () => void;
-}
-
-const AuthenticationForm = ({ isShowing, onCancel }: Props) => {
+const AuthenticationForm = () => {
     const dialogRef = useRef<HTMLDialogElement>(null);
 
-    const [showLogin, setShowLogin] = useState(true);
+    const {
+        signInForm,
+        isSigningIn,
+        setIsSigningIn,
+        isShowingForm,
+        setIsShowingForm,
+        onSignInFormChanged,
+        clearSignInForm,
+    } = useAuthStore();
 
     const FormDefaultPreventer = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
     };
 
-    const OnSubmit = () => {
+    const onSubmit = () => {
         console.log('submit');
     };
 
-    const OnContinueAsGuest = () => {
-        if (onCancel) onCancel();
+    const onContinueAsGuest = () => {
+        setIsShowingForm(false);
         setTimeout(() => {
-            setShowLogin(true);
+            setIsSigningIn(true);
+            clearSignInForm();
         }, 200);
     };
 
     return (
         <section
             className={`authentication-form__backdrop authentication-form__backdrop--${
-                isShowing ? 'active' : 'inactive'
+                isShowingForm ? 'active' : 'inactive'
             }`}>
             <dialog ref={dialogRef} className='authentication-form__wrapper'>
-                <h1 className='form-title'>{showLogin ? 'LOGGA IN' : 'REGISTRERA'}</h1>
+                <h1 className='form-title'>{isSigningIn ? 'LOGGA IN' : 'REGISTRERA'}</h1>
                 <form
-                    className={`main-form main-form--${showLogin ? 'active' : 'inactive'}`}
-                    onSubmit={FormDefaultPreventer}>
+                    className={`main-form main-form--${isSigningIn ? 'active' : 'inactive'}`}
+                    onSubmit={FormDefaultPreventer}
+                    onChange={onSignInFormChanged}>
                     <section className='input-section'>
                         {/* <label className='input-label' htmlFor='loginEmail'>
-                            MAILADRESS
+                            Mailadress
                         </label> */}
                         <input
                             className='input-field input-field__text'
-                            placeholder='MAILADRESS'
+                            placeholder='Mailadress'
                             type='email'
                             name='email'
                             id='loginEmail'
+                            value={signInForm.email}
                         />
                     </section>
 
                     <section className='input-section'>
                         {/* <label className='input-label' htmlFor='loginPassword'>
-                            LÖSENORD
+                            Lösenord
                         </label> */}
                         <input
                             className='input-field input-field__text'
                             type='password'
                             name='password'
                             id='loginPassword'
-                            placeholder='LÖSENORD'
+                            placeholder='Lösenord'
+                            value={signInForm.password}
                         />
                     </section>
 
-                    <a onClick={() => OnContinueAsGuest()} className='form-subtitle'>
+                    <a onClick={() => onContinueAsGuest()} className='form-subtitle'>
                         FORTSÄTT SOM GÄST
                     </a>
                     <section className='form-buttons__wrapper'>
-                        <TextButton onClick={OnSubmit}>LOGGA IN</TextButton>
-                        <TextButton onClick={() => setShowLogin(false)}>REGISTRERA</TextButton>
+                        <TextButton onClick={onSubmit}>LOGGA IN</TextButton>
+                        <TextButton onClick={() => setIsSigningIn(false)}>REGISTRERA</TextButton>
                     </section>
                 </form>
 
                 <form
-                    className={`main-form main-form--${!showLogin ? 'active' : 'inactive'}`}
+                    className={`main-form main-form--${!isSigningIn ? 'active' : 'inactive'}`}
                     onSubmit={FormDefaultPreventer}>
                     <section className='input-section'>
                         {/* <label className='input-label' htmlFor='firstName'>
-                            FÖRNAMN
+                            Förnamn
                         </label> */}
                         <input
                             className='input-field input-field__text'
-                            placeholder='FÖRNAMN'
+                            placeholder='Förnamn'
                             type='text'
                             name='firstName'
                             id='registerFirstName'
@@ -92,11 +100,11 @@ const AuthenticationForm = ({ isShowing, onCancel }: Props) => {
 
                     <section className='input-section'>
                         {/* <label className='input-label' htmlFor='lastName'>
-                            EFTERNAMN
+                            Efternamn
                         </label> */}
                         <input
                             className='input-field input-field__text'
-                            placeholder='EFTERNAMN'
+                            placeholder='Efternamn'
                             type='text'
                             name='lastName'
                             id='registerLastName'
@@ -106,11 +114,11 @@ const AuthenticationForm = ({ isShowing, onCancel }: Props) => {
 
                     <section className='input-section'>
                         {/* <label className='input-label' htmlFor='loginEmail'>
-                            MAILADRESS
+                            Mailadress
                         </label> */}
                         <input
                             className='input-field input-field__text'
-                            placeholder='MAILADRESS'
+                            placeholder='Mailadress'
                             type='email'
                             name='email'
                             id='registerEmail'
@@ -120,38 +128,38 @@ const AuthenticationForm = ({ isShowing, onCancel }: Props) => {
 
                     <section className='input-section'>
                         {/* <label className='input-label' htmlFor='loginPassword'>
-                            LÖSENORD
+                            Lösenord
                         </label> */}
                         <input
                             className='input-field input-field__text'
                             type='password'
                             name='password'
                             id='registerPassword'
-                            placeholder='LÖSENORD'
+                            placeholder='Lösenord'
                             tabIndex={3}
                         />
                     </section>
 
                     <section className='input-section'>
                         {/* <label className='input-label' htmlFor='loginPassword'>
-                            LÖSENORD
+                            Verifiera lösenord
                         </label> */}
                         <input
                             className='input-field input-field__text'
                             type='password'
                             name='confirmPassword'
                             id='registerConfirmPassword'
-                            placeholder='VERIFIERA LÖSENORD'
+                            placeholder='Verifiera lösenord'
                             tabIndex={4}
                         />
                     </section>
 
-                    <a onClick={() => OnContinueAsGuest()} className='form-subtitle'>
+                    <a onClick={() => onContinueAsGuest()} className='form-subtitle'>
                         FORTSÄTT SOM GÄST
                     </a>
                     <section className='form-buttons__wrapper'>
-                        <TextButton onClick={OnSubmit}>REGISTRERA</TextButton>
-                        <TextButton onClick={() => setShowLogin(true)}>GÅ TILL INLOGG</TextButton>
+                        <TextButton onClick={onSubmit}>REGISTRERA</TextButton>
+                        <TextButton onClick={() => setIsSigningIn(true)}>GÅ TILL INLOGG</TextButton>
                     </section>
                 </form>
             </dialog>

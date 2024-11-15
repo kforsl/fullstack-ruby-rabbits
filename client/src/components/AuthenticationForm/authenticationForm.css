@@ -4,7 +4,7 @@
     left: 0;
     bottom: 0;
     right: 0;
-    z-index: 10;
+    z-index: 1000;
     display: grid;
     place-items: center;
     transition: opacity 0.2s ease-in-out, backdrop-filter 0.2s ease-in-out, background 0.2s ease-in-out;
@@ -47,7 +47,7 @@
     top: 0;
     display: flex;
     flex-direction: column;
-    gap: var(--spacing-m);
+    gap: var(--spacing-s);
     padding: var(--spacing-m);
 }
 .main-form--active {
@@ -63,7 +63,7 @@
     position: relative;
 }
 .input-label {
-    font-family: var(--title-font);
+    font-family: var(--bread-font);
     font-size: var(--text-font-l);
     position: absolute;
     top: 1.56rem;
@@ -71,7 +71,7 @@
 }
 .input-field {
     width: 100%;
-    font-family: var(--title-font);
+    font-family: var(--bread-font);
     margin-block: var(--spacing-s);
     font-size: var(--text-font-l);
     padding: var(--spacing-xs);
