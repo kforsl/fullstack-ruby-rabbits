@@ -10,7 +10,7 @@ const productItems: MenuItemType[] = [
         name: 'Choco Loco Shake',
         description: 'En chokladmilkshake fylld med krämig chokladglass, toppad med vispgrädde och chokladsås.',
         type: 'milkshake',
-        imageUrl: '../../../public/images/choco-loco-shake.jpg',
+        imageUrl: '/images/choco-loco-shake.jpg',
         sizes: [
             {
                 size: 'medium',
@@ -62,7 +62,7 @@ const productItems: MenuItemType[] = [
         name: 'Strawberry Dream',
         description: 'En fruktig jordgubbsmilkshake med färska jordgubbar och vaniljglass.',
         type: 'milkshake',
-        imageUrl: '../../../public/images/strawberry-dream.jpg',
+        imageUrl: '/images/strawberry-dream.jpg',
         sizes: [
             {
                 size: 'large',
@@ -210,7 +210,7 @@ const productItems: MenuItemType[] = [
         name: 'Funky Fudge Swirl',
         description: 'Krämig vaniljglass med virvlar av chokladfudge och knapriga chokladbitar.',
         type: 'ice cream',
-        imageUrl: '../../../public/images/funky-fudge-swirl.jpg',
+        imageUrl: '/images/funky-fudge-swirl.jpg',
         sizes: [
             {
                 size: 'small',
@@ -257,7 +257,7 @@ const productItems: MenuItemType[] = [
         name: 'Bubblegum Bliss',
         description: 'En färgglad glass med smak av bubbelgum och små marshmallows.',
         type: 'ice cream',
-        imageUrl: '../../../public/images/bubblegum-bliss.jpg',
+        imageUrl: '/images/bubblegum-bliss.jpg',
         sizes: [
             {
                 size: 'medium',
@@ -484,7 +484,7 @@ export default MenuPage;
  * Tog bort svg-image och titel med css och lade den i headerkomponent.
  */
 
-/**
+/*
  * Ändrat: Kim
  * Lagt till div med wrapper
  */

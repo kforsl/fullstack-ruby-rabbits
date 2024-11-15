@@ -1,5 +1,5 @@
 import './aboutUsPage.css';
-import imgBanana from '../../../public/images/img-banana.png';
+
 const AboutUsPage: React.FC = () => {
     return (
         <>
@@ -36,7 +36,7 @@ const AboutUsPage: React.FC = () => {
                     </p>
                 </section>
                 <section className='about-page__image-wrapper'>
-                    <img src={imgBanana} alt='Happymess' className='about-page__image' />
+                    <img src='/images/img-banana.png' alt='Happymess' className='about-page__image' />
                 </section>
             </main>
         </>

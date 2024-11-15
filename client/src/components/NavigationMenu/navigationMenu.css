@@ -25,5 +25,5 @@
     color: #FE9FC5;
     filter: drop-shadow(var(--shadow-s));
     font-family: var(--title-font);
-    font-size: var(--text-font-xl);
+    font-size: var(--font-size-xl);
 }

@@ -1,11 +1,11 @@
 .text-button {
     min-width: fit-content;
     padding: .5rem 1rem;
-    background-color: var(--pink);
-    color: var(--black);
-    box-shadow: 3px 4px 0 0 var(--black);
+    background-color: var(--color-accent1);
+    color: var(--color-black);
+    box-shadow: 3px 4px 0 0 var(--color-black);
     font-family: var(--title-font);
-    font-size: var(--text-font-l);
+    font-size: var(--font-size-l);
     cursor: pointer;
     border: none;
     border-radius: 2rem;
