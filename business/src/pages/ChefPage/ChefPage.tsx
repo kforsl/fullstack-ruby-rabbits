@@ -1,6 +1,6 @@
 import './chefPage.css';
 const ChefPage: React.FC = () => {
-    return <div>Your component here</div>;
+    return <div>ChefPage</div>;
 };
 
 export default ChefPage;

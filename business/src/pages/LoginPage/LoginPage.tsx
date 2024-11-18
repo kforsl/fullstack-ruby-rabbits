@@ -1,6 +1,6 @@
 import './loginPage.css';
 const LoginPage: React.FC = () => {
-    return <div>Your component here</div>;
+    return <div>LoginPage</div>;
 };
 
 export default LoginPage;

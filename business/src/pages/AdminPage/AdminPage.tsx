@@ -1,6 +1,6 @@
 import './adminPage.css';
 const AdminPage: React.FC = () => {
-    return <div>Your component here</div>;
+    return <div>AdminPage</div>;
 };
 
 export default AdminPage;

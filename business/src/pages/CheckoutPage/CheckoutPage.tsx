@@ -1,6 +1,6 @@
 import './checkoutPage.css';
 const CheckoutPage: React.FC = () => {
-    return <div>Your component here</div>;
+    return <div>CheckoutPage</div>;
 };
 
 export default CheckoutPage;
