@@ -1,4 +1,4 @@
-const {Schema, model} = require('mongoose');
+const { Schema, model } = require('mongoose');
 
 const SizeItemSchema = new Schema({
     type: {
@@ -8,10 +8,10 @@ const SizeItemSchema = new Schema({
     },
     description: {
         type: String,
-        required: false
-    }
+        required: false,
+    },
 });
 
 const SizeModel = model('Size', SizeItemSchema);
 
-module.exports = {SizeModel, SizeItemSchema}
+module.exports = { SizeModel, SizeItemSchema };
