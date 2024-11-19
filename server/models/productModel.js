@@ -45,6 +45,7 @@ const ProductSchema = new Schema({
             ingredient: {
                 type: Schema.Types.ObjectId,
                 ref: 'Ingredient',
+                required: true,
             },
             quantityInGrams: {
                 type: Number,

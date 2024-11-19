@@ -29,7 +29,8 @@ exports.getAllProducts = asyncHandler(async (req, res) => {
         });
     } catch (error) {
         res.status(400).json({
-            message: error.message,
+            message: 'Error',
+            data: error.message,
         });
     }
 });
@@ -42,7 +43,8 @@ exports.updateProductById = asyncHandler(async (req, res) => {
         });
     } catch (error) {
         res.status(400).json({
-            message: error.message,
+            message: 'Error',
+            data: error.message,
         });
     }
 });

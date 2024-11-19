@@ -19,9 +19,11 @@ exports.createOrder = asyncHandler(async (req, res) => {
     }
 });
 
-exports.getyAllOrders = asyncHandler(async (req, res) => {
+exports.getAllOrders = asyncHandler(async (req, res) => {
     try {
-        const orders = await OrderModel.find({});
+        const orders = await OrderModel.find({})
+            .populate('order.product')
+            .populate('order.product.ingredients.ingredient');
         if (orders.length < 1) {
             res.status(404).json({
                 message: 'No orders found',
@@ -45,7 +47,7 @@ exports.getOrderById = asyncHandler(async (req, res) => {
     try {
         const order = await OrderModel.findById(req.params.id)
             .populate('order.product')
-            .populate('order.product.ingredients.ingredient');
+            .populate('order.product.ingredients.ingredient[]');
 
         if (!order)
             res.status(404).json({
