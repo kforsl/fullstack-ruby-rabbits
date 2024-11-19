@@ -109,6 +109,9 @@ exports.refreshToken = asyncHandler(async (req, res) => {
         console.log(req.employee);
         return res.status(200).json({ employee: req.employee });
     } catch (error) {
-        res.status(401).json({ data: 'NEJ!' });
+        res.status(401).json({
+            message: 'Error',
+            data: 'There was something wrong with the refresh token.',
+        });
     }
 });

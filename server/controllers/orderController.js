@@ -22,10 +22,17 @@ exports.createOrder = asyncHandler(async (req, res) => {
 exports.getyAllOrders = asyncHandler(async (req, res) => {
     try {
         const orders = await OrderModel.find({});
-        res.status(200).json({
-            message: 'Succesfully found orders',
-            data: orders,
-        });
+        if (orders.length < 1) {
+            res.status(404).json({
+                message: 'No orders found',
+                data: [],
+            });
+        } else {
+            res.status(200).json({
+                message: 'Succesfully found orders',
+                data: orders,
+            });
+        }
     } catch (error) {
         res.status(500).json({
             message: 'Error',
