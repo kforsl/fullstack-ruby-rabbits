@@ -1,4 +1,4 @@
-export interface MenuItemType {
+export interface ProductType {
     _id: string;
     name: string;
     description: string;
@@ -9,7 +9,7 @@ export interface MenuItemType {
 
 interface SizeType {
     size: string;
-    price: number;
+    prize: number;
     ingredients: IngredientType[];
 }
 
@@ -32,5 +32,5 @@ interface AllergensType {
 
 /**
  * Författare: Kim
- * Skapat interface för MenuItemType, SizeType, IngredientType, IngredientItemType, AllergensType
+ * Skapat interface för ProductType, SizeType, IngredientType, IngredientItemType, AllergensType
  */

@@ -1,5 +1,6 @@
 const express = require('express');
 const mongoose = require('mongoose');
+var cors = require('cors');
 const app = express();
 require('dotenv').config();
 
@@ -11,6 +12,7 @@ const allergenRoute = require('./routes/allergenRoute');
 const PORT = process.env.PORT | 3000;
 
 app.use(express.json());
+app.use(cors());
 
 app.use('/api/menu-items', menuRoute);
 app.use('/api/ingredients', ingredientRoute);
@@ -19,13 +21,12 @@ app.use('/api/allergens', allergenRoute);
 
 const run = async () => {
     try {
-      await mongoose.connect(process.env.DB_URL);
-      app.listen(3000, () => console.log(`Server started on PORT ${PORT}`));
+        await mongoose.connect(process.env.DB_URL);
+        app.listen(3000, () => console.log(`Server started on PORT ${PORT}`));
     } catch (error) {
-      console.error(error);
-      process.exit(1);
+        console.error(error);
+        process.exit(1);
     }
-  };
-
+};
 
 run();

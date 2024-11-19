@@ -1,4 +1,5 @@
 import axios, { AxiosResponse } from 'axios';
+import { ProductType } from '../../interfaces';
 
 // axios.defaults.baseURL = 'Här får vi byta ut och ta vår adress när vi har en backend uppe :) ';
 axios.defaults.baseURL = 'http://localhost:3000/api/';
@@ -20,6 +21,14 @@ const requests = {
 //     update: (id: string, message: MessageModel) => requests.put<string>(`messages/${id}`, message),
 //     delete: (id: string) => requests.delete<string>(`messages/${id}`),
 // };
+interface ProductResponse {
+    message: string;
+    data: ProductType[];
+}
+
+const Product = {
+    list: () => requests.get<ProductResponse>('menu-items'),
+};
 
 const Authenticate = {
     // signIn: (credentials: SignInForm) => requests.post<SignInForm>(`auth`, credentials),
@@ -27,6 +36,7 @@ const Authenticate = {
 
 const agent = {
     Authenticate,
+    Product,
 };
 
 export default agent;
