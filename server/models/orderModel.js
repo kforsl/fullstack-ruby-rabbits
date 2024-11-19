@@ -1,24 +1,6 @@
 const { Schema, model } = require('mongoose');
 
-const OrderItemSchema = new Schema({
-    product: {
-        type: Schema.Types.ObjectId,
-        ref: 'Product',
-        required: true,
-    },
-    quantity: {
-        type: Number,
-        required: true,
-    },
-    size: {
-        type: String,
-        enum: {
-            values: ['small', 'medium', 'large'],
-            message: '{VALUE} is not supported.',
-        },
-        required: true,
-    },
-});
+const OrderItemSchema = new Schema({});
 
 const OrderSchema = new Schema({
     customer: {
@@ -52,8 +34,23 @@ const OrderSchema = new Schema({
     },
     order: [
         {
-            type: OrderItemSchema,
-            required: true,
+            product: {
+                type: Schema.Types.ObjectId,
+                ref: 'Product',
+                required: true,
+            },
+            quantity: {
+                type: Number,
+                required: true,
+            },
+            size: {
+                type: String,
+                enum: {
+                    values: ['small', 'medium', 'large'],
+                    message: '{VALUE} is not supported.',
+                },
+                required: true,
+            },
         },
     ],
 });

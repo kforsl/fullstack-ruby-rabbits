@@ -5,6 +5,7 @@ const router = express.Router();
 
 //Get all menu items
 router.get('/', controller.getyAllOrders);
+router.get('/:id', controller.getOrderById);
 router.post('/', controller.createOrder);
 
 module.exports = router;
