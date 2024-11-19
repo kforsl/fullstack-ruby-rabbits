@@ -1,11 +1,11 @@
-import { MenuItemType } from '../../interfaces';
+import { ProductType } from '../../interfaces/interfaceProduct';
 import ProductListItem from '../ProductListItem/ProductListItem';
 import './productList.css';
 
 interface Props {
     title: string;
     position: 'left' | 'right';
-    productItems: MenuItemType[];
+    productItems: ProductType[];
 }
 
 const ProductList = ({ title, position, productItems }: Props) => {

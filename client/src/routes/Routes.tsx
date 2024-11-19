@@ -17,7 +17,7 @@ const RoutesComponent: React.FC = () => {
 
 export default RoutesComponent;
 
-/**
+/*
  * Författare: Magnus
  * Initial setup för våra routes.
  */
