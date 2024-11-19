@@ -27,7 +27,7 @@ interface ProductResponse {
 }
 
 const Product = {
-    list: () => requests.get<ProductResponse>('menu-items'),
+    list: () => requests.get<ProductResponse>('products'),
 };
 
 const Authenticate = {
@@ -40,3 +40,8 @@ const agent = {
 };
 
 export default agent;
+
+/*
+ * Författare: Kim
+ * Skapat Product med list
+ */
