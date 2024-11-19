@@ -2,12 +2,15 @@ const express = require('express');
 const mongoose = require('mongoose');
 var cors = require('cors');
 const app = express();
+const cookieParser = require('cookie-parser');
+
 require('dotenv').config();
 
 const ingredientRoute = require('./routes/ingredientRoute');
 const productRoute = require('./routes/productRoute');
 const allergenRoute = require('./routes/allergenRoute');
 const orderRoute = require('./routes/orderRoute');
+const authRoute = require('./routes/authRoute');
 
 const PORT = process.env.PORT | 3000;
 
@@ -18,6 +21,7 @@ app.use('/api/ingredients', ingredientRoute);
 app.use('/api/products', productRoute);
 app.use('/api/allergens', allergenRoute);
 app.use('/api/orders', orderRoute);
+app.use('/api/auth', authRoute);
 
 const run = async () => {
     try {
