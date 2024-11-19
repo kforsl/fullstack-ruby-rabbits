@@ -1,4 +1,4 @@
-import { ProductType } from '../../interfaces';
+import { ProductType } from '../../interfaces/interfaceProduct';
 import ProductListItem from '../ProductListItem/ProductListItem';
 import './productList.css';
 

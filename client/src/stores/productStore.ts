@@ -1,5 +1,5 @@
 import { create } from 'zustand';
-import { ProductType } from '../interfaces';
+import { ProductType } from '../interfaces/interfaceProduct';
 import agent from '../services/api/agent';
 
 interface ProductStore {
@@ -19,9 +19,9 @@ const useProductStore = create<ProductStore>((set) => ({
         try {
             const response = await agent.Product.list();
             set({ products: response.data });
-            set((state) => ({ iceCream: state.products.filter((item) => item.type === 'Ice cream') }));
-            set((state) => ({ milkshake: state.products.filter((item) => item.type === 'Milkshake') }));
-            set((state) => ({ specials: state.products.filter((item) => item.type === 'Milkshake') }));
+            set((state) => ({ iceCream: state.products.filter((item) => item.type === 'icecream') }));
+            set((state) => ({ milkshake: state.products.filter((item) => item.type === 'milkshake') }));
+            set((state) => ({ specials: state.products.filter((item) => item.isSpecial === true) }));
         } catch (error) {
             console.log(error);
         }
@@ -31,5 +31,5 @@ const useProductStore = create<ProductStore>((set) => ({
 export default useProductStore;
 /*
  * Författare: Kim
- * Skapat upp en store för products med
+ * Skapat upp en store för products med products, iceCream, milkshake, specials och addProducts
  */
