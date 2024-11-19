@@ -41,7 +41,7 @@ exports.register = asyncHandler(async (req, res) => {
 
         const passwordRegex = /^(?=.*\d)(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z]).{8,}$/;
 
-        if (!user.password || user.password.length < 6) {
+        if (!user.password || user.password.length < 8) {
             return res.status(401).json({
                 message: 'Error',
                 data: 'Lösenordet måste vara åtminstone 6 karaktärer långt!',
