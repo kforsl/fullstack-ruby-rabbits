@@ -1,10 +1,11 @@
 const express = require('express');
 const controller = require('../controllers/orderController');
+const { validateAccessToken } = require('../middlewares/jwtAuth');
 
 const router = express.Router();
 
 //Get all menu items
-router.get('/', controller.getyAllOrders);
+router.get('/', validateAccessToken, controller.getyAllOrders);
 router.get('/:id', controller.getOrderById);
 router.post('/', controller.createOrder);
 

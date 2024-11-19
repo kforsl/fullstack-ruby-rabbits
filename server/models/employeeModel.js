@@ -35,10 +35,13 @@ const EmployeeSchema = new Schema({
         type: String,
         required: true,
     },
-    password: {
+    hash: {
         type: String,
         required: true,
-        minlength: 8,
+    },
+    refreshToken: {
+        type: String,
+        required: false,
     },
     createdAt: {
         type: Date,

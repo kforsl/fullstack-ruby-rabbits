@@ -16,6 +16,7 @@ const PORT = process.env.PORT | 3000;
 
 app.use(express.json());
 app.use(cors());
+app.use(cookieParser(process.env.COOKIE_SECRET));
 
 app.use('/api/ingredients', ingredientRoute);
 app.use('/api/products', productRoute);
