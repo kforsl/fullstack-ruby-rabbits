@@ -1,5 +1,4 @@
 const { Schema, model } = require('mongoose');
-const { AllergenSchema } = require('./allergenModel');
 
 const IngredientSchema = new Schema({
     name: {

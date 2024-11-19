@@ -7,6 +7,7 @@ require('dotenv').config();
 const ingredientRoute = require('./routes/ingredientRoute');
 const productRoute = require('./routes/productRoute');
 const allergenRoute = require('./routes/allergenRoute');
+const orderRoute = require('./routes/orderRoute');
 
 const PORT = process.env.PORT | 3000;
 
@@ -16,6 +17,7 @@ app.use(cors());
 app.use('/api/ingredients', ingredientRoute);
 app.use('/api/products', productRoute);
 app.use('/api/allergens', allergenRoute);
+app.use('/api/orders', orderRoute);
 
 const run = async () => {
     try {

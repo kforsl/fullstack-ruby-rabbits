@@ -6,12 +6,8 @@ const IngredientSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: 'Ingredient',
     },
-    quantity: {
+    quantityInGrams: {
         type: Number,
-        required: true,
-    },
-    measuringUnit: {
-        type: String,
         required: true,
     },
 });
@@ -58,8 +54,14 @@ const ProductSchema = new Schema({
     },
     ingredients: [
         {
-            type: IngredientSchema,
-            required: true,
+            ingredient: {
+                type: Schema.Types.ObjectId,
+                ref: 'Ingredient',
+            },
+            quantityInGrams: {
+                type: Number,
+                required: true,
+            },
         },
     ],
     isSpecial: {
