@@ -23,7 +23,7 @@ exports.getyAllOrders = asyncHandler(async (req, res) => {
     try {
         const orders = await OrderModel.find({}).populate('order.product');
         res.status(200).json({
-            message: 'Succesfully found ingredients',
+            message: 'Succesfully found orders',
             data: orders,
         });
     } catch (error) {
