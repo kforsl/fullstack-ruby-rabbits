@@ -1,9 +1,9 @@
 import './productListItem.css';
 import ProductSizeQuantityItem from '../ProductSizeQuantityItem/ProductSizeQuantityItem';
-import { MenuItemType } from '../../interfaces';
+import { ProductType } from '../../interfaces';
 
 interface Props {
-    productItem: MenuItemType;
+    productItem: ProductType;
 }
 
 const ProductListItem = ({ productItem }: Props) => {
@@ -19,7 +19,7 @@ const ProductListItem = ({ productItem }: Props) => {
             </section>
             <section className='product-list-item__price-wrapper'>
                 {productItem.sizes.map((item) => (
-                    <ProductSizeQuantityItem price={item.price} key={item.price} />
+                    <ProductSizeQuantityItem price={item.prize} key={item.prize} />
                 ))}
             </section>
         </li>
