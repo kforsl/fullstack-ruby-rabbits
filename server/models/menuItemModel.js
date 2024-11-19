@@ -1,61 +1,65 @@
 const { Schema, model } = require('mongoose');
 
-const IngredientSchema = new Schema({ //Denna är speciellt för varje objekt inne i menuItem.
+const IngredientSchema = new Schema({
+    //Denna är speciellt för varje objekt inne i menuItem.
     ingredientItem: {
-        type: Schema.Types.ObjectId, ref: 'IngredientItem'
+        type: Schema.Types.ObjectId,
+        ref: 'IngredientItem',
     },
     quantity: {
         type: Number,
         required: true,
     },
-    measuringUnit:{
+    measuringUnit: {
         type: String,
         required: true,
-    }
+    },
 });
 
 const SizeListSchema = new Schema({
-    size:{
-        type: Schema.Types.ObjectId, 
+    size: {
+        type: Schema.Types.ObjectId,
         ref: 'Size',
     },
-    prize:{
+    price: {
         type: Number,
         required: true,
     },
-    ingredients:{
+    ingredients: {
         type: [IngredientSchema],
         required: true,
-    }
-})
+    },
+});
 
 const MenuItemSchema = new Schema({
     name: {
         type: String,
         required: true,
     },
-    description:{
+    description: {
         type: String,
         required: true,
     },
-    type:{
+    type: {
         type: String,
-        enum:{
-            values: ['Milkshake','Ice cream'],
-            message: '{VALUE} is not supported.'
+        enum: {
+            values: ['Milkshake', 'Ice cream'],
+            message: '{VALUE} is not supported.',
         },
         required: true,
     },
-    imageUrl:{
+    imageUrl: {
         type: String,
         required: false,
     },
-    sizes:[{
-        type: SizeListSchema,
-        required: true}
-    ]
+    sizes: [
+        {
+            type: SizeListSchema,
+            required: true,
+        },
+    ],
 });
 
 const MenuItemModel = model('menuItem', MenuItemSchema);
 
-module.exports = { MenuItemModel, MenuItemSchema }
+module.exports = { MenuItemModel, MenuItemSchema };
