@@ -1,10 +1,10 @@
 const { Schema, model } = require('mongoose');
 
 const IngredientSchema = new Schema({
-    //Denna är speciellt för varje objekt inne i menuItem.
-    ingredientItem: {
+    //Denna är speciellt för varje objekt inne i order.
+    ingredient: {
         type: Schema.Types.ObjectId,
-        ref: 'IngredientItem',
+        ref: 'Ingredient',
     },
     quantity: {
         type: Number,
@@ -18,20 +18,24 @@ const IngredientSchema = new Schema({
 
 const SizeListSchema = new Schema({
     size: {
-        type: Schema.Types.ObjectId,
-        ref: 'Size',
+        type: String,
+        enum: {
+            values: ['small', 'medium', 'large'],
+            message: '{VALUE} is not supported.',
+        },
+        required: true,
     },
     price: {
         type: Number,
         required: true,
     },
-    ingredients: {
-        type: [IngredientSchema],
-        required: true,
+    ingredientMultiplier: {
+        type: Number,
+        default: 1,
     },
 });
 
-const MenuItemSchema = new Schema({
+const ProductSchema = new Schema({
     name: {
         type: String,
         required: true,
@@ -43,7 +47,7 @@ const MenuItemSchema = new Schema({
     type: {
         type: String,
         enum: {
-            values: ['Milkshake', 'Ice cream'],
+            values: ['milkshake', 'icecream'],
             message: '{VALUE} is not supported.',
         },
         required: true,
@@ -51,6 +55,16 @@ const MenuItemSchema = new Schema({
     imageUrl: {
         type: String,
         required: false,
+    },
+    ingredients: [
+        {
+            type: IngredientSchema,
+            required: true,
+        },
+    ],
+    isSpecial: {
+        type: Boolean,
+        default: false,
     },
     sizes: [
         {
@@ -60,6 +74,5 @@ const MenuItemSchema = new Schema({
     ],
 });
 
-const MenuItemModel = model('menuItem', MenuItemSchema);
-
-module.exports = { MenuItemModel, MenuItemSchema };
+const ProductModel = model('Product', ProductSchema);
+module.exports = { ProductModel, ProductSchema };
