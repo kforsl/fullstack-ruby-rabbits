@@ -1,0 +1,32 @@
+.chef-page {
+    display: flex;
+    padding: var(--spacing-m);
+    gap: var(--spacing-xl);
+}
+
+.order-queue {
+    flex-grow: 1;
+}
+
+.order-queue__order-list {
+    display: grid;
+    gap: var(--spacing-s);
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    grid-template-rows: repeat(auto-fill, minmax(200px, auto));
+}
+
+.order-queue,
+.active-order {
+    gap: var(--spacing-s);
+    display: grid;
+    grid-template-rows: auto 1fr;
+    padding-bottom: var(--spacing-xl);
+    overflow-y: auto;
+    max-height: 100vh;
+}
+
+.order-queue__title,
+.active-order__title {
+    grid-column: 1/-1;
+    justify-self: center;
+}
