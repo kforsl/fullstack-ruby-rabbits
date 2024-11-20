@@ -9,9 +9,9 @@ export interface ProductType {
     sizes: SizeType[];
 }
 
-interface SizeType {
+export interface SizeType {
     size: 'small' | 'medium' | 'large';
-    prize: number;
+    price: number;
     ingredientMultiplier: number;
 }
 

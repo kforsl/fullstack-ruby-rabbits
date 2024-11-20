@@ -1,6 +1,7 @@
 export interface CartItem extends CartOrderInfo {
     name: string;
     price: number;
+    imageUrl: string;
 }
 export interface CartOrderInfo {
     id: string;
