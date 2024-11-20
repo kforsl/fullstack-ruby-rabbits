@@ -2,7 +2,7 @@ import axios, { AxiosResponse } from 'axios';
 import { ProductType } from '../../interfaces/interfaceProduct';
 
 // axios.defaults.baseURL = 'Här får vi byta ut och ta vår adress när vi har en backend uppe :) ';
-axios.defaults.baseURL = 'http://localhost:3000/api/';
+axios.defaults.baseURL = 'https://fullstack-ruby-rabbits.onrender.com/api/';
 
 const responseBody = <T>(response: AxiosResponse<T>) => response.data;
 

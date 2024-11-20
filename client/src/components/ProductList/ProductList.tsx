@@ -23,7 +23,7 @@ const ProductList = ({ title, position, productItems }: Props) => {
 
 export default ProductList;
 
-/**
+/*
  * Författare: Kim
  * Komponent som tar emot title, en produktlistan, "left" eller "right" position för placering. och trycker ut en lista av alla produkter i produktlistan.
  */
