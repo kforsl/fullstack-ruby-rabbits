@@ -1,6 +1,7 @@
 import axios, { AxiosResponse } from 'axios';
 import { ProductType } from '../../interfaces/interfaceProduct';
 import { SignInForm } from '../../interfaces/interfaceAuth';
+import { OrderType } from '../../interfaces/interfaceOrder';
 
 axios.defaults.baseURL = 'https://fullstack-ruby-rabbits.onrender.com/api/';
 // axios.defaults.baseURL = 'http://localhost:3000/api/';
@@ -38,7 +39,7 @@ const Products = {
 };
 
 const Orders = {
-    list: () => requests.get<AgentResponse>('orders'),
+    list: () => requests.get<AgentResponse<OrderType>>('orders').then((response) => response.data),
     updateState: (id: string, state: 'waiting' | 'preparing' | 'ready' | 'history') =>
         requests.put<AgentResponse>(`orders/${id}`, { state: state }),
 };

@@ -21,9 +21,9 @@ const ChefPage: React.FC = () => {
         );
     }
 
-    const waiting = data?.data.filter((dataItem: OrderType) => dataItem.state === 'waiting');
+    const waiting = data?.filter((dataItem: OrderType) => dataItem.state === 'waiting');
 
-    const preparing = data?.data.find((dataItem: OrderType) => dataItem.state === 'preparing');
+    const preparing = data?.find((dataItem: OrderType) => dataItem.state === 'preparing');
 
     return (
         <main className='chef-page'>
