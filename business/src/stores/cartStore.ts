@@ -14,12 +14,12 @@ const useCartStore = create<CartStore>((set) => ({
     setCart: (value) => set({ cart: value }),
     addToCart: (item) => {
         set((state) => {
-            const itemInCart = state.cart.find((cartItem) => cartItem.id === item.id && cartItem.size === item.size);
+            const itemInCart = state.cart.find((cartItem) => cartItem === item);
 
             return {
                 cart: itemInCart
                     ? state.cart.map((cartItem) =>
-                          cartItem.id === item.id ? { ...cartItem, quantity: cartItem.quantity + 1 } : cartItem
+                          cartItem === item ? { ...cartItem, quantity: cartItem.quantity + 1 } : cartItem
                       )
                     : [...state.cart, { ...item, quantity: 1 }],
             };
@@ -27,15 +27,15 @@ const useCartStore = create<CartStore>((set) => ({
     },
     removeFromCart: (item) => {
         set((state) => {
-            const itemInCart = state.cart.find((cartItem) => cartItem.id === item.id && cartItem.size === item.size);
+            const itemInCart = state.cart.find((cartItem) => cartItem === item);
 
             return {
                 cart:
                     itemInCart && itemInCart.quantity > 1
                         ? state.cart.map((cartItem) =>
-                              cartItem.id === item.id ? { ...cartItem, quantity: cartItem.quantity - 1 } : cartItem
+                              cartItem === item ? { ...cartItem, quantity: cartItem.quantity - 1 } : cartItem
                           )
-                        : state.cart.filter((cartItem) => cartItem.id !== item.id),
+                        : state.cart.filter((cartItem) => cartItem !== item),
             };
         });
     },
@@ -54,5 +54,5 @@ export default useCartStore;
 
 /**
  * författare: Kim
- * Lagt till deleteFromCart
+ * Lagt till deleteFromCart och ändrat så att den kollar så hela objektet stämmer och inte bara id.
  */

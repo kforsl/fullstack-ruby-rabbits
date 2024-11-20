@@ -12,9 +12,11 @@ const CartProductItem = ({ product }: Props) => {
 
     return (
         <li className='cart-item'>
-            <img className='cart-item__image' src='/assets/strawberry-milkshake.png' alt='temp img' />
+            <img className='cart-item__image' src={product.imageUrl} alt={`Produktbild för ${product.name}`} />
             <section className='cart-item__info-section'>
-                <h3 className='cart-item__info-text'> {product.name}</h3>
+                <h3 className='cart-item__info-text'>
+                    {product.name} - {product.size.slice(0, 1).toUpperCase()}
+                </h3>
                 <h4 className='cart-item__info-text'> {`${priceOfItem} kr`}</h4>
             </section>
             <section className='cart-item__info-cart'>

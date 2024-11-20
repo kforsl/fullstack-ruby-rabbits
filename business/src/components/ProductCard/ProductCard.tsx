@@ -16,6 +16,9 @@ const ProductCard = ({ product, size }: Props) => {
             addToCart({
                 id: product._id,
                 name: product.name,
+                imageUrl: product.imageUrl
+                    ? product.imageUrl
+                    : 'https://happymess-images.s3.eu-north-1.amazonaws.com/Image-not-found.png',
                 price: size.price,
                 quantity: 1,
                 size: size.size,
@@ -27,13 +30,25 @@ const ProductCard = ({ product, size }: Props) => {
 
     return (
         <article className='product-card' onClick={() => productCartFunction()}>
-            <img
-                className='product-card__image'
-                src='/assets/strawberry-milkshake.png'
-                alt={`Produktbild för ${product.name}`}
-            />
-            <h3 className='product-card__text'>{product.name}</h3>
-            <h4 className='product-card__text'>{size.size}</h4>
+            <figure
+                className={
+                    cart.find((item) => item.id === product._id && item.size === size.size)
+                        ? 'product-card__image-container active'
+                        : 'product-card__image-container'
+                }>
+                <img
+                    className='product-card__image'
+                    src={
+                        product.imageUrl
+                            ? product.imageUrl
+                            : 'https://happymess-images.s3.eu-north-1.amazonaws.com/Image-not-found.png'
+                    }
+                    alt={`Produktbild för ${product.name}`}
+                />
+            </figure>
+            <h3 className='product-card__text'>
+                {product.name} - {size.size.slice(0, 1).toUpperCase()}
+            </h3>
             <h4 className='product-card__text'> {size.price} Kr </h4>
         </article>
     );
