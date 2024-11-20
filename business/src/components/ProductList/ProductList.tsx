@@ -23,3 +23,8 @@ const ProductList = ({ title, products }: Props) => {
 };
 
 export default ProductList;
+
+/**
+ * Författare: Kim
+ * Komponent för att lista de olika produkttyperna
+ */

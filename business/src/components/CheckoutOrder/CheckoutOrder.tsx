@@ -61,3 +61,8 @@ const CheckoutOrder = ({ changeview }: Props) => {
 };
 
 export default CheckoutOrder;
+
+/**
+ * Författare: Kim
+ * Komponent som håller layouten för de olika sektionerna av orderstatus.
+ */

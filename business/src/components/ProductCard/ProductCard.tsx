@@ -55,3 +55,8 @@ const ProductCard = ({ product, size }: Props) => {
 };
 
 export default ProductCard;
+
+/**
+ * Författare: Kim
+ * Komponent för ett produktkort som har funktion för att lägga till produkten i varukorg.
+ */

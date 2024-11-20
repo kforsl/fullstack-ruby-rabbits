@@ -62,3 +62,8 @@ const Cart = ({ changeview }: Props) => {
 };
 
 export default Cart;
+
+/**
+ * Författare: Kim
+ * Komponent som visar de produkter som finns i varukorgem och möjligheten att öka och minska antalet.
+ */

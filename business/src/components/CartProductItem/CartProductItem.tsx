@@ -35,3 +35,8 @@ const CartProductItem = ({ product }: Props) => {
 };
 
 export default CartProductItem;
+
+/**
+ * Författare: Kim
+ * Komponent för ett objekt som ligger i varukorgen.
+ */

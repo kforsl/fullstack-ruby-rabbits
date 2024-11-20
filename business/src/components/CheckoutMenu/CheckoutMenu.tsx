@@ -38,3 +38,8 @@ const CheckoutMenu = ({ changeview }: Props) => {
 };
 
 export default CheckoutMenu;
+
+/**
+ * Författare: Kim
+ * Komponent som håller layouten för varukorg och produkterna i meny
+ */
