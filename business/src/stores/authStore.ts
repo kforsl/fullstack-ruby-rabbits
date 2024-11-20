@@ -2,29 +2,18 @@ import { create } from 'zustand';
 import { SignInForm } from '../interfaces/interfaceAuth';
 
 interface AuthStore {
-    isShowingForm: boolean;
-    setIsShowingForm: (value: boolean) => void;
-
+    isLoading: boolean;
     signInForm: SignInForm;
-    isSigningIn: boolean;
-    clearForm: (form: 'signIn' | 'signUp') => void;
-    setIsSigningIn: (value: boolean) => void;
+    clearForm: () => void;
     onFormChanged: (event: React.FormEvent) => void;
-    validateForm: (form: 'signIn' | 'signUp') => void;
+    validateForm: () => void;
 }
 
 const useAuthStore = create<AuthStore>((set) => ({
-    isShowingForm: false,
+    isLoading: false,
     signInForm: { email: '', password: '' },
-    signUpForm: { email: '', password: '', confirmPassword: '', phone: '', firstName: '', lastName: '' },
-    setIsShowingForm: (value) => {
-        set({ isShowingForm: value });
-        (document.querySelector('html') as HTMLElement).style.overflow = value ? 'hidden' : '';
-    },
-    validateRegistrationForm: () => {},
 
-    isSigningIn: true,
-    setIsSigningIn: (value) => set({ isSigningIn: value }),
+    setIsLoading: (state: boolean) => set({ isLoading: state }),
 
     clearForm: () => set({ signInForm: { email: '', password: '' } }),
 
@@ -37,7 +26,7 @@ const useAuthStore = create<AuthStore>((set) => ({
             };
         });
     },
-    validateForm: () => {},
+    validateForm: () => set((state) => ({})),
 }));
 
 export default useAuthStore;

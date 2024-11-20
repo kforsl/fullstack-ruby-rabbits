@@ -1,24 +1,3 @@
-.authentication-form__backdrop {
-    position: fixed;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
-    z-index: 1000;
-    display: grid;
-    place-items: center;
-    transition: opacity 0.2s ease-in-out, backdrop-filter 0.2s ease-in-out, background 0.2s ease-in-out;
-}
-.authentication-form__backdrop--active {
-    opacity: 1;
-    backdrop-filter: blur(5px);
-    background: rgba(0, 0, 0, 0.3);
-}
-.authentication-form__backdrop--inactive {
-    opacity: 0;
-    pointer-events: none;
-    background: rgba(0, 0, 0, 0);
-}
 .authentication-form__wrapper {
     position: relative;
     display: flex;
@@ -34,8 +13,8 @@
 }
 .form-title {
     font-family: var(--title-font);
-    font-weight: 400;
-    font-size: var(--text-font-xl);
+    font-weight: 700;
+    font-size: var(--font-size-l);
     text-align: center;
     user-select: none;
     -moz-user-select: none;
@@ -64,7 +43,7 @@
 }
 .input-label {
     font-family: var(--bread-font);
-    font-size: var(--text-font-l);
+    font-size: var(--font-size-l);
     position: absolute;
     top: 1.56rem;
     left: 0.56rem;
@@ -73,17 +52,18 @@
     width: 100%;
     font-family: var(--bread-font);
     margin-block: var(--spacing-s);
-    font-size: var(--text-font-l);
+    font-size: var(--font-size-l);
     padding: var(--spacing-xs);
     border-radius: 10px;
-    border: 1px solid var(--black);
-    box-shadow: 3px 3px 0 var(--black);
-    background: var(--primary-bg);
-    transition: background 0.2s ease-in-out;
+    border: 1px solid var(--color-black);
+    box-shadow: 3px 3px 0 var(--color-black);
+    background: var(--bg-primary);
+    transition: background 0.2s ease-in-out, padding 0.2s ease-in-out;
 }
 
 .input-field:focus {
-    background: white;
+    background: var(--color-white);
+    padding: var(--spacing-s);
 }
 
 .form-subtitle {
