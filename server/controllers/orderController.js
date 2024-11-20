@@ -86,7 +86,11 @@ exports.getOrderById = asyncHandler(async (req, res) => {
 });
 exports.updateOrderById = asyncHandler(async (req, res) => {
     try {
-        const order = await OrderModel.findByIdAndUpdate(req.params.id, req.body, { new: true });
+        const order = await OrderModel.findByIdAndUpdate(
+            req.params.id,
+            { ...req.body, updatedAt: new Date() },
+            { new: true }
+        );
 
         if (!order) {
             res.status(404).json({
