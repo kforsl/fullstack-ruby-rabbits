@@ -31,6 +31,10 @@
     padding: var(--spacing-s);
 }
 
+.order-card--large {
+    max-width: 300px;
+}
+
 .order-card__date {
     font-size: var(--font-size-l);
     color: gray;

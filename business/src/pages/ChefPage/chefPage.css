@@ -2,10 +2,15 @@
     display: flex;
     padding: var(--spacing-m);
     gap: var(--spacing-xl);
+    max-width: var(--max-width);
+    width: 100%;
+    margin: 0 auto;
+
 }
 
 .order-queue {
     flex-grow: 1;
+    height: 100%;
 }
 
 .order-queue__order-list {
@@ -13,6 +18,7 @@
     gap: var(--spacing-s);
     grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
     grid-template-rows: repeat(auto-fill, minmax(200px, auto));
+
 }
 
 .order-queue,

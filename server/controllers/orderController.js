@@ -19,9 +19,11 @@ exports.createOrder = asyncHandler(async (req, res) => {
     }
 });
 
-exports.getyAllOrders = asyncHandler(async (req, res) => {
+exports.getAllOrders = asyncHandler(async (req, res) => {
     try {
-        const orders = await OrderModel.find({});
+        const orders = await OrderModel.find({})
+            .populate('order.product')
+            .populate('order.product.ingredients.ingredient');
         res.status(200).json({
             message: 'Succesfully found orders',
             data: orders,
