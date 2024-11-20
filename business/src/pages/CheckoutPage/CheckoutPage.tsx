@@ -21,7 +21,7 @@ const CheckoutPage: React.FC = () => {
 
 export default CheckoutPage;
 
-/**
+/*
  * Författare: Kim
  * Page för de olika vyerna för checkoutPage
  */
