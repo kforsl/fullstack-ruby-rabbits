@@ -1,0 +1,22 @@
+.checkoutMenu {
+    display: grid;
+    grid-template-columns: var(--main-grid);
+    gap: var(--spacing-s);
+    max-height: 100svh;
+    overflow: hidden;
+}
+
+.checkoutMenu__menu-title {
+    font-size: var(--font-size-xl);
+    text-align: center;
+}
+
+.checkoutMenu__menu-section {
+    padding-block: var(--spacing-s);
+    overflow-y: scroll;
+    grid-column: 1 / span 5;
+}
+
+.checkoutMenu__cart-section {
+    grid-column: 6 / span 3;
+}
