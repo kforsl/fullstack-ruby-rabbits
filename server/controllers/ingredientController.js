@@ -14,7 +14,7 @@ exports.createIngredient = asyncHandler(async (req, res) => {
     } catch (error) {
         res.status(500).json({
             message: 'Error',
-            data: error.message,
+            data: [error],
         });
     }
 });
@@ -29,7 +29,7 @@ exports.getAllIngredients = asyncHandler(async (req, res) => {
     } catch (error) {
         res.status(500).json({
             message: 'Error',
-            data: error.message,
+            data: [error],
         });
     }
 });
@@ -51,7 +51,7 @@ exports.getIngredientById = asyncHandler(async (req, res) => {
     } catch (error) {
         res.status(500).json({
             message: 'Error',
-            data: error.message,
+            data: [error],
         });
     }
 });
