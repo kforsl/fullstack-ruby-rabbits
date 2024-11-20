@@ -1,21 +1,24 @@
-import { useEffect } from 'react';
 import PopularProductItem from '../../components/PopularProductItem/PopularProductItem';
 import ProductList from '../../components/ProductList/ProductList';
 import './menuPage.css';
-import useProductStore from '../../stores/productStore';
+import { useGetMenu } from '../../services/queries';
+import { ProductType } from '../../interfaces/interfaceProduct';
 
 const MenuPage: React.FC = () => {
-    const { addProducts, iceCream, milkshake, specials } = useProductStore();
+    const { data, isLoading, isError, error } = useGetMenu();
 
-    useEffect(() => {
-        addProducts();
-    }, []);
+    if (isLoading) return <p>Loading...</p>;
+    if (isError) return <p>{`${error}`}</p>;
+
+    const specials = data?.data.filter((item) => item.isSpecial === true) as ProductType[];
+    const iceCream = data?.data.filter((item) => item.type === 'icecream') as ProductType[];
+    const milkshake = data?.data.filter((item) => item.type === 'milkshake') as ProductType[];
 
     return (
         <main className='menu-page'>
             <div className='wrapper'>
                 <ul className='menu-page__popular-wrapper'>
-                    {specials.map((special) => (
+                    {specials?.map((special) => (
                         <PopularProductItem product={special} key={special._id} />
                     ))}
                 </ul>
@@ -37,9 +40,10 @@ export default MenuPage;
  *
  * Ändrat: Magnus
  * Tog bort svg-image och titel med css och lade den i headerkomponent.
- */
-
-/*
+ *
  * Ändrat: Kim
  * Lagt till div med wrapper
+ *
+ * Ändrat: Magnus
+ * Implementerade useQuery istället för zustand-store/useEffect för att rendera ut menyn.
  */
