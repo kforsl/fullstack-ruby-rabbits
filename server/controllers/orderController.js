@@ -21,22 +21,38 @@ exports.createOrder = asyncHandler(async (req, res) => {
 
 exports.getAllOrders = asyncHandler(async (req, res) => {
     try {
+        const { state } = req.query;
+
         const orders = await OrderModel.find({})
             .populate('order.product')
             .populate('order.product.ingredients.ingredient');
-      
+
         if (orders.length < 1) {
             res.status(404).json({
                 message: 'No orders found',
                 data: [],
             });
         } else {
-            res.status(200).json({
-                message: 'Succesfully found orders',
-                data: orders,
-            });
+            if (!state) {
+                res.status(200).json({
+                    message: 'Succesfully found orders',
+                    data: orders.filter((x) => x.state !== 'history'),
+                });
+            } else {
+                const states = ['waiting', 'preparing', 'ready', 'history'];
+                if (states.includes(state)) {
+                    res.status(200).json({
+                        message: 'Succesfully found orders',
+                        data: orders.filter((x) => x.state === state),
+                    });
+                } else {
+                    res.status(200).json({
+                        message: 'Succesfully found orders',
+                        data: orders,
+                    });
+                }
+            }
         }
-
     } catch (error) {
         res.status(500).json({
             message: 'Error',
@@ -59,6 +75,28 @@ exports.getOrderById = asyncHandler(async (req, res) => {
 
         res.status(200).json({
             message: 'Succesfully found order.',
+            data: order,
+        });
+    } catch (error) {
+        res.status(500).json({
+            message: 'Error',
+            data: error.message,
+        });
+    }
+});
+exports.updateOrderById = asyncHandler(async (req, res) => {
+    try {
+        const order = await OrderModel.findByIdAndUpdate(req.params.id, req.body, { new: true });
+
+        if (!order) {
+            res.status(404).json({
+                message: 'Error',
+                data: 'Order not found.',
+            });
+        }
+
+        res.status(200).json({
+            message: 'Succesfully updated order.',
             data: order,
         });
     } catch (error) {
