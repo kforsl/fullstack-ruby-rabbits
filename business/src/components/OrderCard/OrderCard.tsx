@@ -5,9 +5,10 @@ import './orderCard.css';
 interface Props {
     size: 'small' | 'medium' | 'large';
     order: OrderType;
+    onClick?: () => void;
 }
 
-const OrderCard: React.FC<Props> = ({ size, order }) => {
+const OrderCard: React.FC<Props> = ({ size, order, onClick }) => {
     const calculateAmountInOrder = (): number =>
         order.order.reduce((totalAmount: number, orderItem: OrderItemType) => totalAmount + orderItem.quantity, 0);
 
@@ -27,7 +28,7 @@ const OrderCard: React.FC<Props> = ({ size, order }) => {
                     <span>Antal:</span>
                     <span>{calculateAmountInOrder()}</span>
                 </h3>
-                <TextButton onClick={() => console.log('Här var det klickat!')}>TILLAGA</TextButton>
+                <TextButton onClick={onClick}>TILLAGA</TextButton>
             </li>
         );
     if (size === 'large')
@@ -42,7 +43,7 @@ const OrderCard: React.FC<Props> = ({ size, order }) => {
                         <h4 className='order-card__product-quantity'>{orderItem.quantity}</h4>
                     </li>
                 ))}
-                <TextButton onClick={() => console.log('Här var det klickat!')}>KLAR FÖR SERVERING</TextButton>
+                <TextButton onClick={onClick}>KLAR FÖR SERVERING</TextButton>
             </ul>
         );
 };
@@ -50,6 +51,9 @@ const OrderCard: React.FC<Props> = ({ size, order }) => {
 export default OrderCard;
 
 /*
- *Författare: Magnus
- *Skapat komponent som tar 2 props och renderar ut kort för beställningar.
+ * Författare: Magnus
+ * Skapat komponent som tar 2 props och renderar ut kort för beställningar.
+ *
+ * Ändrat: Magnus
+ * Tar nu emot en onClick och skickar ned den till TextButton.
  */
