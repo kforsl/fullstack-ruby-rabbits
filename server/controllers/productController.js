@@ -36,7 +36,11 @@ exports.getAllProducts = asyncHandler(async (req, res) => {
 });
 exports.updateProductById = asyncHandler(async (req, res) => {
     try {
-        const product = await ProductModel.findByIdAndUpdate(req.params.id, req.body, { new: true });
+        const product = await ProductModel.findByIdAndUpdate(
+            req.params.id,
+            { ...req.body, updatedAt: new Date() },
+            { new: true }
+        );
         res.status(200).json({
             message: 'Succesfully updated product.',
             data: [product],
