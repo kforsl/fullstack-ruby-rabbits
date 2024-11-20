@@ -9,7 +9,7 @@ exports.createOrder = asyncHandler(async (req, res) => {
 
         res.status(201).json({
             message: 'Succesfully created order',
-            data: order,
+            data: [order],
         });
     } catch (error) {
         res.status(500).json({
@@ -24,11 +24,11 @@ exports.getAllOrders = asyncHandler(async (req, res) => {
         const orders = await OrderModel.find({})
             .populate('order.product')
             .populate('order.product.ingredients.ingredient');
-      
+
         if (orders.length < 1) {
             res.status(404).json({
-                message: 'No orders found',
-                data: [],
+                message: 'Error',
+                data: 'No orders found',
             });
         } else {
             res.status(200).json({
@@ -36,7 +36,6 @@ exports.getAllOrders = asyncHandler(async (req, res) => {
                 data: orders,
             });
         }
-
     } catch (error) {
         res.status(500).json({
             message: 'Error',
@@ -59,7 +58,7 @@ exports.getOrderById = asyncHandler(async (req, res) => {
 
         res.status(200).json({
             message: 'Succesfully found order.',
-            data: order,
+            data: [order],
         });
     } catch (error) {
         res.status(500).json({
