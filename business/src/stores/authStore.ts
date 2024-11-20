@@ -1,12 +1,13 @@
 import { create } from 'zustand';
 import { SignInForm } from '../interfaces/interfaceAuth';
+// import agent from '../services/api/agent';
 
 interface AuthStore {
     isLoading: boolean;
+
     signInForm: SignInForm;
     clearForm: () => void;
     onFormChanged: (event: React.FormEvent) => void;
-    validateForm: () => void;
 }
 
 const useAuthStore = create<AuthStore>((set) => ({
@@ -26,7 +27,6 @@ const useAuthStore = create<AuthStore>((set) => ({
             };
         });
     },
-    validateForm: () => set((state) => ({})),
 }));
 
 export default useAuthStore;

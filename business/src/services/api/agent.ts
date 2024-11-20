@@ -37,12 +37,9 @@ const Products = {
     list: () => requests.get<AgentResponse<ProductType>>('products'),
 };
 
-const Authenticate = {
-    signIn: (credentials: SignInForm) => requests.post<AgentResponse<SignInForm>>(`auth`, credentials),
-};
-
 const agent = {
-    Authenticate,
+    Authenticate: (credentials: SignInForm) =>
+        requests.post<AgentResponse<SignInForm>>(`auth`, credentials).then((response) => response.data),
     Products,
 };
 
@@ -53,7 +50,7 @@ export default agent;
  * Skapat Product med list
  */
 
-/**
+/*
  * Författare: Johan
  * Skapat Authenticate objektet i Agent för inlogg och dylikt.
  * Jag la även till en uppdaterad version av AgentResponse som kan användas i alla anrop.
