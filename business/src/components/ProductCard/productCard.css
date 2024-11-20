@@ -1,0 +1,18 @@
+.product-card {
+    max-width: 120px;
+}
+
+.product-card__image {
+    border: 4px solid black;
+    border-radius: 0.5rem;
+    width: 100%;
+    aspect-ratio: 1;
+    margin-bottom: 0.5rem;
+}
+
+.product-card__text {
+    font-size: var(--font-size-m);
+    font-family: var(--bread-font);
+    text-align: center;
+    margin-bottom: 0.5rem;
+}
