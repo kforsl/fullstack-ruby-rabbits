@@ -1,5 +1,4 @@
 :root {
-
   --bread-font: Arial, Helvetica, sans-serif;
 
   --font-size-s: clamp(0.75rem, 0.7061rem + 0.1951vw, 0.85rem);
@@ -35,10 +34,10 @@
 }
 
 * {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-  font-weight: 400;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-weight: 400;
 }
 
 body {
@@ -48,14 +47,14 @@ body {
 }
 
 #root {
-  min-height: 100svh;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+    min-height: 100svh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
 .wrapper {
-  display: grid;
-  max-width: var(--max-width);
-  margin: 0 auto;
+    display: grid;
+    max-width: var(--max-width);
+    margin: 0 auto;
 }

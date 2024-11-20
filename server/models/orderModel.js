@@ -1,7 +1,4 @@
 const { Schema, model } = require('mongoose');
-
-const OrderItemSchema = new Schema({});
-
 const OrderSchema = new Schema({
     customer: {
         type: Schema.Types.ObjectId,
