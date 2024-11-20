@@ -1,6 +1,7 @@
 import axios, { AxiosResponse } from 'axios';
 import { ProductType } from '../../interfaces/interfaceProduct';
 import { SignInForm } from '../../interfaces/interfaceAuth';
+import { OrderType } from '../../interfaces/interfaceOrder';
 
 axios.defaults.baseURL = 'https://fullstack-ruby-rabbits.onrender.com/api/';
 // axios.defaults.baseURL = 'http://localhost:3000/api/';
@@ -30,17 +31,24 @@ const requests = {
 
 interface AgentResponse<T = object> {
     message: string;
-    data: T[] | string;
+    data: T[];
 }
 
 const Products = {
     list: () => requests.get<AgentResponse<ProductType>>('products'),
 };
 
+const Orders = {
+    list: () => requests.get<AgentResponse<OrderType>>('orders').then((response) => response.data),
+    updateState: (id: string, state: 'waiting' | 'preparing' | 'ready' | 'history') =>
+        requests.put<AgentResponse>(`orders/${id}`, { state: state }),
+};
+
 const agent = {
     Authenticate: (credentials: SignInForm) =>
         requests.post<AgentResponse<SignInForm>>(`auth`, credentials).then((response) => response.data),
     Products,
+    Orders,
 };
 
 export default agent;
@@ -54,4 +62,9 @@ export default agent;
  * Författare: Johan
  * Skapat Authenticate objektet i Agent för inlogg och dylikt.
  * Jag la även till en uppdaterad version av AgentResponse som kan användas i alla anrop.
+ */
+
+/*
+ * Ändrat: Magnus
+ * Lade in Orders objekt med interface.
  */
