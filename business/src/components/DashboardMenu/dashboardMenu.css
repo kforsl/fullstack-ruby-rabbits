@@ -1,0 +1,16 @@
+.dashboard-menu__wrapper {
+    width: 0;
+    height: 100vh;
+    background: var(--color-black);
+    transition: width 0.2s ease-in-out;
+}
+.dashboard-menu__wrapper--inactive {
+    width: 0;
+    overflow: hidden;
+}
+.dashboard-menu__wrapper--hidden {
+    width: 5rem;
+}
+.dashboard-menu__wrapper--shown {
+    width: 15rem;
+}
