@@ -11,7 +11,7 @@ exports.getAllAllergens = asyncHandler(async (req, res) => {
     } catch (error) {
         res.status(500).json({
             message: 'Error',
-            data: error,
+            data: [error],
         });
     }
 });
@@ -29,7 +29,7 @@ exports.createAllergen = asyncHandler(async (req, res) => {
     } catch (error) {
         res.status(400).json({
             message: 'Error',
-            data: error.errorResponse,
+            data: [error],
         });
     }
 });
@@ -51,7 +51,7 @@ exports.getAllergenById = asyncHandler(async (req, res) => {
     } catch (error) {
         res.status(500).json({
             message: 'Error',
-            data: error,
+            data: [error],
         });
     }
 });

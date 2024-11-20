@@ -14,7 +14,7 @@ exports.createOrder = asyncHandler(async (req, res) => {
     } catch (error) {
         res.status(500).json({
             message: 'Error',
-            data: error.message,
+            data: [error],
         });
     }
 });
@@ -57,7 +57,7 @@ exports.getAllOrders = asyncHandler(async (req, res) => {
     } catch (error) {
         res.status(500).json({
             message: 'Error',
-            data: error.message,
+            data: [error],
         });
     }
 });
@@ -81,7 +81,7 @@ exports.getOrderById = asyncHandler(async (req, res) => {
     } catch (error) {
         res.status(500).json({
             message: 'Error',
-            data: error.message,
+            data: [error],
         });
     }
 });
@@ -107,7 +107,7 @@ exports.updateOrderById = asyncHandler(async (req, res) => {
     } catch (error) {
         res.status(500).json({
             message: 'Error',
-            data: error.message,
+            data: [error],
         });
     }
 });

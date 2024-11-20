@@ -14,7 +14,7 @@ exports.createProduct = asyncHandler(async (req, res) => {
     } catch (error) {
         res.status(500).json({
             message: 'Error',
-            data: error.message,
+            data: [error],
         });
     }
 });
@@ -30,7 +30,7 @@ exports.getAllProducts = asyncHandler(async (req, res) => {
     } catch (error) {
         res.status(400).json({
             message: 'Error',
-            data: error.message,
+            data: [error],
         });
     }
 });
@@ -48,7 +48,7 @@ exports.updateProductById = asyncHandler(async (req, res) => {
     } catch (error) {
         res.status(400).json({
             message: 'Error',
-            data: error.message,
+            data: [error],
         });
     }
 });
@@ -69,7 +69,7 @@ exports.getProductById = asyncHandler(async (req, res) => {
     } catch (error) {
         res.status(400).json({
             message: 'Error',
-            data: error.message,
+            data: [error],
         });
     }
 });
