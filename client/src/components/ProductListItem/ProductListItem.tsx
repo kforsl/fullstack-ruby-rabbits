@@ -1,6 +1,6 @@
 import './productListItem.css';
 import ProductSizeQuantityItem from '../ProductSizeQuantityItem/ProductSizeQuantityItem';
-import { ProductType } from '../../interfaces';
+import { ProductType } from '../../interfaces/interfaceProduct';
 
 interface Props {
     productItem: ProductType;
@@ -12,8 +12,8 @@ const ProductListItem = ({ productItem }: Props) => {
             <section>
                 <h2 className='product-list-item__title'> {productItem.name}</h2>
                 <ul className='product-list-item__ingredients-list'>
-                    {productItem.sizes[0].ingredients.map((product) => (
-                        <li key={product.ingredientItem._id}>{product.ingredientItem.name},</li>
+                    {productItem.ingredients.map((product) => (
+                        <li key={product.ingredient._id}>{product.ingredient.name},</li>
                     ))}
                 </ul>
             </section>
@@ -28,7 +28,7 @@ const ProductListItem = ({ productItem }: Props) => {
 
 export default ProductListItem;
 
-/**
+/*
  * Författare: Kim
  * Komponent som tar emot en produkt och trycker ut ett listobjekt med produktnamn, lista med ingredienser och pris.
  */
