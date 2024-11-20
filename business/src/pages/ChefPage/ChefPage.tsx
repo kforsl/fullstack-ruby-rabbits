@@ -6,7 +6,7 @@ import { OrderType } from '../../interfaces/interfaceOrder';
 const ChefPage: React.FC = () => {
     async function getOrders() {
         try {
-            const response = await axios.get('http://localhost:3000/api/orders');
+            const response = await axios.get('https://fullstack-ruby-rabbits.onrender.com/api/orders');
             return response.data.data;
         } catch (error) {
             console.error(error);

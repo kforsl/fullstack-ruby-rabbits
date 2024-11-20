@@ -5,6 +5,7 @@ export interface CartItem extends CartOrderInfo {
 export interface CartOrderInfo {
     id: string;
     quantity: number;
+    size: 'small' | 'medium' | 'large';
 }
 
 /*

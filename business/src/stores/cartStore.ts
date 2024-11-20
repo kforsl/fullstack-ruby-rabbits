@@ -6,6 +6,7 @@ interface CartStore {
     setCart: (value: CartItem[]) => void;
     addToCart: (value: CartItem) => void;
     removeFromCart: (value: CartItem) => void;
+    deleteFromCart: (value: CartItem) => void;
 }
 
 const useCartStore = create<CartStore>((set) => ({
@@ -13,7 +14,7 @@ const useCartStore = create<CartStore>((set) => ({
     setCart: (value) => set({ cart: value }),
     addToCart: (item) => {
         set((state) => {
-            const itemInCart = state.cart.find((cartItem) => cartItem.id === item.id);
+            const itemInCart = state.cart.find((cartItem) => cartItem.id === item.id && cartItem.size === item.size);
 
             return {
                 cart: itemInCart
@@ -26,7 +27,7 @@ const useCartStore = create<CartStore>((set) => ({
     },
     removeFromCart: (item) => {
         set((state) => {
-            const itemInCart = state.cart.find((cartItem) => cartItem.id === item.id);
+            const itemInCart = state.cart.find((cartItem) => cartItem.id === item.id && cartItem.size === item.size);
 
             return {
                 cart:
@@ -38,10 +39,20 @@ const useCartStore = create<CartStore>((set) => ({
             };
         });
     },
+    deleteFromCart: (item) => {
+        set((state) => {
+            return { cart: state.cart.filter((cartItem) => cartItem !== item) };
+        });
+    },
 }));
 
 export default useCartStore;
 /*
  *Författare: Magnus
  *Startat upp en array för cart samt funktionalitet att lägga till och ta bort cart items. removeFromCart filtrerar bort cart item istället för att visa 0.
+ */
+
+/**
+ * författare: Kim
+ * Lagt till deleteFromCart
  */

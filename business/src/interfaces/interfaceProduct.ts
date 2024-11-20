@@ -11,7 +11,7 @@ export interface ProductType {
 
 export interface SizeType {
     size: 'small' | 'medium' | 'large';
-    prize: number;
+    price: number;
     ingredientMultiplier: number;
 }
 

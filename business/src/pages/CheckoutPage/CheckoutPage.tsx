@@ -9,15 +9,15 @@ const CheckoutPage: React.FC = () => {
 
     const icecreamArray: ProductType[] = [
         {
-            _id: '123',
-            name: 'Glass',
+            _id: '10',
+            name: 'Vanilj',
             description: 'En vanlig vaniljglass',
             type: 'icecream',
             imageUrl: '',
             ingredients: [
                 {
                     ingredientItem: {
-                        _id: 'i123',
+                        _id: 'i1',
                         name: 'Glass',
                         description: 'vanilj',
                         allergens: [],
@@ -29,33 +29,33 @@ const CheckoutPage: React.FC = () => {
             sizes: [
                 {
                     size: 'small',
-                    prize: 32,
+                    price: 32,
                     ingredientMultiplier: 0.8,
                 },
                 {
                     size: 'medium',
-                    prize: 43,
+                    price: 43,
                     ingredientMultiplier: 1,
                 },
                 {
                     size: 'large',
-                    prize: 54,
+                    price: 54,
                     ingredientMultiplier: 1.2,
                 },
             ],
         },
         {
-            _id: '123',
-            name: 'Glass',
-            description: 'En vanlig vaniljglass',
+            _id: '11',
+            name: 'Jordgubb',
+            description: 'En vanlig Jordgubbsglass',
             type: 'icecream',
             imageUrl: '',
             ingredients: [
                 {
                     ingredientItem: {
-                        _id: 'i123',
+                        _id: 'i2',
                         name: 'Glass',
-                        description: 'vanilj',
+                        description: 'Jordgubb',
                         allergens: [],
                     },
                     quantity: 100,
@@ -65,33 +65,33 @@ const CheckoutPage: React.FC = () => {
             sizes: [
                 {
                     size: 'small',
-                    prize: 32,
+                    price: 32,
                     ingredientMultiplier: 0.8,
                 },
                 {
                     size: 'medium',
-                    prize: 43,
+                    price: 43,
                     ingredientMultiplier: 1,
                 },
                 {
                     size: 'large',
-                    prize: 54,
+                    price: 54,
                     ingredientMultiplier: 1.2,
                 },
             ],
         },
         {
-            _id: '123',
-            name: 'Glass',
-            description: 'En vanlig vaniljglass',
+            _id: '12',
+            name: 'choklad',
+            description: 'En vanlig chokladglass',
             type: 'icecream',
             imageUrl: '',
             ingredients: [
                 {
                     ingredientItem: {
-                        _id: 'i123',
+                        _id: 'i3',
                         name: 'Glass',
-                        description: 'vanilj',
+                        description: 'choklad',
                         allergens: [],
                     },
                     quantity: 100,
@@ -101,17 +101,17 @@ const CheckoutPage: React.FC = () => {
             sizes: [
                 {
                     size: 'small',
-                    prize: 32,
+                    price: 32,
                     ingredientMultiplier: 0.8,
                 },
                 {
                     size: 'medium',
-                    prize: 43,
+                    price: 43,
                     ingredientMultiplier: 1,
                 },
                 {
                     size: 'large',
-                    prize: 54,
+                    price: 54,
                     ingredientMultiplier: 1.2,
                 },
             ],
@@ -120,15 +120,15 @@ const CheckoutPage: React.FC = () => {
 
     const milkshakeArray: ProductType[] = [
         {
-            _id: '123',
-            name: 'milkshake',
+            _id: '21',
+            name: 'vanilj',
             description: 'En vanlig vaniljmilkshake',
             type: 'milkshake',
             imageUrl: '',
             ingredients: [
                 {
                     ingredientItem: {
-                        _id: 'i123',
+                        _id: 'i1',
                         name: 'Glass',
                         description: 'vanilj',
                         allergens: [],
@@ -140,31 +140,31 @@ const CheckoutPage: React.FC = () => {
             sizes: [
                 {
                     size: 'small',
-                    prize: 32,
+                    price: 32,
                     ingredientMultiplier: 0.8,
                 },
                 {
                     size: 'medium',
-                    prize: 43,
+                    price: 43,
                     ingredientMultiplier: 1,
                 },
                 {
                     size: 'large',
-                    prize: 54,
+                    price: 54,
                     ingredientMultiplier: 1.2,
                 },
             ],
         },
         {
-            _id: '123',
-            name: 'milkshake',
-            description: 'En vanlig vaniljmilkshake',
+            _id: '22',
+            name: 'jordgubb',
+            description: 'En vanlig jordgubbsmilkshake',
             type: 'milkshake',
             imageUrl: '',
             ingredients: [
                 {
                     ingredientItem: {
-                        _id: 'i123',
+                        _id: 'i2',
                         name: 'Glass',
                         description: 'vanilj',
                         allergens: [],
@@ -176,33 +176,33 @@ const CheckoutPage: React.FC = () => {
             sizes: [
                 {
                     size: 'small',
-                    prize: 32,
+                    price: 32,
                     ingredientMultiplier: 0.8,
                 },
                 {
                     size: 'medium',
-                    prize: 43,
+                    price: 43,
                     ingredientMultiplier: 1,
                 },
                 {
                     size: 'large',
-                    prize: 54,
+                    price: 54,
                     ingredientMultiplier: 1.2,
                 },
             ],
         },
         {
-            _id: '123',
-            name: 'milkshake',
-            description: 'En vanlig vaniljmilkshake',
+            _id: '23',
+            name: 'choklad',
+            description: 'En vanlig chokladmilkshake',
             type: 'milkshake',
             imageUrl: '',
             ingredients: [
                 {
                     ingredientItem: {
-                        _id: 'i123',
+                        _id: 'i3',
                         name: 'Glass',
-                        description: 'vanilj',
+                        description: 'choklad',
                         allergens: [],
                     },
                     quantity: 1,
@@ -212,17 +212,17 @@ const CheckoutPage: React.FC = () => {
             sizes: [
                 {
                     size: 'small',
-                    prize: 32,
+                    price: 32,
                     ingredientMultiplier: 0.8,
                 },
                 {
                     size: 'medium',
-                    prize: 43,
+                    price: 43,
                     ingredientMultiplier: 1,
                 },
                 {
                     size: 'large',
-                    prize: 54,
+                    price: 54,
                     ingredientMultiplier: 1.2,
                 },
             ],
