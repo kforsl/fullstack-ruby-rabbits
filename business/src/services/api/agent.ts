@@ -41,7 +41,7 @@ const Products = {
 const Orders = {
     list: () => requests.get<AgentResponse<OrderType>>('orders').then((response) => response.data),
     updateState: (id: string, state: 'waiting' | 'preparing' | 'ready' | 'history') =>
-        requests.put<AgentResponse>(`orders/${id}`, { state: state }),
+        requests.put<AgentResponse<OrderType>>(`orders/${id}`, { state: state }).then((response) => response.data),
 };
 
 const agent = {
@@ -66,5 +66,5 @@ export default agent;
 
 /*
  * Ändrat: Magnus
- * Lade in Orders objekt med interface.
+ * Lade in Orders objekt med funktioner, ändrade AgentResponse så data alltid är en array med "T".
  */

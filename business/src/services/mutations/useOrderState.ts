@@ -1,6 +1,9 @@
 // import { useMutation } from '@tanstack/react-query';
 // import agent from '../api/agent';
 
-// export const useGetOrders = (id: string, state: 'waiting' | 'preparing' | 'ready' | 'history') => {
+// interface UpdateStatus {
+//     state: 'waiting' | 'preparing' | 'ready' | 'history';
+// }
+// export const useOrderState = (id: string, state: UpdateStatus) => {
 //     return useMutation({ mutationFn: agent.Orders.updateState(id, state) });
 // };

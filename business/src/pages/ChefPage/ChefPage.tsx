@@ -48,4 +48,7 @@ export default ChefPage;
 /*
  *Författare: Magnus
  *Skapat page som renderar ut och sorterar beställningar åt kocken.
+ *
+ * Ändrat: Magnus
+ * Tagit bort axios anropet och placerat det i agent.
  */
