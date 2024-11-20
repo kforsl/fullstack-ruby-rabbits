@@ -33,22 +33,23 @@ exports.getAllOrders = asyncHandler(async (req, res) => {
                 data: 'No orders found',
             });
         } else {
+            const dateSort = (a, b) => (a.updatedAt < b.updatedAt ? -1 : 1);
             if (!state) {
                 res.status(200).json({
                     message: 'Succesfully found orders',
-                    data: orders.filter((x) => x.state !== 'history'),
+                    data: orders.filter((x) => x.state !== 'history').sort(dateSort),
                 });
             } else {
                 const states = ['waiting', 'preparing', 'ready', 'history'];
                 if (states.includes(state)) {
                     res.status(200).json({
                         message: 'Succesfully found orders',
-                        data: orders.filter((x) => x.state === state),
+                        data: orders.filter((x) => x.state === state).sort(dateSort),
                     });
                 } else {
                     res.status(200).json({
                         message: 'Succesfully found orders',
-                        data: orders,
+                        data: orders.sort(dateSort),
                     });
                 }
             }

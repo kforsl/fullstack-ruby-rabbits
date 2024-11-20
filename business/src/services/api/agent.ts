@@ -30,7 +30,7 @@ const requests = {
 
 interface AgentResponse<T = object> {
     message: string;
-    data: T[] | T | string;
+    data: T[] | string;
 }
 
 const Products = {
