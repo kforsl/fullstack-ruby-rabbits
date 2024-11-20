@@ -9,7 +9,7 @@ exports.createProduct = asyncHandler(async (req, res) => {
 
         res.status(201).json({
             message: 'Succesfully created product',
-            data: product,
+            data: [product],
         });
     } catch (error) {
         res.status(500).json({
@@ -36,10 +36,35 @@ exports.getAllProducts = asyncHandler(async (req, res) => {
 });
 exports.updateProductById = asyncHandler(async (req, res) => {
     try {
-        const product = await ProductModel.findByIdAndUpdate(req.params.id, req.body, { new: true });
+        const product = await ProductModel.findByIdAndUpdate(
+            req.params.id,
+            { ...req.body, updatedAt: new Date() },
+            { new: true }
+        );
         res.status(200).json({
             message: 'Succesfully updated product.',
-            data: product,
+            data: [product],
+        });
+    } catch (error) {
+        res.status(400).json({
+            message: 'Error',
+            data: error.message,
+        });
+    }
+});
+
+exports.getProductById = asyncHandler(async (req, res) => {
+    try {
+        const product = await ProductModel.findById(req.params.id);
+        if (!product) {
+            res.status(404).json({
+                message: 'Error',
+                data: 'Product not found.',
+            });
+        }
+        res.status(200).json({
+            message: 'Succesfully found product.',
+            data: [product],
         });
     } catch (error) {
         res.status(400).json({
