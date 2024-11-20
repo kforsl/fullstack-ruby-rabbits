@@ -1,7 +1,6 @@
 import axios, { AxiosResponse } from 'axios';
 import { ProductType } from '../../interfaces/interfaceProduct';
 import { SignInForm } from '../../interfaces/interfaceAuth';
-import { OrderType } from '../../interfaces/interfaceOrder';
 
 axios.defaults.baseURL = 'https://fullstack-ruby-rabbits.onrender.com/api/';
 // axios.defaults.baseURL = 'http://localhost:3000/api/';
@@ -31,20 +30,17 @@ const requests = {
 
 interface AgentResponse<T = object> {
     message: string;
-    data: T[] | T | string;
+    data: T[];
 }
 
 const Products = {
     list: () => requests.get<AgentResponse<ProductType>>('products'),
 };
 
-interface OrderResponse {
-    message: string;
-    data: OrderType[];
-}
-
 const Orders = {
-    list: () => requests.get<OrderResponse>('orders'),
+    list: () => requests.get<AgentResponse>('orders'),
+    updateState: (id: string, state: 'waiting' | 'preparing' | 'ready' | 'history') =>
+        requests.put<AgentResponse>(`orders/${id}`, { state: state }),
 };
 
 const agent = {

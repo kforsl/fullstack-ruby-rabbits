@@ -1,6 +1,5 @@
 import OrderCard from '../../components/OrderCard/OrderCard';
 import './chefPage.css';
-
 import { OrderType } from '../../interfaces/interfaceOrder';
 import { useGetOrders } from '../../services/queries';
 const ChefPage: React.FC = () => {
