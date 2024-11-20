@@ -18,7 +18,6 @@ interface SizeType {
 interface IngredientType {
     ingredient: IngredientItemType;
     quantityInGrams: number;
-    _id: string;
 }
 
 interface IngredientItemType {

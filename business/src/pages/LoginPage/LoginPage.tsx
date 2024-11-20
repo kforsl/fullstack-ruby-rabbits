@@ -1,6 +1,11 @@
+import AuthForm from '../../components/AuthForm/AuthForm';
 import './loginPage.css';
 const LoginPage: React.FC = () => {
-    return <div>LoginPage</div>;
+    return (
+        <>
+            <AuthForm />
+        </>
+    );
 };
 
 export default LoginPage;

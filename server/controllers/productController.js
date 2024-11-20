@@ -29,7 +29,22 @@ exports.getAllProducts = asyncHandler(async (req, res) => {
         });
     } catch (error) {
         res.status(400).json({
-            message: error.message,
+            message: 'Error',
+            data: error.message,
+        });
+    }
+});
+exports.updateProductById = asyncHandler(async (req, res) => {
+    try {
+        const product = await ProductModel.findByIdAndUpdate(req.params.id, req.body, { new: true });
+        res.status(200).json({
+            message: 'Succesfully updated product.',
+            data: product,
+        });
+    } catch (error) {
+        res.status(400).json({
+            message: 'Error',
+            data: error.message,
         });
     }
 });

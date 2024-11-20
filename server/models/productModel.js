@@ -1,17 +1,5 @@
 const { Schema, model } = require('mongoose');
 
-const IngredientSchema = new Schema({
-    //Denna är speciellt för varje objekt inne i order.
-    ingredient: {
-        type: Schema.Types.ObjectId,
-        ref: 'Ingredient',
-    },
-    quantityInGrams: {
-        type: Number,
-        required: true,
-    },
-});
-
 const SizeListSchema = new Schema({
     size: {
         type: String,
@@ -57,6 +45,7 @@ const ProductSchema = new Schema({
             ingredient: {
                 type: Schema.Types.ObjectId,
                 ref: 'Ingredient',
+                required: true,
             },
             quantityInGrams: {
                 type: Number,

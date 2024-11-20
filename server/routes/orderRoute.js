@@ -1,5 +1,6 @@
 const express = require('express');
 const controller = require('../controllers/orderController');
+const { validateAccessToken } = require('../middlewares/jwtAuth');
 
 const router = express.Router();
 
