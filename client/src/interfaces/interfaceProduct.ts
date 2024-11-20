@@ -11,13 +11,13 @@ export interface ProductType {
 
 interface SizeType {
     size: 'small' | 'medium' | 'large';
-    prize: number;
+    price: number;
     ingredientMultiplier: number;
 }
 
 interface IngredientType {
-    ingredientItem: IngredientItemType;
-    quantity: number;
+    ingredient: IngredientItemType;
+    quantityInGrams: number;
 }
 
 interface IngredientItemType {
