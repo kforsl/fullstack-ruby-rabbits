@@ -1,0 +1,69 @@
+.order-card {
+    list-style-type: none;
+    display: grid;
+    border-radius: 4px;
+}
+
+.order-card--small {
+    background-color: #E2ECD3;
+    max-width: fit-content;
+    padding: var(--spacing-xs) var(--spacing-s);
+    border: 1px solid black;
+}
+
+.order-card__order-id {
+    font-size: var(--font-size-l);
+}
+
+.order-card__time {
+    font-size: var(--font-size-m);
+    color: gray;
+    place-self: center;
+}
+
+.order-card--medium {
+    border: 2px solid black;
+}
+
+.order-card--medium,
+.order-card--large {
+    gap: var(--spacing-s);
+    padding: var(--spacing-s);
+}
+
+.order-card--large {
+    max-width: 300px;
+}
+
+.order-card__date {
+    font-size: var(--font-size-l);
+    color: gray;
+    justify-self: end;
+}
+
+.order-card__amount {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    font-size: var(--font-size-m);
+}
+
+.order-card--large {
+    border: 2px dotted red;
+}
+
+.order-card__order-item {
+    display: grid;
+    font-size: var(--font-size-m);
+    gap: var(--spacing-xs);
+    grid-template-columns: repeat(2, 1fr);
+    border-bottom: 1px dotted gray;
+    padding: var(--spacing-xs) 0;
+}
+
+.order-card__product-size {
+    justify-self: end;
+}
+
+.order-card button {
+    justify-self: center;
+}

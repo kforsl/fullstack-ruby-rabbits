@@ -24,6 +24,7 @@ exports.getAllOrders = asyncHandler(async (req, res) => {
         const orders = await OrderModel.find({})
             .populate('order.product')
             .populate('order.product.ingredients.ingredient');
+      
         if (orders.length < 1) {
             res.status(404).json({
                 message: 'No orders found',
@@ -35,6 +36,7 @@ exports.getAllOrders = asyncHandler(async (req, res) => {
                 data: orders,
             });
         }
+
     } catch (error) {
         res.status(500).json({
             message: 'Error',
