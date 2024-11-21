@@ -33,18 +33,22 @@ const OrderCard: React.FC<Props> = ({ size, order, onClick }) => {
         );
     if (size === 'large')
         return (
-            <ul className='order-card order-card--large'>
-                <h2 className='order-card__order-id'>{getLastNCharacters(order._id, 4)}</h2>
-                <h3 className='order-card__date'>{formatDate(order.createdAt)}</h3>
-                {order.order.map((orderItem, i) => (
-                    <li className='order-card__order-item' key={orderItem.size + i}>
-                        <h4 className='order-card__product-name'>{orderItem.product.name}</h4>
-                        <h4 className='order-card__product-size'>{orderItem.size}</h4>
-                        <h4 className='order-card__product-quantity'>{orderItem.quantity}</h4>
-                    </li>
-                ))}
+            <article className='order-card order-card--large'>
+                <section className='order-card__info-section'>
+                    <h2 className='order-card__order-id'>{getLastNCharacters(order._id, 4)}</h2>
+                    <h3 className='order-card__date'>{formatDate(order.createdAt)}</h3>
+                </section>
+                <ul className='order-card__list'>
+                    {order.order.map((orderItem, i) => (
+                        <li className='order-card__order-item' key={orderItem.size + i}>
+                            <h4 className='order-card__product-name'>{orderItem.product.name}</h4>
+                            <h4 className='order-card__product-size'>{orderItem.size}</h4>
+                            <h4 className='order-card__product-quantity'>{orderItem.quantity} st</h4>
+                        </li>
+                    ))}
+                </ul>
                 <TextButton onClick={onClick}>KLAR FÖR SERVERING</TextButton>
-            </ul>
+            </article>
         );
 };
 
@@ -56,4 +60,7 @@ export default OrderCard;
  *
  * Ändrat: Magnus
  * Tar nu emot en onClick och skickar ned den till TextButton.
- */
+ * Ändrat: Kim
+ * Ändrat styling för order-cart--large
+ *
+ *  */

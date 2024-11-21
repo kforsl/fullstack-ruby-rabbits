@@ -5,7 +5,7 @@
 }
 
 .order-card--small {
-    background-color: #E2ECD3;
+    background-color: #e2ecd3;
     max-width: fit-content;
     padding: var(--spacing-xs) var(--spacing-s);
     border: 1px solid black;
@@ -33,6 +33,16 @@
 
 .order-card--large {
     max-width: 300px;
+    overflow: hidden;
+    grid-template-rows: auto 1fr auto;
+}
+
+.order-card__info-section {
+    display: grid;
+}
+
+.order-card__list {
+    overflow: scroll;
 }
 
 .order-card__date {
@@ -54,13 +64,21 @@
 .order-card__order-item {
     display: grid;
     font-size: var(--font-size-m);
-    gap: var(--spacing-xs);
+    gap: var(--spacing-s);
     grid-template-columns: repeat(2, 1fr);
     border-bottom: 1px dotted gray;
-    padding: var(--spacing-xs) 0;
+    padding-block: var(--spacing-s) var(--spacing-m);
+}
+
+.order-card__product-name {
+    grid-column: 1 / -1;
 }
 
 .order-card__product-size {
+    justify-self: start;
+}
+
+.order-card__product-quantity {
     justify-self: end;
 }
 

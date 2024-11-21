@@ -8,6 +8,9 @@
     align-items: center;
     padding-top: var(--spacing-xs);
     overflow: hidden;
+    position: absolute;
+    left: 0;
+    z-index: 99;
 }
 .dashboard-menu__wrapper--inactive {
     width: 0;
