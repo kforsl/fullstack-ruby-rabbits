@@ -1,8 +1,14 @@
 import { create } from 'zustand';
 import { SignInForm } from '../interfaces/interfaceAuth';
+import { EmployeeType } from '../interfaces/interfaceEmployee';
 // import agent from '../services/api/agent';
 
 interface AuthStore {
+    employee: EmployeeType | null;
+    setEmployee: (employee: EmployeeType) => void;
+    menuIsExpanded: boolean;
+    setMenuIsExpanded: (state: boolean) => void;
+    setIsLoading: (state: boolean) => void;
     isLoading: boolean;
 
     signInForm: SignInForm;
@@ -11,6 +17,11 @@ interface AuthStore {
 }
 
 const useAuthStore = create<AuthStore>((set) => ({
+    employee: (JSON.parse(sessionStorage.getItem('user') as string) as EmployeeType) || null,
+    setEmployee: (employee) => set({ employee }),
+    menuIsExpanded: false,
+    setMenuIsExpanded: (state) => set({ menuIsExpanded: state }),
+
     isLoading: false,
     signInForm: { email: '', password: '' },
 
