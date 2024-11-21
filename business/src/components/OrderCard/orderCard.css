@@ -42,7 +42,7 @@
 }
 
 .order-card__list {
-    overflow: scroll;
+    overflow-y: auto;
 }
 
 .order-card__date {
