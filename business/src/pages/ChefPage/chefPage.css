@@ -1,16 +1,20 @@
 .chef-page {
-    display: flex;
-    padding: var(--spacing-m);
-    gap: var(--spacing-xl);
+    display: grid;
+    grid-template-columns: var(--main-grid);
     max-width: var(--max-width);
     width: 100%;
     margin: 0 auto;
-
+    height: 100svh;
+    overflow: hidden;
 }
 
 .order-queue {
-    flex-grow: 1;
+    grid-column: 1 / span 5;
     height: 100%;
+}
+
+.active-order {
+    grid-column: 6 / span 3;
 }
 
 .order-queue__order-list {
@@ -18,16 +22,15 @@
     gap: var(--spacing-s);
     grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
     grid-template-rows: repeat(auto-fill, minmax(200px, auto));
-
+    overflow-y: auto;
 }
 
 .order-queue,
 .active-order {
-    gap: var(--spacing-s);
+    gap: var(--spacing-m);
+    padding: var(--spacing-m);
     display: grid;
     grid-template-rows: auto 1fr;
-    padding-bottom: var(--spacing-xl);
-    overflow-y: auto;
     max-height: 100vh;
 }
 

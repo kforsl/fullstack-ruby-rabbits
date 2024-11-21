@@ -1,3 +1,4 @@
+import { OrderType } from '../../interfaces/interfaceOrder';
 import { useGetOrders } from '../../services/queries';
 import OrderCard from '../OrderCard/OrderCard';
 import './checkoutOrder.css';
@@ -24,33 +25,34 @@ const CheckoutOrder = ({ changeview }: Props) => {
             </main>
         );
     }
+    const ordersWaiting = data?.filter((order) => order.state === 'waiting') as OrderType[];
+    const ordersPrepering = data?.filter((order) => order.state === 'preparing') as OrderType[];
+    const ordersReady = data?.filter((order) => order.state === 'ready') as OrderType[];
 
     return (
         <section className='checkoutOrder'>
             <article className='checkoutOrder__section'>
-                <h2 className='checkoutOrder__section-title'> Väntande Ordrar (11) </h2>
+                <h2 className='checkoutOrder__section-title'> Väntande Ordrar ({ordersWaiting.length}st) </h2>
                 <ul className='checkoutOrder__order-list'>
-                    {data?.map(
-                        (order) =>
-                            order.state === 'waiting' && <OrderCard size={'small'} order={order} key={order._id} />
-                    )}
+                    {ordersWaiting.map((order) => (
+                        <OrderCard size={'small'} order={order} key={order._id} />
+                    ))}
                 </ul>
             </article>
             <article className='checkoutOrder__section'>
                 <h2 className='checkoutOrder__section-title'> Tillagas </h2>
                 <ul className='checkoutOrder__order-list'>
-                    {data?.map(
-                        (order) =>
-                            order.state === 'preparing' && <OrderCard size={'small'} order={order} key={order._id} />
-                    )}
+                    {ordersPrepering.map((order) => (
+                        <OrderCard size={'small'} order={order} key={order._id} />
+                    ))}
                 </ul>
             </article>
             <article className='checkoutOrder__section'>
                 <h2 className='checkoutOrder__section-title'> Redo att hämtas </h2>
                 <ul className='checkoutOrder__order-list'>
-                    {data?.map(
-                        (order) => order.state === 'ready' && <OrderCard size={'small'} order={order} key={order._id} />
-                    )}
+                    {ordersReady.map((order) => (
+                        <OrderCard size={'small'} order={order} key={order._id} />
+                    ))}
                 </ul>
             </article>
             <button className='checkoutOrder__btn' onClick={changeview}>

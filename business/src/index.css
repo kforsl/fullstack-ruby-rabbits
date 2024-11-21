@@ -44,6 +44,7 @@ body {
     background-color: var(--bg-primary);
     font-family: var(--bread-font);
     overflow-y: hidden;
+    padding-left: var(--spacing-l);
 }
 
 #root {

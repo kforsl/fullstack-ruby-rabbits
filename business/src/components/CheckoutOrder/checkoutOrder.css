@@ -3,28 +3,31 @@
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: 1fr auto;
     padding: var(--spacing-m);
-    height: 100svh;
+    max-height: 100svh;
     gap: var(--spacing-m);
 }
 
 .checkoutOrder__section {
-    border-top: 2px solid var(--color-black);
+    height: 100%;
+    overflow: hidden;
 }
 
 .checkoutOrder__section-title {
-    transform: translateY(calc(-50% - 4px));
     background-color: var(--bg-primary);
     width: fit-content;
     margin-left: var(--spacing-s);
     font-size: var(--font-size-m);
     padding-inline: 2px;
     font-weight: 700;
+    margin-bottom: var(--spacing-xs);
 }
 
 .checkoutOrder__order-list {
     display: flex;
     flex-wrap: wrap;
     gap: var(--spacing-s);
+    max-height: 95%;
+    overflow: scroll;
 }
 
 .checkoutOrder__btn {

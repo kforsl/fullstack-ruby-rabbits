@@ -1,4 +1,4 @@
-import { ProductType } from '../../interfaces';
+import { ProductType } from '../../interfaces/interfaceProduct';
 import './popularProductItem.css';
 
 interface Props {
