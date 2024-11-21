@@ -25,10 +25,19 @@ const CheckoutMenu = ({ changeview }: Props) => {
 
     return (
         <section className='checkoutMenu'>
-            <article className='checkoutMenu__menu-section'>
+            <article className='checkoutMenu__wrapper'>
                 <h1 className='checkoutMenu__menu-title'> Menu </h1>
-                <ProductList title='Ice cream' products={iceCream} />
-                <ProductList title='Milkshake' products={milkshake} />
+
+                <img
+                    className='checkoutMenu__back-btn'
+                    src='/assets/icon-park-outline_back.svg'
+                    alt='tillbaka'
+                    onClick={changeview}
+                />
+                <section className='checkoutMenu__menu-section'>
+                    <ProductList title='Ice cream' products={iceCream} />
+                    <ProductList title='Milkshake' products={milkshake} />
+                </section>
             </article>
             <article className='checkoutMenu__cart-section'>
                 <Cart changeview={changeview} />
@@ -42,4 +51,9 @@ export default CheckoutMenu;
 /**
  * Författare: Kim
  * Komponent som håller layouten för varukorg och produkterna i meny
+ */
+
+/**
+ * Ändrat: Kim
+ * Lagt till tillbaka knapp och gjort så att enbart produkterna scrollar
  */
