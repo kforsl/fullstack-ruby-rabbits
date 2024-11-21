@@ -14,7 +14,7 @@ const OrderCard: React.FC<Props> = ({ size, order, onClick }) => {
 
     if (size === 'small')
         return (
-            <li className={`order-card order-card--small`}>
+            <li className={`order-card order-card--small`} onClick={onClick}>
                 <h2 className='order-card__order-id'>{getLastNCharacters(order._id, 4)}</h2>
                 <h3 className='order-card__time'>{formatDate(order.createdAt)}</h3>
             </li>
@@ -63,4 +63,7 @@ export default OrderCard;
  * Ändrat: Kim
  * Ändrat styling för order-cart--large
  *
- *  */
+ * Ändrat: Magnus
+ * Smallcard tar nu emot onclick, används för att toggla små kort som är 'ready' till 'history'.
+ *
+ */
