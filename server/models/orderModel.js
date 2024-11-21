@@ -11,11 +11,9 @@ const OrderSchema = new Schema({
     },
     createdAt: {
         type: Date,
-        default: new Date(),
     },
     updatedAt: {
         type: Date,
-        default: new Date(),
     },
     state: {
         type: String,

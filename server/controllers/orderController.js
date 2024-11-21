@@ -5,6 +5,8 @@ exports.createOrder = asyncHandler(async (req, res) => {
     try {
         const order = new OrderModel(req.body);
 
+        order.createdAt = new Date();
+
         await order.save();
 
         res.status(201).json({
