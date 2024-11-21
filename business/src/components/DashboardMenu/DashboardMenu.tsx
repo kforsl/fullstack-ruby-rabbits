@@ -44,7 +44,8 @@ const DashboardMenu = () => {
                                 to={option.route}
                                 className={`menu-list__link ${
                                     location.pathname === option.route ? 'menu-list__link--active' : ''
-                                }`}>
+                                }`}
+                                onClick={() => setMenuIsExpanded(false)}>
                                 {option.name}
                             </Link>
                         </li>
@@ -66,3 +67,10 @@ const DashboardMenu = () => {
 };
 
 export default DashboardMenu;
+
+/*
+ *Författare: Johan
+ *
+ * Ändrat: Magnus
+ * Lade till seMenuIsExpanded(false) som onClick på navigationslänkarna så att menyn stänger när man navigerat.
+ */

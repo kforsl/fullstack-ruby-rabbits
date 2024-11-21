@@ -1,4 +1,5 @@
 import { OrderType } from '../../interfaces/interfaceOrder';
+import { useOrderState } from '../../services/mutations';
 import { useGetOrders } from '../../services/queries';
 import OrderCard from '../OrderCard/OrderCard';
 import './checkoutOrder.css';
@@ -9,6 +10,7 @@ interface Props {
 
 const CheckoutOrder = ({ changeview }: Props) => {
     const { data, isLoading, isError, error } = useGetOrders();
+    const { mutate: markAsDelivered } = useOrderState();
 
     if (isLoading) {
         return (
@@ -28,6 +30,10 @@ const CheckoutOrder = ({ changeview }: Props) => {
     const ordersWaiting = data?.filter((order) => order.state === 'waiting') as OrderType[];
     const ordersPrepering = data?.filter((order) => order.state === 'preparing') as OrderType[];
     const ordersReady = data?.filter((order) => order.state === 'ready') as OrderType[];
+
+    const handleMarkAsDelivered = (id: string, state: 'waiting' | 'preparing' | 'ready' | 'history') => {
+        markAsDelivered({ id, state });
+    };
 
     return (
         <section className='checkoutOrder'>
@@ -51,7 +57,12 @@ const CheckoutOrder = ({ changeview }: Props) => {
                 <h2 className='checkoutOrder__section-title'> Redo att hämtas </h2>
                 <ul className='checkoutOrder__order-list'>
                     {ordersReady.map((order) => (
-                        <OrderCard size={'small'} order={order} key={order._id} />
+                        <OrderCard
+                            size={'small'}
+                            order={order}
+                            onClick={() => handleMarkAsDelivered(order._id, 'history')}
+                            key={order._id}
+                        />
                     ))}
                 </ul>
             </article>
@@ -64,7 +75,7 @@ const CheckoutOrder = ({ changeview }: Props) => {
 
 export default CheckoutOrder;
 
-/**
+/*
  * Författare: Kim
  * Komponent som håller layouten för de olika sektionerna av orderstatus.
  */
