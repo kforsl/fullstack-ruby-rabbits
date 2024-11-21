@@ -1,6 +1,7 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import agent from '../api/agent';
 import { CartToOrder } from '../../interfaces/interfaceCart';
+import { socket } from '../webSocket/ioSocket';
 
 export const useCreateOrder = () => {
     const queryClient = useQueryClient();
@@ -10,6 +11,7 @@ export const useCreateOrder = () => {
 
         onSuccess: () => {
             queryClient.invalidateQueries({ queryKey: ['orders'] });
+            socket.emit('createOrder');
         },
     });
 };

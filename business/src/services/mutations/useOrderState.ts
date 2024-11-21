@@ -1,5 +1,6 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import agent from '../api/agent';
+import { socket } from '../webSocket/ioSocket';
 
 interface MutationParameters {
     id: string;
@@ -13,6 +14,7 @@ export const useOrderState = () => {
 
         onSuccess: () => {
             queryClient.invalidateQueries({ queryKey: ['orders'] });
+            socket.emit('updateOrderStatus');
         },
     });
 };

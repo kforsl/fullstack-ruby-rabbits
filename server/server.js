@@ -44,10 +44,10 @@ const run = async () => {
                 console.log(`USER DISCONNECTED: ${socket.id}. REASON: ${reason}`);
             });
             socket.on('createOrder', () => {
-                console.log('createOrder');
+                socket.broadcast.emit('newOrder');
             });
             socket.on('updateOrderStatus', () => {
-                console.log('updateOrderStatus');
+                socket.broadcast.emit('newOrderStatus');
             });
         });
         server.listen(3000, () => console.log(`Server started on PORT ${PORT}`));
