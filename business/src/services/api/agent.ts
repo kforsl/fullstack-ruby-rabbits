@@ -2,6 +2,7 @@ import axios, { AxiosResponse } from 'axios';
 import { ProductType } from '../../interfaces/interfaceProduct';
 import { SignInForm } from '../../interfaces/interfaceAuth';
 import { OrderType } from '../../interfaces/interfaceOrder';
+import { CartToOrder } from '../../interfaces/interfaceCart';
 
 axios.defaults.baseURL = 'https://fullstack-ruby-rabbits.onrender.com/api/';
 // axios.defaults.baseURL = 'http://localhost:3000/api/';
@@ -42,6 +43,8 @@ const Orders = {
     list: () => requests.get<AgentResponse<OrderType>>('orders').then((response) => response.data),
     updateState: (id: string, state: 'waiting' | 'preparing' | 'ready' | 'history') =>
         requests.put<AgentResponse<OrderType>>(`orders/${id}`, { state: state }).then((response) => response.data),
+    post: (order: CartToOrder) =>
+        requests.post<AgentResponse<OrderType>>('orders', order).then((response) => response.data),
 };
 
 const agent = {
@@ -67,4 +70,8 @@ export default agent;
 /*
  * Ändrat: Magnus
  * Lade in Orders objekt med funktioner, ändrade AgentResponse så data alltid är en array med "T".
+ */
+/*
+ * Ändrat: Magnus
+ * Skapade en post för att lägga en order.
  */

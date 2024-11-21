@@ -1,32 +1,54 @@
 import { useState } from 'react';
-import { CartItem } from '../../interfaces/interfaceCart';
+import { CartItem, CartToOrder } from '../../interfaces/interfaceCart';
 import useCartStore from '../../stores/cartStore';
 import CartProductItem from '../CartProductItem/CartProductItem';
 import './cart.css';
-
-const createNewOrder = (cart: CartItem[], comment: string, changeview: () => void) => {
-    changeview();
-};
+import { useCreateOrder } from '../../services/mutations';
 
 interface Props {
     changeview: () => void;
 }
 
 const Cart = ({ changeview }: Props) => {
-    const { cart } = useCartStore();
+    const { cart, setCart } = useCartStore();
     const [isPayByCard, setIsPayByCard] = useState<boolean>(true);
-
     const [comment, setComment] = useState('');
+    const { mutate: createOrder, isPending } = useCreateOrder();
 
     const calculateTotalPrice = (): number =>
         cart.reduce((totalCost: number, cartItem: CartItem) => totalCost + cartItem.price * cartItem.quantity, 0); // totalCost är vad vi kallar returnerade värdet, 0 är initiala värdet.
+
+    const createNewOrder = (cart: CartItem[], comment: string, changeview: () => void) => {
+        const cartToOrder = cart.map(({ id, quantity, size }) => ({
+            product: id,
+            quantity,
+            size,
+        }));
+
+        let newOrder: CartToOrder | null = {
+            price: calculateTotalPrice(),
+            comment: comment,
+            order: cartToOrder,
+        };
+
+        createOrder(newOrder, {
+            onSuccess: () => {
+                newOrder = null;
+                setCart([]);
+                changeview();
+            },
+            onError: (error) => {
+                console.error('Order creation failed:', error);
+            },
+        });
+    };
 
     return (
         <section className='cart'>
             <h2 className='cart__title'>Kundkorg</h2>
             <ul className='cart__product-list'>
-                {cart.map((product) => (
-                    <CartProductItem product={product} key={product.size + product.id} />
+                {cart.map((product, i) => (
+                    <CartProductItem product={product} key={i} />
                 ))}
             </ul>
             <section className='cart__information'>
@@ -53,8 +75,9 @@ const Cart = ({ changeview }: Props) => {
                 </button>
                 <button
                     className='cart__btn cart__btn--large'
-                    onClick={() => createNewOrder(cart, comment, changeview)}>
-                    Betala
+                    onClick={() => createNewOrder(cart, comment, changeview)}
+                    disabled={isPending}>
+                    {isPending ? 'Loading...' : 'Betala'}
                 </button>
             </section>
         </section>
@@ -63,7 +86,11 @@ const Cart = ({ changeview }: Props) => {
 
 export default Cart;
 
-/**
+/*
  * Författare: Kim
  * Komponent som visar de produkter som finns i varukorgem och möjligheten att öka och minska antalet.
+ *
+ * Ändrat: Magnus
+ * Fixat createNewOrder funtkionen som använder useMutate för att skapa en ny order.
+ * Använder isPending för att rendera textinnehåll i betalaknappen och är då disabled.
  */
