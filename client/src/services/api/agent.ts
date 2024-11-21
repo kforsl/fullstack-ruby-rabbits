@@ -1,7 +1,8 @@
 import axios, { AxiosResponse } from 'axios';
+import { ProductType } from '../../interfaces/interfaceProduct';
 
 // axios.defaults.baseURL = 'Här får vi byta ut och ta vår adress när vi har en backend uppe :) ';
-axios.defaults.baseURL = 'http://localhost:3000/api/';
+axios.defaults.baseURL = 'https://fullstack-ruby-rabbits.onrender.com/api/';
 
 const responseBody = <T>(response: AxiosResponse<T>) => response.data;
 
@@ -20,6 +21,14 @@ const requests = {
 //     update: (id: string, message: MessageModel) => requests.put<string>(`messages/${id}`, message),
 //     delete: (id: string) => requests.delete<string>(`messages/${id}`),
 // };
+interface ProductResponse {
+    message: string;
+    data: ProductType[];
+}
+
+const Product = {
+    list: () => requests.get<ProductResponse>('products'),
+};
 
 const Authenticate = {
     // signIn: (credentials: SignInForm) => requests.post<SignInForm>(`auth`, credentials),
@@ -27,6 +36,12 @@ const Authenticate = {
 
 const agent = {
     Authenticate,
+    Product,
 };
 
 export default agent;
+
+/*
+ * Författare: Kim
+ * Skapat Product med list
+ */

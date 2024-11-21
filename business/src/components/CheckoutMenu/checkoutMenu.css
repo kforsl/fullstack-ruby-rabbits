@@ -1,0 +1,36 @@
+.checkoutMenu {
+    display: grid;
+    grid-template-columns: var(--main-grid);
+    gap: var(--spacing-s);
+    max-height: 100svh;
+    overflow: hidden;
+    position: relative;
+}
+
+.checkoutMenu__wrapper {
+    padding-block: var(--spacing-s);
+    grid-column: 1 / span 5;
+    max-height: 100svh;
+}
+
+.checkoutMenu__menu-title {
+    font-size: var(--font-size-xl);
+    text-align: center;
+}
+
+.checkoutMenu__back-btn {
+    position: absolute;
+    top: var(--spacing-s);
+    left: var(--spacing-s);
+    border: none;
+    background-color: transparent;
+}
+
+.checkoutMenu__menu-section {
+    overflow-y: scroll;
+    height: 100%;
+}
+
+.checkoutMenu__cart-section {
+    grid-column: 6 / span 3;
+}

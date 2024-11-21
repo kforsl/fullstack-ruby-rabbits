@@ -1,8 +1,8 @@
-import { MenuItemType } from '../../interfaces';
+import { ProductType } from '../../interfaces/interfaceProduct';
 import './popularProductItem.css';
 
 interface Props {
-    product: MenuItemType;
+    product: ProductType;
 }
 
 const PopularProductItem = ({ product }: Props) => {

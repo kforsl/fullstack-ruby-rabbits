@@ -1,0 +1,15 @@
+.product-list {
+    padding: var(--spacing-s);
+}
+
+.product-list__title {
+    font-size: var(--font-size-l);
+    font-family: var(--bread-font);
+    margin-bottom: var(--spacing-s);
+}
+
+.product-list__wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--spacing-s);
+}

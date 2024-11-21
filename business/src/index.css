@@ -1,60 +1,65 @@
 :root {
+    --bread-font: Arial, Helvetica, sans-serif;
 
-  --bread-font: Arial, Helvetica, sans-serif;
+    --font-size-s: clamp(0.75rem, 0.7061rem + 0.1951vw, 0.85rem);
+    --font-size-m: clamp(1rem, 0.8902rem + 0.4878vw, 1.25rem);
+    --font-size-l: clamp(1.25rem, 1.1402rem + 0.4878vw, 1.5rem);
+    --font-size-xl: clamp(1.625rem, 1.4604rem + 0.7317vw, 2rem);
+    --font-size-2xl: clamp(2rem, 1.561rem + 1.9512vw, 3rem);
+    --font-size-3xl: clamp(3rem, 2.561rem + 1.9512vw, 4rem);
 
-  --font-size-s: clamp(0.75rem, 0.7061rem + 0.1951vw, 0.85rem);
-  --font-size-m: clamp(1rem, 0.8902rem + 0.4878vw, 1.25rem);
-  --font-size-l: clamp(1.25rem, 1.1402rem + 0.4878vw, 1.5rem);
-  --font-size-xl: clamp(1.625rem, 1.4604rem + 0.7317vw, 2rem);
-  --font-size-2xl: clamp(2rem, 1.561rem + 1.9512vw, 3rem);
-  --font-size-3xl: clamp(3rem, 2.561rem + 1.9512vw, 4rem);
+    --bg-primary: #fefaf1;
+    --bg-dark: #333333;
+    --bg-light: #fffefb;
 
-  --bg-primary: #fefaf1;
-  --bg-dark: #333333;
-  --bg-light: #FFFEFB;
+    --color-black: #333333;
+    --color-white: white;
+    --color-CTA: yellowgreen;
+    --color-accent1: #ff9fc5;
+    --color-accent2: #82dfff;
+    --color-accent3: #f2ac81;
 
-  --color-black: #333333;
-  --color-white: white;
-  --color-CTA: yellowgreen;
-  --color-accent1: #ff9fc5;
-  --color-accent2: #82DFFF;
-  --color-accent3: #F2AC81;
+    --shadow-s: 2px 2px 0 var(--color-black);
 
-  --shadow-s: 2px 2px 0 var(--color-black);
+    --spacing-xs: 0.5rem;
+    --spacing-s: 1rem;
+    --spacing-m: 2rem;
+    --spacing-l: 3rem;
+    --spacing-xl: 4rem;
+    --spacing-2xl: 8rem;
+    --spacing-3xl: 10rem;
 
-  --spacing-s: 1rem;
-  --spacing-m: 2rem;
-  --spacing-l: 3rem;
-  --spacing-xl: 4rem;
-  --spacing-2xl: 8rem;
-  --spacing-3xl: 10rem;
-
-  --main-grid: repeat(8, minmax(0, 1fr));
-  --max-width: 1180px;
+    --main-grid: repeat(8, minmax(0, 1fr));
+    --max-width: 1180px;
 }
 
 * {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-  font-weight: 400;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-weight: 400;
 }
 
 body {
-  background-color: var(--bg-primary);
-  font-family: var(--bread-font);
-  overflow-y: scroll;
+    background-color: var(--bg-primary);
+    font-family: var(--bread-font);
+    overflow-y: hidden;
+    padding-left: var(--spacing-l);
 }
 
 #root {
-  min-height: 100svh;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+    min-height: 100svh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
 .wrapper {
-  display: grid;
-  max-width: var(--max-width);
-  margin: 0 auto;
+    display: grid;
+    max-width: var(--max-width);
+    margin: 0 auto;
+}
+.main-wrapper {
+    display: grid;
+    grid-template-columns: auto 1fr;
 }

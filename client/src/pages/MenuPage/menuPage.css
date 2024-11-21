@@ -1,12 +1,12 @@
 .menu-page {
-    margin-block: var(--spacing-xl);
-    padding-block: var(--spacing-xl);
+    margin-block: var(--spacing-2xl);
+    padding-inline: var(--spacing-s);
 }
 
 .menu-page__popular-wrapper {
     width: 100%;
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
     gap: var(--spacing-s);
     margin-bottom: var(--spacing-l);
 }

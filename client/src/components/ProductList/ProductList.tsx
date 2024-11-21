@@ -1,11 +1,11 @@
-import { MenuItemType } from '../../interfaces';
+import { ProductType } from '../../interfaces/interfaceProduct';
 import ProductListItem from '../ProductListItem/ProductListItem';
 import './productList.css';
 
 interface Props {
     title: string;
     position: 'left' | 'right';
-    productItems: MenuItemType[];
+    productItems: ProductType[];
 }
 
 const ProductList = ({ title, position, productItems }: Props) => {
@@ -23,7 +23,7 @@ const ProductList = ({ title, position, productItems }: Props) => {
 
 export default ProductList;
 
-/**
+/*
  * Författare: Kim
  * Komponent som tar emot title, en produktlistan, "left" eller "right" position för placering. och trycker ut en lista av alla produkter i produktlistan.
  */

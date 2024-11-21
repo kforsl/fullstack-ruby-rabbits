@@ -1,12 +1,32 @@
 const express = require('express');
 const mongoose = require('mongoose');
-const { createServer } = require('node:http'); // socket.io
-const { Server } = require('socket.io'); // socket.io
 var cors = require('cors');
 const app = express();
+const cookieParser = require('cookie-parser');
 
 require('dotenv').config();
+
+const { createServer } = require('node:http'); // socket.io
+const { Server } = require('socket.io'); // socket.io
+
+const ingredientRoute = require('./routes/ingredientRoute');
+const productRoute = require('./routes/productRoute');
+const allergenRoute = require('./routes/allergenRoute');
+const orderRoute = require('./routes/orderRoute');
+const authRoute = require('./routes/authRoute');
+
+const PORT = process.env.PORT | 3000;
+
+app.use(express.json());
 app.use(cors());
+app.use(cookieParser(process.env.COOKIE_SECRET));
+
+app.use('/api/ingredients', ingredientRoute);
+app.use('/api/products', productRoute);
+app.use('/api/allergens', allergenRoute);
+app.use('/api/orders', orderRoute);
+app.use('/api/auth', authRoute);
+
 const server = createServer(app); // socket.io
 const io = new Server(server, {
     cors: {
@@ -14,20 +34,6 @@ const io = new Server(server, {
         methods: ['GET', 'POST'],
     },
 });
-
-const menuRoute = require('./routes/menuRoute');
-const ingredientRoute = require('./routes/ingredientRoute');
-const sizeRoute = require('./routes/sizeRoute');
-const allergenRoute = require('./routes/allergenRoute');
-
-const PORT = process.env.PORT | 3000;
-
-app.use(express.json());
-
-app.use('/api/menu-items', menuRoute);
-app.use('/api/ingredients', ingredientRoute);
-app.use('/api/sizes', sizeRoute);
-app.use('/api/allergens', allergenRoute);
 
 const run = async () => {
     try {

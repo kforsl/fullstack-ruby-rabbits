@@ -1,3 +1,4 @@
+import DashboardMenu from './components/DashboardMenu/DashboardMenu';
 import { useEffect } from 'react';
 import RoutesComponent from './routes/RoutesComponent';
 import { socket } from './services/webSocket/ioSocket';
@@ -12,6 +13,7 @@ function App() {
     }, []);
     return (
         <>
+            <DashboardMenu />
             <RoutesComponent />
         </>
     );
