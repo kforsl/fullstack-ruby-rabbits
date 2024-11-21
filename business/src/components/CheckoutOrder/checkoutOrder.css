@@ -27,7 +27,7 @@
     flex-wrap: wrap;
     gap: var(--spacing-s);
     max-height: 95%;
-    overflow: scroll;
+    overflow-y: auto;
 }
 
 .checkoutOrder__btn {
