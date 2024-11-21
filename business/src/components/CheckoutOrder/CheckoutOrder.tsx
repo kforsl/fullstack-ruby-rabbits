@@ -78,4 +78,7 @@ export default CheckoutOrder;
 /*
  * Författare: Kim
  * Komponent som håller layouten för de olika sektionerna av orderstatus.
+ *
+ * Ändrat: Magnus
+ * handleMarkAsDelivered skickas ned till små kort med status 'ready' för att togglas till 'history'
  */

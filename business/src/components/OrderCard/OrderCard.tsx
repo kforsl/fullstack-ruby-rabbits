@@ -63,4 +63,7 @@ export default OrderCard;
  * Ändrat: Kim
  * Ändrat styling för order-cart--large
  *
- *  */
+ * Ändrat: Magnus
+ * Smallcard tar nu emot onclick, används för att toggla små kort som är 'ready' till 'history'.
+ *
+ */
