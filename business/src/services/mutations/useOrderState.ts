@@ -1,5 +1,6 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import agent from '../api/agent';
+import { socket } from '../webSocket/ioSocket';
 
 interface MutationParameters {
     id: string;
@@ -13,6 +14,7 @@ export const useOrderState = () => {
 
         onSuccess: () => {
             queryClient.invalidateQueries({ queryKey: ['orders'] });
+            socket.emit('updateOrderStatus');
         },
     });
 };
@@ -25,4 +27,7 @@ export const useOrderState = () => {
  * Plocka ut mutate: const { mutate } = useOrderState();
  * mutate är en funktion som tar ett object med två parametrar vilket definieras av MutationParameters-interface ovan.
  * ex: mutate({id, state})
+ *
+ *  * Ändrat: Kim
+ * Laggt till socket.emit
  */

@@ -3,9 +3,18 @@ import './chefPage.css';
 import { OrderType } from '../../interfaces/interfaceOrder';
 import { useGetOrders } from '../../services/queries';
 import { useOrderState } from '../../services/mutations';
+import { socket } from '../../services/webSocket/ioSocket';
 const ChefPage: React.FC = () => {
-    const { data, isLoading, isError, error } = useGetOrders();
+    const { data, isLoading, isError, error, refetch } = useGetOrders();
     const { mutate } = useOrderState();
+
+    socket.on('newOrder', () => {
+        refetch();
+    });
+    socket.on('newOrderStatus', () => {
+        refetch();
+    });
+
     if (isLoading) {
         return (
             <main className='chef-page'>
@@ -70,4 +79,7 @@ export default ChefPage;
  *
  * Ändrat: Magnus
  * Implementerat useMutate så vi kan uppdatera orderstatus.
+ *
+ *  * Ändrat: Kim
+ * Laggt till socket.on för att refetch useQuery
  */
