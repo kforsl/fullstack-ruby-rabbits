@@ -58,3 +58,8 @@ const run = async () => {
 };
 
 run();
+
+/*
+ * Ändrat: Kim
+ * Laggt till socket.io
+ */

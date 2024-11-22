@@ -10,8 +10,8 @@ export const useCreateOrder = () => {
         mutationFn: (order: CartToOrder) => agent.Orders.post(order),
 
         onSuccess: () => {
-            queryClient.invalidateQueries({ queryKey: ['orders'] });
             socket.emit('createOrder');
+            queryClient.invalidateQueries({ queryKey: ['orders'] });
         },
     });
 };
@@ -19,4 +19,7 @@ export const useCreateOrder = () => {
 /*
  * Författare: Magnus
  * En mutate som tar emot en order skickar till vårt api och invaliderar cache för att trigga refetch när den är klar.
+ *
+ * Ändrat: Kim
+ * Laggt till socket.emit
  */
