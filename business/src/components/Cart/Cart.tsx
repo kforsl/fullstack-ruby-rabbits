@@ -34,6 +34,7 @@ const Cart = ({ changeview }: Props) => {
         createOrder(newOrder, {
             onSuccess: () => {
                 newOrder = null;
+                setComment('');
                 setCart([]);
                 changeview();
             },
