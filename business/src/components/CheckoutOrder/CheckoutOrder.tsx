@@ -1,6 +1,7 @@
 import { OrderType } from '../../interfaces/interfaceOrder';
 import { useOrderState } from '../../services/mutations';
 import { useGetOrders } from '../../services/queries';
+import { socket } from '../../services/webSocket/ioSocket';
 import OrderCard from '../OrderCard/OrderCard';
 import './checkoutOrder.css';
 
@@ -9,8 +10,15 @@ interface Props {
 }
 
 const CheckoutOrder = ({ changeview }: Props) => {
-    const { data, isLoading, isError, error } = useGetOrders();
+    const { data, isLoading, isError, error, refetch } = useGetOrders();
     const { mutate: markAsDelivered } = useOrderState();
+
+    socket.on('newOrder', () => {
+        refetch();
+    });
+    socket.on('newOrderStatus', () => {
+        refetch();
+    });
 
     if (isLoading) {
         return (
@@ -81,4 +89,7 @@ export default CheckoutOrder;
  *
  * Ändrat: Magnus
  * handleMarkAsDelivered skickas ned till små kort med status 'ready' för att togglas till 'history'
+ *
+ *  *  * Ändrat: Kim
+ * Laggt till socket.on för att refetch useQuery
  */

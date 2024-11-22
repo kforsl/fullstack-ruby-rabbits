@@ -6,6 +6,9 @@ const cookieParser = require('cookie-parser');
 
 require('dotenv').config();
 
+const { createServer } = require('node:http'); // socket.io
+const { Server } = require('socket.io'); // socket.io
+
 const ingredientRoute = require('./routes/ingredientRoute');
 const productRoute = require('./routes/productRoute');
 const allergenRoute = require('./routes/allergenRoute');
@@ -24,10 +27,30 @@ app.use('/api/allergens', allergenRoute);
 app.use('/api/orders', orderRoute);
 app.use('/api/auth', authRoute);
 
+const server = createServer(app); // socket.io
+const io = new Server(server, {
+    cors: {
+        origin: '*',
+        methods: ['GET', 'POST'],
+    },
+});
+
 const run = async () => {
     try {
         await mongoose.connect(process.env.DB_URL);
-        app.listen(3000, () => console.log(`Server started on PORT ${PORT}`));
+        io.on('connection', (socket) => {
+            console.log('a user connected');
+            socket.on('disconnect', async (reason) => {
+                console.log(`USER DISCONNECTED: ${socket.id}. REASON: ${reason}`);
+            });
+            socket.on('createOrder', () => {
+                socket.broadcast.emit('newOrder');
+            });
+            socket.on('updateOrderStatus', () => {
+                socket.broadcast.emit('newOrderStatus');
+            });
+        });
+        server.listen(3000, () => console.log(`Server started on PORT ${PORT}`));
     } catch (error) {
         console.error(error);
         process.exit(1);
@@ -35,3 +58,8 @@ const run = async () => {
 };
 
 run();
+
+/*
+ * Ändrat: Kim
+ * Laggt till socket.io
+ */
