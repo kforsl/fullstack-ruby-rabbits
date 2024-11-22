@@ -12,13 +12,13 @@ exports.authenticate = asyncHandler(async (req, res) => {
         if (!employee) {
             res.status(401).json({
                 message: 'Error',
-                data: 'Invalid credentials',
+                data: ['Invalid credentials'],
             });
         }
         if (!(await bcrypt.compare(password, employee.hash))) {
             res.status(401).json({
                 message: 'Error',
-                data: 'Invalid credentials',
+                data: ['Invalid credentials'],
             });
         }
         const refreshToken = jwt.sign(employee.toJSON(), process.env.REFRESH_SECRET, { expiresIn: '5d' });
@@ -65,13 +65,15 @@ exports.register = asyncHandler(async (req, res) => {
         if (!password || password.length < 8) {
             return res.status(401).json({
                 message: 'Error',
-                data: 'Lösenordet måste vara åtminstone 8 karaktärer långt!',
+                data: ['Lösenordet måste vara åtminstone 8 karaktärer långt!'],
             });
         }
         if (!passwordRegex.test(password)) {
             return res.status(401).json({
                 message: 'Error',
-                data: 'Lösenordet måste innehålla minst 1 stor bokstav, 1 liten bokstav, 1 siffra och 1 specialtecken!',
+                data: [
+                    'Lösenordet måste innehålla minst 1 stor bokstav, 1 liten bokstav, 1 siffra och 1 specialtecken!',
+                ],
             });
         }
         user.hash = await bcrypt.hash(password, 10);
@@ -94,12 +96,12 @@ exports.register = asyncHandler(async (req, res) => {
         employee.hash = null;
         res.status(201).json({
             message: 'Succesfully created new employee',
-            data: employee,
+            data: [employee],
         });
     } catch (error) {
         res.status(500).json({
             message: 'Error',
-            data: error.message,
+            data: [error.message],
         });
     }
 });

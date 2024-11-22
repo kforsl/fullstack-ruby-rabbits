@@ -32,7 +32,7 @@ exports.getAllOrders = asyncHandler(async (req, res) => {
         if (orders.length < 1) {
             res.status(404).json({
                 message: 'Error',
-                data: 'No orders found',
+                data: ['No orders found'],
             });
         } else {
             const dateSort = (a, b) => (a.updatedAt < b.updatedAt ? -1 : 1);
