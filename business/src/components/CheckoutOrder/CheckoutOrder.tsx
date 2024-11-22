@@ -31,7 +31,7 @@ const CheckoutOrder = ({ changeview }: Props) => {
     const ordersPrepering = data?.filter((order) => order.state === 'preparing') as OrderType[];
     const ordersReady = data?.filter((order) => order.state === 'ready') as OrderType[];
 
-    const handleMarkAsDelivered = (id: string, state: 'waiting' | 'preparing' | 'ready' | 'history') => {
+    const handleMarkAsDelivered = (id: string, state: 'history') => {
         markAsDelivered({ id, state });
     };
 

@@ -14,14 +14,9 @@ const CheckoutMenu = ({ changeview }: Props) => {
     if (isLoading) return <p>Loading...</p>;
     if (isError) return <p>{`${error}`}</p>;
 
-    const iceCream =
-        typeof data?.data !== 'string'
-            ? (data?.data.filter((item) => item.type === 'icecream') as ProductType[])
-            : ([] as ProductType[]);
-    const milkshake =
-        typeof data?.data !== 'string'
-            ? (data?.data.filter((item) => item.type === 'milkshake') as ProductType[])
-            : ([] as ProductType[]);
+    const iceCream = data?.filter((item) => item.type === 'icecream') as ProductType[];
+
+    const milkshake = data?.filter((item) => item.type === 'milkshake') as ProductType[];
 
     return (
         <section className='checkoutMenu'>
@@ -48,12 +43,17 @@ const CheckoutMenu = ({ changeview }: Props) => {
 
 export default CheckoutMenu;
 
-/**
+/*
  * Författare: Kim
  * Komponent som håller layouten för varukorg och produkterna i meny
  */
 
-/**
+/*
  * Ändrat: Kim
  * Lagt till tillbaka knapp och gjort så att enbart produkterna scrollar
+ */
+
+/*
+ * Ändrat: Magnus
+ * Förenklat filtermetoderna efter att svaren alltid är en array.
  */

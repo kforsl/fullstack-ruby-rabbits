@@ -36,7 +36,7 @@ interface AgentResponse<T = object> {
 }
 
 const Products = {
-    list: () => requests.get<AgentResponse<ProductType>>('products'),
+    list: () => requests.get<AgentResponse<ProductType>>('products').then((response) => response.data),
 };
 
 const Orders = {
@@ -74,4 +74,8 @@ export default agent;
 /*
  * Ändrat: Magnus
  * Skapade en post för att lägga en order.
+ */
+/*
+ * Ändrat: Magnus
+ * Fixat så Product.list returnerar data direkt så man slipper stega data.data.
  */
