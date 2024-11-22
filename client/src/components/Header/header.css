@@ -1,6 +1,6 @@
 .header {
-    background-image: url(/images/header-bg.svg);
-    background-repeat: no-repeat;
+    background-image: url(/images/repeating-bg.svg);
+    background-repeat: repeat-x;
     background-position: bottom;
     min-height: 65svh;
 }

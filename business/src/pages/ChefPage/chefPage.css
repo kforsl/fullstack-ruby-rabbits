@@ -1,0 +1,41 @@
+.chef-page {
+    display: grid;
+    grid-template-columns: var(--main-grid);
+    max-width: var(--max-width);
+    width: 100%;
+    margin: 0 auto;
+    height: 100svh;
+    overflow: hidden;
+}
+
+.order-queue {
+    grid-column: 1 / span 5;
+    height: 100%;
+}
+
+.active-order {
+    grid-column: 6 / span 3;
+}
+
+.order-queue__order-list {
+    display: grid;
+    gap: var(--spacing-s);
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    grid-template-rows: repeat(auto-fill, minmax(200px, auto));
+    overflow-y: auto;
+}
+
+.order-queue,
+.active-order {
+    gap: var(--spacing-m);
+    padding: var(--spacing-m);
+    display: grid;
+    grid-template-rows: auto 1fr;
+    max-height: 100vh;
+}
+
+.order-queue__title,
+.active-order__title {
+    grid-column: 1/-1;
+    justify-self: center;
+}

@@ -1,16 +1,18 @@
-export interface MenuItemType {
+export interface ProductType {
     _id: string;
     name: string;
     description: string;
-    type: string;
+    type: 'milkshake' | 'icecream';
     imageUrl: string;
+    ingredients: IngredientType[];
+    isSpecial: boolean;
     sizes: SizeType[];
 }
 
-interface SizeType {
-    size: string;
+export interface SizeType {
+    size: 'small' | 'medium' | 'large';
     price: number;
-    ingredients: IngredientType[];
+    ingredientMultiplier: number;
 }
 
 interface IngredientType {
@@ -26,11 +28,12 @@ interface IngredientItemType {
 }
 
 interface AllergensType {
+    _id: string;
     type: string;
     description: string;
 }
 
-/**
+/*
  * Författare: Kim
- * Skapat interface för MenuItemType, SizeType, IngredientType, IngredientItemType, AllergensType
+ * Skapat interface för ProductType, SizeType, IngredientType, IngredientItemType, AllergensType
  */
