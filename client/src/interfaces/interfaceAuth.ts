@@ -1,6 +1,24 @@
 export interface SignInForm {
     email: string;
+    password?: string;
+}
+
+export interface SignUpForm extends Customer {
     password: string;
+    verifyPassword: string;
+}
+
+export interface Customer {
+    firstName: string;
+    lastName: string;
+    socialSecurityNumber: string;
+    email: string;
+    phone: string;
+    address: string;
+    zipcode: string;
+    city: string;
+    createdAt?: Date;
+    updatedAt?: Date;
 }
 
 // export interface SignUpForm extends SignInForm {
@@ -19,7 +37,7 @@ export interface Employee {
     firstName: string;
     lastName: string;
     email: string;
-    phone: string;
+    phone: number;
     address: string;
     zipcode: string;
     city: string;

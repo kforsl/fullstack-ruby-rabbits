@@ -1,5 +1,6 @@
 import axios, { AxiosResponse } from 'axios';
 import { ProductType } from '../../interfaces/interfaceProduct';
+import { Customer, SignInForm } from '../../interfaces/interfaceAuth';
 
 // axios.defaults.baseURL = 'Här får vi byta ut och ta vår adress när vi har en backend uppe :) ';
 axios.defaults.baseURL = 'https://fullstack-ruby-rabbits.onrender.com/api/';
@@ -31,7 +32,8 @@ const Product = {
 };
 
 const Authenticate = {
-    // signIn: (credentials: SignInForm) => requests.post<SignInForm>(`auth`, credentials),
+    signIn: (credentials: SignInForm) => requests.post<SignInForm>(`auth`, credentials),
+    signUp: (credentials: Customer) => requests.post<Customer>(`auth/register`, credentials),
 };
 
 const agent = {

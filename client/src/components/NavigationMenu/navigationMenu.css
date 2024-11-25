@@ -12,7 +12,6 @@
     display: grid;
     gap: var(--spacing-l);
     grid-template-columns: repeat(3, minmax(0, 1fr));
-
 }
 
 .navigation-menu__list-item {
@@ -22,8 +21,13 @@
 
 .navigation-menu__link {
     text-decoration: none;
-    color: #FE9FC5;
+    color: #fe9fc5;
     filter: drop-shadow(var(--shadow-s));
     font-family: var(--title-font);
     font-size: var(--font-size-xl);
+}
+.navigation-menu__link--profile {
+    background: transparent;
+    border: none;
+    cursor: pointer;
 }
