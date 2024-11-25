@@ -4,8 +4,10 @@ const router = express.Router();
 const { validateRefreshToken } = require('../middlewares/jwtAuth');
 
 //Authenticate
-router.post('/', controller.authenticate);
-router.post('/register', controller.register);
+router.post('/', controller.authenticateEmployee);
+router.post('/customer', controller.authenticateCustomer);
+router.post('/customer/register', controller.registerCustomer);
+router.post('/register', controller.registerEmployee);
 router.post('/refresh', validateRefreshToken, controller.refreshToken);
 
 module.exports = router;

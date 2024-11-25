@@ -10,6 +10,12 @@ const NavigationMenu: React.FC = () => {
         { name: 'OM OSS', route: '/om-oss' },
         // { name: 'PROFIL', route: '/profil' },
     ];
+
+    const onProfileButtonClicked = () => {
+        if (customer === null) setIsShowingForm(true);
+        else window.location.href = '/profil';
+    };
+
     return (
         <nav className='navigation-menu'>
             <ul className='navigation-menu__list'>
@@ -22,7 +28,7 @@ const NavigationMenu: React.FC = () => {
                 ))}
                 <li className='navigation-menu__list-item'>
                     <button
-                        onClick={() => setIsShowingForm(true)}
+                        onClick={onProfileButtonClicked}
                         className='navigation-menu__link navigation-menu__link--profile'>
                         {customer !== null ? 'PROFIL' : 'LOGGA IN'}
                     </button>

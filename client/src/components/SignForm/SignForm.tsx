@@ -5,6 +5,8 @@ import useAuthStore from '../../stores/authStore';
 import { authSchema, signUpSchema } from '../../utils/models/authSchema';
 import { FormEvent, useState } from 'react';
 import agent from '../../services/api/agent';
+import { AxiosError } from 'axios';
+import { Customer } from '../../interfaces/interfaceAuth';
 const SignForm = () => {
     const {
         signInForm,
@@ -19,6 +21,7 @@ const SignForm = () => {
         setIsShowingForm,
         isSigningIn,
         setIsSigningIn,
+        setCustomer,
     } = useAuthStore();
     const [IsShowingError, setIsShowingError] = useState<boolean>(false);
 
@@ -45,15 +48,18 @@ const SignForm = () => {
             setIsShowingError(true);
             setTimeout(() => setIsShowingError(false), 3000);
         } else {
-            const data = await agent.Authenticate.signIn(signInForm);
-            if (data !== null) {
+            const data: Customer | AxiosError = await agent.Authenticate.signIn(signInForm);
+
+            if ((data as Customer).email) {
                 sessionStorage.setItem('user', JSON.stringify(data));
+                setCustomer(data as Customer);
                 setIsLoading(false);
                 setTimeout(() => {
                     setIsShowingLoadingSection(false);
                     window.location.href = '/profil';
                 }, 100);
             } else {
+                console.log(data);
                 setIsShowingError(true);
                 setTimeout(() => setIsShowingError(false), 3000);
                 setIsLoading(false);
@@ -78,8 +84,8 @@ const SignForm = () => {
                 setIsShowingLoadingSection(false);
             }, 200);
         } else {
-            const data = await agent.Authenticate.signUp(signUpForm);
-            if (data !== null) {
+            const data: Customer | AxiosError = await agent.Authenticate.signUp(signUpForm);
+            if ((data as Customer).email) {
                 sessionStorage.setItem('user', JSON.stringify(data));
                 setIsLoading(false);
                 setTimeout(() => {
@@ -87,6 +93,7 @@ const SignForm = () => {
                     window.location.href = '/profil';
                 }, 100);
             } else {
+                console.log(data);
                 setIsShowingError(true);
                 setTimeout(() => setIsShowingError(false), 3000);
                 setIsLoading(false);
