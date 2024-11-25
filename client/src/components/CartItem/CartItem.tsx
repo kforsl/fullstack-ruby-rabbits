@@ -18,8 +18,6 @@ const CartItemComponent: React.FC<Props> = ({ cartItem }) => {
                     className='cart-item__button'
                     onClick={() => {
                         removeFromCart(cartItem);
-                        console.log(cart.length);
-
                         cart.length === 1 && cartItem.quantity === 1 && setIsOpen(false);
                     }}>
                     -
@@ -37,6 +35,9 @@ const CartItemComponent: React.FC<Props> = ({ cartItem }) => {
 export default CartItemComponent;
 
 /*
- *Författare: Magnus
- *Komponent för cart-items. Varje item har 2 knappar och totalpris för item. Knapparna är kopplade till funktioner i zustand useCartStore.
+ * Författare: Magnus
+ * Komponent för cart-items. Varje item har 2 knappar och totalpris för item. Knapparna är kopplade till funktioner i zustand useCartStore.
+ *
+ * Ändrat: Magnus
+ * Stänger nu cart ifall man tar bort sista cart-item. Ändrat css. Lagt till storlek.
  */

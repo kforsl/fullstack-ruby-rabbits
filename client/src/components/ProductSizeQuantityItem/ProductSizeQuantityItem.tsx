@@ -40,5 +40,5 @@ export default ProductSizeQuantityItem;
  * Komponent som tar emot ett pris och trycker ut priset på skärmen.
  *
  * Ädrat: Magnus
- * Lade till funktionalitet genom textbutton och menutocartincrementer för att lägga till/ta bort från cart
+ * Lade till funktionalitet genom textbutton och MenuToCartIncrementer för att lägga till/ta bort från cart
  */

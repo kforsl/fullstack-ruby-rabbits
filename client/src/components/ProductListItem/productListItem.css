@@ -26,6 +26,5 @@
     display: grid;
     min-width: 20rem;
     grid-template-columns: repeat(3, minmax(0, 1fr));
-    justify-content: flex-end;
     gap: var(--spacing-xs);
 }

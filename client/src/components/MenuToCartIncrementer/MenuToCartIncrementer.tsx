@@ -29,3 +29,8 @@ const MenuToCartIncrementer: React.FC<Props> = ({ item }) => {
 };
 
 export default MenuToCartIncrementer;
+
+/*
+ * Författare: Magnus
+ * Skapat komponent som lägger till och tar ifrån antal från befintliga cart-items.
+ */

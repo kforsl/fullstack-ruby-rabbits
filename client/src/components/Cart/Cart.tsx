@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import './cart.css';
 import useCartStore from '../../stores/cartStore';
 import { useNavigate } from 'react-router-dom';
@@ -51,8 +50,10 @@ const Cart: React.FC = () => {
 export default Cart;
 
 /*
- *Författare: Magnus
- *Komponent för cart. Knapp med ikon som öppnar meny där samtliga cartItems samlas Kopplas till zustand useCartStore. Endast testad med utkommenterat dummy-data.
- *Ändrat: Magnus
- *När cart är tom så är nu knappen disabled samt har sänkt opacity.
+ * Författare: Magnus
+ * Komponent för cart. Knapp med ikon som öppnar meny där samtliga cartItems samlas Kopplas till zustand useCartStore. Endast testad med utkommenterat dummy-data.
+ * Ändrat: Magnus
+ * När cart är tom så är nu knappen disabled samt har sänkt opacity.
+ * Ändrat: Magnus
+ * Raderat dummy-data. Flyttat useState av isOpen och setIsOpen till cartstore.
  */
