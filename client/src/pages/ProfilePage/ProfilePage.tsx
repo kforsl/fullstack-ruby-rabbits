@@ -1,12 +1,16 @@
-import UnderConstruction from '../../components/UnderConstruction/UnderConstruction';
+import ProfileNav from '../../components/ProfileNav/ProfileNav';
 import './profilePage.css';
 
 const ProfilePage: React.FC = () => {
+    const changeNavOption = (navOption: 'personal' | 'payment' | 'password' | 'allergies') => {
+        console.log(navOption);
+    };
+
     return (
         <>
             <main className='profile-page'>
                 <div className='wrapper'>
-                    <UnderConstruction />
+                    <ProfileNav onClick={changeNavOption} />
                 </div>
             </main>
         </>

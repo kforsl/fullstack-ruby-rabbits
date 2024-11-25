@@ -22,14 +22,14 @@
 
     --bg-primary: #fefaf1;
     --bg-dark: #333333;
-    --bg-light: #FFFEFB;
+    --bg-light: #fffefb;
 
     --color-black: #333333;
     --color-white: white;
     --color-CTA: yellowgreen;
     --color-accent1: #ff9fc5;
-    --color-accent2: #82DFFF;
-    --color-accent3: #F2AC81;
+    --color-accent2: #82dfff;
+    --color-accent3: #f2ac81;
 
     --shadow-s: 2px 2px 0 var(--color-black);
 
@@ -54,18 +54,10 @@
 body {
     background-color: var(--bg-primary);
     font-family: var(--bread-font);
-    background-image:
-        url(/images/blotches/by0-pink-cola-blue.svg),
-        url(/images/blotches/cSe-cola-pink-blue.svg),
-        url(/images/blotches/491-blue-pink-cola.svg),
-        url(/images/blotches/dotHb-cola-blue-pink.svg),
+    background-image: url(/images/blotches/by0-pink-cola-blue.svg), url(/images/blotches/cSe-cola-pink-blue.svg),
+        url(/images/blotches/491-blue-pink-cola.svg), url(/images/blotches/dotHb-cola-blue-pink.svg),
         url(/images/blotches/cSe-cola-pink-blue.svg);
-    background-position:
-        left 70svh,
-        right 1000svh,
-        right 110svh,
-        left 150svh,
-        right bottom;
+    background-position: left 70svh, right 1000svh, right 110svh, left 150svh, right bottom;
     background-repeat: no-repeat;
     overflow-y: scroll;
 }

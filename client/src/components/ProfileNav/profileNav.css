@@ -1,0 +1,17 @@
+.profile-nav {
+    height: 100%;
+    width: fit-content;
+    padding: var(--spacing-s);
+}
+
+.profile-nav__list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-s);
+}
+
+.profile-nav__list-item {
+    font-size: var(--font-size-xl);
+    font-family: var(--title-font);
+}
