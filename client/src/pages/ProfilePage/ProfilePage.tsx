@@ -1,11 +1,15 @@
+import { useState } from 'react';
 import ProfileNav from '../../components/ProfileNav/ProfileNav';
 import ProfileOrderList from '../../components/ProfileOrderList/ProfileOrderList';
 import { OrderType } from '../../interfaces/interfaceOrder';
 import './profilePage.css';
+import ProfilePersonalForm from '../../components/ProfilePersonalForm/ProfilePersonalForm';
 
 const ProfilePage: React.FC = () => {
+    const [formToShow, setFormToShow] = useState<string>('personal');
+
     const changeNavOption = (navOption: 'personal' | 'payment' | 'password' | 'allergies') => {
-        console.log(navOption);
+        setFormToShow(navOption);
     };
 
     const orders: OrderType[] = [
@@ -769,6 +773,11 @@ const ProfilePage: React.FC = () => {
             <main className='profile-page'>
                 <div className='wrapper'>
                     <ProfileNav onClick={changeNavOption} />
+                    {formToShow === 'personal' && <ProfilePersonalForm />}
+                    {formToShow === 'payment' && <h1> payment </h1>}
+                    {formToShow === 'password' && <h1> password </h1>}
+                    {formToShow === 'allergies' && <h1> allergies </h1>}
+
                     <ProfileOrderList orders={orders} />
                 </div>
             </main>

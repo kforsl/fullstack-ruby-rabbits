@@ -1,0 +1,51 @@
+.personal-form {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-s);
+    padding: var(--spacing-s);
+    max-width: 600px;
+    margin: 0 auto;
+    background-color: var(--bg-primary);
+    align-items: start;
+
+    button {
+        align-self: flex-end;
+    }
+}
+
+.personal-form__title {
+    font-size: var(--font-size-l);
+    font-family: var(--title-font);
+}
+.personal-form__adress-label,
+.personal-form__city-label,
+.personal-form__zip-label,
+.personal-form__label {
+    font-size: var(--font-size-m);
+    display: inline-block;
+    width: 100%;
+    font-family: var(--bread-font);
+}
+
+.personal-form__text-input {
+    font-size: var(--font-size-m);
+    padding: var(--spacing-xs);
+    width: 100%;
+    margin-top: var(--spacing-xs);
+}
+
+.personal-form__adress-section {
+    display: grid;
+    grid-template-columns: 1fr 0.5fr;
+    gap: var(--spacing-s);
+}
+
+.personal-form__adress-label {
+    grid-column: 1 / -1;
+}
+.personal-form__city-label {
+    grid-column: 1;
+}
+.personal-form__zip-label {
+    grid-column: 2;
+}
