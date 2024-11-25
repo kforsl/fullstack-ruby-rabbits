@@ -33,6 +33,7 @@
 
     --shadow-s: 2px 2px 0 var(--color-black);
 
+    --spacing-xs: 0.5rem;
     --spacing-s: 1rem;
     --spacing-m: 2rem;
     --spacing-l: 3rem;
