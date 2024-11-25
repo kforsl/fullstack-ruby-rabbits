@@ -1,13 +1,21 @@
 import { Link } from 'react-router-dom';
 import './navigationMenu.css';
 import Cart from '../Cart/Cart';
-
+import useAuthStore from '../../stores/authStore';
 const NavigationMenu: React.FC = () => {
+    const { setIsShowingForm, customer } = useAuthStore();
+
     const navigation = [
         { name: 'MENU', route: '/' },
         { name: 'OM OSS', route: '/om-oss' },
-        { name: 'PROFIL', route: '/profil' },
+        // { name: 'PROFIL', route: '/profil' },
     ];
+
+    const onProfileButtonClicked = () => {
+        if (customer === null) setIsShowingForm(true);
+        else window.location.href = '/profil';
+    };
+
     return (
         <nav className='navigation-menu'>
             <ul className='navigation-menu__list'>
@@ -18,7 +26,15 @@ const NavigationMenu: React.FC = () => {
                         </Link>
                     </li>
                 ))}
+                <li className='navigation-menu__list-item'>
+                    <button
+                        onClick={onProfileButtonClicked}
+                        className='navigation-menu__link navigation-menu__link--profile'>
+                        {customer !== null ? 'PROFIL' : 'LOGGA IN'}
+                    </button>
+                </li>
             </ul>
+
             <Cart />
         </nav>
     );

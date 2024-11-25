@@ -1,12 +1,13 @@
 import Footer from './components/Footer/Footer';
 import Header from './components/Header/Header';
+import SignForm from './components/SignForm/SignForm';
 import RoutesComponent from './routes/Routes';
 
 function App() {
     return (
         <>
             <Header />
-
+            <SignForm />
             <RoutesComponent />
 
             <Footer />
