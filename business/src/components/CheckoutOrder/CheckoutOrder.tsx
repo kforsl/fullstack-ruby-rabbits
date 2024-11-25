@@ -90,6 +90,6 @@ export default CheckoutOrder;
  * Ändrat: Magnus
  * handleMarkAsDelivered skickas ned till små kort med status 'ready' för att togglas till 'history'
  *
- *  *  * Ändrat: Kim
- * Laggt till socket.on för att refetch useQuery
+ * Ändrat: Kim
+ * Lagt till socket.on för att refetch useQuery
  */
