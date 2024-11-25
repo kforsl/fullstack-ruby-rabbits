@@ -108,6 +108,10 @@ export default Cart;
  * Komponent som visar de produkter som finns i varukorgem och möjligheten att öka och minska antalet.
  *
  * Ändrat: Magnus
- * Fixat createNewOrder funtkionen som använder useMutate för att skapa en ny order.
+ * Fixat createNewOrder funktionen som använder useMutate för att skapa en ny order.
  * Använder isPending för att rendera textinnehåll i betalaknappen och är då disabled.
+ *
+ * Ändrat: Magnus
+ * Skapade useState-variabel (isCommenting) som togglas om man håller på att lägga kommentar eller inte. Renderar CommentForm-komponent eller cart__product-list beroende av state på variabeln.
+ *
  */

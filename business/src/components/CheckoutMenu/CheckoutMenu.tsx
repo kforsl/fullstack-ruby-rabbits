@@ -62,4 +62,7 @@ export default CheckoutMenu;
 /*
  * Ändrat: Magnus
  * Förenklat filtermetoderna efter att svaren alltid är en array.
+ *
+ * Ändrat: Magnus
+ * Flyttade useState för comment hit så att komponenterna som behöver den har åtkomst.
  */

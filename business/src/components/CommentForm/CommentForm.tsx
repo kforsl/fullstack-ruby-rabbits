@@ -3,7 +3,7 @@ import './CommentForm.css';
 interface Props {
     comment: string;
     onSave: () => void;
-    setComment: (arg: string) => void;
+    setComment: (comment: string) => void;
     onAbort: () => void;
 }
 const CommentForm: React.FC<Props> = ({ onSave, setComment, onAbort, comment }) => {
@@ -30,3 +30,8 @@ const CommentForm: React.FC<Props> = ({ onSave, setComment, onAbort, comment }) 
 };
 
 export default CommentForm;
+
+/*
+ * Författare: Magnus
+ * Skapade komponent som sparar kommentar vid beställning.
+ */
