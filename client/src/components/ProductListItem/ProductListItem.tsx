@@ -19,7 +19,7 @@ const ProductListItem = ({ productItem }: Props) => {
             </section>
             <section className='product-list-item__price-wrapper'>
                 {productItem.sizes.map((item) => (
-                    <ProductSizeQuantityItem price={item.price} key={item.price} />
+                    <ProductSizeQuantityItem price={item.price} size={item.size} key={item.price} item={productItem} />
                 ))}
             </section>
         </li>
@@ -31,4 +31,7 @@ export default ProductListItem;
 /*
  * Författare: Kim
  * Komponent som tar emot en produkt och trycker ut ett listobjekt med produktnamn, lista med ingredienser och pris.
+ *
+ * Ändrat: Magnus
+ * Komponent skickar nu ned size och productItem för användning när man lägger till saker från meny till cart.
  */

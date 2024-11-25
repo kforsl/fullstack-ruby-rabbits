@@ -1,0 +1,23 @@
+.menu-to-cart-incrementer * {
+    font-size: var(--font-size-xl);
+
+}
+
+.menu-to-cart-incrementer {
+    display: grid;
+    gap: var(--spacing-s);
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    place-items: center;
+}
+
+.menu-to-cart-incrementer__button {
+    cursor: pointer;
+    background-color: var(--bg-primary);
+    color: var(--color-accent2);
+    text-shadow: var(--text-outline);
+    border: none;
+}
+
+.menu-to-cart-incrementer__amount {
+    color: var(--color-black);
+}
