@@ -35,6 +35,7 @@
 
     --text-outline: 1px 1px var(--color-black), -1px -1px var(--color-black), 1px -1px var(--color-black), -1px 1px var(--color-black);
 
+    --spacing-xs: 0.5rem;
     --spacing-s: 1rem;
     --spacing-m: 2rem;
     --spacing-l: 3rem;
@@ -73,6 +74,7 @@ body {
 
 .wrapper {
     display: grid;
+    grid-template-columns: auto;
     max-width: var(--max-width);
     margin: 0 auto;
 }
