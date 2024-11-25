@@ -6,6 +6,8 @@ interface CartStore {
     setCart: (value: CartItem[]) => void;
     addToCart: (value: CartItem) => void;
     removeFromCart: (value: CartItem) => void;
+    isOpen: boolean;
+    setIsOpen: (value: boolean | ((prev: boolean) => boolean)) => void;
 }
 
 const useCartStore = create<CartStore>((set) => ({
@@ -38,6 +40,11 @@ const useCartStore = create<CartStore>((set) => ({
             };
         });
     },
+    isOpen: false,
+    setIsOpen: (value) =>
+        set((state) => ({
+            isOpen: typeof value === 'function' ? value(state.isOpen) : value,
+        })),
 }));
 
 export default useCartStore;

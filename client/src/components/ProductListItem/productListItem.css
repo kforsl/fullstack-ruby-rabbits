@@ -1,7 +1,6 @@
 .product-list-item {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    justify-content: space-between;
+    grid-template-columns: 1fr auto;
     width: 100%;
     margin-bottom: var(--spacing-m);
 }
@@ -24,7 +23,9 @@
 }
 
 .product-list-item__price-wrapper {
-    display: flex;
+    display: grid;
+    min-width: 20rem;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
     justify-content: flex-end;
-    gap: 0.5rem;
+    gap: var(--spacing-xs);
 }

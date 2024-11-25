@@ -19,7 +19,7 @@ const ProductListItem = ({ productItem }: Props) => {
             </section>
             <section className='product-list-item__price-wrapper'>
                 {productItem.sizes.map((item) => (
-                    <ProductSizeQuantityItem price={item.price} size={item.size} key={item.price} item={productItem} />
+                    <ProductSizeQuantityItem key={item._id} size={item} product={productItem} />
                 ))}
             </section>
         </li>

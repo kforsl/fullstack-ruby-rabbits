@@ -7,10 +7,8 @@ import TextButton from '../TextButton/TextButton';
 import { CartItem } from '../../interfaces/interfaceCart';
 
 const Cart: React.FC = () => {
-    const [isOpen, setIsOpen] = useState<boolean>(false);
-    const { cart } = useCartStore();
+    const { cart, isOpen, setIsOpen } = useCartStore();
     const isCartEmpty: boolean = cart.length === 0;
-    const { setCart } = useCartStore();
     const navigate = useNavigate();
 
     const calculateTotalPrice = (): number =>
@@ -23,13 +21,13 @@ const Cart: React.FC = () => {
         <figure className='cart'>
             <button
                 aria-label='Öppna varukorgen'
-                onClick={(): void => setIsOpen((prev) => !prev)}
+                onClick={() => setIsOpen((prev) => !prev)}
                 className={`cart__button ${isCartEmpty ? 'cart__button--disabled' : ''}`}
                 disabled={isCartEmpty}>
                 {!isCartEmpty && <span className='cart__counter'>{calculateAmountOfIcreams()}</span>}
             </button>
 
-            {isOpen && cart.length !== 0 && (
+            {isOpen && (
                 <div className='cart__innerwrapper'>
                     <ul className='cart__item-list'>
                         {cart.map((cartItem) => (

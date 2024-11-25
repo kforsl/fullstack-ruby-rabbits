@@ -9,7 +9,7 @@ export interface ProductType {
     sizes: SizeType[];
 }
 
-interface SizeType {
+export interface SizeType {
     _id: string;
     size: 'small' | 'medium' | 'large';
     price: number;

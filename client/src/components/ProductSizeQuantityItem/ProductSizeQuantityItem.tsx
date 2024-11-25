@@ -1,29 +1,29 @@
-import { ProductType } from '../../interfaces/interfaceProduct';
+import { CartItem } from '../../interfaces/interfaceCart';
+import { ProductType, SizeType } from '../../interfaces/interfaceProduct';
 import useCartStore from '../../stores/cartStore';
 import MenuToCartIncrementer from '../MenuToCartIncrementer/MenuToCartIncrementer';
 import TextButton from '../TextButton/TextButton';
 import './productSizeQuantityItem.css';
 
 interface Props {
-    price: number;
-    size: 'small' | 'medium' | 'large';
-    item: ProductType;
+    product: ProductType;
+    size: SizeType;
 }
 
-const ProductSizeQuantityItem = ({ price, size, item }: Props) => {
+const ProductSizeQuantityItem = ({ product, size }: Props) => {
     const { addToCart, cart } = useCartStore();
-    const foundProduct = cart.find((cartItem) => cartItem.id === item._id && cartItem.size === size);
+    const foundProduct = cart.find((cartItem) => cartItem.id === size._id);
 
-    const cartItem = {
-        id: item._id,
-        name: item.name,
-        price: price,
+    const cartItem: CartItem = {
+        id: size._id,
+        name: product.name,
+        price: size.price,
         quantity: 1,
-        size: size,
+        size: size.size,
     };
     return (
         <section className='product-size-quantity-item'>
-            <p className='product-size-quantity-item__price'> {price} kr </p>
+            <p className='product-size-quantity-item__price'> {size.price} kr </p>
             {!foundProduct ? (
                 <TextButton onClick={() => addToCart(cartItem)}>KÖP</TextButton>
             ) : (

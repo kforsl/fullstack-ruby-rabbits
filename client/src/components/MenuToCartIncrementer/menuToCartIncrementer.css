@@ -1,23 +1,26 @@
-.menu-to-cart-incrementer * {
-    font-size: var(--font-size-xl);
-
-}
-
 .menu-to-cart-incrementer {
     display: grid;
     gap: var(--spacing-s);
     grid-template-columns: repeat(3, minmax(0, 1fr));
     place-items: center;
+    width: 5.5rem;
 }
 
 .menu-to-cart-incrementer__button {
     cursor: pointer;
     background-color: var(--bg-primary);
-    color: var(--color-accent2);
-    text-shadow: var(--text-outline);
     border: none;
+}
+
+.menu-to-cart-incrementer__button-text {
+    font-size: var(--font-size-xl);
+    color: var(--color-accent2);
+    filter: drop-shadow(var(--shadow-s));
+    text-shadow: var(--text-outline);
 }
 
 .menu-to-cart-incrementer__amount {
     color: var(--color-black);
+    font-size: var(--font-size-xl);
+    align-self: end;
 }

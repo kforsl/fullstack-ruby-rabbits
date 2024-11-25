@@ -6,14 +6,22 @@ interface Props {
     cartItem: CartItem;
 }
 const CartItemComponent: React.FC<Props> = ({ cartItem }) => {
-    const { addToCart, removeFromCart } = useCartStore();
+    const { addToCart, removeFromCart, cart, setIsOpen } = useCartStore();
     const priceOfItem = cartItem.price * cartItem.quantity;
 
     return (
         <li className='cart-item'>
             <h3 className='cart-item__title'>{cartItem.name}</h3>
+            <h3 className='cart-item__size'>{cartItem.size}</h3>
             <div className='cart-item__button-wrapper'>
-                <button className='cart-item__button' onClick={() => removeFromCart(cartItem)}>
+                <button
+                    className='cart-item__button'
+                    onClick={() => {
+                        removeFromCart(cartItem);
+                        console.log(cart.length);
+
+                        cart.length === 1 && cartItem.quantity === 1 && setIsOpen(false);
+                    }}>
                     -
                 </button>
                 <h3 className='cart-item__quantity'>{cartItem.quantity}</h3>

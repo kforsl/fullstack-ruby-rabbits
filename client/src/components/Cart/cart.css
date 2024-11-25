@@ -30,7 +30,7 @@
     place-items: center;
     background-color: var(--bg-dark);
     aspect-ratio: 1;
-    width: 1.2rem;
+    width: 1.5rem;
     border-radius: 50%;
     position: absolute;
     bottom: -1rem;
@@ -44,28 +44,32 @@
     background-color: var(--bg-light);
     box-shadow: 2px 2px 1rem rgba(0, 0, 0, 0.2);
     display: grid;
-    padding: var(--spacing-m);
+    padding: var(--spacing-m) 0 var(--spacing-m) var(--spacing-m);
     gap: var(--spacing-m);
     position: absolute;
-    top: 3rem;
+    top: 3.2rem;
     right: 0rem;
     min-width: 20rem;
 }
 
 .cart__item-list {
+    padding-right: var(--spacing-m);
     display: grid;
+    overflow-y: auto;
+    max-height: 26rem;
     gap: var(--spacing-s);
-    min-height: 10rem;
     min-width: fit-content;
     list-style-type: none;
 }
 
 .cart__total-price {
+    padding-right: var(--spacing-m);
     justify-self: end;
 }
 
-.cart__buy-button {
-    justify-self: end;
+.cart .text-button {
+    margin-right: var(--spacing-m);
+
 }
 
 @media (hover: hover) and (pointer: fine) {

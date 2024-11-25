@@ -8,7 +8,7 @@ const MenuPage: React.FC = () => {
     const { data, isLoading, isError, error } = useGetMenu();
 
     if (isLoading) return <p>Loading...</p>;
-    if (isError) return <p>{`${error}`}</p>;
+    if (isError) return <p>{`${error.message}`}</p>;
 
     const specials = data?.data.filter((item) => item.isSpecial === true) as ProductType[];
     const iceCream = data?.data.filter((item) => item.type === 'icecream') as ProductType[];
