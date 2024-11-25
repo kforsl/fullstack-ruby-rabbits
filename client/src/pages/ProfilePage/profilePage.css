@@ -1,4 +1,5 @@
 .profile-page {
     flex: 1;
     align-content: flex-end;
+    padding: var(--spacing-m);
 }

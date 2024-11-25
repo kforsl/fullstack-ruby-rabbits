@@ -2,6 +2,9 @@
     height: 100%;
     width: fit-content;
     padding: var(--spacing-s);
+    grid-column: 1 / 2;
+    grid-row: 1 / -1;
+    margin-bottom: var(--spacing-xl);
 }
 
 .profile-nav__list {
@@ -14,4 +17,5 @@
 .profile-nav__list-item {
     font-size: var(--font-size-xl);
     font-family: var(--title-font);
+    cursor: pointer;
 }

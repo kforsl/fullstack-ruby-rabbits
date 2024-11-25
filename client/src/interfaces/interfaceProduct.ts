@@ -10,13 +10,15 @@ export interface ProductType {
 }
 
 interface SizeType {
+    _id: string;
     size: 'small' | 'medium' | 'large';
     price: number;
     ingredientMultiplier: number;
 }
 
 interface IngredientType {
-    ingredient: IngredientItemType;
+    _id: string;
+    ingredient: IngredientItemType | string;
     quantityInGrams: number;
 }
 

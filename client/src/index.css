@@ -71,6 +71,7 @@ body {
 
 .wrapper {
     display: grid;
+    grid-template-columns: auto;
     max-width: var(--max-width);
     margin: 0 auto;
 }

@@ -1,0 +1,12 @@
+.profile-order-list {
+    grid-column: 1 / span 3;
+    grid-row: 2;
+    display: grid;
+    gap: var(--font-size-l);
+}
+
+.profile-order-list__title {
+    font-family: var(--title-font);
+    font-size: var(--font-size-xl);
+    margin-bottom: var(--spacing-s);
+}
