@@ -1,4 +1,4 @@
-import { FormEvent, useEffect } from 'react';
+import { FormEvent, useEffect, useState } from 'react';
 import useAuthStore from '../../stores/authStore';
 
 import './authForm.css';
@@ -14,7 +14,7 @@ const AuthForm = () => {
     const FormDefaultPreventer = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
     };
-
+    const [IsShowingError, setIsShowingError] = useState<boolean>(false);
     const onSubmit = async () => {
         setIsShowingLoadingSection(true);
         setTimeout(() => setIsLoading(true), 100);
@@ -24,7 +24,7 @@ const AuthForm = () => {
             console.log('ERROR: ', error);
         } else {
             const data = await agent.Authenticate(signInForm);
-            if (typeof data === 'object') {
+            if (typeof data[0] !== 'string') {
                 sessionStorage.setItem('user', JSON.stringify(data));
 
                 setIsLoading(false);
@@ -32,6 +32,13 @@ const AuthForm = () => {
                     setIsShowingLoadingSection(false);
                     window.location.href = '/kassa';
                 }, 100);
+            } else {
+                setIsShowingError(true);
+                setTimeout(() => setIsShowingError(false), 3000);
+                setIsLoading(false);
+                setTimeout(() => {
+                    setIsShowingLoadingSection(false);
+                }, 200);
             }
         }
     };
@@ -46,6 +53,9 @@ const AuthForm = () => {
             {isShowingLoadingSection && <Loading isLoading={isLoading} />}
             <section className={`authentication-form__wrapper`}>
                 <h1 className='form-title'>LOGGA IN</h1>
+                <p className={`error-message error-message--${IsShowingError ? 'active' : 'inactive'}`}>
+                    Det blev något fel, var god försök igen!
+                </p>
                 <form className={`main-form main-form--active`} onSubmit={FormDefaultPreventer}>
                     <section className='input-section'>
                         {/* <label className='input-label' htmlFor='loginEmail'>

@@ -41,12 +41,12 @@ exports.authenticate = asyncHandler(async (req, res) => {
         });
 
         employee.hash = null;
-        res.status(200).json({
+        return res.status(200).json({
             message: 'Succesfully logged in',
             data: employee,
         });
     } catch (error) {
-        res.status(400).json({
+        return res.status(400).json({
             message: 'Error',
             data: error.message,
         });
@@ -94,12 +94,12 @@ exports.register = asyncHandler(async (req, res) => {
         });
 
         employee.hash = null;
-        res.status(201).json({
+        return res.status(201).json({
             message: 'Succesfully created new employee',
             data: [employee],
         });
     } catch (error) {
-        res.status(500).json({
+        return res.status(500).json({
             message: 'Error',
             data: [error.message],
         });
