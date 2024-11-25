@@ -49,7 +49,10 @@ const Orders = {
 
 const agent = {
     Authenticate: (credentials: SignInForm) =>
-        requests.post<AgentResponse<SignInForm>>(`auth`, credentials).then((response) => response.data),
+        requests
+            .post<AgentResponse<SignInForm>>(`auth`, credentials)
+            .then((response) => response.data)
+            .catch((error) => error.message),
     Products,
     Orders,
 };

@@ -11,6 +11,9 @@ interface AuthStore {
     setIsLoading: (state: boolean) => void;
     isLoading: boolean;
 
+    isShowingLoadingSection: boolean;
+    setIsShowingLoadingSection: (state: boolean) => void;
+
     signInForm: SignInForm;
     clearForm: () => void;
     onFormChanged: (event: React.FormEvent) => void;
@@ -24,6 +27,9 @@ const useAuthStore = create<AuthStore>((set) => ({
 
     isLoading: false,
     signInForm: { email: '', password: '' },
+
+    isShowingLoadingSection: false,
+    setIsShowingLoadingSection: (state) => set({ isShowingLoadingSection: state }),
 
     setIsLoading: (state: boolean) => set({ isLoading: state }),
 
