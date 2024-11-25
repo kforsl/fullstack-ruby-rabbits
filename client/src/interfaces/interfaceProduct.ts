@@ -17,13 +17,11 @@ interface SizeType {
 }
 
 interface IngredientType {
-    _id: string;
-    ingredient: IngredientItemType | string;
+    ingredient: IngredientItemType;
     quantityInGrams: number;
 }
 
 interface IngredientItemType {
-    _id: string;
     name: string;
     description: string;
     allergens: AllergensType[];

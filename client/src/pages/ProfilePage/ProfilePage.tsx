@@ -26,23 +26,7 @@ const ProfilePage: React.FC = () => {
                         description: 'En lyxig Oreo-milkshake fylld med chokladglass, krossade Oreos och vispgrädde.',
                         type: 'milkshake',
                         imageUrl: 'https://happymess-images.s3.eu-north-1.amazonaws.com/oreo-overload.png',
-                        ingredients: [
-                            {
-                                ingredient: '673db2c23cef091f385c83a2',
-                                quantityInGrams: 200,
-                                _id: '673f558f9d0e31dbb1d16514',
-                            },
-                            {
-                                ingredient: '673f54f69d0e31dbb1d163e1',
-                                quantityInGrams: 30,
-                                _id: '673f558f9d0e31dbb1d16515',
-                            },
-                            {
-                                ingredient: '673c64f003b1e62b333556da',
-                                quantityInGrams: 20,
-                                _id: '673f558f9d0e31dbb1d16516',
-                            },
-                        ],
+                        ingredients: [],
                         isSpecial: false,
                         sizes: [
                             {
@@ -76,44 +60,9 @@ const ProfilePage: React.FC = () => {
                         description: 'En lyxig Oreo-milkshake fylld med chokladglass, krossade Oreos och vispgrädde.',
                         type: 'milkshake',
                         imageUrl: 'https://happymess-images.s3.eu-north-1.amazonaws.com/oreo-overload.png',
-                        ingredients: [
-                            {
-                                ingredient: '673db2c23cef091f385c83a2',
-                                quantityInGrams: 200,
-                                _id: '673f558f9d0e31dbb1d16514',
-                            },
-                            {
-                                ingredient: '673f54f69d0e31dbb1d163e1',
-                                quantityInGrams: 30,
-                                _id: '673f558f9d0e31dbb1d16515',
-                            },
-                            {
-                                ingredient: '673c64f003b1e62b333556da',
-                                quantityInGrams: 20,
-                                _id: '673f558f9d0e31dbb1d16516',
-                            },
-                        ],
+                        ingredients: [],
                         isSpecial: false,
-                        sizes: [
-                            {
-                                size: 'small',
-                                price: 35,
-                                ingredientMultiplier: 0.85,
-                                _id: '673daddf3cef091f385c82a7',
-                            },
-                            {
-                                size: 'medium',
-                                price: 49,
-                                ingredientMultiplier: 1,
-                                _id: '673daddf3cef091f385c82a8',
-                            },
-                            {
-                                size: 'large',
-                                price: 55,
-                                ingredientMultiplier: 1.15,
-                                _id: '673daddf3cef091f385c82a9',
-                            },
-                        ],
+                        sizes: [],
                     },
                     quantity: 1,
                     size: 'large',
@@ -126,34 +75,9 @@ const ProfilePage: React.FC = () => {
                         description: 'En klassisk vaniljmilkshake gjord på äkta vaniljstång.',
                         type: 'milkshake',
                         imageUrl: 'https://happymess-images.s3.eu-north-1.amazonaws.com/vanillamilkshake.png',
-                        ingredients: [
-                            {
-                                ingredient: '673c659b03b1e62b333556e0',
-                                quantityInGrams: 300,
-                                _id: '673db7213cef091f385c848d',
-                            },
-                        ],
+                        ingredients: [],
                         isSpecial: false,
-                        sizes: [
-                            {
-                                size: 'small',
-                                price: 40,
-                                ingredientMultiplier: 0.9,
-                                _id: '673db7213cef091f385c848e',
-                            },
-                            {
-                                size: 'medium',
-                                price: 55,
-                                ingredientMultiplier: 1,
-                                _id: '673db7213cef091f385c848f',
-                            },
-                            {
-                                size: 'large',
-                                price: 60,
-                                ingredientMultiplier: 1.25,
-                                _id: '673db7213cef091f385c8490',
-                            },
-                        ],
+                        sizes: [],
                     },
                     quantity: 1,
                     size: 'large',
@@ -166,34 +90,9 @@ const ProfilePage: React.FC = () => {
                         description: 'En uppfriskande mintmilkshake med chokladbitar för en härlig kombination.',
                         type: 'milkshake',
                         imageUrl: 'https://happymess-images.s3.eu-north-1.amazonaws.com/mint-milkshake.png',
-                        ingredients: [
-                            {
-                                ingredient: '673db3943cef091f385c83aa',
-                                quantityInGrams: 300,
-                                _id: '673dbcd53cef091f385c8b07',
-                            },
-                        ],
+                        ingredients: [],
                         isSpecial: false,
-                        sizes: [
-                            {
-                                size: 'small',
-                                price: 40,
-                                ingredientMultiplier: 0.9,
-                                _id: '673dbcd53cef091f385c8b08',
-                            },
-                            {
-                                size: 'medium',
-                                price: 55,
-                                ingredientMultiplier: 1,
-                                _id: '673dbcd53cef091f385c8b09',
-                            },
-                            {
-                                size: 'large',
-                                price: 60,
-                                ingredientMultiplier: 1.25,
-                                _id: '673dbcd53cef091f385c8b0a',
-                            },
-                        ],
+                        sizes: [],
                     },
                     quantity: 1,
                     size: 'medium',
@@ -217,18 +116,7 @@ const ProfilePage: React.FC = () => {
                         description: 'Krämig vaniljglass med generösa bitar av chokladkakor.',
                         type: 'icecream',
                         imageUrl: 'https://happymess-images.s3.eu-north-1.amazonaws.com/cookie-crumble.png',
-                        ingredients: [
-                            {
-                                ingredient: '673c659b03b1e62b333556e0',
-                                quantityInGrams: 150,
-                                _id: '673f4264d6eac1bbc32caf7c',
-                            },
-                            {
-                                ingredient: '673daef23cef091f385c8359',
-                                quantityInGrams: 20,
-                                _id: '673f4264d6eac1bbc32caf7d',
-                            },
-                        ],
+                        ingredients: [],
                         isSpecial: false,
                         sizes: [
                             {
@@ -262,18 +150,7 @@ const ProfilePage: React.FC = () => {
                         description: 'En tropisk mango- och passionsfruktsglass med syrlig fruktpuré.',
                         type: 'icecream',
                         imageUrl: 'https://happymess-images.s3.eu-north-1.amazonaws.com/mango-tango.png',
-                        ingredients: [
-                            {
-                                ingredient: '673db01a3cef091f385c8364',
-                                quantityInGrams: 120,
-                                _id: '673f4152d6eac1bbc32ca242',
-                            },
-                            {
-                                ingredient: '673db2923cef091f385c839e',
-                                quantityInGrams: 15,
-                                _id: '673f4152d6eac1bbc32ca243',
-                            },
-                        ],
+                        ingredients: [],
                         isSpecial: true,
                         sizes: [
                             {
@@ -307,23 +184,7 @@ const ProfilePage: React.FC = () => {
                         description: 'En len jordnötsglass med chokladvirvlar och knapriga jordnötsbitar.',
                         type: 'icecream',
                         imageUrl: 'https://happymess-images.s3.eu-north-1.amazonaws.com/peanut-butter-paradise.png',
-                        ingredients: [
-                            {
-                                ingredient: '673daf823cef091f385c8360',
-                                quantityInGrams: 120,
-                                _id: '673db4de3cef091f385c83be',
-                            },
-                            {
-                                ingredient: '673daef23cef091f385c8359',
-                                quantityInGrams: 30,
-                                _id: '673db4de3cef091f385c83bf',
-                            },
-                            {
-                                ingredient: '673dafcd3cef091f385c8362',
-                                quantityInGrams: 15,
-                                _id: '673db4de3cef091f385c83c0',
-                            },
-                        ],
+                        ingredients: [],
                         isSpecial: false,
                         sizes: [
                             {
@@ -357,18 +218,7 @@ const ProfilePage: React.FC = () => {
                         description: 'En färgglad glass med smak av bubbelgum och små marshmallows.',
                         type: 'icecream',
                         imageUrl: 'https://happymess-images.s3.eu-north-1.amazonaws.com/bubblegum-bliss.png',
-                        ingredients: [
-                            {
-                                ingredient: '673daf1b3cef091f385c835b',
-                                quantityInGrams: 120,
-                                _id: '673db4763cef091f385c83b7',
-                            },
-                            {
-                                ingredient: '673daf413cef091f385c835d',
-                                quantityInGrams: 30,
-                                _id: '673db4763cef091f385c83b8',
-                            },
-                        ],
+                        ingredients: [],
                         isSpecial: true,
                         sizes: [
                             {
@@ -412,23 +262,7 @@ const ProfilePage: React.FC = () => {
                         description: 'Krämig vaniljglass med virvlar av chokladfudge och knapriga chokladbitar.',
                         type: 'icecream',
                         imageUrl: 'https://happymess-images.s3.eu-north-1.amazonaws.com/funky-fudge-swirl.png',
-                        ingredients: [
-                            {
-                                ingredient: '673c659b03b1e62b333556e0',
-                                quantityInGrams: 100,
-                                _id: '673db41f3cef091f385c83af',
-                            },
-                            {
-                                ingredient: '673daec03cef091f385c82c9',
-                                quantityInGrams: 30,
-                                _id: '673db41f3cef091f385c83b0',
-                            },
-                            {
-                                ingredient: '673daef23cef091f385c8359',
-                                quantityInGrams: 25,
-                                _id: '673db41f3cef091f385c83b1',
-                            },
-                        ],
+                        ingredients: [],
                         isSpecial: true,
                         sizes: [
                             {
@@ -462,18 +296,7 @@ const ProfilePage: React.FC = () => {
                         description: 'Krämig vaniljglass med generösa bitar av chokladkakor.',
                         type: 'icecream',
                         imageUrl: 'https://happymess-images.s3.eu-north-1.amazonaws.com/cookie-crumble.png',
-                        ingredients: [
-                            {
-                                ingredient: '673c659b03b1e62b333556e0',
-                                quantityInGrams: 150,
-                                _id: '673f4264d6eac1bbc32caf7c',
-                            },
-                            {
-                                ingredient: '673daef23cef091f385c8359',
-                                quantityInGrams: 20,
-                                _id: '673f4264d6eac1bbc32caf7d',
-                            },
-                        ],
+                        ingredients: [],
                         isSpecial: false,
                         sizes: [
                             {
@@ -518,18 +341,7 @@ const ProfilePage: React.FC = () => {
                         description: 'En färgglad glass med smak av bubbelgum och små marshmallows.',
                         type: 'icecream',
                         imageUrl: 'https://happymess-images.s3.eu-north-1.amazonaws.com/bubblegum-bliss.png',
-                        ingredients: [
-                            {
-                                ingredient: '673daf1b3cef091f385c835b',
-                                quantityInGrams: 120,
-                                _id: '673db4763cef091f385c83b7',
-                            },
-                            {
-                                ingredient: '673daf413cef091f385c835d',
-                                quantityInGrams: 30,
-                                _id: '673db4763cef091f385c83b8',
-                            },
-                        ],
+                        ingredients: [],
                         isSpecial: true,
                         sizes: [
                             {
@@ -563,23 +375,7 @@ const ProfilePage: React.FC = () => {
                         description: 'En len jordnötsglass med chokladvirvlar och knapriga jordnötsbitar.',
                         type: 'icecream',
                         imageUrl: 'https://happymess-images.s3.eu-north-1.amazonaws.com/peanut-butter-paradise.png',
-                        ingredients: [
-                            {
-                                ingredient: '673daf823cef091f385c8360',
-                                quantityInGrams: 120,
-                                _id: '673db4de3cef091f385c83be',
-                            },
-                            {
-                                ingredient: '673daef23cef091f385c8359',
-                                quantityInGrams: 30,
-                                _id: '673db4de3cef091f385c83bf',
-                            },
-                            {
-                                ingredient: '673dafcd3cef091f385c8362',
-                                quantityInGrams: 15,
-                                _id: '673db4de3cef091f385c83c0',
-                            },
-                        ],
+                        ingredients: [],
                         isSpecial: false,
                         sizes: [
                             {
@@ -613,18 +409,7 @@ const ProfilePage: React.FC = () => {
                         description: 'En tropisk mango- och passionsfruktsglass med syrlig fruktpuré.',
                         type: 'icecream',
                         imageUrl: 'https://happymess-images.s3.eu-north-1.amazonaws.com/mango-tango.png',
-                        ingredients: [
-                            {
-                                ingredient: '673db01a3cef091f385c8364',
-                                quantityInGrams: 120,
-                                _id: '673f4152d6eac1bbc32ca242',
-                            },
-                            {
-                                ingredient: '673db2923cef091f385c839e',
-                                quantityInGrams: 15,
-                                _id: '673f4152d6eac1bbc32ca243',
-                            },
-                        ],
+                        ingredients: [],
                         isSpecial: true,
                         sizes: [
                             {
@@ -669,23 +454,7 @@ const ProfilePage: React.FC = () => {
                         description: 'En len jordnötsglass med chokladvirvlar och knapriga jordnötsbitar.',
                         type: 'icecream',
                         imageUrl: 'https://happymess-images.s3.eu-north-1.amazonaws.com/peanut-butter-paradise.png',
-                        ingredients: [
-                            {
-                                ingredient: '673daf823cef091f385c8360',
-                                quantityInGrams: 120,
-                                _id: '673db4de3cef091f385c83be',
-                            },
-                            {
-                                ingredient: '673daef23cef091f385c8359',
-                                quantityInGrams: 30,
-                                _id: '673db4de3cef091f385c83bf',
-                            },
-                            {
-                                ingredient: '673dafcd3cef091f385c8362',
-                                quantityInGrams: 15,
-                                _id: '673db4de3cef091f385c83c0',
-                            },
-                        ],
+                        ingredients: [],
                         isSpecial: false,
                         sizes: [
                             {
@@ -719,23 +488,7 @@ const ProfilePage: React.FC = () => {
                         description: 'En len jordnötsglass med chokladvirvlar och knapriga jordnötsbitar.',
                         type: 'icecream',
                         imageUrl: 'https://happymess-images.s3.eu-north-1.amazonaws.com/peanut-butter-paradise.png',
-                        ingredients: [
-                            {
-                                ingredient: '673daf823cef091f385c8360',
-                                quantityInGrams: 120,
-                                _id: '673db4de3cef091f385c83be',
-                            },
-                            {
-                                ingredient: '673daef23cef091f385c8359',
-                                quantityInGrams: 30,
-                                _id: '673db4de3cef091f385c83bf',
-                            },
-                            {
-                                ingredient: '673dafcd3cef091f385c8362',
-                                quantityInGrams: 15,
-                                _id: '673db4de3cef091f385c83c0',
-                            },
-                        ],
+                        ingredients: [],
                         isSpecial: false,
                         sizes: [
                             {
