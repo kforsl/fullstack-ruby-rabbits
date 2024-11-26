@@ -12,10 +12,11 @@ interface Props {
 
 const ProductSizeQuantityItem = ({ product, size }: Props) => {
     const { addToCart, cart } = useCartStore();
-    const foundProduct = cart.find((cartItem) => cartItem.id === size._id);
+    const foundProduct = cart.find((cartItem) => cartItem.id === product._id && cartItem.size === size.size);
 
     const cartItem: CartItem = {
-        id: size._id, //product._id?
+        id: product._id,
+        imageUrl: product.imageUrl,
         name: product.name,
         price: size.price,
         quantity: 1,
@@ -27,7 +28,7 @@ const ProductSizeQuantityItem = ({ product, size }: Props) => {
             {!foundProduct ? (
                 <TextButton onClick={() => addToCart(cartItem)}>KÖP</TextButton>
             ) : (
-                <MenuToCartIncrementer item={cartItem} />
+                <MenuToCartIncrementer item={foundProduct} />
             )}
         </section>
     );
@@ -40,5 +41,5 @@ export default ProductSizeQuantityItem;
  * Komponent som tar emot ett pris och trycker ut priset på skärmen.
  *
  * Ädrat: Magnus
- * Lade till funktionalitet genom textbutton och MenuToCartIncrementer för att lägga till/ta bort från cart
+ * Lade till funktionalitet genom textbutton och MenuToCartIncrementer för att lägga till/ta bort från cart. Ändrade cartItem id och hur foundproduct fungerar.
  */
