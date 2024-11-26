@@ -122,11 +122,10 @@ exports.authenticateCustomer = asyncHandler(async (req, res) => {
                 data: ['Invalid credentials'],
             });
         }
-        user.hash = await bcrypt.hash(password, 10);
-        const refreshToken = jwt.sign(customer.toJSON(), process.env.REFRESH_SECRET, { expiresIn: '2d' });
-        customer.refreshToken = refreshToken;
+        // customer.refreshToken = uuidv4();
+        // customer.refreshToken = refreshToken;
 
-        await customer.save();
+        // await customer.save();
 
         const accessToken = jwt.sign(customer.toJSON(), process.env.JWT_SECRET, { expiresIn: '1h' });
         customer.hash = null;
@@ -185,10 +184,10 @@ exports.registerCustomer = asyncHandler(async (req, res) => {
         user.hash = await bcrypt.hash(password, 10);
         delete customer.hash;
         const customer = new CustomerModel(user);
-        const refreshToken = jwt.sign(customer.toJSON(), process.env.REFRESH_SECRET, { expiresIn: '2d' });
-        customer.refreshToken = refreshToken;
+        // const refreshToken = jwt.sign(customer.toJSON(), process.env.REFRESH_SECRET, { expiresIn: '2d' });
+        // customer.refreshToken = refreshToken;
 
-        await customer.save();
+        // await customer.save();
 
         const accessToken = jwt.sign(customer.toJSON(), process.env.JWT_SECRET, { expiresIn: '1h' });
 

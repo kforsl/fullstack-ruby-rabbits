@@ -1,8 +1,9 @@
 const express = require('express');
 const mongoose = require('mongoose');
 var cors = require('cors');
-const app = express();
 const cookieParser = require('cookie-parser');
+const helmet = require('helmet');
+const app = express();
 
 require('dotenv').config();
 
@@ -18,6 +19,23 @@ const authRoute = require('./routes/authRoute');
 const PORT = process.env.PORT | 3000;
 
 app.use(express.json());
+app.use(
+    helmet.contentSecurityPolicy({
+        directives: {
+            scriptSrc: ["'self'", 'https://localhost:3000'],
+            defaultSrc: ["'self'", 'https://localhost:3000'],
+            fontSrc: ["'self'"],
+            imgSrc: ["'self'", 'https://happymess-images.s3.eu-north-1.amazonaws.com'],
+            connectSrc: [
+                "'self'",
+                'https://drpn0wxpzl77r.cloudfront.net',
+                'https://dxcrvzvfdmi0n.cloudfront.net',
+                'https://localhost:1337',
+                'https://localhost:1338',
+            ],
+        },
+    })
+);
 app.use(cors());
 app.use(cookieParser(process.env.COOKIE_SECRET));
 

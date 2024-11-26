@@ -1,10 +1,11 @@
 import axios, { AxiosError, AxiosResponse } from 'axios';
 import { ProductType } from '../../interfaces/interfaceProduct';
 import { Customer, SignInForm } from '../../interfaces/interfaceAuth';
+import { OrderType } from '../../interfaces/interfaceOrder';
 
 // axios.defaults.baseURL = 'Här får vi byta ut och ta vår adress när vi har en backend uppe :) ';
-// axios.defaults.baseURL = 'http://localhost:3000/api/';
-axios.defaults.baseURL = 'https://fullstack-ruby-rabbits.onrender.com/api/';
+axios.defaults.baseURL = 'http://localhost:3000/api/';
+// axios.defaults.baseURL = 'https://fullstack-ruby-rabbits.onrender.com/api/';
 
 const responseBody = <T>(response: AxiosResponse<T>) => response.data;
 
@@ -49,9 +50,23 @@ const Authenticate = {
             .catch((error) => error),
 };
 
+const Order = {
+    list: () =>
+        requests
+            .get<AgentResponse<OrderType>>(`orders`)
+            .then((response) => response.data)
+            .catch((error) => error),
+    listByUserId: (id: string) =>
+        requests
+            .get<AgentResponse<OrderType>>(`orders/user/${id}`)
+            .then((response) => response.data)
+            .catch((error) => error),
+};
+
 const agent = {
     Authenticate,
     Product,
+    Order,
 };
 
 export default agent;
