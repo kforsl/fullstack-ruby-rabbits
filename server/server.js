@@ -14,6 +14,7 @@ const productRoute = require('./routes/productRoute');
 const allergenRoute = require('./routes/allergenRoute');
 const orderRoute = require('./routes/orderRoute');
 const authRoute = require('./routes/authRoute');
+const profileRoute = require('./routes/profileRoute');
 
 const PORT = process.env.PORT | 3000;
 
@@ -26,6 +27,7 @@ app.use('/api/products', productRoute);
 app.use('/api/allergens', allergenRoute);
 app.use('/api/orders', orderRoute);
 app.use('/api/auth', authRoute);
+app.use('/api/profile', profileRoute);
 
 const server = createServer(app); // socket.io
 const io = new Server(server, {

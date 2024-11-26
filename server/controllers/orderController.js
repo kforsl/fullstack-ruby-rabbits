@@ -4,7 +4,11 @@ const { OrderModel } = require('../models/orderModel');
 exports.createOrder = asyncHandler(async (req, res) => {
     try {
         const order = new OrderModel(req.body);
+        const { customer } = req;
 
+        if (customer) {
+            order.customer = customer._id;
+        }
         order.createdAt = new Date();
 
         await order.save();
@@ -64,6 +68,33 @@ exports.getAllOrders = asyncHandler(async (req, res) => {
     }
 });
 
+exports.getAllOrdersByCustomerId = asyncHandler(async (req, res) => {
+    try {
+        const { id } = req.params;
+
+        const orders = await OrderModel.find({ customer: id })
+            .populate('order.product')
+            .populate('order.product.ingredients.ingredient');
+
+        if (orders.length < 1) {
+            res.status(404).json({
+                message: 'Error',
+                data: ['No orders found'],
+            });
+        } else {
+            res.status(200).json({
+                message: 'Succesfully found orders',
+                data: [orders],
+            });
+        }
+    } catch (error) {
+        res.status(500).json({
+            message: 'Error',
+            data: [error],
+        });
+    }
+});
+
 exports.getOrderById = asyncHandler(async (req, res) => {
     try {
         const order = await OrderModel.findById(req.params.id)
@@ -87,6 +118,7 @@ exports.getOrderById = asyncHandler(async (req, res) => {
         });
     }
 });
+
 exports.updateOrderById = asyncHandler(async (req, res) => {
     try {
         const order = await OrderModel.findByIdAndUpdate(

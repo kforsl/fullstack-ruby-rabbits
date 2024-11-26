@@ -1,5 +1,7 @@
 const asyncHandler = require('express-async-handler');
+const { EmployeeModel } = require('../models/employeeModel');
 const { CustomerModel } = require('../models/customerModel');
+
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
@@ -120,6 +122,21 @@ exports.authenticateCustomer = asyncHandler(async (req, res) => {
                 data: ['Invalid credentials'],
             });
         }
+        customer.hash = await bcrypt.hash(password, 10);
+        const refreshToken = jwt.sign(customer.toJSON(), process.env.REFRESH_SECRET, { expiresIn: '2d' });
+        customer.refreshToken = refreshToken;
+
+        await customer.save();
+
+        const accessToken = jwt.sign(customer.toJSON(), process.env.JWT_SECRET, { expiresIn: '1h' });
+        customer.hash = null;
+
+        res.cookie('ato', accessToken, {
+            httpOnly: true,
+            secure: true,
+            signed: true,
+            maxAge: 9000000,
+        });
 
         return res.status(200).json({
             message: 'Succesfully logged in as customer.',
@@ -166,6 +183,7 @@ exports.registerCustomer = asyncHandler(async (req, res) => {
             });
         }
         user.hash = await bcrypt.hash(password, 10);
+        delete customer.hash;
         const customer = new CustomerModel(user);
         const refreshToken = jwt.sign(customer.toJSON(), process.env.REFRESH_SECRET, { expiresIn: '2d' });
         customer.refreshToken = refreshToken;
@@ -181,7 +199,6 @@ exports.registerCustomer = asyncHandler(async (req, res) => {
             maxAge: 9000000,
         });
 
-        customer.hash = null;
         return res.status(201).json({
             message: 'Succesfully created new customer',
             data: [customer],
