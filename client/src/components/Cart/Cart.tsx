@@ -30,16 +30,16 @@ const Cart: React.FC = () => {
                 <div className='cart__innerwrapper'>
                     <ul className='cart__item-list'>
                         {cart.map((cartItem) => (
-                            <CartItemComponent cartItem={cartItem} key={cartItem.id} />
+                            <CartItemComponent cartItem={cartItem} key={cartItem.id + cartItem.size} />
                         ))}
                     </ul>
                     <h3 className='cart__total-price'>TOTALT: {calculateTotalPrice()}kr</h3>
                     <TextButton
                         onClick={() => {
-                            navigate('bekraftaorder');
+                            navigate('orderbekraftelse');
                             setIsOpen(false);
                         }}>
-                        KÖP
+                        BEKRÄFTA
                     </TextButton>
                 </div>
             )}

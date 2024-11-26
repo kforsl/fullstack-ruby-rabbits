@@ -1,6 +1,8 @@
-import axios, { AxiosError, AxiosResponse } from 'axios';
+import axios, { AxiosResponse } from 'axios';
 import { ProductType } from '../../interfaces/interfaceProduct';
 import { Customer, SignInForm } from '../../interfaces/interfaceAuth';
+import { CartToOrder } from '../../interfaces/interfaceCart';
+import { OrderType } from '../../interfaces/interfaceOrder';
 
 // axios.defaults.baseURL = 'Här får vi byta ut och ta vår adress när vi har en backend uppe :) ';
 // axios.defaults.baseURL = 'http://localhost:3000/api/';
@@ -36,6 +38,11 @@ const Product = {
     list: () => requests.get<ProductResponse>('products'),
 };
 
+const Orders = {
+    post: (order: CartToOrder) =>
+        requests.post<AgentResponse<OrderType>>('orders', order).then((response) => response.data),
+};
+
 const Authenticate = {
     signIn: (credentials: SignInForm) =>
         requests
@@ -52,6 +59,7 @@ const Authenticate = {
 const agent = {
     Authenticate,
     Product,
+    Orders,
 };
 
 export default agent;

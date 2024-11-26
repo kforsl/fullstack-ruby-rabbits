@@ -6,6 +6,7 @@ interface CartStore {
     setCart: (value: CartItem[]) => void;
     addToCart: (value: CartItem) => void;
     removeFromCart: (value: CartItem) => void;
+    deleteFromCart: (value: CartItem) => void;
     isOpen: boolean;
     setIsOpen: (value: boolean | ((prev: boolean) => boolean)) => void;
 }
@@ -15,12 +16,12 @@ const useCartStore = create<CartStore>((set) => ({
     setCart: (value) => set({ cart: value }),
     addToCart: (item) => {
         set((state) => {
-            const itemInCart = state.cart.find((cartItem) => cartItem.id === item.id);
+            const itemInCart = state.cart.find((cartItem) => cartItem === item);
 
             return {
                 cart: itemInCart
                     ? state.cart.map((cartItem) =>
-                          cartItem.id === item.id ? { ...cartItem, quantity: cartItem.quantity + 1 } : cartItem
+                          cartItem === item ? { ...cartItem, quantity: cartItem.quantity + 1 } : cartItem
                       )
                     : [...state.cart, { ...item, quantity: 1 }],
             };
@@ -28,16 +29,21 @@ const useCartStore = create<CartStore>((set) => ({
     },
     removeFromCart: (item) => {
         set((state) => {
-            const itemInCart = state.cart.find((cartItem) => cartItem.id === item.id);
+            const itemInCart = state.cart.find((cartItem) => cartItem === item);
 
             return {
                 cart:
                     itemInCart && itemInCart.quantity > 1
                         ? state.cart.map((cartItem) =>
-                              cartItem.id === item.id ? { ...cartItem, quantity: cartItem.quantity - 1 } : cartItem
+                              cartItem === item ? { ...cartItem, quantity: cartItem.quantity - 1 } : cartItem
                           )
-                        : state.cart.filter((cartItem) => cartItem.id !== item.id),
+                        : state.cart.filter((cartItem) => cartItem !== item),
             };
+        });
+    },
+    deleteFromCart: (item) => {
+        set((state) => {
+            return { cart: state.cart.filter((cartItem) => cartItem !== item) };
         });
     },
     isOpen: false,
