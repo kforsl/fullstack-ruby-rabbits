@@ -34,9 +34,9 @@ exports.getAllOrders = asyncHandler(async (req, res) => {
             .populate('order.product.ingredients.ingredient');
 
         if (orders.length < 1) {
-            res.status(404).json({
-                message: 'Error',
-                data: ['No orders found'],
+            res.status(204).json({
+                message: 'No orders found',
+                data: [],
             });
         } else {
             const dateSort = (a, b) => (a.updatedAt < b.updatedAt ? -1 : 1);
@@ -77,14 +77,14 @@ exports.getAllOrdersByCustomerId = asyncHandler(async (req, res) => {
             .populate('order.product.ingredients.ingredient');
 
         if (orders.length < 1) {
-            res.status(404).json({
-                message: 'Error',
-                data: ['No orders found'],
+            res.status(204).json({
+                message: 'No orders found',
+                data: [],
             });
         } else {
             res.status(200).json({
                 message: 'Succesfully found orders',
-                data: [orders],
+                data: orders,
             });
         }
     } catch (error) {
@@ -128,9 +128,9 @@ exports.updateOrderById = asyncHandler(async (req, res) => {
         );
 
         if (!order) {
-            res.status(404).json({
+            res.status(204).json({
                 message: 'Error',
-                data: 'Order not found.',
+                data: [],
             });
         }
 

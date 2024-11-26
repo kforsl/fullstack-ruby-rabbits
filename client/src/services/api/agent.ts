@@ -5,8 +5,8 @@ import { CartToOrder } from '../../interfaces/interfaceCart';
 import { OrderType } from '../../interfaces/interfaceOrder';
 
 // axios.defaults.baseURL = 'Här får vi byta ut och ta vår adress när vi har en backend uppe :) ';
-// axios.defaults.baseURL = 'http://localhost:3000/api/';
-axios.defaults.baseURL = 'https://fullstack-ruby-rabbits.onrender.com/api/';
+axios.defaults.baseURL = 'http://localhost:3000/api/';
+// axios.defaults.baseURL = 'https://fullstack-ruby-rabbits.onrender.com/api/';
 
 const responseBody = <T>(response: AxiosResponse<T>) => response.data;
 
@@ -41,6 +41,16 @@ const Product = {
 const Orders = {
     post: (order: CartToOrder) =>
         requests.post<AgentResponse<OrderType>>('orders', order).then((response) => response.data),
+    list: () =>
+        requests
+            .get<AgentResponse<OrderType>>(`orders`)
+            .then((response) => response.data)
+            .catch((error) => error),
+    listByUserId: (id: string) =>
+        requests
+            .get<AgentResponse<OrderType>>(`orders/user/${id}`)
+            .then((response) => response.data)
+            .catch((error) => error),
 };
 
 const Authenticate = {
