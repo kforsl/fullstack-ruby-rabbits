@@ -31,7 +31,7 @@ const useAuthStore = create<AuthStore>((set) => ({
     orders: null,
 
     setOrders: async (id) => {
-        const data = await agent.Order.listByUserId(id);
+        const data = await agent.Orders.listByUserId(id);
         set({ orders: data });
     },
 
