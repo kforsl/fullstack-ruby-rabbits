@@ -64,3 +64,12 @@ exports.validateUserAsManager = async (req, res, next) => {
         });
     }
 };
+
+exports.validateIfUserIsCustomer = async (req, res, next) => {
+    const { ato } = req.signedCookies;
+    try {
+        const customer = jwt.verify(ato, process.env.JWT_SECRET);
+        req.customer = customer;
+    } catch (error) {}
+    next();
+};
