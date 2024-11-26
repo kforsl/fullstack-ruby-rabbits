@@ -122,7 +122,7 @@ exports.authenticateCustomer = asyncHandler(async (req, res) => {
                 data: ['Invalid credentials'],
             });
         }
-        user.hash = await bcrypt.hash(password, 10);
+        customer.hash = await bcrypt.hash(password, 10);
         const refreshToken = jwt.sign(customer.toJSON(), process.env.REFRESH_SECRET, { expiresIn: '2d' });
         customer.refreshToken = refreshToken;
 
