@@ -23,24 +23,26 @@ const ProfileOrderList = () => {
                 <>
                     <ul>
                         <h3 className='profile-order-list__title'> Aktiva Ordrar </h3>
-                        {orders
-                            .filter((order) => order.state !== 'history')
-                            .map(
-                                (order) => order.state !== 'history' && <OrderListItem order={order} key={order._id} />
-                            )}
-                        {orders.filter((order) => order.state !== 'history').length <= 0 && (
-                            <li className='profile-order-list__empty'>Du har inga tidigare ordrar.</li>
+                        {orders.filter((order) => order.state !== 'history').length < 1 ? (
+                            <li key='01' className='profile-order-list__empty'>
+                                Du har inga tidigare ordrar.
+                            </li>
+                        ) : (
+                            orders
+                                .filter((order) => order.state !== 'history')
+                                .map((order) => <OrderListItem order={order} key={order._id} />)
                         )}
                     </ul>
                     <ul>
                         <h3 className='profile-order-list__title'> Tidigare Ordrar </h3>
-                        {orders
-                            .filter((order) => order.state === 'history')
-                            .map(
-                                (order) => order.state === 'history' && <OrderListItem order={order} key={order._id} />
-                            )}
-                        {orders.filter((order) => order.state === 'history').length <= 0 && (
-                            <li className='profile-order-list__empty'>Du har inga tidigare ordrar.</li>
+                        {orders.filter((order) => order.state === 'history').length != 0 ? (
+                            <li key='01' className='profile-order-list__empty'>
+                                Du har inga tidigare ordrar.
+                            </li>
+                        ) : (
+                            orders
+                                .filter((order) => order.state === 'history')
+                                .map((order) => <OrderListItem order={order} key={order._id} />)
                         )}
                     </ul>
                 </>
