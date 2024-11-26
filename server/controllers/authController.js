@@ -1,6 +1,6 @@
 const asyncHandler = require('express-async-handler');
-const { CustomerModel } = require('../models/customerModel');
 const { EmployeeModel } = require('../models/employeeModel');
+const { CustomerModel } = require('../models/customerModel');
 
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
@@ -122,6 +122,13 @@ exports.authenticateCustomer = asyncHandler(async (req, res) => {
                 data: ['Invalid credentials'],
             });
         }
+        user.hash = await bcrypt.hash(password, 10);
+        const refreshToken = jwt.sign(customer.toJSON(), process.env.REFRESH_SECRET, { expiresIn: '2d' });
+        customer.refreshToken = refreshToken;
+
+        await customer.save();
+
+        const accessToken = jwt.sign(customer.toJSON(), process.env.JWT_SECRET, { expiresIn: '1h' });
 
         const refreshToken = jwt.sign(customer.toJSON(), process.env.REFRESH_SECRET, { expiresIn: '2d' });
         customer.refreshToken = refreshToken;
