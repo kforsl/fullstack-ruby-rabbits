@@ -5,6 +5,7 @@ import './finalizeOrder.css';
 import { useCreateOrder } from '../../services/mutations';
 import TextButton from '../../components/TextButton/TextButton';
 import { CartItem, CartToOrder } from '../../interfaces/interfaceCart';
+
 const FinalizeOrder: React.FC = () => {
     const { cart, setCart } = useCartStore();
     const [comment, setComment] = useState('');
@@ -42,7 +43,7 @@ const FinalizeOrder: React.FC = () => {
             <h1 className='finalize-page__title'>DIN ORDER:</h1>
             <ul className='finalize-page__order-list'>
                 {cart.map((item) => (
-                    <CartItemComponent key={item.id} cartItem={item} />
+                    <CartItemComponent key={item.id + item.size} cartItem={item} />
                 ))}
             </ul>
             <form className='finalize-page__comment-form'>
@@ -51,10 +52,11 @@ const FinalizeOrder: React.FC = () => {
                     name='orderComment'
                     id='orderComment'
                     className='finalize-page__textarea'
-                    onChange={(e) => setComment(e.target.value)}
-                    value={comment ? comment : ''}></textarea>
+                    onChange={(e) => setComment(e.target.value)}></textarea>
             </form>
-            <TextButton onClick={createNewOrder}>{isPending ? 'Loading...' : 'SKICKA ORDER'}</TextButton>
+            {cart.length !== 0 && (
+                <TextButton onClick={createNewOrder}>{isPending ? 'Loading...' : 'SKICKA ORDER'}</TextButton>
+            )}
         </main>
     );
 };
@@ -63,5 +65,5 @@ export default FinalizeOrder;
 
 /*
  * Författare: Magnus
- * Skapat sidan som skickar ordern till backend.
+ * Skapat sidan som skickar ordern till backend. Preliminär css och komponent.
  */
