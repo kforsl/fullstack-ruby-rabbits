@@ -25,7 +25,7 @@ const AuthForm = () => {
         } else {
             const data = await agent.Authenticate(signInForm);
             if (typeof data[0] !== 'string') {
-                sessionStorage.setItem('user', JSON.stringify(data));
+                sessionStorage.setItem('employee', JSON.stringify(data));
 
                 setIsLoading(false);
                 setTimeout(() => {
@@ -42,11 +42,6 @@ const AuthForm = () => {
             }
         }
     };
-
-    useEffect(() => {
-        const user = sessionStorage.getItem('user');
-        if (user) window.location.href = '/kassa';
-    }, []);
 
     return (
         <>
