@@ -9,5 +9,6 @@ router.post('/customer', controller.authenticateCustomer);
 router.post('/customer/register', controller.registerCustomer);
 router.post('/register', controller.registerEmployee);
 router.post('/refresh', validateRefreshToken, controller.refreshToken);
+router.get('/', controller.getUser);
 
 module.exports = router;
