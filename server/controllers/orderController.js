@@ -46,7 +46,7 @@ exports.getAllOrders = asyncHandler(async (req, res) => {
                     data: orders.filter((x) => x.state !== 'history').sort(dateSort),
                 });
             } else {
-                const states = ['waiting', 'preparing', 'ready', 'history'];
+                const states = ['waiting', 'preparing', 'ready', 'history', 'annulled', 'editing'];
                 if (states.includes(state)) {
                     res.status(200).json({
                         message: 'Succesfully found orders',
@@ -136,7 +136,7 @@ exports.updateOrderById = asyncHandler(async (req, res) => {
 
         res.status(200).json({
             message: 'Succesfully updated order.',
-            data: order,
+            data: [order],
         });
     } catch (error) {
         res.status(500).json({
