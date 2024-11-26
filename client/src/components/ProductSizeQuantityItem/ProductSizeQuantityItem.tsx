@@ -15,7 +15,7 @@ const ProductSizeQuantityItem = ({ product, size }: Props) => {
     const foundProduct = cart.find((cartItem) => cartItem.id === size._id);
 
     const cartItem: CartItem = {
-        id: size._id,
+        id: size._id, //product._id?
         name: product.name,
         price: size.price,
         quantity: 1,
