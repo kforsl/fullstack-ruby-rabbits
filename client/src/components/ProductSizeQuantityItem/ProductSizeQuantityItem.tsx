@@ -16,6 +16,7 @@ const ProductSizeQuantityItem = ({ product, size }: Props) => {
 
     const cartItem: CartItem = {
         id: size._id, //product._id?
+        imageUrl: product.imageUrl,
         name: product.name,
         price: size.price,
         quantity: 1,

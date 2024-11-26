@@ -36,10 +36,10 @@ const Cart: React.FC = () => {
                     <h3 className='cart__total-price'>TOTALT: {calculateTotalPrice()}kr</h3>
                     <TextButton
                         onClick={() => {
-                            navigate('bekraftaorder');
+                            navigate('orderbekraftelse');
                             setIsOpen(false);
                         }}>
-                        KÖP
+                        BEKRÄFTA
                     </TextButton>
                 </div>
             )}

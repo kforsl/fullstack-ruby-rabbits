@@ -1,0 +1,41 @@
+.finalize-page {
+    flex: 1;
+    width: 100%;
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    gap: var(--spacing-m);
+    margin-block: var(--spacing-2xl);
+    padding-inline: var(--spacing-s);
+}
+
+.finalize-page__title {
+    font-family: var(--title-font);
+    font-size: var(--font-size-xl);
+}
+
+.finalize-page__order-list {
+    padding-right: var(--spacing-m);
+    overflow-y: auto;
+    max-height: 40svh;
+    display: grid;
+    grid-template-rows: repeat(auto-fill, minmax(var(--spacing-2xl), auto));
+    gap: var(--spacing-m);
+}
+
+.finalize-page__comment-form {
+    width: 100%;
+    display: grid;
+}
+
+.finalize-page__textarea {
+    margin-top: var(--spacing-2xl);
+    grid-column: 1/-1;
+    min-height: var(--spacing-3xl);
+    padding: var(--spacing-s);
+    resize: none;
+    font-size: var(--font-size-m);
+}
+
+.finalize-page .text-button {
+    justify-self: end;
+}
