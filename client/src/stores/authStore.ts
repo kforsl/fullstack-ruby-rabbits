@@ -1,9 +1,12 @@
 import { create } from 'zustand';
 import { SignInForm, Customer, SignUpForm } from '../interfaces/interfaceAuth';
-// import agent from '../services/api/agent';
+import { OrderType } from '../interfaces/interfaceOrder';
+import agent from '../services/api/agent';
 
 interface AuthStore {
     customer: Customer | null;
+    orders: OrderType[] | null;
+    setOrders: (id: string) => void;
     isSigningIn: boolean;
     setIsSigningIn: (state: boolean) => void;
 
@@ -25,6 +28,12 @@ interface AuthStore {
 const useAuthStore = create<AuthStore>((set) => ({
     customer: (JSON.parse(sessionStorage.getItem('user') as string) as Customer) || null,
     setCustomer: (customer) => set({ customer }),
+    orders: null,
+
+    setOrders: async (id) => {
+        const data = await agent.Orders.listByUserId(id);
+        set({ orders: data });
+    },
 
     signInForm: { email: '', password: '' },
     signUpForm: {
