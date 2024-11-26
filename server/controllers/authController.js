@@ -129,12 +129,6 @@ exports.authenticateCustomer = asyncHandler(async (req, res) => {
         await customer.save();
 
         const accessToken = jwt.sign(customer.toJSON(), process.env.JWT_SECRET, { expiresIn: '1h' });
-
-        const refreshToken = jwt.sign(customer.toJSON(), process.env.REFRESH_SECRET, { expiresIn: '2d' });
-        customer.refreshToken = refreshToken;
-        await customer.save();
-
-        const accessToken = jwt.sign(customer.toJSON(), process.env.JWT_SECRET, { expiresIn: '1h' });
         customer.hash = null;
 
         res.cookie('ato', accessToken, {
