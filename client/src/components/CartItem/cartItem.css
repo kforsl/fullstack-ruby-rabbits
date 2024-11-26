@@ -3,13 +3,17 @@
     grid-template-columns: repeat(2, minmax(0, 1fr));
     min-width: fit-content;
     text-wrap: nowrap;
-    border: 2px solid var(--color-white);
-    padding: var(--spacing-s);
+    padding-bottom: var(--spacing-s);
+    border-bottom: 2px dotted var(--color-accent1);
     gap: var(--spacing-s);
 }
 
 .cart-item__title {
     grid-column: 1/-1;
+}
+
+.cart-item__size {
+    align-self: center;
 }
 
 .cart-item__button-wrapper {
@@ -31,6 +35,7 @@
 }
 
 .cart-item__price-of-item {
+    grid-column: 1/-1;
     justify-self: end;
     align-self: center;
 }

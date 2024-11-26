@@ -9,7 +9,7 @@ export interface ProductType {
     sizes: SizeType[];
 }
 
-interface SizeType {
+export interface SizeType {
     _id: string;
     size: 'small' | 'medium' | 'large';
     price: number;
@@ -17,11 +17,13 @@ interface SizeType {
 }
 
 interface IngredientType {
+    _id: string;
     ingredient: IngredientItemType;
     quantityInGrams: number;
 }
 
 interface IngredientItemType {
+    _id: string;
     name: string;
     description: string;
     allergens: AllergensType[];

@@ -33,6 +33,8 @@
 
     --shadow-s: 2px 2px 0 var(--color-black);
 
+    --text-outline: 1px 1px var(--color-black), -1px -1px var(--color-black), 1px -1px var(--color-black), -1px 1px var(--color-black);
+
     --spacing-xs: 0.5rem;
     --spacing-s: 1rem;
     --spacing-m: 2rem;
