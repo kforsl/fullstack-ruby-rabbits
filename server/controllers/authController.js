@@ -122,13 +122,14 @@ exports.authenticateCustomer = asyncHandler(async (req, res) => {
                 data: ['Invalid credentials'],
             });
         }
-        user.hash = await bcrypt.hash(password, 10);
+        customer.hash = await bcrypt.hash(password, 10);
         const refreshToken = jwt.sign(customer.toJSON(), process.env.REFRESH_SECRET, { expiresIn: '2d' });
         customer.refreshToken = refreshToken;
 
         await customer.save();
 
         const accessToken = jwt.sign(customer.toJSON(), process.env.JWT_SECRET, { expiresIn: '1h' });
+        customer.hash = null;
 
         res.cookie('ato', accessToken, {
             httpOnly: true,
@@ -137,7 +138,6 @@ exports.authenticateCustomer = asyncHandler(async (req, res) => {
             maxAge: 9000000,
         });
 
-        customer.hash = null;
         return res.status(200).json({
             message: 'Succesfully logged in as customer.',
             data: [customer],
@@ -183,6 +183,7 @@ exports.registerCustomer = asyncHandler(async (req, res) => {
             });
         }
         user.hash = await bcrypt.hash(password, 10);
+        delete customer.hash;
         const customer = new CustomerModel(user);
         const refreshToken = jwt.sign(customer.toJSON(), process.env.REFRESH_SECRET, { expiresIn: '2d' });
         customer.refreshToken = refreshToken;
@@ -198,7 +199,6 @@ exports.registerCustomer = asyncHandler(async (req, res) => {
             maxAge: 9000000,
         });
 
-        customer.hash = null;
         return res.status(201).json({
             message: 'Succesfully created new customer',
             data: [customer],
