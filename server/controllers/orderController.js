@@ -34,9 +34,9 @@ exports.getAllOrders = asyncHandler(async (req, res) => {
             .populate('order.product.ingredients.ingredient');
 
         if (orders.length < 1) {
-            res.status(404).json({
-                message: 'Error',
-                data: ['No orders found'],
+            res.status(204).json({
+                message: 'No orders found',
+                data: [],
             });
         } else {
             const dateSort = (a, b) => (a.updatedAt < b.updatedAt ? -1 : 1);
@@ -46,7 +46,7 @@ exports.getAllOrders = asyncHandler(async (req, res) => {
                     data: orders.filter((x) => x.state !== 'history').sort(dateSort),
                 });
             } else {
-                const states = ['waiting', 'preparing', 'ready', 'history'];
+                const states = ['waiting', 'preparing', 'ready', 'history', 'annulled', 'editing'];
                 if (states.includes(state)) {
                     res.status(200).json({
                         message: 'Succesfully found orders',
@@ -77,14 +77,14 @@ exports.getAllOrdersByCustomerId = asyncHandler(async (req, res) => {
             .populate('order.product.ingredients.ingredient');
 
         if (orders.length < 1) {
-            res.status(404).json({
-                message: 'Error',
-                data: ['No orders found'],
+            res.status(204).json({
+                message: 'No orders found',
+                data: [],
             });
         } else {
             res.status(200).json({
                 message: 'Succesfully found orders',
-                data: [orders],
+                data: orders,
             });
         }
     } catch (error) {
@@ -128,15 +128,15 @@ exports.updateOrderById = asyncHandler(async (req, res) => {
         );
 
         if (!order) {
-            res.status(404).json({
+            res.status(204).json({
                 message: 'Error',
-                data: 'Order not found.',
+                data: [],
             });
         }
 
         res.status(200).json({
             message: 'Succesfully updated order.',
-            data: order,
+            data: [order],
         });
     } catch (error) {
         res.status(500).json({

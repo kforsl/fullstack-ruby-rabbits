@@ -5,7 +5,7 @@ import { EmployeeType } from '../interfaces/interfaceEmployee';
 
 interface AuthStore {
     employee: EmployeeType | null;
-    setEmployee: (employee: EmployeeType) => void;
+    setEmployee: (employee: EmployeeType | null) => void;
     menuIsExpanded: boolean;
     setMenuIsExpanded: (state: boolean) => void;
     setIsLoading: (state: boolean) => void;
@@ -20,7 +20,7 @@ interface AuthStore {
 }
 
 const useAuthStore = create<AuthStore>((set) => ({
-    employee: (JSON.parse(sessionStorage.getItem('user') as string) as EmployeeType) || null,
+    employee: (JSON.parse(sessionStorage.getItem('employee') as string) as EmployeeType) || null,
     setEmployee: (employee) => set({ employee }),
     menuIsExpanded: false,
     setMenuIsExpanded: (state) => set({ menuIsExpanded: state }),

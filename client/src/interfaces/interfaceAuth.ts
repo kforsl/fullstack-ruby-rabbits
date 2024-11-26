@@ -9,6 +9,7 @@ export interface SignUpForm extends Customer {
 }
 
 export interface Customer {
+    _id?: string;
     firstName: string;
     lastName: string;
     socialSecurityNumber: string;
