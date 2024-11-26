@@ -1,15 +1,23 @@
 import './dashboardMenu.css';
 import useAuthStore from '../../stores/authStore';
 import { Link, useLocation } from 'react-router-dom';
+import { useEffect } from 'react';
 
 const DashboardMenu = () => {
     const location = useLocation();
-    const { employee, menuIsExpanded, setMenuIsExpanded } = useAuthStore();
+    const { employee, setEmployee, menuIsExpanded, setMenuIsExpanded } = useAuthStore();
     const navigation = [
         { name: 'KASSA-VY', route: '/kassa' },
         { name: 'KOCK-VY', route: '/kock' },
         { name: 'LAGERSALDO', route: '/lager' },
     ];
+    useEffect(() => {
+        if (navigation.some((item) => item.route === location.pathname)) {
+            if (!employee) {
+                window.location.href = '/';
+            }
+        }
+    }, []);
 
     return (
         <>
@@ -55,6 +63,7 @@ const DashboardMenu = () => {
                             className='menu-list__logout'
                             onClick={() => {
                                 window.sessionStorage.clear();
+                                setEmployee(null);
                                 window.location.href = '/';
                             }}>
                             LOGGA UT
