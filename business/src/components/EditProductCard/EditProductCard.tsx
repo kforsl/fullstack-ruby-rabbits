@@ -32,13 +32,13 @@ const EditProductCard = ({ product }: Props) => {
             <section className='edit-product-card-section'>
                 <ul className='edit-product-card__list'>
                     {product.ingredients.map((ingredient) => (
-                        <li> {ingredient.ingredient.name}, </li>
+                        <li key={ingredient.ingredient._id}> {ingredient.ingredient.name}, </li>
                     ))}
                 </ul>
 
                 <ul className='edit-product-card__list'>
                     {product.sizes.map((size) => (
-                        <li className='edit-product-card__list-item'>
+                        <li key={size.size} className='edit-product-card__list-item'>
                             <p className='edit-product-card__size'>
                                 {size.size.slice(0, 1).toUpperCase()} - {size.price} kr
                             </p>
