@@ -3,6 +3,7 @@ import './editProductPage.css';
 import { useGetMenu } from '../../services/queries';
 import { ProductType } from '../../interfaces/interfaceProduct';
 import ProductList from '../../components/ProductList/ProductList';
+import ProductForm from '../../components/ProductForm/ProductForm';
 
 const EditProductPage = () => {
     const { data, isLoading, isError, error } = useGetMenu();
@@ -27,7 +28,7 @@ const EditProductPage = () => {
                         </section>
                     </article>
                     <article className='checkoutMenu__edit-section'>
-                        {/* <Cart changeview={changeview} comment={comment} setComment={setComment} /> */}
+                        <ProductForm />
                     </article>
                 </section>
             </div>
