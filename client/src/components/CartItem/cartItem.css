@@ -8,6 +8,10 @@
     gap: var(--spacing-s);
 }
 
+.cart-item:last-of-type {
+    border-bottom: 2px solid var(--color-accent1);
+}
+
 .cart-item__title {
     grid-column: 1/-1;
 }
