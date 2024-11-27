@@ -16,7 +16,7 @@ export interface SizeType {
 }
 
 interface IngredientType {
-    ingredientItem: IngredientItemType;
+    ingredient: IngredientItemType;
     quantity: number;
 }
 
