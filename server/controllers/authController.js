@@ -187,7 +187,7 @@ exports.registerCustomer = asyncHandler(async (req, res) => {
         // const refreshToken = jwt.sign(customer.toJSON(), process.env.REFRESH_SECRET, { expiresIn: '2d' });
         // customer.refreshToken = refreshToken;
 
-        // await customer.save();
+        await customer.save();
 
         const accessToken = jwt.sign(customer.toJSON(), process.env.JWT_SECRET, { expiresIn: '1h' });
 
