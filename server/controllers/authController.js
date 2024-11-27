@@ -182,7 +182,7 @@ exports.registerCustomer = asyncHandler(async (req, res) => {
             });
         }
         user.hash = await bcrypt.hash(password, 10);
-        delete customer.hash;
+        delete user.hash;
         const customer = new CustomerModel(user);
         // const refreshToken = jwt.sign(customer.toJSON(), process.env.REFRESH_SECRET, { expiresIn: '2d' });
         // customer.refreshToken = refreshToken;
