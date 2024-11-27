@@ -1,11 +1,10 @@
 .finalize-page {
     flex: 1;
     width: 100%;
-    display: grid;
-    grid-template-rows: auto 1fr auto;
-    gap: var(--spacing-m);
+
     margin-block: var(--spacing-2xl);
     padding-inline: var(--spacing-s);
+    min-height: 100svh;
 }
 
 .finalize-page__title {
@@ -19,6 +18,13 @@
     max-height: 40svh;
     display: grid;
     grid-template-rows: repeat(auto-fill, minmax(var(--spacing-2xl), auto));
+    gap: var(--spacing-m);
+}
+
+.finalize-page__confirmation-wrapper {
+    height: fit-content;
+    display: grid;
+    grid-template-rows: auto 1fr auto;
     gap: var(--spacing-m);
 }
 

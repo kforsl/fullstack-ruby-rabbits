@@ -1,0 +1,47 @@
+.order-confirmation {
+    display: grid;
+    grid-template-rows: auto auto auto 1fr;
+    gap: var(--spacing-m);
+    border: 2px solid var(--color-black);
+    padding: var(--spacing-l);
+    border-radius: 8px;
+    background-color: var(--bg-primary);
+    max-width: 50rem;
+    width: 100%;
+    height: fit-content;
+    margin-inline: auto;
+
+}
+
+
+.order-confirmation__title {
+    font-family: var(--title-font);
+    font-size: var(--font-size-xl);
+
+}
+
+.order-confirmation__info {
+    font-style: italic;
+}
+
+.order-confirmation__order-list {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    row-gap: var(--spacing-xs);
+}
+
+
+
+.order-confirmation__order-list-item {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-column: 1/-1;
+
+}
+
+@media screen and (max-width: 450px) {
+    .order-confirmation {
+        padding: 0;
+        border: none;
+    }
+}
