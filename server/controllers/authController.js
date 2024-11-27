@@ -23,8 +23,9 @@ exports.authenticateEmployee = asyncHandler(async (req, res) => {
                 data: ['Invalid credentials'],
             });
         }
-        const refreshToken = jwt.sign(employee.toJSON(), process.env.REFRESH_SECRET, { expiresIn: '5d' });
-        employee.refreshToken = refreshToken;
+        // const refreshToken = jwt.sign(employee.toJSON(), process.env.REFRESH_SECRET, { expiresIn: '5d' });
+        // employee.refreshToken = refreshToken;
+        employee.refreshToken = null;
 
         const accessToken = jwt.sign(employee.toJSON(), process.env.JWT_SECRET, { expiresIn: '1h' });
 
@@ -35,12 +36,12 @@ exports.authenticateEmployee = asyncHandler(async (req, res) => {
             maxAge: 9000000,
         });
 
-        res.cookie('rto', refreshToken, {
-            httpOnly: true,
-            secure: true,
-            signed: true,
-            maxAge: 432000000,
-        });
+        // res.cookie('rto', refreshToken, {
+        //     httpOnly: true,
+        //     secure: true,
+        //     signed: true,
+        //     maxAge: 432000000,
+        // });
 
         employee.hash = null;
         return res.status(200).json({
@@ -81,9 +82,9 @@ exports.registerEmployee = asyncHandler(async (req, res) => {
         user.hash = await bcrypt.hash(password, 10);
 
         const employee = new EmployeeModel(user);
-        const refreshToken = jwt.sign(employee.toJSON(), process.env.REFRESH_SECRET, { expiresIn: '2d' });
-        employee.refreshToken = refreshToken;
-
+        // const refreshToken = jwt.sign(employee.toJSON(), process.env.REFRESH_SECRET, { expiresIn: '2d' });
+        // employee.refreshToken = refreshToken;
+        employee.refreshToken = null;
         await employee.save();
 
         const accessToken = jwt.sign(employee.toJSON(), process.env.JWT_SECRET, { expiresIn: '1h' });
@@ -122,10 +123,7 @@ exports.authenticateCustomer = asyncHandler(async (req, res) => {
                 data: ['Invalid credentials'],
             });
         }
-        // customer.refreshToken = uuidv4();
         // customer.refreshToken = refreshToken;
-
-        // await customer.save();
 
         const accessToken = jwt.sign(customer.toJSON(), process.env.JWT_SECRET, { expiresIn: '1h' });
         customer.hash = null;
@@ -182,12 +180,12 @@ exports.registerCustomer = asyncHandler(async (req, res) => {
             });
         }
         user.hash = await bcrypt.hash(password, 10);
-        delete customer.hash;
         const customer = new CustomerModel(user);
         // const refreshToken = jwt.sign(customer.toJSON(), process.env.REFRESH_SECRET, { expiresIn: '2d' });
         // customer.refreshToken = refreshToken;
 
-        // await customer.save();
+        await customer.save();
+        customer.hash = null;
 
         const accessToken = jwt.sign(customer.toJSON(), process.env.JWT_SECRET, { expiresIn: '1h' });
 
@@ -197,7 +195,6 @@ exports.registerCustomer = asyncHandler(async (req, res) => {
             signed: true,
             maxAge: 9000000,
         });
-
         return res.status(201).json({
             message: 'Succesfully created new customer',
             data: [customer],
