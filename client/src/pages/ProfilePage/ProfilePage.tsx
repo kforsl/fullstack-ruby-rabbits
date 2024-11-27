@@ -5,6 +5,7 @@ import ProfileOrderList from '../../components/ProfileOrderList/ProfileOrderList
 import './profilePage.css';
 import ProfilePersonalForm from '../../components/ProfilePersonalForm/ProfilePersonalForm';
 import useAuthStore from '../../stores/authStore';
+import ProfilePaymentOptionsForm from '../../components/ProfilePaymentOptionsForm/ProfilePaymentOptionsForm';
 const ProfilePage: React.FC = () => {
     const { customer } = useAuthStore();
     const [formToShow, setFormToShow] = useState<string>('personal');
@@ -527,7 +528,7 @@ const ProfilePage: React.FC = () => {
                 <div className='wrapper'>
                     <ProfileNav onClick={changeNavOption} />
                     {formToShow === 'personal' && <ProfilePersonalForm />}
-                    {formToShow === 'payment' && <h1> payment </h1>}
+                    {formToShow === 'payment' && <ProfilePaymentOptionsForm />}
                     {formToShow === 'password' && <h1> password </h1>}
                     {formToShow === 'allergies' && <h1> allergies </h1>}
 
