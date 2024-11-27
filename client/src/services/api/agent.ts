@@ -41,6 +41,8 @@ const Product = {
 const Orders = {
     post: (order: CartToOrder) =>
         requests.post<AgentResponse<OrderType>>('orders', order).then((response) => response.data),
+    updateState: (id: string, state: 'waiting' | 'editing' | 'anulled') =>
+        requests.put<AgentResponse<OrderType>>(`orders/${id}`, { state: state }).then((response) => response.data),
     list: () =>
         requests
             .get<AgentResponse<OrderType>>(`orders`)
@@ -77,4 +79,8 @@ export default agent;
 /*
  * Författare: Kim
  * Skapat Product med list
+ */
+/*
+ * Ändrat: Magnus
+ * Skapade updateState i order för att ändra en beställnings state.
  */

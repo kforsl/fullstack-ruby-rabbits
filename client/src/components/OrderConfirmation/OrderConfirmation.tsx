@@ -1,6 +1,8 @@
 import { OrderType } from '../../interfaces/interfaceOrder';
+import { useChangeOrderState } from '../../services/mutations';
 import useAuthStore from '../../stores/authStore';
 import { getLastNCharacters } from '../../utils/utilFunctions';
+import TextButton from '../TextButton/TextButton';
 import './orderConfirmation.css';
 
 interface Props {
@@ -10,9 +12,18 @@ interface Props {
 const OrderConfirmation: React.FC<Props> = ({ order }) => {
     const orderNumber = order ? getLastNCharacters(order._id, 4) : '';
     const { customer } = useAuthStore();
+
+    const { mutate: changeState, isPending, isSuccess: isAnulled } = useChangeOrderState();
+
+    const handleUpdateState = (id: string, state: 'waiting' | 'editing' | 'anulled') => {
+        changeState({ id, state });
+    };
     return (
         <article className='order-confirmation'>
-            <h1 className='order-confirmation__title'>Succé! Du har lagt en beställning!</h1>
+            {isAnulled && <h2 className='order-confirmation__deleted'>ANNULERAD!</h2>}
+            <h1 className='order-confirmation__title'>
+                {isAnulled ? 'Din order har tagits bort.' : 'Succé! Du har lagt en beställning!'}
+            </h1>
             <h2 className='order-confirmation__subtitle'>{`Ordernummer: ${orderNumber}`}</h2>
             {customer ? (
                 <p className='order-confirmation__info'>Din beställning har sparats i din profil!</p>
@@ -34,6 +45,11 @@ const OrderConfirmation: React.FC<Props> = ({ order }) => {
                     </li>
                 ))}
             </ul>
+            {!isAnulled && (
+                <TextButton onClick={() => handleUpdateState(order._id, 'anulled')}>
+                    {isPending ? 'Loading...' : 'AVBRYT ORDER'}
+                </TextButton>
+            )}
         </article>
     );
 };

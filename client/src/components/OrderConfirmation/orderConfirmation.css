@@ -10,9 +10,11 @@
     width: 100%;
     height: fit-content;
     margin-inline: auto;
-
 }
 
+.order-confirmation__deleted {
+    color: red;
+}
 
 .order-confirmation__title {
     font-family: var(--title-font);
