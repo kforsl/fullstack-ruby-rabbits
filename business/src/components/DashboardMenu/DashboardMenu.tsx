@@ -10,6 +10,7 @@ const DashboardMenu = () => {
         { name: 'KASSA-VY', route: '/kassa' },
         { name: 'KOCK-VY', route: '/kock' },
         { name: 'LAGERSALDO', route: '/lager' },
+        { name: 'Ändra Produkt', route: '/admin/produkt' },
     ];
     useEffect(() => {
         if (navigation.some((item) => item.route === location.pathname)) {
