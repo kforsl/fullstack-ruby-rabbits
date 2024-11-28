@@ -73,3 +73,16 @@ exports.validateIfUserIsCustomer = async (req, res, next) => {
     } catch (error) {}
     next();
 };
+exports.validateIfUserIsCustomerStrict = async (req, res, next) => {
+    const { ato } = req.signedCookies;
+    try {
+        const customer = jwt.verify(ato, process.env.JWT_SECRET);
+        req.customer = customer;
+        next();
+    } catch (error) {
+        if (ato) res.clearCookie('ato');
+        else res.clearCookie('rto');
+
+        return res.status(401).json({ message: 'Invalid Token' });
+    }
+};

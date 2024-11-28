@@ -14,12 +14,11 @@ const ProfileOrderList = ({ id }: Props) => {
         return (
             <section className='profile-order-list'>
                 <ul>
-                    <h3 className='profile-order-list__title'> Det blev ett problem på vägern! </h3>
+                    <h3 className='profile-order-list__title'> Det blev ett problem på vägen! </h3>
                     <li className='profile-order-list__empty'>{error.message}</li>
                 </ul>
             </section>
         );
-
     return (
         <section className='profile-order-list'>
             {data !== null ? (
@@ -38,7 +37,7 @@ const ProfileOrderList = ({ id }: Props) => {
                     </ul>
                     <ul>
                         <h3 className='profile-order-list__title'> Tidigare Ordrar </h3>
-                        {data.filter((order: OrderType) => order.state === 'history').length != 0 ? (
+                        {data.filter((order: OrderType) => order.state === 'history').length < 1 ? (
                             <li key='01' className='profile-order-list__empty'>
                                 Du har inga tidigare ordrar.
                             </li>
