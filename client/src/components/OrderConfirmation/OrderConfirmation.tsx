@@ -13,7 +13,7 @@ const OrderConfirmation: React.FC<Props> = ({ order }) => {
     const orderNumber = order ? getLastNCharacters(order._id, 4) : '';
     const { customer } = useAuthStore();
     const { mutate: anullOrder, isPending: isAnulling, isSuccess: isAnulled } = useChangeOrderState();
-    const { mutate: editOrder, isPending: isChangingToEditState, isSuccess: isInEditState } = useChangeOrderState();
+    // const { mutate: editOrder, isPending: isChangingToEditState, isSuccess: isInEditState } = useChangeOrderState();
     // const { mutate: backToWaiting, isPending: isChangingToWaitingState, isSuccess: isWaiting } = useChangeOrderState();
 
     return (
@@ -35,9 +35,7 @@ const OrderConfirmation: React.FC<Props> = ({ order }) => {
                 <h3 className='order-confirmation__category-title'>ANTAL</h3>
                 {order.order.map((orderItem) => (
                     <li className='order-confirmation__order-list-item' key={orderItem._id}>
-                        <h4 className='order-confirmation__list-info'>
-                            orderItem. product. name :({/* Behöver fixa så namnet är tillgängligt i objektet */}
-                        </h4>
+                        <h4 className='order-confirmation__list-info'>{orderItem.product.name}</h4>
                         <h4 className='order-confirmation__list-info'>{orderItem.size}</h4>
                         <h4 className='order-confirmation__list-info'>{orderItem.quantity}</h4>
                     </li>
@@ -49,11 +47,11 @@ const OrderConfirmation: React.FC<Props> = ({ order }) => {
                     <TextButton onClick={() => anullOrder({ id: order._id, state: 'anulled' })} disabled={isAnulling}>
                         {isAnulling ? 'Loading...' : 'AVBRYT ORDER'}
                     </TextButton>
-                    <TextButton
+                    {/* <TextButton
                         onClick={() => editOrder({ id: order._id, state: 'editing' })}
                         disabled={isChangingToEditState}>
                         {isChangingToEditState ? 'Loading...' : 'ÄNDRA ORDER'}
-                    </TextButton>
+                    </TextButton> */}
                 </div>
             )}
         </article>
