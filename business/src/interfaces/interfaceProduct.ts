@@ -15,12 +15,12 @@ export interface SizeType {
     ingredientMultiplier: number;
 }
 
-interface IngredientType {
+export interface IngredientType {
     ingredient: IngredientItemType;
-    quantity: number;
+    quantityInGrams: number;
 }
 
-interface IngredientItemType {
+export interface IngredientItemType {
     _id: string;
     name: string;
     description: string;

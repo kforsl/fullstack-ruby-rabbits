@@ -1,5 +1,5 @@
 import axios, { AxiosResponse } from 'axios';
-import { ProductType } from '../../interfaces/interfaceProduct';
+import { IngredientItemType, ProductType } from '../../interfaces/interfaceProduct';
 import { SignInForm } from '../../interfaces/interfaceAuth';
 import { OrderType } from '../../interfaces/interfaceOrder';
 import { CartToOrder } from '../../interfaces/interfaceCart';
@@ -47,6 +47,10 @@ const Orders = {
         requests.post<AgentResponse<OrderType>>('orders', order).then((response) => response.data),
 };
 
+const Ingrediant = {
+    list: () => requests.get<AgentResponse<IngredientItemType>>('ingredients').then((response) => response.data),
+};
+
 const agent = {
     Authenticate: (credentials: SignInForm) =>
         requests
@@ -55,6 +59,7 @@ const agent = {
             .catch((error) => error.message),
     Products,
     Orders,
+    Ingrediant,
 };
 
 export default agent;

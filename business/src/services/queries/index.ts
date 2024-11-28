@@ -1,5 +1,6 @@
 export * from './useGetOrders';
 export * from './useGetMenu';
+export * from './useGetIngrediant';
 
 /*
  *Författare: Magnus

@@ -1,4 +1,3 @@
-import { useEffect } from 'react';
 import { ProductType } from '../../interfaces/interfaceProduct';
 import ProductCard from '../ProductCard/ProductCard';
 import './productList.css';
@@ -13,9 +12,6 @@ interface Props {
 const ProductList = ({ title, products }: Props) => {
     const location = useLocation();
 
-    useEffect(() => {
-        console.log(location.pathname);
-    });
     return (
         <section className='product-list'>
             <h3 className='product-list__title'>{title}</h3>

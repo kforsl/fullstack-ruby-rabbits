@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import './editProductPage.css';
 import { useGetMenu } from '../../services/queries';
 import { ProductType } from '../../interfaces/interfaceProduct';

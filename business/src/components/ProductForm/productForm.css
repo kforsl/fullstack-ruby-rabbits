@@ -1,0 +1,86 @@
+.product-form {
+    padding: var(--spacing-s);
+    border-left: 1px solid var(--color-black);
+    height: 100%;
+    max-height: 100svh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    overflow: hidden;
+}
+
+.product-form__title {
+    font-size: var(--font-size-l);
+    text-align: center;
+    margin-bottom: var(--spacing-m);
+}
+
+.product-form__form-section {
+    height: 100%;
+    margin-bottom: var(--spacing-m);
+    display: grid;
+    gap: var(--spacing-s);
+}
+
+.product-form__form {
+    display: grid;
+    gap: var(--spacing-xs);
+}
+
+.product-form__label {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-xs);
+}
+
+.product-form__input {
+    padding: var(--spacing-xs);
+    width: 100%;
+}
+
+.product-form__desc {
+    height: 100px;
+    resize: none;
+    padding: var(--spacing-xs);
+}
+
+.product-form__size-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--spacing-xs);
+}
+
+.product-form__checkbox {
+    margin-inline: var(--spacing-xs);
+}
+
+.product-form__sub-title {
+    font-size: var(--font-size-m);
+}
+
+.product-form__ingredient-container {
+    display: grid;
+    grid-template-columns: 1fr 0.4fr;
+    gap: var(--spacing-s);
+}
+
+.product-form__ingredient-list {
+    overflow-y: scroll;
+    height: 135px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    padding-block: var(--spacing-s);
+    padding-inline: var(--spacing-xs);
+    list-style: none;
+    gap: var(--spacing-s);
+}
+
+.product-form__ingredient {
+    display: flex;
+    justify-content: space-between;
+}
+
+.product-form__btn {
+    padding: var(--spacing-xs);
+    width: 100%;
+}
