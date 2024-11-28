@@ -4,6 +4,7 @@ const { OrderModel } = require('../models/orderModel');
 exports.createOrder = asyncHandler(async (req, res) => {
     try {
         const order = new OrderModel(req.body);
+
         const { customer } = req;
 
         if (customer) {
@@ -13,9 +14,12 @@ exports.createOrder = asyncHandler(async (req, res) => {
 
         await order.save();
 
+        const orderToReturn = await OrderModel.findById(order._id).populate('order.product').populate('customer');
+        orderToReturn.hash = null;
+
         res.status(201).json({
             message: 'Succesfully created order',
-            data: [order],
+            data: [orderToReturn],
         });
     } catch (error) {
         res.status(500).json({
@@ -31,9 +35,13 @@ exports.getAllOrders = asyncHandler(async (req, res) => {
 
         const orders = await OrderModel.find({})
             .populate('order.product')
-            .populate('order.product.ingredients.ingredient');
+            .populate('order.product.ingredients.ingredient')
+            .populate('customer');
 
         if (orders.length < 1) {
+            order.forEach((o) => {
+                if (o.customer) o.customer.hash = null;
+            });
             res.status(204).json({
                 message: 'No orders found',
                 data: [],
@@ -63,7 +71,7 @@ exports.getAllOrders = asyncHandler(async (req, res) => {
     } catch (error) {
         res.status(500).json({
             message: 'Error',
-            data: [error],
+            data: [error.message],
         });
     }
 });
@@ -72,9 +80,7 @@ exports.getAllOrdersByCustomerId = asyncHandler(async (req, res) => {
     try {
         const { id } = req.params;
 
-        const orders = await OrderModel.find({ customer: id })
-            .populate('order.product')
-            .populate('order.product.ingredients.ingredient');
+        const orders = await OrderModel.find({ customer: id }).populate('order.product');
 
         if (orders.length < 1) {
             res.status(204).json({
@@ -90,16 +96,16 @@ exports.getAllOrdersByCustomerId = asyncHandler(async (req, res) => {
     } catch (error) {
         res.status(500).json({
             message: 'Error',
-            data: [error],
+            data: [error.message],
         });
     }
 });
 
 exports.getOrderById = asyncHandler(async (req, res) => {
     try {
-        const order = await OrderModel.findById(req.params.id)
-            .populate('order.product')
-            .populate('order.product.ingredients.ingredient[]');
+        const order = await OrderModel.findById(req.params.id).populate('order.product').populate('customer');
+
+        if (order.customer) order.customer.hash = null;
 
         if (!order)
             res.status(404).json({
@@ -114,7 +120,7 @@ exports.getOrderById = asyncHandler(async (req, res) => {
     } catch (error) {
         res.status(500).json({
             message: 'Error',
-            data: [error],
+            data: [error.message],
         });
     }
 });
@@ -126,6 +132,7 @@ exports.updateOrderById = asyncHandler(async (req, res) => {
             { ...req.body, updatedAt: new Date() },
             { new: true }
         );
+        if (order.customer) order.customer.hash = null;
 
         if (!order) {
             res.status(204).json({
@@ -141,7 +148,7 @@ exports.updateOrderById = asyncHandler(async (req, res) => {
     } catch (error) {
         res.status(500).json({
             message: 'Error',
-            data: [error],
+            data: [error.message],
         });
     }
 });

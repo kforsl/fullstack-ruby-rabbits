@@ -1,0 +1,53 @@
+.payment-form {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-s);
+    padding: var(--spacing-s);
+    max-width: 600px;
+    width: 50vw;
+    margin: 0 auto;
+    background-color: var(--bg-primary);
+    align-items: start;
+
+    button {
+        align-self: flex-end;
+    }
+}
+
+.payment-form__title {
+    font-size: var(--font-size-l);
+    font-family: var(--title-font);
+}
+.payment-form__input-section {
+    display: flex;
+    width: 100%;
+    border: solid 1px var(--color-black);
+    padding: var(--spacing-s);
+    border-radius: 3px;
+}
+.payment-form__label {
+    font-size: var(--font-size-m);
+    font-family: var(--bread-font);
+    width: 100%;
+}
+
+.payment-form__checkbox {
+    aspect-ratio: 1/1;
+    height: 100%;
+}
+
+.payment-form__adress-section {
+    display: grid;
+    grid-template-columns: 1fr 0.5fr;
+    gap: var(--spacing-s);
+}
+
+.payment-form__adress-label {
+    grid-column: 1 / -1;
+}
+.payment-form__city-label {
+    grid-column: 1;
+}
+.payment-form__zip-label {
+    grid-column: 2;
+}

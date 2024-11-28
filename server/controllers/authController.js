@@ -33,12 +33,13 @@ exports.authenticateEmployee = asyncHandler(async (req, res) => {
             httpOnly: true,
             secure: true,
             signed: true,
-            maxAge: 9000000,
+            sameSite: 'none',
+            maxAge: 12 * 60 * 60 * 1000,
         });
 
         // res.cookie('rto', refreshToken, {
         //     httpOnly: true,
-        //     secure: true,
+        //     secure: false,
         //     signed: true,
         //     maxAge: 432000000,
         // });
@@ -93,7 +94,8 @@ exports.registerEmployee = asyncHandler(async (req, res) => {
             httpOnly: true,
             secure: true,
             signed: true,
-            maxAge: 9000000,
+            sameSite: 'none',
+            maxAge: 12 * 60 * 60 * 1000,
         });
 
         employee.hash = null;
@@ -132,7 +134,8 @@ exports.authenticateCustomer = asyncHandler(async (req, res) => {
             httpOnly: true,
             secure: true,
             signed: true,
-            maxAge: 9000000,
+            sameSite: 'none',
+            maxAge: 12 * 60 * 60 * 1000,
         });
 
         return res.status(200).json({
@@ -193,7 +196,8 @@ exports.registerCustomer = asyncHandler(async (req, res) => {
             httpOnly: true,
             secure: true,
             signed: true,
-            maxAge: 9000000,
+            sameSite: 'none',
+            maxAge: 12 * 60 * 60 * 1000,
         });
         return res.status(201).json({
             message: 'Succesfully created new customer',

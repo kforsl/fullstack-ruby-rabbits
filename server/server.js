@@ -23,21 +23,32 @@ app.use(express.json());
 app.use(
     helmet.contentSecurityPolicy({
         directives: {
-            scriptSrc: ["'self'", 'https://localhost:3000'],
-            defaultSrc: ["'self'", 'https://localhost:3000'],
+            scriptSrc: ["'self'", 'http://localhost:3000'],
+            defaultSrc: ["'self'", 'http://localhost:3000'],
             fontSrc: ["'self'"],
             imgSrc: ["'self'", 'https://happymess-images.s3.eu-north-1.amazonaws.com'],
             connectSrc: [
                 "'self'",
                 'https://drpn0wxpzl77r.cloudfront.net',
                 'https://dxcrvzvfdmi0n.cloudfront.net',
-                'https://localhost:1337',
-                'https://localhost:1338',
+                'http://localhost:1337',
+                'http://localhost:1338',
             ],
         },
     })
 );
-app.use(cors());
+app.use(
+    cors({
+        credentials: true,
+        origin: [
+            'http://localhost:3000',
+            'http://localhost:1337',
+            'http://localhost:1338',
+            'https://drpn0wxpzl77r.cloudfront.net',
+            'https://dxcrvzvfdmi0n.cloudfront.net',
+        ],
+    })
+);
 app.use(cookieParser(process.env.COOKIE_SECRET));
 
 app.use('/api/ingredients', ingredientRoute);
