@@ -19,11 +19,21 @@
     font-family: var(--title-font);
 }
 .payment-form__input-section {
-    display: flex;
+    display: grid;
+    grid-template-columns: 1fr 0.25fr;
+    place-items: center;
     width: 100%;
     border: solid 1px var(--color-black);
     padding: var(--spacing-s);
     border-radius: 3px;
+}
+.payment-form__checkbox {
+}
+
+.payment-form__extra-info {
+    grid-column: span 2;
+    width: 100%;
+    padding-top: var(--spacing-s);
 }
 .payment-form__label {
     font-size: var(--font-size-m);
@@ -31,23 +41,9 @@
     width: 100%;
 }
 
-.payment-form__checkbox {
-    aspect-ratio: 1/1;
-    height: 100%;
-}
-
-.payment-form__adress-section {
-    display: grid;
-    grid-template-columns: 1fr 0.5fr;
-    gap: var(--spacing-s);
-}
-
-.payment-form__adress-label {
-    grid-column: 1 / -1;
-}
-.payment-form__city-label {
-    grid-column: 1;
-}
-.payment-form__zip-label {
-    grid-column: 2;
+.payment-form__text-input {
+    font-size: var(--font-size-m);
+    padding: var(--spacing-xs);
+    width: 100%;
+    margin-top: var(--spacing-xs);
 }

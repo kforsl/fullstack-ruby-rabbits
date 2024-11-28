@@ -1,6 +1,6 @@
 import axios, { AxiosResponse } from 'axios';
 import { ProductType } from '../../interfaces/interfaceProduct';
-import { Customer, SignInForm } from '../../interfaces/interfaceAuth';
+import { Customer, PaymentOption, SignInForm } from '../../interfaces/interfaceAuth';
 import { CartToOrder } from '../../interfaces/interfaceCart';
 import { OrderType } from '../../interfaces/interfaceOrder';
 
@@ -68,10 +68,16 @@ const Authenticate = {
             .catch((error) => error),
 };
 
+const Profile = {
+    updatePaymentOptions: (paymentOptions: PaymentOption[]) =>
+        requests.put<AgentResponse<Customer>>(`profile/payment`, paymentOptions).then((response) => response.data),
+};
+
 const agent = {
     Authenticate,
     Product,
     Orders,
+    Profile,
 };
 
 export default agent;
