@@ -33,6 +33,7 @@ exports.authenticateEmployee = asyncHandler(async (req, res) => {
             httpOnly: true,
             secure: true,
             signed: true,
+            sameSite: 'none',
             maxAge: 12 * 60 * 60 * 1000,
         });
 
@@ -93,6 +94,7 @@ exports.registerEmployee = asyncHandler(async (req, res) => {
             httpOnly: true,
             secure: true,
             signed: true,
+            sameSite: 'none',
             maxAge: 12 * 60 * 60 * 1000,
         });
 
@@ -132,6 +134,7 @@ exports.authenticateCustomer = asyncHandler(async (req, res) => {
             httpOnly: true,
             secure: true,
             signed: true,
+            sameSite: 'none',
             maxAge: 12 * 60 * 60 * 1000,
         });
 
@@ -193,6 +196,7 @@ exports.registerCustomer = asyncHandler(async (req, res) => {
             httpOnly: true,
             secure: true,
             signed: true,
+            sameSite: 'none',
             maxAge: 12 * 60 * 60 * 1000,
         });
         return res.status(201).json({

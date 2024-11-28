@@ -37,9 +37,11 @@ exports.getAllOrders = asyncHandler(async (req, res) => {
             .populate('order.product')
             .populate('order.product.ingredients.ingredient')
             .populate('customer');
-        if (order.customer) order.customer.hash = null;
 
         if (orders.length < 1) {
+            order.forEach((o) => {
+                if (o.customer) o.customer.hash = null;
+            });
             res.status(204).json({
                 message: 'No orders found',
                 data: [],
@@ -69,7 +71,7 @@ exports.getAllOrders = asyncHandler(async (req, res) => {
     } catch (error) {
         res.status(500).json({
             message: 'Error',
-            data: [error],
+            data: [error.message],
         });
     }
 });
@@ -94,7 +96,7 @@ exports.getAllOrdersByCustomerId = asyncHandler(async (req, res) => {
     } catch (error) {
         res.status(500).json({
             message: 'Error',
-            data: [error],
+            data: [error.message],
         });
     }
 });
@@ -118,7 +120,7 @@ exports.getOrderById = asyncHandler(async (req, res) => {
     } catch (error) {
         res.status(500).json({
             message: 'Error',
-            data: [error],
+            data: [error.message],
         });
     }
 });
@@ -146,7 +148,7 @@ exports.updateOrderById = asyncHandler(async (req, res) => {
     } catch (error) {
         res.status(500).json({
             message: 'Error',
-            data: [error],
+            data: [error.message],
         });
     }
 });

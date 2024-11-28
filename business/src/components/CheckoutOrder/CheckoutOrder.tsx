@@ -29,7 +29,6 @@ const CheckoutOrder = ({ changeview }: Props) => {
     }
 
     if (isError) {
-        console.dir(error);
         return (
             <main className='chef-page'>
                 <p>{`${error}`}</p>
