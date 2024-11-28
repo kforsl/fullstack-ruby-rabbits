@@ -37,7 +37,17 @@ app.use(
         },
     })
 );
-app.use(cors());
+app.use(
+    cors({
+        credentials: true,
+        origin: [
+            'http://localhost:1337',
+            'http://localhost:1338',
+            'https://drpn0wxpzl77r.cloudfront.net',
+            'https://dxcrvzvfdmi0n.cloudfront.net',
+        ],
+    })
+);
 app.use(cookieParser(process.env.COOKIE_SECRET));
 
 app.use('/api/ingredients', ingredientRoute);
