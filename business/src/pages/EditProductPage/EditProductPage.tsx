@@ -36,3 +36,8 @@ const EditProductPage = () => {
 };
 
 export default EditProductPage;
+
+/*
+ * Författare: Kim
+ * Skapat en sida som visar produkter och formulär för att ändra en produkts information.
+ */

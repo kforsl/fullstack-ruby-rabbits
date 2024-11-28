@@ -245,3 +245,8 @@ const ProductForm = () => {
 };
 
 export default ProductForm;
+
+/*
+ * Författare: Kim
+ * Formulär som sparar input från användare när en produkt ska ändras eller skapas. Behöver brytas ner och skapa fler komponenter.
+ */

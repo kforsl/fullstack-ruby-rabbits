@@ -90,3 +90,8 @@ const EditProductCard = ({ product }: Props) => {
 };
 
 export default EditProductCard;
+
+/*
+ * Författare: Kim
+ * Skapat en kompopnent för att se all information om en produkt.
+ */

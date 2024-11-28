@@ -56,4 +56,6 @@ interface UpdateSizeType {
 /*
  * Författare: Kim
  * Skapat interface för ProductType, SizeType, IngredientType, IngredientItemType, AllergensType
+ * Ändrat: Kim
+ * Laggt till UpdateProductType, UpdateIngredientType och UpdateSizeType
  */

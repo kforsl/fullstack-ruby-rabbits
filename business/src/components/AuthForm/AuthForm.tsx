@@ -1,4 +1,4 @@
-import { FormEvent, useEffect, useState } from 'react';
+import { FormEvent, useState } from 'react';
 import useAuthStore from '../../stores/authStore';
 
 import './authForm.css';
@@ -19,7 +19,7 @@ const AuthForm = () => {
         setIsShowingLoadingSection(true);
         setTimeout(() => setIsLoading(true), 100);
 
-        const { error, value } = authSchema.validate(signInForm);
+        const { error } = authSchema.validate(signInForm);
         if (error) {
             console.log('ERROR: ', error);
         } else {
