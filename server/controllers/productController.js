@@ -55,7 +55,7 @@ exports.updateProductById = asyncHandler(async (req, res) => {
 
 exports.getProductById = asyncHandler(async (req, res) => {
     try {
-        const product = await ProductModel.findById(req.params.id);
+        const product = await ProductModel.findById(req.params.id).populate('ingredients.ingredient');
         if (!product) {
             res.status(404).json({
                 message: 'Error',
