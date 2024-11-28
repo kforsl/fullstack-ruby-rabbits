@@ -87,8 +87,8 @@ exports.updatePassword = asyncHandler(async (req, res) => {
 exports.updatePayment = asyncHandler(async (req, res) => {
     try {
         const customer = req.customer;
-        const { paymentOptions } = req.body;
-        console.log(paymentOptions);
+        const paymentOptions = req.body;
+        console.log(req.body);
         const updatedCustomer = await CustomerModel.findByIdAndUpdate(
             customer._id,
             { ...customer, paymentOptions: [...paymentOptions] },
