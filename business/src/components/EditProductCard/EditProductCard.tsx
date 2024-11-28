@@ -1,4 +1,5 @@
 import { ProductType } from '../../interfaces/interfaceProduct';
+import useAdminStore from '../../stores/adminStore';
 import './editProductCard.css';
 
 interface Props {
@@ -6,13 +7,51 @@ interface Props {
 }
 
 const EditProductCard = ({ product }: Props) => {
+    const { productToEdit, setProductToEdit, setIsEditingProduct } = useAdminStore();
+
+    const handleProductCartClick = () => {
+        if (productToEdit === product) {
+            setProductToEdit({
+                _id: '',
+                name: '',
+                description: '',
+                type: 'icecream',
+                imageUrl: '',
+                ingredients: [],
+                isSpecial: false,
+                sizes: [
+                    {
+                        size: 'small',
+                        price: 0,
+                        ingredientMultiplier: 0.9,
+                    },
+                    {
+                        size: 'medium',
+                        price: 0,
+                        ingredientMultiplier: 1,
+                    },
+                    {
+                        size: 'large',
+                        price: 0,
+                        ingredientMultiplier: 1.25,
+                    },
+                ],
+            });
+            setIsEditingProduct(false);
+        } else {
+            setProductToEdit(product);
+            setIsEditingProduct(true);
+        }
+    };
+
     return (
-        <article className='edit-product-card' onClick={() => console.log('click')}>
+        <article className='edit-product-card' onClick={handleProductCartClick}>
             <section className='edit-product-card-section'>
                 <figure
                     className={
-                        // ? 'product-card__image-container active'
-                        'edit-product-card__image-container'
+                        productToEdit === product
+                            ? 'edit-product-card__image-container active'
+                            : 'edit-product-card__image-container'
                     }>
                     <img
                         className='edit-product-card__image'
@@ -51,3 +90,8 @@ const EditProductCard = ({ product }: Props) => {
 };
 
 export default EditProductCard;
+
+/*
+ * Författare: Kim
+ * Skapat en kompopnent för att se all information om en produkt.
+ */

@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import './editProductPage.css';
 import { useGetMenu } from '../../services/queries';
 import { ProductType } from '../../interfaces/interfaceProduct';
@@ -37,3 +36,8 @@ const EditProductPage = () => {
 };
 
 export default EditProductPage;
+
+/*
+ * Författare: Kim
+ * Skapat en sida som visar produkter och formulär för att ändra en produkts information.
+ */

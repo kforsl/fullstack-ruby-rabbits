@@ -42,7 +42,7 @@ const SignForm = () => {
         setIsShowingLoadingSection(true);
         setTimeout(() => setIsLoading(true), 100);
 
-        const { error, value } = authSchema.validate(signInForm);
+        const { error } = authSchema.validate(signInForm);
         if (error) {
             setIsShowingLoadingSection(false);
             setIsShowingError(true);
@@ -74,7 +74,7 @@ const SignForm = () => {
         setIsShowingLoadingSection(true);
         setTimeout(() => setIsLoading(true), 100);
 
-        const { error, value } = signUpSchema.validate(signUpForm);
+        const { error } = signUpSchema.validate(signUpForm);
         if (error) {
             setIsShowingError(true);
             setTimeout(() => setIsShowingError(false), 3000);
