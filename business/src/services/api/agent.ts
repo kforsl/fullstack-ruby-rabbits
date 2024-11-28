@@ -1,5 +1,5 @@
 import axios, { AxiosResponse } from 'axios';
-import { ProductType } from '../../interfaces/interfaceProduct';
+import { IngredientItemType, ProductType, UpdateProductType } from '../../interfaces/interfaceProduct';
 import { SignInForm } from '../../interfaces/interfaceAuth';
 import { OrderType } from '../../interfaces/interfaceOrder';
 import { CartToOrder } from '../../interfaces/interfaceCart';
@@ -37,6 +37,10 @@ interface AgentResponse<T = object> {
 
 const Products = {
     list: () => requests.get<AgentResponse<ProductType>>('products').then((response) => response.data),
+    update: (id: string, product: UpdateProductType) =>
+        requests.put<AgentResponse<UpdateProductType>>(`products/${id}`, product).then((response) => response.data),
+    post: (product: UpdateProductType) =>
+        requests.post<AgentResponse<UpdateProductType>>(`products`, product).then((response) => response.data),
 };
 
 const Orders = {
@@ -47,6 +51,10 @@ const Orders = {
         requests.post<AgentResponse<OrderType>>('orders', order).then((response) => response.data),
 };
 
+const Ingrediant = {
+    list: () => requests.get<AgentResponse<IngredientItemType>>('ingredients').then((response) => response.data),
+};
+
 const agent = {
     Authenticate: (credentials: SignInForm) =>
         requests
@@ -55,6 +63,7 @@ const agent = {
             .catch((error) => error.message),
     Products,
     Orders,
+    Ingrediant,
 };
 
 export default agent;
