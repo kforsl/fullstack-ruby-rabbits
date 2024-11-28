@@ -5,8 +5,8 @@ import { CartToOrder } from '../../interfaces/interfaceCart';
 import { OrderType } from '../../interfaces/interfaceOrder';
 
 // axios.defaults.baseURL = 'Här får vi byta ut och ta vår adress när vi har en
-// axios.defaults.baseURL = 'http://localhost:3000/api/';
-axios.defaults.baseURL = 'https://fullstack-ruby-rabbits.onrender.com/api/';
+axios.defaults.baseURL = 'http://localhost:3000/api/';
+// axios.defaults.baseURL = 'https://fullstack-ruby-rabbits.onrender.com/api/';
 
 const responseBody = <T>(response: AxiosResponse<T>) => response.data;
 
@@ -41,6 +41,8 @@ const Product = {
 const Orders = {
     post: (order: CartToOrder) =>
         requests.post<AgentResponse<OrderType>>('orders', order).then((response) => response.data),
+    updateState: (id: string, state: 'waiting' | 'editing' | 'anulled') =>
+        requests.put<AgentResponse<OrderType>>(`orders/${id}`, { state: state }).then((response) => response.data),
     list: () =>
         requests
             .get<AgentResponse<OrderType>>(`orders`)
@@ -77,4 +79,8 @@ export default agent;
 /*
  * Författare: Kim
  * Skapat Product med list
+ */
+/*
+ * Ändrat: Magnus
+ * Skapade updateState i order för att ändra en beställnings state.
  */

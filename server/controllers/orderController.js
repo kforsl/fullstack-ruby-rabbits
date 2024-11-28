@@ -4,6 +4,7 @@ const { OrderModel } = require('../models/orderModel');
 exports.createOrder = asyncHandler(async (req, res) => {
     try {
         const order = new OrderModel(req.body);
+
         const { customer } = req;
 
         if (customer) {
