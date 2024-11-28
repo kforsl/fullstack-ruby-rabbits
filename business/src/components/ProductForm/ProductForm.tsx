@@ -2,15 +2,20 @@ import useAdminStore from '../../stores/adminStore';
 import './productForm.css';
 import { useGetIngrediant } from '../../services/queries';
 import { useEffect, useState } from 'react';
-import { IngredientItemType, IngredientType } from '../../interfaces/interfaceProduct';
-
-interface ingredient {
-    ingredient: string;
-    quantityInGrams: number;
-}
+import {
+    IngredientItemType,
+    IngredientType,
+    UpdateIngredientType,
+    UpdateProductType,
+} from '../../interfaces/interfaceProduct';
+import { useUpdateProduct } from '../../services/mutations/useUpdateProduct';
+import { useCreateProduct } from '../../services/mutations/useCreateProduct';
 
 const ProductForm = () => {
     const { productToEdit, isEditingProduct } = useAdminStore();
+
+    const { mutate: updateProduct } = useUpdateProduct();
+    const { mutate: createProduct } = useCreateProduct();
 
     useEffect(() => {
         setFormProductName(productToEdit.name);
@@ -40,7 +45,7 @@ const ProductForm = () => {
     if (isError) return <p>{`${error}`}</p>;
 
     const submitProductInformation = () => {
-        const ingredientsToAdd: ingredient[] = [];
+        const ingredientsToAdd: UpdateIngredientType[] = [];
 
         addedIngredients.forEach((ingredient) => {
             ingredientsToAdd.push({
@@ -49,10 +54,10 @@ const ProductForm = () => {
             });
         });
 
-        const productInformation = {
+        const productInformation: UpdateProductType = {
             name: formProductName,
             description: formProductDescription,
-            type: formProductType,
+            type: formProductType as 'icecream' | 'milkshake',
             imageUrl: productToEdit
                 ? productToEdit.imageUrl
                 : 'https://happymess-images.s3.eu-north-1.amazonaws.com/Image-not-found.png',
@@ -64,7 +69,7 @@ const ProductForm = () => {
                     price: formProductPriceS,
                 },
                 {
-                    size: 'mediun',
+                    size: 'medium',
                     price: formProductPriceM,
                 },
                 {
@@ -73,7 +78,13 @@ const ProductForm = () => {
                 },
             ],
         };
-        console.log(productInformation);
+        if (productToEdit._id.length > 0) {
+            console.log('update');
+            updateProduct({ id: productToEdit._id, product: productInformation });
+        } else {
+            console.log('create');
+            createProduct(productInformation);
+        }
     };
 
     const submitIngredientForm = (e: React.SyntheticEvent<HTMLFormElement>) => {

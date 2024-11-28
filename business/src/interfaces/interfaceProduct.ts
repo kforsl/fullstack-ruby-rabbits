@@ -33,6 +33,26 @@ interface AllergensType {
     description: string;
 }
 
+export interface UpdateProductType {
+    name: string;
+    description: string;
+    type: 'milkshake' | 'icecream';
+    imageUrl: string;
+    ingredients: UpdateIngredientType[];
+    isSpecial: boolean;
+    sizes: UpdateSizeType[];
+}
+
+export interface UpdateIngredientType {
+    ingredient: string;
+    quantityInGrams: number;
+}
+
+interface UpdateSizeType {
+    size: 'small' | 'medium' | 'large';
+    price: number;
+}
+
 /*
  * Författare: Kim
  * Skapat interface för ProductType, SizeType, IngredientType, IngredientItemType, AllergensType
