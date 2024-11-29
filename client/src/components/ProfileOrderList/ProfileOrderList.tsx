@@ -31,9 +31,11 @@ const ProfileOrderList = ({ id }: Props) => {
                                 Du har inga aktiva ordrar.
                             </li>
                         ) : (
-                            (data.filter((order: OrderType) => order.state !== 'history') as OrderType[]).map(
-                                (order: OrderType) => <OrderListItem order={order} key={order._id} />
-                            )
+                            (
+                                data.filter(
+                                    (order: OrderType) => order.state !== 'history' && order.state !== 'anulled'
+                                ) as OrderType[]
+                            ).map((order: OrderType) => <OrderListItem order={order} key={order._id} />)
                         )}
                     </ul>
                     <ul>
