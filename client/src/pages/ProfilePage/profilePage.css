@@ -1,5 +1,5 @@
 .profile-page {
     flex: 1;
-    align-content: flex-end;
     padding: var(--spacing-m);
+    min-height: 100svh;
 }

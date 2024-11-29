@@ -75,10 +75,10 @@ const run = async () => {
                 console.log(`USER DISCONNECTED: ${socket.id}. REASON: ${reason}`);
             });
             socket.on('createOrder', () => {
-                socket.broadcast.emit('newOrder');
+                io.emit('newOrder');
             });
             socket.on('updateOrderStatus', () => {
-                socket.broadcast.emit('newOrderStatus');
+                io.emit('newOrderStatus');
             });
         });
         server.listen(3000, () => console.log(`Server started on PORT ${PORT}`));
@@ -93,4 +93,7 @@ run();
 /*
  * Ändrat: Kim
  * Laggt till socket.io
+ *
+ * Ändrat: Kim
+ * Ändrat till io.emit istället för socket.emit/broadcast
  */
