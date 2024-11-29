@@ -18,7 +18,7 @@ const OrderSchema = new Schema({
     state: {
         type: String,
         enum: {
-            values: ['waiting', 'editing', 'preparing', 'ready', 'history', 'annulled'],
+            values: ['waiting', 'editing', 'preparing', 'ready', 'history', 'anulled'],
             message: '{VALUE} is not supported.',
         },
         default: 'waiting',
