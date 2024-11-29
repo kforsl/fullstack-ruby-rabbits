@@ -99,7 +99,7 @@ const ProfilePaymentOptionsForm = () => {
                 <section className='payment-form__input-section'>
                     <label className='payment-form__label'>Betalkort</label>
                     <input
-                        name='Card'
+                        name='card'
                         className='payment-form__checkbox'
                         type='checkbox'
                         checked={checkboxes.card}
