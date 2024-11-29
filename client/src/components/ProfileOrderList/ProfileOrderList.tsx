@@ -25,9 +25,10 @@ const ProfileOrderList = ({ id }: Props) => {
                 <>
                     <ul>
                         <h3 className='profile-order-list__title'> Aktiva Ordrar </h3>
-                        {data.filter((order: OrderType) => order.state !== 'history').length < 1 ? (
+                        {data.filter((order: OrderType) => order.state !== 'history' && order.state !== 'annulled')
+                            .length < 1 ? (
                             <li key='01' className='profile-order-list__empty'>
-                                Du har inga tidigare ordrar.
+                                Du har inga aktiva ordrar.
                             </li>
                         ) : (
                             (data.filter((order: OrderType) => order.state !== 'history') as OrderType[]).map(
@@ -37,14 +38,17 @@ const ProfileOrderList = ({ id }: Props) => {
                     </ul>
                     <ul>
                         <h3 className='profile-order-list__title'> Tidigare Ordrar </h3>
-                        {data.filter((order: OrderType) => order.state === 'history').length < 1 ? (
+                        {data.filter((order: OrderType) => order.state === 'history' || order.state === 'annulled')
+                            .length < 1 ? (
                             <li key='01' className='profile-order-list__empty'>
                                 Du har inga tidigare ordrar.
                             </li>
                         ) : (
-                            (data.filter((order: OrderType) => order.state === 'history') as OrderType[]).map(
-                                (order: OrderType) => <OrderListItem order={order} key={order._id} />
-                            )
+                            (
+                                data.filter(
+                                    (order: OrderType) => order.state === 'history' || order.state === 'annulled'
+                                ) as OrderType[]
+                            ).map((order: OrderType) => <OrderListItem order={order} key={order._id} />)
                         )}
                     </ul>
                 </>
