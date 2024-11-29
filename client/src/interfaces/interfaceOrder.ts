@@ -5,7 +5,7 @@ export interface OrderType {
     price: number;
     createdAt: Date;
     updatedAt: Date;
-    state: 'waiting' | 'preparing' | 'ready' | 'history' | 'annulled' | 'editing';
+    state: 'waiting' | 'preparing' | 'ready' | 'history' | 'anulled' | 'editing';
     comment?: string;
     order: OrderItemType[];
 }
