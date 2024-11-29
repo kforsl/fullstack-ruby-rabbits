@@ -86,14 +86,24 @@ exports.updatePassword = asyncHandler(async (req, res) => {
 });
 exports.updatePayment = asyncHandler(async (req, res) => {
     try {
+        const customer = req.customer;
+        const paymentOptions = req.body;
+        console.log(req.body);
+        const updatedCustomer = await CustomerModel.findByIdAndUpdate(
+            customer._id,
+            { ...customer, paymentOptions: [...paymentOptions] },
+            { new: true }
+        );
+        updatedCustomer.hash = null;
+        updatedCustomer.updatedAt = new Date();
         res.status(200).json({
             message: 'Succesfully updated payment',
-            data: [],
+            data: [updatedCustomer],
         });
     } catch (error) {
         res.status(400).json({
             message: 'Error',
-            data: [error],
+            data: [error.message],
         });
     }
 });

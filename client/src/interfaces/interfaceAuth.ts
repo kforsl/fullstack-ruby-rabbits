@@ -18,10 +18,14 @@ export interface Customer {
     address: string;
     zipcode: string;
     city: string;
+    paymentOptions?: PaymentOption[];
     createdAt?: Date;
     updatedAt?: Date;
 }
-
+export interface PaymentOption {
+    paymentOption: string;
+    paymentDetails: string;
+}
 // export interface SignUpForm extends SignInForm {
 //     firstName: string;
 //     lastName: string;
