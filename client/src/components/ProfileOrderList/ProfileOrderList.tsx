@@ -25,7 +25,7 @@ const ProfileOrderList = ({ id }: Props) => {
                 <>
                     <ul>
                         <h3 className='profile-order-list__title'> Aktiva Ordrar </h3>
-                        {data.filter((order: OrderType) => order.state !== 'history' && order.state !== 'annulled')
+                        {data.filter((order: OrderType) => order.state !== 'history' && order.state !== 'anulled')
                             .length < 1 ? (
                             <li key='01' className='profile-order-list__empty'>
                                 Du har inga aktiva ordrar.
@@ -38,7 +38,7 @@ const ProfileOrderList = ({ id }: Props) => {
                     </ul>
                     <ul>
                         <h3 className='profile-order-list__title'> Tidigare Ordrar </h3>
-                        {data.filter((order: OrderType) => order.state === 'history' || order.state === 'annulled')
+                        {data.filter((order: OrderType) => order.state === 'history' || order.state === 'anulled')
                             .length < 1 ? (
                             <li key='01' className='profile-order-list__empty'>
                                 Du har inga tidigare ordrar.
@@ -46,7 +46,7 @@ const ProfileOrderList = ({ id }: Props) => {
                         ) : (
                             (
                                 data.filter(
-                                    (order: OrderType) => order.state === 'history' || order.state === 'annulled'
+                                    (order: OrderType) => order.state === 'history' || order.state === 'anulled'
                                 ) as OrderType[]
                             ).map((order: OrderType) => <OrderListItem order={order} key={order._id} />)
                         )}
