@@ -1,5 +1,6 @@
 .profile-nav {
     height: 100%;
+    min-height: 50svh;
     width: fit-content;
     padding: var(--spacing-s);
     grid-column: 1 / 2;
