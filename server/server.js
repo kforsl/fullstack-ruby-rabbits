@@ -92,7 +92,7 @@ run();
 
 /*
  * Ändrat: Kim
- * Laggt till socket.io
+ * Lagt till socket.io
  *
  * Ändrat: Kim
  * Ändrat till io.emit istället för socket.emit/broadcast

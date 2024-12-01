@@ -17,6 +17,12 @@
     font-size: var(--font-size-l);
     font-family: var(--title-font);
 }
+
+.personal-form__name-section {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--spacing-s);
+}
 .personal-form__adress-label,
 .personal-form__city-label,
 .personal-form__zip-label,
