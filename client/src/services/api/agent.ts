@@ -76,6 +76,11 @@ const Authenticate = {
 const Profile = {
     updatePaymentOptions: (paymentOptions: PaymentOption[]) =>
         requests.put<AgentResponse<Customer>>(`profile/payment`, paymentOptions).then((response) => response.data),
+    updatePersonalData: (userInformation: Customer) =>
+        requests
+            .put<AgentResponse<Customer>>('profile/data', userInformation)
+            .then((response) => response.data[0])
+            .catch((error) => error),
     updatePassword: (passwords: PasswordForm) =>
         requests.put<AgentResponse<Customer>>('profile/password', passwords).then((response) => response.data),
 };
