@@ -1,5 +1,6 @@
 .text-button {
     max-width: fit-content;
+    max-height: fit-content;
     padding: .5rem 1rem;
     background-color: var(--color-accent1);
     color: var(--color-black);

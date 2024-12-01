@@ -5,12 +5,14 @@ import agent from '../services/api/agent';
 
 interface AuthStore {
     customer: Customer | null;
+    setCustomer: (customer: Customer) => void;
+
     orders: OrderType[] | null;
     setOrders: (id: string) => void;
+
     isSigningIn: boolean;
     setIsSigningIn: (state: boolean) => void;
 
-    setCustomer: (customer: Customer) => void;
     setIsLoading: (state: boolean) => void;
     isLoading: boolean;
 

@@ -1,20 +1,20 @@
 import axios, { AxiosResponse } from 'axios';
 import { ProductType } from '../../interfaces/interfaceProduct';
-import { Customer, SignInForm } from '../../interfaces/interfaceAuth';
+import { Customer, PaymentOption, SignInForm } from '../../interfaces/interfaceAuth';
 import { CartToOrder } from '../../interfaces/interfaceCart';
 import { OrderType } from '../../interfaces/interfaceOrder';
 
 // axios.defaults.baseURL = 'Här får vi byta ut och ta vår adress när vi har en
-// axios.defaults.baseURL = 'http://localhost:3000/api/';
-axios.defaults.baseURL = 'https://fullstack-ruby-rabbits.onrender.com/api/';
+axios.defaults.baseURL = 'http://localhost:3000/api/';
+// axios.defaults.baseURL = 'https://fullstack-ruby-rabbits.onrender.com/api/';
 
 const responseBody = <T>(response: AxiosResponse<T>) => response.data;
 
 const requests = {
-    get: <T>(url: string) => axios.get<T>(`${url}`).then(responseBody),
-    post: <T>(url: string, body: {}) => axios.post<T>(`${url}`, body).then(responseBody),
-    put: <T>(url: string, body: {}) => axios.put<T>(`${url}`, body).then(responseBody),
-    delete: <T>(url: string) => axios.delete<T>(`${url}`).then(responseBody),
+    get: <T>(url: string) => axios.get<T>(`${url}`, { withCredentials: true }).then(responseBody),
+    post: <T>(url: string, body: {}) => axios.post<T>(`${url}`, body, { withCredentials: true }).then(responseBody),
+    put: <T>(url: string, body: {}) => axios.put<T>(`${url}`, body, { withCredentials: true }).then(responseBody),
+    delete: <T>(url: string) => axios.delete<T>(`${url}`, { withCredentials: true }).then(responseBody),
 };
 
 //Exempel på objekt som kan användas i Agent
@@ -41,6 +41,8 @@ const Product = {
 const Orders = {
     post: (order: CartToOrder) =>
         requests.post<AgentResponse<OrderType>>('orders', order).then((response) => response.data),
+    updateState: (id: string, state: 'waiting' | 'editing' | 'anulled') =>
+        requests.put<AgentResponse<OrderType>>(`orders/${id}`, { state: state }).then((response) => response.data),
     list: () =>
         requests
             .get<AgentResponse<OrderType>>(`orders`)
@@ -49,6 +51,11 @@ const Orders = {
     listByUserId: (id: string) =>
         requests
             .get<AgentResponse<OrderType>>(`orders/user/${id}`)
+            .then((response) => response.data)
+            .catch((error) => error),
+    getByOrderId: (id: string) =>
+        requests
+            .get<AgentResponse<OrderType>>(`orders/${id}`)
             .then((response) => response.data)
             .catch((error) => error),
 };
@@ -66,10 +73,16 @@ const Authenticate = {
             .catch((error) => error),
 };
 
+const Profile = {
+    updatePaymentOptions: (paymentOptions: PaymentOption[]) =>
+        requests.put<AgentResponse<Customer>>(`profile/payment`, paymentOptions).then((response) => response.data),
+};
+
 const agent = {
     Authenticate,
     Product,
     Orders,
+    Profile,
 };
 
 export default agent;
@@ -77,4 +90,8 @@ export default agent;
 /*
  * Författare: Kim
  * Skapat Product med list
+ */
+/*
+ * Ändrat: Magnus
+ * Skapade updateState i order för att ändra en beställnings state.
  */

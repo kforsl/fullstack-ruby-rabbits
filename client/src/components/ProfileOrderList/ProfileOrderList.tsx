@@ -1,51 +1,64 @@
 import OrderListItem from '../OrderListItem/OrderListItem';
-import useAuthStore from '../../stores/authStore';
 import './profileOrderList.css';
-import { useEffect } from 'react';
-import { Customer } from '../../interfaces/interfaceAuth';
+import { useGetOrders } from '../../services/queries/useGetOrders';
+import { OrderType } from '../../interfaces/interfaceOrder';
 
-const ProfileOrderList = () => {
-    const { orders, setOrders } = useAuthStore();
+interface Props {
+    id: string;
+}
 
-    useEffect(() => {
-        const user = JSON.parse(sessionStorage.getItem('user') as string) as Customer;
-        if (!user) {
-            window.location.href = '/?notLoggedIn=true';
-        } else {
-            setOrders(user._id as string);
-        }
-    }, []);
+const ProfileOrderList = ({ id }: Props) => {
+    const { data, isLoading, isError, error } = useGetOrders(id);
+    if (isLoading) return <ul>Laddar...</ul>;
+    if (isError)
+        return (
+            <section className='profile-order-list'>
+                <ul>
+                    <h3 className='profile-order-list__title'> Det blev ett problem på vägen! </h3>
+                    <li className='profile-order-list__empty'>{error.message}</li>
+                </ul>
+            </section>
+        );
     return (
         <section className='profile-order-list'>
-            {!orders ? (
-                <ul>Laddar...</ul>
-            ) : (
+            {data !== null ? (
                 <>
                     <ul>
                         <h3 className='profile-order-list__title'> Aktiva Ordrar </h3>
-                        {orders.filter((order) => order.state !== 'history').length < 1 ? (
+                        {data.filter((order: OrderType) => order.state !== 'history' && order.state !== 'anulled')
+                            .length < 1 ? (
                             <li key='01' className='profile-order-list__empty'>
-                                Du har inga tidigare ordrar.
+                                Du har inga aktiva ordrar.
                             </li>
                         ) : (
-                            orders
-                                .filter((order) => order.state !== 'history')
-                                .map((order) => <OrderListItem order={order} key={order._id} />)
+                            (
+                                data.filter(
+                                    (order: OrderType) => order.state !== 'history' && order.state !== 'anulled'
+                                ) as OrderType[]
+                            ).map((order: OrderType) => <OrderListItem order={order} key={order._id} />)
                         )}
                     </ul>
                     <ul>
                         <h3 className='profile-order-list__title'> Tidigare Ordrar </h3>
-                        {orders.filter((order) => order.state === 'history').length != 0 ? (
+                        {data.filter((order: OrderType) => order.state === 'history' || order.state === 'anulled')
+                            .length < 1 ? (
                             <li key='01' className='profile-order-list__empty'>
                                 Du har inga tidigare ordrar.
                             </li>
                         ) : (
-                            orders
-                                .filter((order) => order.state === 'history')
-                                .map((order) => <OrderListItem order={order} key={order._id} />)
+                            (
+                                data.filter(
+                                    (order: OrderType) => order.state === 'history' || order.state === 'anulled'
+                                ) as OrderType[]
+                            ).map((order: OrderType) => <OrderListItem order={order} key={order._id} />)
                         )}
                     </ul>
                 </>
+            ) : (
+                <ul>
+                    <h3 className='profile-order-list__title'> Ni har inte lagt någon order än! </h3>
+                    <li className='profile-order-list__empty'></li>
+                </ul>
             )}
         </section>
     );

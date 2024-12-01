@@ -43,6 +43,18 @@ const CustomerSchema = new Schema({
         type: String,
         required: false,
     },
+    paymentOptions: [
+        {
+            paymentOption: {
+                type: String,
+                required: true,
+            },
+            paymentDetails: {
+                type: String,
+                required: true,
+            },
+        },
+    ],
     createdAt: {
         type: Date,
         default: Date.now(),
