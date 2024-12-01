@@ -1,11 +1,12 @@
 import { useState } from 'react';
 import TextButton from '../TextButton/TextButton';
 import './profilePasswordForm.css';
-import { useUpdateProfile } from '../../services/mutations/useUpdateProfile';
+import { PasswordForm } from '../../interfaces/interfaceAuth';
+import { useUpdatePassword } from './../../services/mutations/useUpdatePassword';
 
 const ProfilePasswordForm = () => {
     const [isErrorShowing, setIsErrorShowing] = useState<boolean>(false);
-    const { mutate: updateProfile, isPending } = useUpdateProfile();
+    const { mutate: updatePassword, isPending } = useUpdatePassword();
 
     const [password, setPassword] = useState<string>('');
     const [newPassword, setNewPassword] = useState<string>('');
@@ -14,35 +15,25 @@ const ProfilePasswordForm = () => {
     const submitUpdatePasswordForm = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
-        interface passwordForm {
-            password: string;
-            newPassword: string;
-            verifyPassword: string;
-        }
-
-        const formData: passwordForm = {
+        const passwordDetails: PasswordForm = {
             password,
             newPassword,
             verifyPassword,
         };
-        updateProfile(
-            {
-                route: 'password',
-                formData,
+
+        console.log(passwordDetails);
+        updatePassword(passwordDetails, {
+            onSuccess: () => {
+                console.log('success');
+                setPassword('');
+                setNewPassword('');
+                setVerifyPassword('');
             },
-            {
-                onSuccess: () => {
-                    console.log('success');
-                    setPassword('');
-                    setNewPassword('');
-                    setVerifyPassword('');
-                },
-                onError: (error) => {
-                    console.error('Order creation failed:', error);
-                    setIsErrorShowing(true);
-                },
-            }
-        );
+            onError: (error) => {
+                console.error('Order creation failed:', error);
+                setIsErrorShowing(true);
+            },
+        });
     };
 
     return (
@@ -50,7 +41,7 @@ const ProfilePasswordForm = () => {
             <h2 className='password-form__title'>Byta lösenord</h2>
             {isErrorShowing && <p className='password-form__error'> Något gick fel....</p>}
             <label className='password-form__label'>
-                Gamalt Lösenord
+                Gammalt Lösenord
                 <input
                     className='password-form__input'
                     type='password'
