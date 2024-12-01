@@ -25,7 +25,7 @@ const ProfileOrderList = ({ id }: Props) => {
                 <>
                     <ul>
                         <h3 className='profile-order-list__title'> Aktiva Ordrar </h3>
-                        {data.filter((order: OrderType) => order.state !== 'history' && order.state !== 'anulled')
+                        {data.filter((order: OrderType) => order.state !== 'history' && order.state !== 'annulled')
                             .length < 1 ? (
                             <li key='01' className='profile-order-list__empty'>
                                 Du har inga aktiva ordrar.
@@ -33,14 +33,14 @@ const ProfileOrderList = ({ id }: Props) => {
                         ) : (
                             (
                                 data.filter(
-                                    (order: OrderType) => order.state !== 'history' && order.state !== 'anulled'
+                                    (order: OrderType) => order.state !== 'history' && order.state !== 'annulled'
                                 ) as OrderType[]
                             ).map((order: OrderType) => <OrderListItem order={order} key={order._id} />)
                         )}
                     </ul>
                     <ul>
                         <h3 className='profile-order-list__title'> Tidigare Ordrar </h3>
-                        {data.filter((order: OrderType) => order.state === 'history' || order.state === 'anulled')
+                        {data.filter((order: OrderType) => order.state === 'history' || order.state === 'annulled')
                             .length < 1 ? (
                             <li key='01' className='profile-order-list__empty'>
                                 Du har inga tidigare ordrar.
@@ -48,7 +48,7 @@ const ProfileOrderList = ({ id }: Props) => {
                         ) : (
                             (
                                 data.filter(
-                                    (order: OrderType) => order.state === 'history' || order.state === 'anulled'
+                                    (order: OrderType) => order.state === 'history' || order.state === 'annulled'
                                 ) as OrderType[]
                             ).map((order: OrderType) => <OrderListItem order={order} key={order._id} />)
                         )}
