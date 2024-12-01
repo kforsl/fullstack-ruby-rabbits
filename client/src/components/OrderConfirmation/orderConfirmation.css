@@ -51,19 +51,19 @@
 .order-confirmation__order-list {
     display: grid;
     grid-template-columns: 1fr auto auto;
-
     gap: var(--spacing-s) var(--spacing-m);
 }
 
 .order-confirmation__order-list-item {
+    place-items: center;
     display: grid;
     grid-template-columns: subgrid;
     grid-column: 1/-1;
     font-size: var(--font-size-m);
 }
 
-.order-confirmation__list-info:last-of-type {
-    justify-self: center;
+.order-confirmation__list-info:first-of-type {
+    justify-self: start;
 }
 
 .order-confirmation__button-wrapper {

@@ -130,7 +130,10 @@ exports.updateOrderById = asyncHandler(async (req, res) => {
         const order = await OrderModel.findByIdAndUpdate(
             req.params.id,
             { ...req.body, updatedAt: new Date() },
-            { new: true }
+            {
+                new: true,
+                runValidators: true,
+            }
         );
         if (order.customer) order.customer.hash = null;
 
@@ -152,3 +155,8 @@ exports.updateOrderById = asyncHandler(async (req, res) => {
         });
     }
 });
+
+/*
+ * Ändrad: Magnus
+ * Lade till validering i object på updateOrderById.
+ */

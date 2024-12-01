@@ -41,8 +41,10 @@ const Product = {
 const Orders = {
     post: (order: CartToOrder) =>
         requests.post<AgentResponse<OrderType>>('orders', order).then((response) => response.data),
-    updateState: (id: string, state: 'waiting' | 'editing' | 'anulled') =>
+    updateState: (id: string, state: 'waiting' | 'editing' | 'annulled') =>
         requests.put<AgentResponse<OrderType>>(`orders/${id}`, { state: state }).then((response) => response.data),
+    updateOrder: (id: string, order: OrderType) =>
+        requests.put<AgentResponse<OrderType>>(`orders/${id}`, order).then((response) => response.data),
     list: () =>
         requests
             .get<AgentResponse<OrderType>>(`orders`)
@@ -93,5 +95,5 @@ export default agent;
  */
 /*
  * Ändrat: Magnus
- * Skapade updateState i order för att ändra en beställnings state.
+ * Skapade updateState och updateOrder i order för att ändra en beställnings.
  */
