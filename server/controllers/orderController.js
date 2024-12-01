@@ -18,7 +18,7 @@ exports.createOrder = asyncHandler(async (req, res) => {
         orderToReturn.hash = null;
 
         res.status(201).json({
-            message: 'Succesfully created order',
+            message: 'successfully created order',
             data: [orderToReturn],
         });
     } catch (error) {
@@ -50,19 +50,19 @@ exports.getAllOrders = asyncHandler(async (req, res) => {
             const dateSort = (a, b) => (a.updatedAt < b.updatedAt ? -1 : 1);
             if (!state) {
                 res.status(200).json({
-                    message: 'Succesfully found orders',
+                    message: 'successfully found orders',
                     data: orders.filter((x) => x.state !== 'history').sort(dateSort),
                 });
             } else {
                 const states = ['waiting', 'preparing', 'ready', 'history', 'annulled', 'editing'];
                 if (states.includes(state)) {
                     res.status(200).json({
-                        message: 'Succesfully found orders',
+                        message: 'successfully found orders',
                         data: orders.filter((x) => x.state === state).sort(dateSort),
                     });
                 } else {
                     res.status(200).json({
-                        message: 'Succesfully found orders',
+                        message: 'successfully found orders',
                         data: orders.sort(dateSort),
                     });
                 }
@@ -89,7 +89,7 @@ exports.getAllOrdersByCustomerId = asyncHandler(async (req, res) => {
             });
         } else {
             res.status(200).json({
-                message: 'Succesfully found orders',
+                message: 'successfully found orders',
                 data: orders,
             });
         }
@@ -114,7 +114,7 @@ exports.getOrderById = asyncHandler(async (req, res) => {
             });
 
         res.status(200).json({
-            message: 'Succesfully found order.',
+            message: 'successfully found order.',
             data: [order],
         });
     } catch (error) {
@@ -142,7 +142,7 @@ exports.updateOrderById = asyncHandler(async (req, res) => {
         }
 
         res.status(200).json({
-            message: 'Succesfully updated order.',
+            message: 'successfully updated order.',
             data: [order],
         });
     } catch (error) {

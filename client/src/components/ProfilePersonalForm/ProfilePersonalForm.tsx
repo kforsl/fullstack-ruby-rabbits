@@ -41,3 +41,8 @@ const ProfilePersonalForm = () => {
 };
 
 export default ProfilePersonalForm;
+
+/**
+ * Författare: Kim
+ * Skapat ett formulär så användaren kan ändra uppgifter om sig själv.
+ */
