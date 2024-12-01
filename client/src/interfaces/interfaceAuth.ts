@@ -50,3 +50,9 @@ export interface Employee {
     createdAt?: Date;
     updatedAt?: Date;
 }
+
+export interface PasswordForm {
+    password: string;
+    newPassword: string;
+    verifyPassword: string;
+}

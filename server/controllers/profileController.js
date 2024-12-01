@@ -7,7 +7,7 @@ const { CustomerModel } = require('../models/customerModel');
 exports.updateAllergen = asyncHandler(async (req, res) => {
     try {
         res.status(200).json({
-            message: 'Succesfully update Allergen',
+            message: 'successfully update Allergen',
             data: [],
         });
     } catch (error) {
@@ -73,7 +73,7 @@ exports.updatePassword = asyncHandler(async (req, res) => {
         });
 
         res.status(200).json({
-            message: 'Succesfully update Pawwsord',
+            message: 'successfully update Password',
             data: [updatedUser],
         });
     } catch (error) {
@@ -97,7 +97,7 @@ exports.updatePayment = asyncHandler(async (req, res) => {
         updatedCustomer.hash = null;
         updatedCustomer.updatedAt = new Date();
         res.status(200).json({
-            message: 'Succesfully updated payment',
+            message: 'successfully updated payment',
             data: [updatedCustomer],
         });
     } catch (error) {
@@ -132,7 +132,7 @@ exports.updatePersonalData = asyncHandler(async (req, res) => {
             maxAge: 9000000,
         });
         res.status(200).json({
-            message: 'Succesfully updated Personal data.',
+            message: 'successfully updated Personal data.',
             data: [updatedUser],
         });
     } catch (error) {

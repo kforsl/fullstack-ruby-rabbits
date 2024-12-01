@@ -26,3 +26,9 @@ const ProfileNav = ({ onClick }: Props) => {
 };
 
 export default ProfileNav;
+
+/*
+ * Författare: Kim
+ *
+ * Skapat komponent för att ändra vilket formulär som ska visas för användaren.
+ */

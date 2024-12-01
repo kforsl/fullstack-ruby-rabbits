@@ -46,7 +46,7 @@ exports.authenticateEmployee = asyncHandler(async (req, res) => {
 
         employee.hash = null;
         return res.status(200).json({
-            message: 'Succesfully logged in',
+            message: 'successfully logged in',
             data: employee,
         });
     } catch (error) {
@@ -100,7 +100,7 @@ exports.registerEmployee = asyncHandler(async (req, res) => {
 
         employee.hash = null;
         return res.status(201).json({
-            message: 'Succesfully created new employee',
+            message: 'successfully created new employee',
             data: [employee],
         });
     } catch (error) {
@@ -139,7 +139,7 @@ exports.authenticateCustomer = asyncHandler(async (req, res) => {
         });
 
         return res.status(200).json({
-            message: 'Succesfully logged in as customer.',
+            message: 'successfully logged in as customer.',
             data: [customer],
         });
     } catch (error) {
@@ -200,7 +200,7 @@ exports.registerCustomer = asyncHandler(async (req, res) => {
             maxAge: 12 * 60 * 60 * 1000,
         });
         return res.status(201).json({
-            message: 'Succesfully created new customer',
+            message: 'successfully created new customer',
             data: [customer],
         });
     } catch (error) {
