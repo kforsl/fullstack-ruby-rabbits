@@ -51,7 +51,7 @@ const Orders = {
         requests.post<AgentResponse<OrderType>>('orders', order).then((response) => response.data),
 };
 
-const Ingrediant = {
+const Ingredient = {
     list: () => requests.get<AgentResponse<IngredientItemType>>('ingredients').then((response) => response.data),
 };
 
@@ -63,7 +63,7 @@ const agent = {
             .catch((error) => error.message),
     Products,
     Orders,
-    Ingrediant,
+    Ingredient,
 };
 
 export default agent;
