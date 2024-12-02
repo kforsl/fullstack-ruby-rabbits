@@ -18,6 +18,12 @@
     transform: translateY(2px);
 }
 
+.text-button--disabled {
+    opacity: .5;
+    cursor: default;
+    background-color: var(--color-disabled);
+}
+
 @media (hover: hover) and (pointer: fine) {
     .text-button:hover {
         scale: 1.02;

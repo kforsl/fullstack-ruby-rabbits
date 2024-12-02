@@ -45,10 +45,14 @@ const Products = {
 
 const Orders = {
     list: () => requests.get<AgentResponse<OrderType>>('orders').then((response) => response.data),
-    updateState: (id: string, state: 'waiting' | 'preparing' | 'ready' | 'history') =>
+    updateState: (id: string, state: 'waiting' | 'preparing' | 'ready' | 'history' | 'editing' | 'annulled') =>
         requests.put<AgentResponse<OrderType>>(`orders/${id}`, { state: state }).then((response) => response.data),
     post: (order: CartToOrder) =>
         requests.post<AgentResponse<OrderType>>('orders', order).then((response) => response.data),
+    getByOrderId: (id: string) =>
+        requests.get<AgentResponse<OrderType>>(`orders/${id}`).then((response) => response.data),
+    updateOrder: (id: string, order: OrderType) =>
+        requests.put<AgentResponse<OrderType>>(`orders/${id}`, order).then((response) => response.data),
 };
 
 const Ingredient = {
@@ -90,4 +94,7 @@ export default agent;
 /*
  * Ändrat: Magnus
  * Fixat så Product.list returnerar data direkt så man slipper stega data.data.
+ 
+ * Ändrat: Magnus
+ * Lagt in getByOrderId och updateOrder.
  */
