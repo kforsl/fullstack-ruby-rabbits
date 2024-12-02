@@ -77,11 +77,9 @@ const run = async () => {
             });
             socket.on('joinEmployeeRoom', () => {
                 socket.join('employee');
-                console.log(socket.id, 'Is in room Employee');
             });
             socket.on('joinOrderRoom', (id) => {
                 socket.join(id);
-                console.log(socket.id, 'Is in room ', id);
             });
             socket.on('createOrder', (id) => {
                 socket.to('employee').to(id).emit('newOrder');

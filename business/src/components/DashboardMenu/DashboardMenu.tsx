@@ -2,6 +2,7 @@ import './dashboardMenu.css';
 import useAuthStore from '../../stores/authStore';
 import { Link, useLocation } from 'react-router-dom';
 import { useEffect } from 'react';
+import { socket } from '../../services/webSocket/ioSocket';
 
 const DashboardMenu = () => {
     const location = useLocation();
@@ -16,6 +17,8 @@ const DashboardMenu = () => {
         if (navigation.some((item) => item.route === location.pathname)) {
             if (!employee) {
                 window.location.href = '/';
+            } else {
+                socket.emit('joinEmployeeRoom');
             }
         }
     }, []);
