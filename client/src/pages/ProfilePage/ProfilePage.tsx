@@ -32,7 +32,7 @@ const ProfilePage: React.FC = () => {
 
 export default ProfilePage;
 
-/**
+/*
  * Författare: Kim
  * Lagt till UnderConstruction komponent.
  *

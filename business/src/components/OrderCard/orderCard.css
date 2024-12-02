@@ -84,4 +84,5 @@
 
 .order-card button {
     justify-self: center;
+    align-self: end;
 }

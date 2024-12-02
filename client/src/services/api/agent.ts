@@ -56,10 +56,7 @@ const Orders = {
             .then((response) => response.data)
             .catch((error) => error),
     getByOrderId: (id: string) =>
-        requests
-            .get<AgentResponse<OrderType>>(`orders/${id}`)
-            .then((response) => response.data)
-            .catch((error) => error),
+        requests.get<AgentResponse<OrderType>>(`orders/${id}`).then((response) => response.data),
 };
 
 const Authenticate = {

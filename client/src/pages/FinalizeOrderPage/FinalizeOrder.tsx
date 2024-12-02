@@ -5,7 +5,6 @@ import './finalizeOrder.css';
 import { useCreateOrder } from '../../services/mutations';
 import TextButton from '../../components/TextButton/TextButton';
 import { CartItem, CartToOrder } from '../../interfaces/interfaceCart';
-import OrderConfirmation from '../../components/OrderConfirmation/OrderConfirmation';
 import useOrderStore from '../../stores/orderStore';
 import { useNavigate } from 'react-router-dom';
 
@@ -14,7 +13,7 @@ const FinalizeOrder: React.FC = () => {
     const { setOrder } = useOrderStore();
     const [comment, setComment] = useState('');
     const navigate = useNavigate();
-    const { mutate: createOrder, isPending, data, isSuccess, isError, error } = useCreateOrder();
+    const { mutate: createOrder, isPending, isError, error } = useCreateOrder();
 
     const calculateTotalPrice = (): number =>
         cart.reduce((totalCost: number, cartItem: CartItem) => totalCost + cartItem.price * cartItem.quantity, 0);
@@ -39,9 +38,12 @@ const FinalizeOrder: React.FC = () => {
         };
 
         createOrder(newOrder, {
-            onSuccess: () => {
+            onSuccess: (response) => {
                 newOrder = null;
-                if (data) setOrder(data[0]);
+                if (response) {
+                    setOrder(response[0]);
+                    navigate(`/ordrar/${response[0]._id}`);
+                }
                 setComment('');
                 setCart([]);
             },
@@ -53,36 +55,28 @@ const FinalizeOrder: React.FC = () => {
 
     return (
         <main className='finalize-page wrapper'>
-            {isSuccess ? (
-                <OrderConfirmation order={data[0]} />
+            {isError ? (
+                <h1 className='finalize-page__title'>{error.message}</h1>
             ) : (
-                <>
-                    {isError ? (
-                        <h1 className='finalize-page__title'>{error.message}</h1>
-                    ) : (
-                        <article className='finalize-page__confirmation-wrapper'>
-                            <h1 className='finalize-page__title'>DIN ORDER:</h1>
-                            <ul className='finalize-page__order-list'>
-                                {cart.map((item) => (
-                                    <CartItemComponent key={item.id + item.size} cartItem={item} />
-                                ))}
-                            </ul>
-                            <form className='finalize-page__comment-form'>
-                                <textarea
-                                    placeholder='HAR DU ÖNSKEMÅL PÅ DIN BESTÄLLNING? SKRIV HÄR...'
-                                    name='orderComment'
-                                    id='orderComment'
-                                    className='finalize-page__textarea'
-                                    onChange={(e) => setComment(e.target.value)}></textarea>
-                            </form>
-                            {cart.length !== 0 && (
-                                <TextButton onClick={createNewOrder}>
-                                    {isPending ? 'Loading...' : 'SKICKA ORDER'}
-                                </TextButton>
-                            )}
-                        </article>
+                <article className='finalize-page__confirmation-wrapper'>
+                    <h1 className='finalize-page__title'>DIN ORDER:</h1>
+                    <ul className='finalize-page__order-list'>
+                        {cart.map((item) => (
+                            <CartItemComponent key={item.id + item.size} cartItem={item} />
+                        ))}
+                    </ul>
+                    <form className='finalize-page__comment-form'>
+                        <textarea
+                            placeholder='HAR DU ÖNSKEMÅL PÅ DIN BESTÄLLNING? SKRIV HÄR...'
+                            name='orderComment'
+                            id='orderComment'
+                            className='finalize-page__textarea'
+                            onChange={(e) => setComment(e.target.value)}></textarea>
+                    </form>
+                    {cart.length !== 0 && (
+                        <TextButton onClick={createNewOrder}>{isPending ? 'Loading...' : 'SKICKA ORDER'}</TextButton>
                     )}
-                </>
+                </article>
             )}
         </main>
     );
@@ -102,4 +96,7 @@ export default FinalizeOrder;
  *
  * Ändrat: Magnus
  * Om cart är tom när du direktnavigerar till /orderbekraftelse så skickas du tillbaka till menyn.
+ *
+ * Ändrat: Magnus
+ * Tagit bort komponent för att rendera ut färdig order. Istället navigerar du till ordrar page. OnSuccess i mutation ger dig inte direkt tillgång till data. Så har ändrat data till response
  */

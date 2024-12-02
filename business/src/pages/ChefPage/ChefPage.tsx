@@ -4,16 +4,35 @@ import { OrderType } from '../../interfaces/interfaceOrder';
 import { useGetOrders } from '../../services/queries';
 import { useOrderState } from '../../services/mutations';
 import { socket } from '../../services/webSocket/ioSocket';
+import { useEffect } from 'react';
 const ChefPage: React.FC = () => {
     const { data, isLoading, isError, error, refetch } = useGetOrders();
     const { mutate } = useOrderState();
 
-    socket.on('newOrder', () => {
-        refetch();
-    });
-    socket.on('newOrderStatus', () => {
-        refetch();
-    });
+    useEffect(() => {
+        const handleNewOrder = () => {
+            console.log('logging newOrder');
+            refetch();
+        };
+
+        const handleNewOrderStatus = () => {
+            console.log('logging newOrderStatus');
+            refetch();
+        };
+
+        if (!socket.hasListeners('newOrder')) {
+            socket.on('newOrder', handleNewOrder);
+        }
+
+        if (!socket.hasListeners('newOrderStatus')) {
+            socket.on('newOrderStatus', handleNewOrderStatus);
+        }
+
+        return () => {
+            socket.off('newOrder', handleNewOrder);
+            socket.off('newOrderStatus', handleNewOrderStatus);
+        };
+    }, [refetch]);
 
     if (isLoading) {
         return (
