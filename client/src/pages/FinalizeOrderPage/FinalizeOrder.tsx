@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import CartItemComponent from '../../components/CartItem/CartItem';
 import useCartStore from '../../stores/cartStore';
 import './finalizeOrder.css';
@@ -6,14 +6,24 @@ import { useCreateOrder } from '../../services/mutations';
 import TextButton from '../../components/TextButton/TextButton';
 import { CartItem, CartToOrder } from '../../interfaces/interfaceCart';
 import OrderConfirmation from '../../components/OrderConfirmation/OrderConfirmation';
+import useOrderStore from '../../stores/orderStore';
+import { useNavigate } from 'react-router-dom';
 
 const FinalizeOrder: React.FC = () => {
     const { cart, setCart } = useCartStore();
+    const { setOrder } = useOrderStore();
     const [comment, setComment] = useState('');
+    const navigate = useNavigate();
     const { mutate: createOrder, isPending, data, isSuccess, isError, error } = useCreateOrder();
 
     const calculateTotalPrice = (): number =>
         cart.reduce((totalCost: number, cartItem: CartItem) => totalCost + cartItem.price * cartItem.quantity, 0);
+
+    useEffect(() => {
+        if (cart.length === 0) {
+            navigate('/');
+        }
+    }, []);
 
     const createNewOrder = () => {
         const cartToOrder = cart.map(({ id, quantity, size }) => ({
@@ -31,6 +41,7 @@ const FinalizeOrder: React.FC = () => {
         createOrder(newOrder, {
             onSuccess: () => {
                 newOrder = null;
+                if (data) setOrder(data[0]);
                 setComment('');
                 setCart([]);
             },
@@ -85,4 +96,10 @@ export default FinalizeOrder;
  *
  * Ändrat: Magnus
  * Lagt in komponent för order-bekräftelse samt error renderas ifall det misslyckas.
+ *
+ * Ändrat: Magnus
+ * Lagt in setOrder från orderStore. Använder den för att sätta ett grundvärde på order.
+ *
+ * Ändrat: Magnus
+ * Om cart är tom när du direktnavigerar till /orderbekraftelse så skickas du tillbaka till menyn.
  */
