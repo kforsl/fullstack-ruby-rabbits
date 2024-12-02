@@ -1,6 +1,6 @@
 import useAdminStore from '../../stores/adminStore';
 import './productForm.css';
-import { useGetIngrediant } from '../../services/queries';
+import { useGetIngredient } from '../../services/queries';
 import { useEffect, useState } from 'react';
 import {
     IngredientItemType,
@@ -10,6 +10,7 @@ import {
 } from '../../interfaces/interfaceProduct';
 import { useUpdateProduct } from '../../services/mutations/useUpdateProduct';
 import { useCreateProduct } from '../../services/mutations/useCreateProduct';
+import { handleImageUpload } from '../../services/api/imageUpload';
 
 const ProductForm = () => {
     const { productToEdit, isEditingProduct } = useAdminStore();
@@ -35,16 +36,17 @@ const ProductForm = () => {
     const [formProductPriceM, setFormProductPriceM] = useState<number>(0);
     const [formProductPriceL, setFormProductPriceL] = useState<number>(0);
     const [isProductSpecial, setIsProductSpecial] = useState<boolean>(false);
-    const [newIngrediant, setnewIngrediant] = useState<string>('');
-    const [quantityIngrediant, setQuantityIngrediant] = useState<number>(0);
+    const [formImage, setFormImage] = useState<File>();
+    const [newIngredient, setNewIngredient] = useState<string>('');
+    const [quantityIngredient, setQuantityIngredient] = useState<number>(0);
     const [addedIngredients, setAddedIngredients] = useState<IngredientType[]>([]);
 
-    const { data, isLoading, isError, error } = useGetIngrediant();
+    const { data, isLoading, isError, error } = useGetIngredient();
 
     if (isLoading) return <p>Loading...</p>;
     if (isError) return <p>{`${error}`}</p>;
 
-    const submitProductInformation = () => {
+    const submitProductInformation = async () => {
         const ingredientsToAdd: UpdateIngredientType[] = [];
 
         addedIngredients.forEach((ingredient) => {
@@ -54,13 +56,19 @@ const ProductForm = () => {
             });
         });
 
+        let imageUrl = isEditingProduct
+            ? productToEdit.imageUrl
+            : 'https://happymess-images.s3.eu-north-1.amazonaws.com/Image-not-found.png';
+
+        if (formImage) {
+            imageUrl = await handleImageUpload(formImage);
+        }
+
         const productInformation: UpdateProductType = {
             name: formProductName,
             description: formProductDescription,
             type: formProductType as 'icecream' | 'milkshake',
-            imageUrl: productToEdit
-                ? productToEdit.imageUrl
-                : 'https://happymess-images.s3.eu-north-1.amazonaws.com/Image-not-found.png',
+            imageUrl,
             ingredients: ingredientsToAdd,
             isSpecial: isProductSpecial,
             sizes: [
@@ -89,21 +97,21 @@ const ProductForm = () => {
 
     const submitIngredientForm = (e: React.SyntheticEvent<HTMLFormElement>) => {
         e.preventDefault();
-        console.log(newIngrediant);
-        const foundIngrediant = data?.find((ingredient) => ingredient.name === newIngrediant) as IngredientItemType;
+        console.log(newIngredient);
+        const foundIngredient = data?.find((ingredient) => ingredient.name === newIngredient) as IngredientItemType;
         setAddedIngredients([
             ...addedIngredients,
             {
-                ingredient: foundIngrediant,
-                quantityInGrams: quantityIngrediant,
+                ingredient: foundIngredient,
+                quantityInGrams: quantityIngredient,
             },
         ]);
-        setQuantityIngrediant(0);
+        setQuantityIngredient(0);
     };
 
-    const removeIngrediant = (ingredient: string) => {
-        const filterdIngrediantList = addedIngredients.filter((ing) => ing.ingredient._id !== ingredient);
-        setAddedIngredients(filterdIngrediantList);
+    const removeIngredient = (ingredient: string) => {
+        const filteredIngredientList = addedIngredients.filter((ing) => ing.ingredient._id !== ingredient);
+        setAddedIngredients(filteredIngredientList);
     };
 
     return (
@@ -189,7 +197,12 @@ const ProductForm = () => {
                         Sätt som Populär
                     </label>
 
-                    <input className='product-form__file-input' type='file' accept='image/png, image/jpeg' />
+                    <input
+                        className='product-form__file-input'
+                        type='file'
+                        accept='image/png, image/jpeg'
+                        onChange={(e) => e.target.files && setFormImage(e.target.files[0])}
+                    />
                 </form>
                 <form className='product-form__form' onSubmit={submitIngredientForm}>
                     <h3 className='product-form__sub-title'>Ingredienser</h3>
@@ -199,14 +212,14 @@ const ProductForm = () => {
                             <select
                                 className='product-form__input'
                                 onChange={(e) => {
-                                    setnewIngrediant(e.target.value);
+                                    setNewIngredient(e.target.value);
                                 }}>
                                 <option value='null'> </option>
                                 {data?.map(
-                                    (ingrediant) =>
-                                        !addedIngredients.find((ing) => ing.ingredient.name === ingrediant.name) && (
-                                            <option key={ingrediant._id} value={ingrediant.name}>
-                                                {ingrediant.name}
+                                    (ingredient) =>
+                                        !addedIngredients.find((ing) => ing.ingredient.name === ingredient.name) && (
+                                            <option key={ingredient._id} value={ingredient.name}>
+                                                {ingredient.name}
                                             </option>
                                         )
                                 )}
@@ -217,9 +230,9 @@ const ProductForm = () => {
                             <input
                                 className='product-form__input'
                                 type='number'
-                                value={quantityIngrediant}
+                                value={quantityIngredient}
                                 onChange={(e) => {
-                                    setQuantityIngrediant(parseInt(e.target.value));
+                                    setQuantityIngredient(parseInt(e.target.value));
                                 }}
                             />
                         </label>
@@ -231,7 +244,7 @@ const ProductForm = () => {
                                 <p>
                                     {ingredient.ingredient.name} - {ingredient.quantityInGrams}g
                                 </p>
-                                <p onClick={() => removeIngrediant(ingredient.ingredient._id)}>X</p>
+                                <p onClick={() => removeIngredient(ingredient.ingredient._id)}>X</p>
                             </li>
                         ))}
                     </ul>
@@ -249,4 +262,7 @@ export default ProductForm;
 /*
  * Författare: Kim
  * Formulär som sparar input från användare när en produkt ska ändras eller skapas. Behöver brytas ner och skapa fler komponenter.
+ *
+ * Ändrat: Kim
+ * Funktion som lägger till en bild i en s3 bucket och returnerar en url till bilden.
  */
