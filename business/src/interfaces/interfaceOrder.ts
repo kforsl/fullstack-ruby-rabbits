@@ -5,12 +5,13 @@ export interface OrderType {
     price: number;
     createdAt: Date;
     updatedAt: Date;
-    state: 'waiting' | 'preparing' | 'ready' | 'history';
+    state: 'waiting' | 'preparing' | 'ready' | 'history' | 'annulled' | 'editing';
     comment?: string;
     order: OrderItemType[];
 }
 
 export interface OrderItemType {
+    _id: string;
     product: ProductType;
     quantity: number;
     size: 'small' | 'medium' | 'large';

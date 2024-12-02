@@ -1,4 +1,4 @@
-import { useLocation, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import OrderConfirmation from '../../components/OrderConfirmation/OrderConfirmation';
 import useOrderStore from '../../stores/orderStore';
 import './orderPage.css';
@@ -7,7 +7,6 @@ import { useGetOrderById } from '../../services/queries';
 const OrderPage: React.FC = () => {
     const { order, setOrder } = useOrderStore();
     const { id } = useParams<{ id: string }>();
-    const location = useLocation();
     const { data, isError, isLoading } = useGetOrderById(id || '');
 
     useEffect(() => {
@@ -39,3 +38,8 @@ const OrderPage: React.FC = () => {
 };
 
 export default OrderPage;
+
+/*
+ * Författare: Magnus
+ * Skapat sida som renderar ut ordrar.
+ */

@@ -32,7 +32,7 @@
     --color-accent3: #f2ac81;
     --color-success: #00ff00;
     --color-error: #ff0000;
-    --color-disabled: gray;
+    --color-disabled: rgb(165, 162, 162);
 
     --shadow-s: 2px 2px 0 var(--color-black);
 

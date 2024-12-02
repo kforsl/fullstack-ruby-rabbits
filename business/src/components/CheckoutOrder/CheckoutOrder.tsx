@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { OrderType } from '../../interfaces/interfaceOrder';
 import { useOrderState } from '../../services/mutations';
 import { useGetOrders } from '../../services/queries';
@@ -13,12 +14,30 @@ const CheckoutOrder = ({ changeview }: Props) => {
     const { data, isLoading, isError, error, refetch } = useGetOrders();
     const { mutate: markAsDelivered } = useOrderState();
 
-    socket.on('newOrder', () => {
-        refetch();
-    });
-    socket.on('newOrderStatus', () => {
-        refetch();
-    });
+    useEffect(() => {
+        const handleNewOrder = () => {
+            console.log('logging newOrder');
+            refetch();
+        };
+
+        const handleNewOrderStatus = () => {
+            console.log('logging newOrderStatus');
+            refetch();
+        };
+
+        if (!socket.hasListeners('newOrder')) {
+            socket.on('newOrder', handleNewOrder);
+        }
+
+        if (!socket.hasListeners('newOrderStatus')) {
+            socket.on('newOrderStatus', handleNewOrderStatus);
+        }
+
+        return () => {
+            socket.off('newOrder', handleNewOrder);
+            socket.off('newOrderStatus', handleNewOrderStatus);
+        };
+    }, [refetch]);
 
     if (isLoading) {
         return (
@@ -92,4 +111,7 @@ export default CheckoutOrder;
  *
  * Ändrat: Kim
  * Lagt till socket.on för att refetch useQuery
+ *
+ * Ändrat: Magnus
+ * Lagt till useEffect och uppstädningsfunktion för socket så att det inte triggas så ofta.
  */
