@@ -11,6 +11,7 @@ const RoutesComponent: React.FC = () => {
             <Route path='/om-oss' element={<AboutUsPage />} />
             <Route path='/profil' element={<ProfilePage />} />
             <Route path='/orderbekraftelse' element={<FinalizeOrder />} />
+            <Route path='/ordrar/:id' element={<FinalizeOrder />} />
         </Routes>
     );
 };
