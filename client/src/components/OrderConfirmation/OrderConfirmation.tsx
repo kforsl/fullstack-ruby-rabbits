@@ -1,5 +1,4 @@
-import { useEffect, useMemo, useState } from 'react';
-import { OrderType } from '../../interfaces/interfaceOrder';
+import { useEffect, useState } from 'react';
 import { useChangeOrderState } from '../../services/mutations';
 import useAuthStore from '../../stores/authStore';
 import { getLastNCharacters } from '../../utils/utilFunctions';
@@ -11,13 +10,8 @@ import OrderConfirmationListItem from '../OrderConfirmationListItem/OrderConfirm
 import useOrderStore from '../../stores/orderStore';
 import { useUpdateOrder } from '../../services/mutations/useUpdateOrder';
 
-interface Props {
-    order: OrderType;
-}
-
-const OrderConfirmation: React.FC<Props> = ({ order }) => {
+const OrderConfirmation: React.FC = () => {
     const { order: newOrder, setOrder: setNewOrder, originalOrder, setOriginalOrder } = useOrderStore();
-    const memoizedOrder = useMemo(() => order, [order]);
     const [isEditing, setIsEditing] = useState<boolean>(false);
     const orderNumber = newOrder ? getLastNCharacters(newOrder._id, 4) : '';
     const { customer } = useAuthStore();
@@ -25,11 +19,6 @@ const OrderConfirmation: React.FC<Props> = ({ order }) => {
     const { mutate: editOrderState, isPending: isChangingEditState } = useChangeOrderState();
     const { mutate: updateOrder } = useUpdateOrder();
     const { refetch, isFetching } = useGetOrderById(newOrder?._id);
-
-    useEffect(() => {
-        setNewOrder(memoizedOrder);
-        setOriginalOrder(memoizedOrder);
-    }, [memoizedOrder]);
 
     useEffect(() => {
         const handleNewOrderStatus = async () => {
@@ -48,12 +37,31 @@ const OrderConfirmation: React.FC<Props> = ({ order }) => {
         };
     }, [refetch]);
 
+    const handleStateInfo = (state: 'annulled' | 'editing' | 'preparing' | 'ready' | 'history' | 'waiting') => {
+        switch (state) {
+            case 'waiting':
+                return { state: 'PLACERAD I KÖ', description: 'Ordern har placerats i kön.' };
+            case 'annulled':
+                return { state: 'ANNULERAD', description: 'Ordern har blivit annullerad.' };
+            case 'editing':
+                return { state: 'EDITERAS', description: 'Ordern är under redigering.' };
+            case 'preparing':
+                return { state: 'TILLAGAS', description: 'Ordern håller på att tillagas.' };
+            case 'ready':
+                return { state: 'REDO ATT HÄMTAS!', description: 'Ordern är redo att hämtas.' };
+            case 'history':
+                return { state: 'HÄMTAD', description: 'Ordern har hämtats och avslutats.' };
+            default:
+                return { state: 'PLACERAD I KÖ', description: 'Ordern har placerats i kön.' };
+        }
+    };
+
     return (
         <article className='order-confirmation'>
-            {isAnnulled && <h2 className='order-confirmation__deleted'>ANNULERAD!</h2>}
-            <h1 className='order-confirmation__title'>
-                {isAnnulled ? 'Din order har tagits bort.' : 'Succé! Du har lagt en beställning!'}
-            </h1>
+            <h2 className={`order-confirmation__state order-confirmation__state--${newOrder.state}`}>
+                {handleStateInfo(newOrder.state).state}
+            </h2>
+            <h1 className='order-confirmation__title'>{handleStateInfo(newOrder.state).description}</h1>
             <h2 className='order-confirmation__subtitle'>{`Ordernummer: ${orderNumber}`}</h2>
             {customer ? (
                 <p className='order-confirmation__info'>Din beställning har sparats i din profil!</p>
@@ -147,4 +155,7 @@ export default OrderConfirmation;
  * Ändrat: Magnus
  * Lagt till möjlighet att ändra order. Lagt till 2 useEffects. 1 för att få ett grundvärde på orderstore (useMemo för att objekt triggar false då de jämförs med referens inte innehåll... Något sådant..). 1 för att inte kalla på socket 100ggr per anrop.
  * Behöver refaktoreras! Knapparna kanske ska ha en egen komponent...
+ *
+ * Ändrat: Magnus
+ * Tagit bort memoize, tagit bort behover av props, genererar text beroende av state av order via en switch. Lagt till klasser i css för olika states.
  */

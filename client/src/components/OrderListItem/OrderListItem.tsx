@@ -8,7 +8,7 @@ interface Props {
 const OrderListItem = ({ order }: Props) => {
     return (
         <li className='order-list-item'>
-            <Link className='order-list-item__link' to={`/orderbekraftelse/${order._id}`}>
+            <Link className='order-list-item__link' to={`/ordrar/${order._id}`}>
                 {order._id.slice(order._id.length - 4, order._id.length).toLocaleUpperCase()}
             </Link>
             <p className='order-list-item__status'> Status: {order.state}</p>
