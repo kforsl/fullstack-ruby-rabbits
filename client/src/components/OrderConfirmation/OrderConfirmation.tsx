@@ -19,12 +19,12 @@ const OrderConfirmation: React.FC<Props> = ({ order }) => {
     const { order: newOrder, setOrder: setNewOrder, originalOrder, setOriginalOrder } = useOrderStore();
     const memoizedOrder = useMemo(() => order, [order]);
     const [isEditing, setIsEditing] = useState<boolean>(false);
-    const orderNumber = newOrder ? getLastNCharacters(newOrder._id, 4) : '';
+    const orderNumber = newOrder ? getLastNCharacters(newOrder?._id, 4) : '';
     const { customer } = useAuthStore();
-    const { refetch, isFetching } = useGetOrderById(newOrder?._id);
     const { mutate: annullOrder, isPending: isAnnulling, isSuccess: isAnnulled } = useChangeOrderState();
     const { mutate: editOrderState, isPending: isChangingEditState } = useChangeOrderState();
     const { mutate: updateOrder } = useUpdateOrder();
+    const { refetch, isFetching } = useGetOrderById(newOrder?._id);
 
     useEffect(() => {
         setNewOrder(memoizedOrder);
