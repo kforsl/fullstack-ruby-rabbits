@@ -4,7 +4,6 @@ const { OrderModel } = require('../models/orderModel');
 exports.createOrder = asyncHandler(async (req, res) => {
     const { customer } = req;
     const order = new OrderModel(req.body);
-    console.log(order);
     if (customer) {
         order.customer = customer._id;
     }
@@ -15,7 +14,6 @@ exports.createOrder = asyncHandler(async (req, res) => {
         .reduce((a, b) => a + b);
     await order.save();
 
-    console.table(order);
     return res.status(201).json({
         message: 'successfully created order',
         data: [order],
@@ -120,11 +118,12 @@ exports.getOrderById = asyncHandler(async (req, res) => {
 exports.updateOrderById = asyncHandler(async (req, res) => {
     try {
         const { order } = req;
-        if (order.order) {
-            order.price = order.order
-                .map((item) => Number(item.product.sizes.find((x) => x.size === item.size).price) * item.quantity)
-                .reduce((a, b) => a + b);
-        }
+        // if (order.order) {
+        //     order.price = order.order
+        //         .map((item) => Number(item.product.sizes.find((x) => x.size === item.size).price) * item.quantity)
+        //         .reduce((a, b) => a + b);
+        // }
+
         const updatedOrder = await OrderModel.findByIdAndUpdate(
             req.params.id,
             { ...order, updatedAt: new Date() },
@@ -135,7 +134,7 @@ exports.updateOrderById = asyncHandler(async (req, res) => {
         );
 
         if (!updatedOrder) {
-            res.status(204).json({
+            res.status(200).json({
                 message: 'Error',
                 data: ['Order was not validated correctly.'],
             });
