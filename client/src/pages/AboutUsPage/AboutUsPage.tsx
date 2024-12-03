@@ -35,8 +35,35 @@ const AboutUsPage: React.FC = () => {
                         ger en känsla av tidlös lycka.
                     </p>
                 </section>
-                <section className='about-page__image-wrapper'>
-                    <img src='/images/img-banana.png' alt='Happymess' className='about-page__image' />
+                <section className='employees'>
+                    <figure className='employees__employee-card'>
+                        <img src='' alt='' className='employees__image' />
+                        <figcaption className='employees__caption'>
+                            <h2 className='employees__employee-name'>Mr. Mysterio Mustachio</h2>
+                            <h3 className='employees__description'>Äger allt. Även dig.</h3>
+                        </figcaption>
+                    </figure>
+                    <figure className='employees__employee-card'>
+                        <img src='' alt='' className='employees__image' />
+                        <figcaption className='employees__caption'>
+                            <h2 className='employees__employee-name'>Ärlige Harry</h2>
+                            <h3 className='employees__description'>Säljer allt. Även dig.</h3>
+                        </figcaption>
+                    </figure>
+                    <figure className='employees__employee-card'>
+                        <img src='' alt='' className='employees__image' />
+                        <figcaption className='employees__caption'>
+                            <h2 className='employees__employee-name'>Brotein Icecream</h2>
+                            <h3 className='employees__description'>Bänkar 200l glass</h3>
+                        </figcaption>
+                    </figure>
+                    <figure className='employees__employee-card'>
+                        <img src='' alt='' className='employees__image' />
+                        <figcaption className='employees__caption'>
+                            <h2 className='employees__employee-name'>King Dingeling</h2>
+                            <h3 className='employees__description'>Glasstekniker</h3>
+                        </figcaption>
+                    </figure>
                 </section>
             </main>
         </>
