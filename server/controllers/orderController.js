@@ -4,7 +4,6 @@ const { OrderModel } = require('../models/orderModel');
 exports.createOrder = asyncHandler(async (req, res) => {
     const { customer } = req;
     const order = new OrderModel(req.body);
-    console.log(order);
     if (customer) {
         order.customer = customer._id;
     }
@@ -15,7 +14,6 @@ exports.createOrder = asyncHandler(async (req, res) => {
         .reduce((a, b) => a + b);
     await order.save();
 
-    console.table(order);
     return res.status(201).json({
         message: 'successfully created order',
         data: [order],
@@ -32,7 +30,7 @@ exports.getAllOrders = asyncHandler(async (req, res) => {
             .populate('customer');
 
         if (orders.length < 1) {
-            res.status(204).json({
+            res.status(200).json({
                 message: 'No orders found',
                 data: [],
             });
@@ -120,11 +118,12 @@ exports.getOrderById = asyncHandler(async (req, res) => {
 exports.updateOrderById = asyncHandler(async (req, res) => {
     try {
         const { order } = req;
-        if (order.order) {
-            order.price = order.order
-                .map((item) => Number(item.product.sizes.find((x) => x.size === item.size).price) * item.quantity)
-                .reduce((a, b) => a + b);
-        }
+        // if (order.order) {
+        //     order.price = order.order
+        //         .map((item) => Number(item.product.sizes.find((x) => x.size === item.size).price) * item.quantity)
+        //         .reduce((a, b) => a + b);
+        // }
+
         const updatedOrder = await OrderModel.findByIdAndUpdate(
             req.params.id,
             { ...order, updatedAt: new Date() },
@@ -135,7 +134,7 @@ exports.updateOrderById = asyncHandler(async (req, res) => {
         );
 
         if (!updatedOrder) {
-            res.status(204).json({
+            res.status(200).json({
                 message: 'Error',
                 data: ['Order was not validated correctly.'],
             });
@@ -157,8 +156,10 @@ exports.updateOrderById = asyncHandler(async (req, res) => {
 /*
  * Ändrad: Magnus
  * Lade till validering i object på updateOrderById.
- */
-/**
+ *
+ * Ändrad: Magnus
+ * Ändrade status 204 till 200 på getAllOrder för att returnera en tom order. Med status 204 kraschade appen.
+ *
  * Ändrad: Johan
  * Ordnade med middleware som sköter viss validering av data som kommer in, t.ex om ordern har produkter eller inte med sig.
  *

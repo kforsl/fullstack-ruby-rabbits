@@ -1,5 +1,11 @@
+@font-face {
+    font-family: alone-on-earth;
+    src: url(/fonts/Alone.otf);
+}
+
 :root {
     --bread-font: Arial, Helvetica, sans-serif;
+    --title-font: alone-on-earth;
 
     --font-size-s: clamp(0.75rem, 0.7061rem + 0.1951vw, 0.85rem);
     --font-size-m: clamp(1rem, 0.8902rem + 0.4878vw, 1.25rem);
@@ -18,8 +24,13 @@
     --color-accent1: #ff9fc5;
     --color-accent2: #82dfff;
     --color-accent3: #f2ac81;
+    --color-success: #00ff00;
+    --color-error: #ff0000;
+    --color-disabled: rgb(165, 162, 162);
 
     --shadow-s: 2px 2px 0 var(--color-black);
+
+    --text-outline: 1px 1px var(--color-black), -1px -1px var(--color-black), 1px -1px var(--color-black), -1px 1px var(--color-black);
 
     --spacing-xs: 0.5rem;
     --spacing-s: 1rem;
@@ -59,6 +70,7 @@ body {
     max-width: var(--max-width);
     margin: 0 auto;
 }
+
 .main-wrapper {
     display: grid;
     grid-template-columns: auto 1fr;
