@@ -42,7 +42,7 @@ exports.getAllOrders = asyncHandler(async (req, res) => {
             order.forEach((o) => {
                 if (o.customer) o.customer.hash = null;
             });
-            res.status(204).json({
+            res.status(200).json({
                 message: 'No orders found',
                 data: [],
             });
@@ -159,4 +159,6 @@ exports.updateOrderById = asyncHandler(async (req, res) => {
 /*
  * Ändrad: Magnus
  * Lade till validering i object på updateOrderById.
+ * Ändrad: Magnus
+ * Ändrade status 204 till 200 på getAllOrder för att returnera en tom order. Med status 204 kraschade appen.
  */

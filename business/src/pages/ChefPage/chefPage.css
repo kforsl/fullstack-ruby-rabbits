@@ -11,10 +11,12 @@
 .order-queue {
     grid-column: 1 / span 5;
     height: 100%;
+    padding: var(--spacing-m);
 }
 
 .active-order {
     grid-column: 6 / span 3;
+    padding: var(--spacing-m) var(--spacing-m) var(--spacing-m) 0;
 }
 
 .order-queue__order-list {
@@ -28,7 +30,6 @@
 .order-queue,
 .active-order {
     gap: var(--spacing-m);
-    padding: var(--spacing-m);
     display: grid;
     grid-template-rows: auto 1fr;
     max-height: 100vh;

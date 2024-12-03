@@ -24,6 +24,11 @@
     background-color: var(--color-disabled);
 }
 
+.text-button--end {
+    grid-column: 2/3;
+    justify-self: end;
+}
+
 @media (hover: hover) and (pointer: fine) {
     .text-button:hover {
         scale: 1.02;
