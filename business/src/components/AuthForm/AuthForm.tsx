@@ -23,6 +23,7 @@ const AuthForm = () => {
         isShowingErrorMessage,
         setIsShowingErrorMessage,
         employee,
+        setEmployee,
     } = useAuthStore();
 
     const FormDefaultPreventer = (e: FormEvent<HTMLFormElement>) => {
@@ -48,8 +49,9 @@ const AuthForm = () => {
             const data = await agent.Authenticate(signInForm);
             if (typeof data[0] !== 'string') {
                 sessionStorage.setItem('employee', JSON.stringify(data));
-
+                setEmployee(data);
                 setIsLoading(false);
+
                 socket.emit('joinEmployeeRoom');
                 setTimeout(() => {
                     setIsShowingLoadingSection(false);

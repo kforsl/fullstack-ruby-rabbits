@@ -4,6 +4,7 @@ import useAuthStore from '../../stores/authStore';
 import { PaymentOption } from '../../interfaces/interfaceAuth';
 import TextButton from '../TextButton/TextButton';
 import { useUpdatePaymentOptions } from '../../services/mutations/useUpdatePaymentOptions';
+import { useNavigate } from 'react-router-dom';
 
 const ProfilePaymentOptionsForm = () => {
     const { mutate: updatePaymentOptions, isPending: isUpdating, isSuccess: isUpdated } = useUpdatePaymentOptions();
@@ -11,8 +12,9 @@ const ProfilePaymentOptionsForm = () => {
     const [swishPaymentOption, setSwishPaymentOption] = useState<PaymentOption>();
     const [cardPaymentOption, setCardPaymentOption] = useState<PaymentOption>();
     const [checkboxes, setCheckboxes] = useState<{ swish: boolean; card: boolean }>({ swish: false, card: false });
+    const navigate = useNavigate();
     useEffect(() => {
-        if (customer === null) window.location.href = '/';
+        if (customer === null) navigate('/');
         else {
             if (customer.paymentOptions !== null) {
                 setSwishPaymentOption(customer.paymentOptions?.find((x) => x.paymentOption === 'Swish'));
