@@ -16,3 +16,9 @@
     grid-template-columns: var(--main-grid);
     row-gap: var(--spacing-m);
 }
+
+@media screen and (max-width: 1120px) {
+    .product-list {
+        grid-column: 1/-1;
+    }
+}

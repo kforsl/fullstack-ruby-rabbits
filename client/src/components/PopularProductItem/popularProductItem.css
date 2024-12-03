@@ -5,6 +5,7 @@
     font-size: var(--font-size-l);
     font-family: var(--title-font);
     text-align: center;
+    background-color: var(--bg-primary);
 }
 
 .popular-product-item__image {

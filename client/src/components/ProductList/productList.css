@@ -30,3 +30,11 @@
 .product-list__menu-list {
     width: 100%;
 }
+
+@media screen and (max-width: 700px) {
+    .product-list {
+
+        padding-inline: var(--spacing-xs);
+
+    }
+}
