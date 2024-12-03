@@ -1,22 +1,23 @@
 import './dashboardMenu.css';
 import useAuthStore from '../../stores/authStore';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
 import { socket } from '../../services/webSocket/ioSocket';
 
 const DashboardMenu = () => {
     const location = useLocation();
+    const navigate = useNavigate();
     const { employee, setEmployee, menuIsExpanded, setMenuIsExpanded } = useAuthStore();
     const navigation = [
         { name: 'KASSA-VY', route: '/kassa' },
         { name: 'KOCK-VY', route: '/kock' },
         { name: 'LAGERSALDO', route: '/lager' },
-        { name: 'Ändra Produkt', route: '/admin/produkt' },
+        { name: 'PRODUKTER', route: '/admin/produkt' },
     ];
     useEffect(() => {
         if (navigation.some((item) => item.route === location.pathname)) {
             if (!employee) {
-                window.location.href = '/';
+                navigate('/');
             } else {
                 socket.emit('joinEmployeeRoom');
             }
@@ -68,7 +69,7 @@ const DashboardMenu = () => {
                             onClick={() => {
                                 window.sessionStorage.clear();
                                 setEmployee(null);
-                                window.location.href = '/';
+                                navigate('/');
                             }}>
                             LOGGA UT
                         </button>
