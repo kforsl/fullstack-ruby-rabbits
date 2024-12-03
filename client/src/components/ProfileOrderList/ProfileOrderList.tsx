@@ -2,6 +2,7 @@ import OrderListItem from '../OrderListItem/OrderListItem';
 import './profileOrderList.css';
 import { useGetOrders } from '../../services/queries/useGetOrders';
 import { OrderType } from '../../interfaces/interfaceOrder';
+import { socket } from '../../services/webSocket/ioSocket';
 
 interface Props {
     id: string;
@@ -50,7 +51,10 @@ const ProfileOrderList = ({ id }: Props) => {
                                 data.filter(
                                     (order: OrderType) => order.state === 'history' || order.state === 'annulled'
                                 ) as OrderType[]
-                            ).map((order: OrderType) => <OrderListItem order={order} key={order._id} />)
+                            ).map((order: OrderType) => {
+                                socket.emit('joinOrderRoom', order._id);
+                                return <OrderListItem order={order} key={order._id} />;
+                            })
                         )}
                     </ul>
                 </>
