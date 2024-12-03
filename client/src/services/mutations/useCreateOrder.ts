@@ -9,8 +9,9 @@ export const useCreateOrder = () => {
     return useMutation({
         mutationFn: (order: CartToOrder) => agent.Orders.post(order),
 
-        onSuccess: () => {
-            socket.emit('createOrder');
+        onSuccess: (orderList) => {
+            socket.emit('joinOrderRoom', orderList[0]._id);
+            socket.emit('createOrder', orderList[0]._id);
             queryClient.invalidateQueries({ queryKey: ['orders'] });
         },
     });
