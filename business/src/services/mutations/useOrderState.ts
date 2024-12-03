@@ -12,9 +12,9 @@ export const useOrderState = () => {
     return useMutation({
         mutationFn: ({ id, state }: MutationParameters) => agent.Orders.updateState(id, state),
 
-        onSuccess: () => {
+        onSuccess: (orderList) => {
             queryClient.invalidateQueries({ queryKey: ['orders'] });
-            socket.emit('updateOrderStatus');
+            socket.emit('updateOrderStatus', orderList[0]._id);
         },
     });
 };

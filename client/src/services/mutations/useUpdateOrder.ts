@@ -11,8 +11,8 @@ export const useUpdateOrder = () => {
     return useMutation({
         mutationFn: ({ id, order }: MutationParameters) => agent.Orders.updateOrder(id, { ...order, state: 'waiting' }),
 
-        onSuccess: () => {
-            socket.emit('updateOrderStatus');
+        onSuccess: (orderList) => {
+            socket.emit('updateOrderStatus', orderList[0]._id);
         },
     });
 };

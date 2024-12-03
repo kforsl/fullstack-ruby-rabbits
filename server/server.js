@@ -70,15 +70,22 @@ const run = async () => {
     try {
         await mongoose.connect(process.env.DB_URL);
         io.on('connection', (socket) => {
-            console.log('a user connected');
+            console.log('a user connected', socket.id);
+
             socket.on('disconnect', async (reason) => {
                 console.log(`USER DISCONNECTED: ${socket.id}. REASON: ${reason}`);
             });
-            socket.on('createOrder', () => {
-                io.emit('newOrder');
+            socket.on('joinEmployeeRoom', () => {
+                socket.join('employee');
             });
-            socket.on('updateOrderStatus', () => {
-                io.emit('newOrderStatus');
+            socket.on('joinOrderRoom', (id) => {
+                socket.join(id);
+            });
+            socket.on('createOrder', (id) => {
+                socket.to('employee').to(id).emit('newOrder');
+            });
+            socket.on('updateOrderStatus', (id) => {
+                socket.to('employee').to(id).emit('newOrderStatus');
             });
         });
         server.listen(3000, () => console.log(`Server started on PORT ${PORT}`));

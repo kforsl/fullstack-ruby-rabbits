@@ -6,6 +6,7 @@ import TextButton from '../TextButton/TextButton';
 import agent from '../../services/api/agent';
 import authSchema from '../../utils/models/authSchema';
 import Loading from '../Loading/Loading';
+import { socket } from '../../services/webSocket/ioSocket';
 
 const AuthForm = () => {
     const { signInForm, onFormChanged, isLoading, setIsLoading, isShowingLoadingSection, setIsShowingLoadingSection } =
@@ -28,6 +29,7 @@ const AuthForm = () => {
                 sessionStorage.setItem('employee', JSON.stringify(data));
 
                 setIsLoading(false);
+                socket.emit('joinEmployeeRoom');
                 setTimeout(() => {
                     setIsShowingLoadingSection(false);
                     window.location.href = '/kassa';
