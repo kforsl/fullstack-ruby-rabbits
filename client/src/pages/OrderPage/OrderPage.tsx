@@ -4,6 +4,7 @@ import useOrderStore from '../../stores/orderStore';
 import './orderPage.css';
 import { useEffect } from 'react';
 import { useGetOrderById } from '../../services/queries';
+import { socket } from '../../services/webSocket/ioSocket';
 const OrderPage: React.FC = () => {
     const { order, setOrder } = useOrderStore();
     const { id } = useParams<{ id: string }>();
@@ -12,6 +13,7 @@ const OrderPage: React.FC = () => {
     useEffect(() => {
         if (data && data.length > 0 && !isError) {
             setOrder(data[0]);
+            socket.emit('joinOrderRoom', data[0]._id);
         }
     }, [data]);
 
