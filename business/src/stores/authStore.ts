@@ -11,6 +11,11 @@ interface AuthStore {
     setIsLoading: (state: boolean) => void;
     isLoading: boolean;
 
+    errorMessage: string;
+    setErrorMessage: (message: string) => void;
+    isShowingErrorMessage: boolean;
+    setIsShowingErrorMessage: (state: boolean) => void;
+
     isShowingLoadingSection: boolean;
     setIsShowingLoadingSection: (state: boolean) => void;
 
@@ -24,6 +29,11 @@ const useAuthStore = create<AuthStore>((set) => ({
     setEmployee: (employee) => set({ employee }),
     menuIsExpanded: false,
     setMenuIsExpanded: (state) => set({ menuIsExpanded: state }),
+
+    errorMessage: '',
+    setErrorMessage: (message) => set({ errorMessage: message }),
+    isShowingErrorMessage: false,
+    setIsShowingErrorMessage: (state) => set({ isShowingErrorMessage: state }),
 
     isLoading: false,
     signInForm: { email: '', password: '' },

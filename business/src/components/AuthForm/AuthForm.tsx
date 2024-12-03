@@ -1,4 +1,4 @@
-import { FormEvent, useState } from 'react';
+import { FormEvent, useEffect } from 'react';
 import useAuthStore from '../../stores/authStore';
 
 import './authForm.css';
@@ -7,22 +7,43 @@ import agent from '../../services/api/agent';
 import authSchema from '../../utils/models/authSchema';
 import Loading from '../Loading/Loading';
 import { socket } from '../../services/webSocket/ioSocket';
+import { useNavigate } from 'react-router-dom';
 
 const AuthForm = () => {
-    const { signInForm, onFormChanged, isLoading, setIsLoading, isShowingLoadingSection, setIsShowingLoadingSection } =
-        useAuthStore(); //Loading biten får göras lite snyggare sen
+    const navigate = useNavigate();
+    const {
+        signInForm,
+        onFormChanged,
+        isLoading,
+        setIsLoading,
+        isShowingLoadingSection,
+        setIsShowingLoadingSection,
+        errorMessage,
+        setErrorMessage,
+        isShowingErrorMessage,
+        setIsShowingErrorMessage,
+        employee,
+    } = useAuthStore();
 
     const FormDefaultPreventer = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
     };
-    const [IsShowingError, setIsShowingError] = useState<boolean>(false);
     const onSubmit = async () => {
         setIsShowingLoadingSection(true);
         setTimeout(() => setIsLoading(true), 100);
 
         const { error } = authSchema.validate(signInForm);
         if (error) {
-            console.log('ERROR: ', error);
+            setErrorMessage(error.toString());
+            setIsShowingErrorMessage(true);
+            setTimeout(() => {
+                setIsShowingErrorMessage(false);
+            }, 3000);
+
+            setIsLoading(false);
+            setTimeout(() => {
+                setIsShowingLoadingSection(false);
+            }, 200);
         } else {
             const data = await agent.Authenticate(signInForm);
             if (typeof data[0] !== 'string') {
@@ -32,26 +53,23 @@ const AuthForm = () => {
                 socket.emit('joinEmployeeRoom');
                 setTimeout(() => {
                     setIsShowingLoadingSection(false);
-                    window.location.href = '/kassa';
+                    navigate('/kassa');
                 }, 100);
-            } else {
-                setIsShowingError(true);
-                setTimeout(() => setIsShowingError(false), 3000);
-                setIsLoading(false);
-                setTimeout(() => {
-                    setIsShowingLoadingSection(false);
-                }, 200);
             }
         }
     };
+
+    useEffect(() => {
+        if (employee !== null) navigate('/kassa');
+    }, []);
 
     return (
         <>
             {isShowingLoadingSection && <Loading isLoading={isLoading} />}
             <section className={`authentication-form__wrapper`}>
                 <h1 className='form-title'>LOGGA IN</h1>
-                <p className={`error-message error-message--${IsShowingError ? 'active' : 'inactive'}`}>
-                    Det blev något fel, var god försök igen!
+                <p className={`error-message error-message--${isShowingErrorMessage ? 'active' : 'inactive'}`}>
+                    {errorMessage}
                 </p>
                 <form className={`main-form main-form--active`} onSubmit={FormDefaultPreventer}>
                     <section className='input-section'>

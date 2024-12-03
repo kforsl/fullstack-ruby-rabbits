@@ -2,31 +2,24 @@ const asyncHandler = require('express-async-handler');
 const { OrderModel } = require('../models/orderModel');
 
 exports.createOrder = asyncHandler(async (req, res) => {
-    try {
-        const order = new OrderModel(req.body);
-
-        const { customer } = req;
-
-        if (customer) {
-            order.customer = customer._id;
-        }
-        order.createdAt = new Date();
-
-        await order.save();
-
-        const orderToReturn = await OrderModel.findById(order._id).populate('order.product').populate('customer');
-        orderToReturn.hash = null;
-
-        res.status(201).json({
-            message: 'successfully created order',
-            data: [orderToReturn],
-        });
-    } catch (error) {
-        res.status(500).json({
-            message: 'Error',
-            data: [error],
-        });
+    const { customer } = req;
+    const order = new OrderModel(req.body);
+    console.log(order);
+    if (customer) {
+        order.customer = customer._id;
     }
+    order.createdAt = new Date();
+    await order.populate('order.product');
+    order.price = order.order
+        .map((item) => Number(item.product.sizes.find((x) => x.size === item.size).price) * item.quantity)
+        .reduce((a, b) => a + b);
+    await order.save();
+
+    console.table(order);
+    return res.status(201).json({
+        message: 'successfully created order',
+        data: [order],
+    });
 });
 
 exports.getAllOrders = asyncHandler(async (req, res) => {
@@ -39,14 +32,14 @@ exports.getAllOrders = asyncHandler(async (req, res) => {
             .populate('customer');
 
         if (orders.length < 1) {
-            order.forEach((o) => {
-                if (o.customer) o.customer.hash = null;
-            });
             res.status(204).json({
                 message: 'No orders found',
                 data: [],
             });
         } else {
+            orders.forEach((o) => {
+                if (o.customer) o.customer.hash = null;
+            });
             const dateSort = (a, b) => (a.updatedAt < b.updatedAt ? -1 : 1);
             if (!state) {
                 res.status(200).json({
@@ -104,14 +97,13 @@ exports.getAllOrdersByCustomerId = asyncHandler(async (req, res) => {
 exports.getOrderById = asyncHandler(async (req, res) => {
     try {
         const order = await OrderModel.findById(req.params.id).populate('order.product').populate('customer');
-
-        if (order.customer) order.customer.hash = null;
-
         if (!order)
             res.status(404).json({
                 message: 'Error',
                 data: 'Order not found.',
             });
+
+        if (order.customer) order.customer.hash = null;
 
         res.status(200).json({
             message: 'successfully found order.',
@@ -127,26 +119,32 @@ exports.getOrderById = asyncHandler(async (req, res) => {
 
 exports.updateOrderById = asyncHandler(async (req, res) => {
     try {
-        const order = await OrderModel.findByIdAndUpdate(
+        const { order } = req;
+        if (order.order) {
+            order.price = order.order
+                .map((item) => Number(item.product.sizes.find((x) => x.size === item.size).price) * item.quantity)
+                .reduce((a, b) => a + b);
+        }
+        const updatedOrder = await OrderModel.findByIdAndUpdate(
             req.params.id,
-            { ...req.body, updatedAt: new Date() },
+            { ...order, updatedAt: new Date() },
             {
                 new: true,
                 runValidators: true,
             }
         );
-        if (order.customer) order.customer.hash = null;
 
-        if (!order) {
+        if (!updatedOrder) {
             res.status(204).json({
                 message: 'Error',
-                data: [],
+                data: ['Order was not validated correctly.'],
             });
         }
+        if (updatedOrder.customer) updatedOrder.customer.hash = null;
 
         res.status(200).json({
             message: 'successfully updated order.',
-            data: [order],
+            data: [updatedOrder],
         });
     } catch (error) {
         res.status(500).json({
@@ -159,4 +157,9 @@ exports.updateOrderById = asyncHandler(async (req, res) => {
 /*
  * Ändrad: Magnus
  * Lade till validering i object på updateOrderById.
+ */
+/**
+ * Ändrad: Johan
+ * Ordnade med middleware som sköter viss validering av data som kommer in, t.ex om ordern har produkter eller inte med sig.
+ *
  */
