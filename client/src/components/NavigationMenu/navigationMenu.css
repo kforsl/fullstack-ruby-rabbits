@@ -6,6 +6,7 @@
     z-index: 999;
     backdrop-filter: blur(10rem);
     -webkit-backdrop-filter: blur(10rem);
+    padding: var(--spacing-s);
 }
 
 .navigation-menu__list {
@@ -16,7 +17,6 @@
 
 .navigation-menu__list-item {
     list-style-type: none;
-    padding: var(--spacing-s);
 }
 
 .navigation-menu__link {
