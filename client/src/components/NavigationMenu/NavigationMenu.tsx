@@ -32,8 +32,6 @@ const NavigationMenu: React.FC = () => {
         <nav className={isBurgerShowing ? 'navigation-burger' : 'navigation-menu'}>
             {isBurgerShowing ? (
                 <>
-                    {/* {isNavOpen && (
-                        <ul className={`navigation-burger__list navigation-burger__list--open`}> */}
                     <ul className={`navigation-burger__list ${isNavOpen ? 'navigation-burger__list--open' : ''}`}>
                         {navigation.map((navigationItem) => (
                             <li className='navigation-menu__list-item' key={navigationItem.route}>
