@@ -94,4 +94,7 @@ export default NavigationMenu;
 /*
  * Författare: Magnus
  * Komponent som ger oss våra länkar för navigation.
+ *
+ * Ändrat: Kim
+ * Lagt till så meny ändras till en mobil navigationsmeny
  */
