@@ -3,9 +3,9 @@ import './aboutUsPage.css';
 const AboutUsPage: React.FC = () => {
     return (
         <>
-            <main className='about-page'>
+            <main className='about-page wrapper'>
+                <h1 className='about-page__title'>OM OSS:</h1>
                 <section className='about-page__info-wrapper'>
-                    <h1 className='about-page__title'>OM OSS:</h1>
                     <p className='about-page__paragraph'>
                         Happymess är en charmig glassbar i retrostil, där varje besök känns som en nostalgisk resa
                         tillbaka till 1950-talet. Inredningen är inspirerad av klassiska amerikanska diners, med
@@ -36,29 +36,47 @@ const AboutUsPage: React.FC = () => {
                     </p>
                 </section>
                 <section className='employees'>
-                    <figure className='employees__employee-card'>
-                        <img src='' alt='' className='employees__image' />
+                    <figure className='employees__employee-card employees__employee-card--large'>
+                        <div className='employees__image-wrapper'>
+                            <img
+                                src='../../../public/images/employees/mr-mustachio-no-bg.png'
+                                alt=''
+                                className='employees__image'
+                            />
+                        </div>
                         <figcaption className='employees__caption'>
                             <h2 className='employees__employee-name'>Mr. Mysterio Mustachio</h2>
                             <h3 className='employees__description'>Äger allt. Även dig.</h3>
                         </figcaption>
                     </figure>
                     <figure className='employees__employee-card'>
-                        <img src='' alt='' className='employees__image' />
+                        <div className='employees__image-wrapper'>
+                            <img src='../../../public/images/employees/harry.png' alt='' className='employees__image' />
+                        </div>
                         <figcaption className='employees__caption'>
                             <h2 className='employees__employee-name'>Ärlige Harry</h2>
                             <h3 className='employees__description'>Säljer allt. Även dig.</h3>
                         </figcaption>
                     </figure>
                     <figure className='employees__employee-card'>
-                        <img src='' alt='' className='employees__image' />
+                        <div className='employees__image-wrapper'>
+                            <img
+                                src='../../../public/images/employees/brotein.png'
+                                alt=''
+                                className='employees__image'
+                            />
+                        </div>
+
                         <figcaption className='employees__caption'>
                             <h2 className='employees__employee-name'>Brotein Icecream</h2>
                             <h3 className='employees__description'>Bänkar 200l glass</h3>
                         </figcaption>
                     </figure>
                     <figure className='employees__employee-card'>
-                        <img src='' alt='' className='employees__image' />
+                        <div className='employees__image-wrapper'>
+                            <img src='../../../public/images/employees/test.png' alt='' className='employees__image' />
+                        </div>
+
                         <figcaption className='employees__caption'>
                             <h2 className='employees__employee-name'>King Dingeling</h2>
                             <h3 className='employees__description'>Glasstekniker</h3>
@@ -72,10 +90,13 @@ const AboutUsPage: React.FC = () => {
 
 export default AboutUsPage;
 
-/**
+/*
  * Författare: Johan
  * grundläggande layout för sidan med information.
  *
  * Ändrat: Magnus
  * Tog bort image och lade den i headerkomponent.
+ *
+ * Ändrat: Magnus
+ * Gjort om grid, lagt in figures med innehåll och gjort sidan responsiv.
  */
