@@ -1,9 +1,8 @@
 .about-page {
     margin-block: var(--spacing-2xl);
     padding-inline: var(--spacing-s);
-    display: grid;
     grid-template-columns: auto 1fr;
-    grid-template-rows: auto 1fr 1fr 1fr 1fr;
+    grid-template-rows: auto 1fr;
     gap: var(--spacing-s);
     width: 100%;
 }
@@ -43,12 +42,15 @@
     background-image: url(../../../public/images/blotches/u-e-t-a-darkblue-pink-white-cola.svg);
     background-size: cover;
     background-position: 50%;
-
+    position: relative;
+    min-height: 12rem;
 }
 
 .employees__employee-card {
     background-color: var(--color-white);
     padding: var(--spacing-xs);
+    display: grid;
+    grid-template-rows: 1fr auto;
 }
 
 .employees__employee-card--large {
@@ -63,13 +65,13 @@
 
 /* Targetar bild 2 och framåt av employee-card */
 .employees__employee-card:nth-child(n+2) .employees__image {
-    transform: translateY(1.2rem);
     filter: drop-shadow(2px 2px 2px gray);
+    position: absolute;
+    bottom: -1.2rem;
 }
 
 .employees__caption {
     padding: var(--spacing-xs) var(--spacing-s);
-    max-height: 2ch;
     width: 100%;
 }
 
@@ -89,4 +91,64 @@
     .employees {
         grid-template-columns: repeat(2, minmax(0, 1fr));
     }
+
+    /* Targetar bild 2 och framåt av employee-card */
+    .employees__employee-card:nth-child(n+2) .employees__image {
+        width: 15rem;
+    }
+
+}
+
+@media (max-width: 970px) {
+    .employees {
+        grid-template-columns: 1fr;
+    }
+
+    .employees__image-wrapper {
+        min-height: 15rem;
+    }
+
+}
+
+@media (max-width: 970px) {
+    .employees {
+        grid-template-columns: 1fr;
+    }
+
+    .employees__image-wrapper {
+        min-height: 15rem;
+    }
+
+}
+
+@media (max-width: 850px) {
+    .about-page__info-wrapper {
+        width: 100%;
+        max-width: unset;
+    }
+
+    .about-page {
+
+        grid-template-columns: 1fr;
+    }
+
+    .employees {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+
+}
+
+@media (max-width: 550px) {
+    .employees__image-wrapper {
+        min-height: 12rem;
+    }
+
+}
+
+@media (max-width: 420px) {
+    .employees__image-wrapper {
+        min-height: 10rem;
+    }
+
 }

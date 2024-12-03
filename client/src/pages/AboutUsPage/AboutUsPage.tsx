@@ -45,7 +45,7 @@ const AboutUsPage: React.FC = () => {
                             />
                         </div>
                         <figcaption className='employees__caption'>
-                            <h2 className='employees__employee-name'>Mr. Mysterio Mustachio</h2>
+                            <h2 className='employees__employee-name'>Mr. Mustachio</h2>
                             <h3 className='employees__description'>Äger allt. Även dig.</h3>
                         </figcaption>
                     </figure>
