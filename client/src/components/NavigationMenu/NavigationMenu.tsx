@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import './navigationMenu.css';
 import Cart from '../Cart/Cart';
 import useAuthStore from '../../stores/authStore';
@@ -10,6 +10,7 @@ const NavigationMenu: React.FC = () => {
     const [isBurgerShowing, setIsBurgerShowing] = useState<boolean>(false);
     const [isNavOpen, setIsNavOpen] = useState<boolean>(false);
 
+    const navigate = useNavigate();
     const navigation = [
         { name: 'MENU', route: '/' },
         { name: 'OM OSS', route: '/om-oss' },
@@ -19,7 +20,7 @@ const NavigationMenu: React.FC = () => {
     const onProfileButtonClicked = () => {
         if (isNavOpen) setIsNavOpen(false);
         if (customer === null) setIsShowingForm(true);
-        else window.location.href = '/profil';
+        else navigate('/profil');
     };
 
     useEffect(() => {
