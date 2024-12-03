@@ -1,5 +1,5 @@
 import './orderPreview.css';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { useChangeOrderState, useUpdateOrder } from '../../services/mutations';
 import { getLastNCharacters } from '../../utils/utilFunctions';
 import TextButton from '../TextButton/TextButton';
@@ -9,7 +9,15 @@ import OrderPreviewListItem from '../OrderPreviewListItem/OrderPreviewListItem';
 import useOrderStore from '../../stores/ordersStore';
 
 const OrderPreview: React.FC = () => {
-    const { order: newOrder, setOrder: setNewOrder, originalOrder, setOriginalOrder } = useOrderStore();
+    const {
+        order: newOrder,
+        setOrder: setNewOrder,
+        originalOrder,
+        setOriginalOrder,
+        isOrderPreviewOpen,
+        setIsOrderPreviewOpen,
+    } = useOrderStore();
+    const dialogRef = useRef<HTMLDialogElement>(null);
     const [isEditing, setIsEditing] = useState<boolean>(false);
     const orderNumber = newOrder ? getLastNCharacters(newOrder._id, 4) : '';
     const { mutate: annullOrder, isPending: isAnnulling, isSuccess: isAnnulled } = useChangeOrderState();
@@ -20,21 +28,27 @@ const OrderPreview: React.FC = () => {
     useEffect(() => {
         const handleNewOrderStatus = async () => {
             const { data, isError } = await refetch();
-
             if (data && !isError) {
                 setOriginalOrder(data[0]);
                 setNewOrder(data[0]);
             }
         };
-
-        if (!socket.hasListeners('newOrderStatus')) {
-            socket.on('newOrderStatus', handleNewOrderStatus);
-        }
+        socket.on('newOrderStatus', handleNewOrderStatus);
 
         return () => {
             socket.off('newOrderStatus', handleNewOrderStatus);
         };
     }, [refetch]);
+
+    useEffect(() => {
+        if (dialogRef.current) {
+            if (isOrderPreviewOpen) {
+                (dialogRef.current as HTMLDialogElement).showModal();
+            } else {
+                (dialogRef.current as HTMLDialogElement).close();
+            }
+        }
+    }, [isOrderPreviewOpen]);
 
     const handleStateInfo = (state: 'annulled' | 'editing' | 'preparing' | 'ready' | 'history' | 'waiting') => {
         switch (state) {
@@ -55,26 +69,31 @@ const OrderPreview: React.FC = () => {
         }
     };
     return (
-        <article className='order-preview'>
+        <dialog className='order-preview' ref={dialogRef}>
             <h2 className={`order-preview__state order-preview__state--${newOrder.state}`}>
                 {handleStateInfo(newOrder.state).state}
             </h2>
+            <button className='order-preview__back-button' onClick={() => setIsOrderPreviewOpen(false)}>
+                X
+            </button>
             <h1 className='order-preview__title'>{handleStateInfo(newOrder.state).description}</h1>
             <h2 className='order-preview__subtitle'>{`Ordernummer: ${orderNumber}`}</h2>
-
-            <ul className='order-preview__order-list'>
+            {newOrder.comment && <p className='order-preview__comment'>{newOrder.comment}</p>}
+            <div className='order-preview__list-wrapper'>
                 <h3 className='order-preview__category-title'>PRODUKT</h3>
                 <h3 className='order-preview__category-title'>STORLEK</h3>
                 <h3 className='order-preview__category-title'>ANTAL</h3>
-                {newOrder?.order.map((orderItem) => (
-                    <OrderPreviewListItem
-                        orderItem={orderItem}
-                        isEditing={isEditing}
-                        key={orderItem._id + orderItem.size}
-                    />
-                ))}
-                <h3 className='order-preview__category-title'>{`Totalpris: ${newOrder?.price}kr`}</h3>
-            </ul>
+                <ul className='order-preview__order-list'>
+                    {newOrder?.order.map((orderItem) => (
+                        <OrderPreviewListItem
+                            orderItem={orderItem}
+                            isEditing={isEditing}
+                            key={orderItem._id + orderItem.size}
+                        />
+                    ))}
+                </ul>
+            </div>
+            <h3 className='order-preview__total-price'>{`Totalpris: ${newOrder?.price}kr`}</h3>
             {!isAnnulled && (
                 <div className='order-preview__button-wrapper'>
                     {newOrder?.state === 'waiting' && (
@@ -95,6 +114,7 @@ const OrderPreview: React.FC = () => {
                                         }
                                     )
                                 }
+                                modifier='end'
                                 disabled={isChangingEditState || isFetching}>
                                 {isChangingEditState || isFetching ? 'Loading...' : 'ÄNDRA ORDER'}
                             </TextButton>
@@ -128,14 +148,34 @@ const OrderPreview: React.FC = () => {
                                         }
                                     );
                                 }}
+                                modifier='end'
                                 disabled={isChangingEditState || isFetching}>
                                 {isChangingEditState || isFetching ? 'Loading...' : 'SPARA ÄNDRING'}
                             </TextButton>
                         </>
                     )}
+                    {newOrder?.state === 'ready' && (
+                        <>
+                            <TextButton
+                                onClick={() => {
+                                    editOrderState(
+                                        { id: newOrder._id, state: 'history' },
+                                        {
+                                            onSuccess: () => {
+                                                setIsEditing(false);
+                                            },
+                                        }
+                                    );
+                                }}
+                                modifier='end'
+                                disabled={isChangingEditState || isFetching}>
+                                {isChangingEditState || isFetching ? 'Loading...' : 'GE TILL KUND'}
+                            </TextButton>
+                        </>
+                    )}
                 </div>
             )}
-        </article>
+        </dialog>
     );
 };
 
@@ -151,4 +191,7 @@ export default OrderPreview;
  *
  * Ändrat: Magnus
  * Tagit bort memoize, tagit bort behovet av props, genererar text beroende av state av order via en switch. Lagt till klasser i css för olika states. socket har nu en if-sats och clean up
+ *
+ * Ändrat: Magnus
+ * Gjort om till en dialog och använder useRef för att visa eller dölja modal. Ändrat useEffect för socket att alltid lägga på en listener. Lagt till knappar.
  */

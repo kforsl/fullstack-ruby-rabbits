@@ -3,9 +3,9 @@ import { IngredientItemType, ProductType, UpdateProductType } from '../../interf
 import { SignInForm } from '../../interfaces/interfaceAuth';
 import { OrderType } from '../../interfaces/interfaceOrder';
 import { CartToOrder } from '../../interfaces/interfaceCart';
+import { BASE_URL } from '../../../../constants.ts';
 
-// axios.defaults.baseURL = 'https://fullstack-ruby-rabbits.onrender.com/api/';
-axios.defaults.baseURL = 'http://localhost:3000/api/';
+axios.defaults.baseURL = `${BASE_URL}/api`;
 
 const responseBody = <T>(response: AxiosResponse<T>) => response.data;
 
@@ -96,5 +96,5 @@ export default agent;
  * Fixat så Product.list returnerar data direkt så man slipper stega data.data.
  
  * Ändrat: Magnus
- * Lagt in getByOrderId och updateOrder.
+ * Lagt in getByOrderId och updateOrder. Importerar nu BASE_URL från constants.ts för att enbart ha ett ställe att ändra url på.
  */

@@ -5,9 +5,12 @@ import { useGetOrders } from '../../services/queries';
 import { useOrderState } from '../../services/mutations';
 import { socket } from '../../services/webSocket/ioSocket';
 import { useEffect } from 'react';
+import OrderPreview from '../../components/OrderPreview/OrderPreview';
+import useOrderStore from '../../stores/ordersStore';
 const ChefPage: React.FC = () => {
     const { data, isLoading, isError, error, refetch } = useGetOrders();
     const { mutate } = useOrderState();
+    const { isOrderPreviewOpen } = useOrderStore();
 
     useEffect(() => {
         const handleNewOrder = () => {
@@ -60,6 +63,7 @@ const ChefPage: React.FC = () => {
 
     return (
         <main className='chef-page'>
+            {isOrderPreviewOpen && <OrderPreview />}
             <section className='order-queue'>
                 <h2 className='order-queue__title'>{`Väntande Ordrar (${waiting?.length}st)`}</h2>
                 <ul className='order-queue__order-list'>
@@ -99,6 +103,9 @@ export default ChefPage;
  * Ändrat: Magnus
  * Implementerat useMutate så vi kan uppdatera orderstatus.
  *
- *  * Ändrat: Kim
+ * Ändrat: Kim
  * Laggt till socket.on för att refetch useQuery
+ *
+ * Ändrat: Magnus
+ * Lagt in OrderPreview komponent och useEffect för att städa upp socket.
  */

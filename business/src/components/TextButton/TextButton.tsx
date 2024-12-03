@@ -1,15 +1,18 @@
 import './textButton.css';
 interface TextButton {
     children: string;
-    onClick?: () => void;
+    onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void;
     disabled?: boolean;
+    modifier?: string;
 }
-const TextButton: React.FC<TextButton> = ({ children, onClick, disabled }) => {
+const TextButton: React.FC<TextButton> = ({ children, onClick, disabled, modifier }) => {
     return (
         <button
-            className={`text-button ${disabled ? 'text-button--disabled' : ''}`}
-            onClick={onClick}
-            disabled={disabled}>
+            className={`text-button ${disabled ? 'text-button--disabled' : ''} ${
+                modifier ? `text-button--${modifier}` : ''
+            }`}
+            disabled={disabled}
+            onClick={onClick}>
             {children}
         </button>
     );
@@ -25,5 +28,5 @@ export default TextButton;
  * Ändrade färg till rosa och satte drop-shadow.
  *
  * Ändrat: Magnus
- * Lade till disabled funktionalitet med css.
+ * Lade till disabled funktionalitet med css. Kan skicka ned en modifier klass. Har nu stop propagation på onClick för att förhindra att flera funktioner utlöses.
  */

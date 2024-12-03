@@ -1,10 +1,11 @@
 import { useEffect } from 'react';
 import { OrderType } from '../../interfaces/interfaceOrder';
-import { useOrderState } from '../../services/mutations';
 import { useGetOrders } from '../../services/queries';
 import { socket } from '../../services/webSocket/ioSocket';
 import OrderCard from '../OrderCard/OrderCard';
 import './checkoutOrder.css';
+import useOrderStore from '../../stores/ordersStore';
+import OrderPreview from '../OrderPreview/OrderPreview';
 
 interface Props {
     changeview: () => void;
@@ -12,16 +13,10 @@ interface Props {
 
 const CheckoutOrder = ({ changeview }: Props) => {
     const { data, isLoading, isError, error, refetch } = useGetOrders();
-    const { mutate: markAsDelivered } = useOrderState();
+    const { isOrderPreviewOpen } = useOrderStore();
 
     useEffect(() => {
         const handleNewOrder = () => {
-            console.log('logging newOrder');
-            refetch();
-        };
-
-        const handleNewOrderStatus = () => {
-            console.log('logging newOrderStatus');
             refetch();
         };
 
@@ -30,12 +25,12 @@ const CheckoutOrder = ({ changeview }: Props) => {
         }
 
         if (!socket.hasListeners('newOrderStatus')) {
-            socket.on('newOrderStatus', handleNewOrderStatus);
+            socket.on('newOrderStatus', handleNewOrder);
         }
 
         return () => {
             socket.off('newOrder', handleNewOrder);
-            socket.off('newOrderStatus', handleNewOrderStatus);
+            socket.off('newOrderStatus', handleNewOrder);
         };
     }, [refetch]);
 
@@ -58,12 +53,9 @@ const CheckoutOrder = ({ changeview }: Props) => {
     const ordersPrepering = data?.filter((order) => order.state === 'preparing') as OrderType[];
     const ordersReady = data?.filter((order) => order.state === 'ready') as OrderType[];
 
-    const handleMarkAsDelivered = (id: string, state: 'history') => {
-        markAsDelivered({ id, state });
-    };
-
     return (
         <section className='checkoutOrder'>
+            {isOrderPreviewOpen && <OrderPreview />}
             <article className='checkoutOrder__section'>
                 <h2 className='checkoutOrder__section-title'> Väntande Ordrar ({ordersWaiting.length}st) </h2>
                 <ul className='checkoutOrder__order-list'>
@@ -84,12 +76,7 @@ const CheckoutOrder = ({ changeview }: Props) => {
                 <h2 className='checkoutOrder__section-title'> Redo att hämtas </h2>
                 <ul className='checkoutOrder__order-list'>
                     {ordersReady.map((order) => (
-                        <OrderCard
-                            size={'small'}
-                            order={order}
-                            onClick={() => handleMarkAsDelivered(order._id, 'history')}
-                            key={order._id}
-                        />
+                        <OrderCard size={'small'} order={order} key={order._id} />
                     ))}
                 </ul>
             </article>

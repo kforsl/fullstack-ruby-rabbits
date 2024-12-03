@@ -85,7 +85,8 @@ const run = async () => {
                 socket.to('employee').to(id).emit('newOrder');
             });
             socket.on('updateOrderStatus', (id) => {
-                socket.to('employee').to(id).emit('newOrderStatus');
+                // socket.to('employee').to(id).emit('newOrderStatus');
+                io.emit('newOrderStatus');
             });
         });
         server.listen(3000, () => console.log(`Server started on PORT ${PORT}`));

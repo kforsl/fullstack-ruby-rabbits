@@ -8,6 +8,8 @@ interface OrderState {
     setOriginalOrder: (arg: OrderType) => void;
     incrementItem: (productId: string, size: 'small' | 'medium' | 'large') => void;
     decrementItem: (productId: string, size: 'small' | 'medium' | 'large') => void;
+    isOrderPreviewOpen: boolean;
+    setIsOrderPreviewOpen: (value: boolean | ((prev: boolean) => boolean)) => void;
 }
 
 const useOrderStore = create<OrderState>((set) => ({
@@ -82,10 +84,18 @@ const useOrderStore = create<OrderState>((set) => ({
             };
         });
     },
+    isOrderPreviewOpen: false,
+    setIsOrderPreviewOpen: (value) =>
+        set((state) => ({
+            isOrderPreviewOpen: typeof value === 'function' ? value(state.isOrderPreviewOpen) : value,
+        })),
 }));
 
 export default useOrderStore;
 /*
  * Författare: Magnus
  * Skapade upp store för liggande ordrar så vi kan göra en uppdatering till api.
+ *
+ * Ändrat: Magnus
+ * Lagt till isOrderPreviewOpen med setter för att visa dialog.
  */
