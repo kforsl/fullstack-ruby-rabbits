@@ -77,31 +77,24 @@
     .header {
         height: 40rem;
         background-size: contain;
-
     }
 }
 
 @media screen and (max-width: 800px) {
     .header {
         height: 35rem;
-        background-size: contain;
-
     }
 }
 
 @media screen and (max-width: 700px) {
     .header {
         height: 30rem;
-        background-size: contain;
-
     }
 }
 
 @media screen and (max-width: 630px) {
     .header {
         height: 26rem;
-        background-size: contain;
-
     }
 }
 
@@ -112,7 +105,6 @@
 
     .header {
         height: 15rem;
-        background-size: contain;
 
     }
 
