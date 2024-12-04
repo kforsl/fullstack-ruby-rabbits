@@ -52,7 +52,6 @@ const NavigationMenu: React.FC = () => {
                             </button>
                         </li>
                     </ul>
-
                     <section className='hamburger-wrapper'>
                         <button
                             className={`hamburger-button hamburger-button--${isNavOpen ? 'active' : 'inactive'}`}
@@ -64,6 +63,7 @@ const NavigationMenu: React.FC = () => {
                             <span></span>
                         </button>
                     </section>
+                    <img src='../../../public/images/logotype.png' alt='' className='navigation-menu__logotype' />{' '}
                 </>
             ) : (
                 <>
