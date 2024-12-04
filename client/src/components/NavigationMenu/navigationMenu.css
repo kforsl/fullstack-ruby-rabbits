@@ -7,10 +7,11 @@
 }
 
 .navigation-burger {
-    grid-template-columns: repeat(2, auto);
+    grid-template-columns: repeat(3, minmax(0, 1fr));
     justify-content: space-between;
     align-content: start;
     width: 100%;
+    background-color: var(--bg-primary);
 }
 
 .navigation-burger__list {
@@ -56,6 +57,7 @@
     font-family: var(--title-font);
     font-size: var(--font-size-xl);
 }
+
 .navigation-menu__link--profile {
     background: transparent;
     border: none;
@@ -68,6 +70,7 @@
     width: 100%;
     padding-left: var(--spacing-xs);
 }
+
 .hamburger-button {
     display: flex;
     flex-direction: column;
@@ -94,9 +97,40 @@
 .hamburger-button--active span:first-child {
     transform: translateY(225%) rotate(-225deg);
 }
+
 .hamburger-button--active span:last-child {
     transform: translateY(-225%) rotate(225deg);
 }
+
 .hamburger-button--active span:nth-child(2) {
     width: 0;
+}
+
+.navigation-menu__logotype {
+    z-index: -1;
+    position: absolute;
+    grid-column: 2/3;
+    top: var(--spacing-s);
+    justify-self: center;
+    max-width: 5rem;
+}
+
+@media screen and (max-width: 550px) {
+    .navigation-menu__link {
+        font-size: var(--font-size-3xl);
+    }
+
+    .hamburger-button {
+        padding: var(--spacing-s);
+        min-width: 4rem
+    }
+
+    .navigation-burger,
+    .navigation-menu {
+        padding: 0;
+    }
+
+    .cart {
+        grid-column: 3/4;
+    }
 }

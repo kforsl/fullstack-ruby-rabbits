@@ -52,7 +52,6 @@ const NavigationMenu: React.FC = () => {
                             </button>
                         </li>
                     </ul>
-
                     <section className='hamburger-wrapper'>
                         <button
                             className={`hamburger-button hamburger-button--${isNavOpen ? 'active' : 'inactive'}`}
@@ -64,6 +63,12 @@ const NavigationMenu: React.FC = () => {
                             <span></span>
                         </button>
                     </section>
+                    <img
+                        src='/images/logotype.png'
+                        alt='Leende blå person med h och m som ögon'
+                        className='navigation-menu__logotype'
+                        onClick={() => window.scrollTo(0, 0)}
+                    />
                 </>
             ) : (
                 <>
@@ -98,4 +103,7 @@ export default NavigationMenu;
  *
  * Ändrat: Kim
  * Lagt till så meny ändras till en mobil navigationsmeny
+ *
+ * Ändrat: Magnus
+ * Skapat logotyp för att visa i mobilt-läge. Om man klickar scrollar den upp dig. Ändrat storlek på navigation i burgare, kanske för stort. Padding ligger nu på knappar istället för wrapper.
  */
