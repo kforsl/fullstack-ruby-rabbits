@@ -3,14 +3,22 @@ import './profileOrderList.css';
 import { useGetOrders } from '../../services/queries/useGetOrders';
 import { OrderType } from '../../interfaces/interfaceOrder';
 import { socket } from '../../services/webSocket/ioSocket';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 
 interface Props {
     id: string;
 }
 
 const ProfileOrderList = ({ id }: Props) => {
-    const { data, isLoading, isError, error } = useGetOrders(id);
+    const { data, isLoading, isError, error, refetch } = useGetOrders(id);
+
+    useEffect(() => {
+        socket.on('newOrderStatus', refetch);
+
+        return () => {
+            socket.off('newOrderStatus', refetch);
+        };
+    }, [refetch]);
 
     if (isLoading) return <ul>Laddar...</ul>;
     if (isError)

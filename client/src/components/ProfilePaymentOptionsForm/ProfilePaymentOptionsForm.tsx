@@ -7,7 +7,7 @@ import { useUpdatePaymentOptions } from '../../services/mutations/useUpdatePayme
 import { useNavigate } from 'react-router-dom';
 
 const ProfilePaymentOptionsForm = () => {
-    const { mutate: updatePaymentOptions, isPending: isUpdating, isSuccess: isUpdated } = useUpdatePaymentOptions();
+    const { mutate: updatePaymentOptions } = useUpdatePaymentOptions();
     const { customer } = useAuthStore();
     const [swishPaymentOption, setSwishPaymentOption] = useState<PaymentOption>();
     const [cardPaymentOption, setCardPaymentOption] = useState<PaymentOption>();
@@ -38,11 +38,11 @@ const ProfilePaymentOptionsForm = () => {
     const handleChangeInput = (e: React.FormEvent) => {
         const { name, value } = e.target as HTMLInputElement;
         if (name === 'Swish') {
-            setSwishPaymentOption((prevValue) => {
+            setSwishPaymentOption(() => {
                 return { paymentOption: name, paymentDetails: value };
             });
         } else {
-            setCardPaymentOption((prevValue) => {
+            setCardPaymentOption(() => {
                 return { paymentOption: name, paymentDetails: value };
             });
         }
@@ -91,7 +91,11 @@ const ProfilePaymentOptionsForm = () => {
                                     className='payment-form__text-input'
                                     type='text'
                                     placeholder='0701234567'
-                                    value={swishPaymentOption?.paymentDetails}
+                                    value={
+                                        swishPaymentOption?.paymentDetails
+                                            ? swishPaymentOption?.paymentDetails
+                                            : customer?.phone
+                                    }
                                     onChange={handleChangeInput}
                                 />
                             </label>
