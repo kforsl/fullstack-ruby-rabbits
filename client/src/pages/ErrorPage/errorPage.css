@@ -1,0 +1,54 @@
+.error-page {
+    flex: 1;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto 1fr;
+    min-height: 90svh;
+    width: 100%;
+    row-gap: var(--spacing-m);
+    margin-block: var(--spacing-l);
+    padding: var(--spacing-m);
+    background-image: url(../../../public/images/error-page.png);
+    background-repeat: no-repeat;
+    background-position: bottom 20vh right 1rem;
+    background-size: 30rem;
+}
+
+.error-page__title {
+    font-size: 8rem;
+    font-weight: 900;
+}
+
+.error-page__description-wrapper {
+    font-size: var(--font-size-xl);
+    max-width: 20ch;
+    font-weight: 600;
+}
+
+
+@media screen and (max-width: 900px) {
+    .error-page__title {
+        font-size: 6rem;
+    }
+
+    .error-page {
+        padding: var(--spacing-s);
+    }
+
+    .error-page__description {
+        font-size: var(--font-size-l);
+        text-wrap: balance;
+    }
+}
+
+@media screen and (max-width: 800px) {
+    .error-page {
+        padding: var(--spacing-s);
+    }
+}
+
+@media screen and (max-width: 450px) {
+    .error-page {
+        background-size: 15rem;
+    }
+}
