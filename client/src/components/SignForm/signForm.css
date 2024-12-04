@@ -23,13 +23,14 @@
 }
 
 .authentication-form__wrapper {
-    position: absolute;
+    /* position: absolute; */
+    position: relative;
     display: flex;
     flex-direction: column;
     max-width: 800px;
-    min-width: 400px;
-    width: 95vw;
-    margin: auto;
+    /* min-width: 400px; */
+    width: 95svw;
+    /* margin: auto; */
     padding: var(--spacing-xl) var(--spacing-m) var(--spacing-m) var(--spacing-m);
     background: var(--bg-primary);
     border-radius: 8px;
@@ -74,7 +75,7 @@
     top: 0;
     display: flex;
     flex-direction: column;
-    padding: var(--spacing-s) var(--spacing-m);
+    padding-block: var(--spacing-s);
 }
 .main-form--active {
     opacity: 1;
@@ -95,23 +96,6 @@
     top: 1.56rem;
     left: 0.56rem;
 }
-.input-field {
-    width: 100%;
-    font-family: var(--bread-font);
-    margin-block: var(--spacing-xs);
-    font-size: var(--font-size-l);
-    padding: var(--spacing-xs);
-    border-radius: 10px;
-    border: 1px solid var(--color-black);
-    box-shadow: 3px 3px 0 var(--color-black);
-    background: var(--bg-primary);
-    transition: background 0.2s ease-in-out, padding 0.2s ease-in-out;
-}
-
-.input-field:focus {
-    background: var(--color-white);
-    padding: var(--spacing-s);
-}
 
 .form-subtitle {
     text-align: center;
@@ -127,4 +111,45 @@
     row-gap: var(--spacing-s);
     justify-content: space-evenly;
     padding-top: var(--spacing-s);
+}
+
+.form-buttons__back-button {
+    font-weight: 800;
+    color: var(--color-black);
+    /* border: 1px solid var(--color-black); */
+    font-size: var(--font-size-m);
+    padding-inline: var(--spacing-xs);
+    cursor: pointer;
+    position: absolute;
+    top: var(--spacing-m);
+    right: var(--spacing-m);
+}
+@media screen and (max-width: 540px) {
+    .authentication-form__wrapper {
+        border-radius: 0;
+        width: 100%;
+        height: 100%;
+        justify-content: center;
+        border: none;
+    }
+
+    .authentication-form__wrapper {
+        padding: var(--spacing-m) var(--spacing-s);
+    }
+
+    .input-field {
+        font-size: var(--font-size-m);
+    }
+
+    .form-buttons__back-button {
+        font-weight: 800;
+        color: var(--color-black);
+        /* border: 1px solid var(--color-black); */
+        font-size: var(--font-size-m);
+        padding-inline: var(--spacing-xs);
+        cursor: pointer;
+        position: absolute;
+        top: var(--spacing-xs);
+        right: var(--spacing-s);
+    }
 }
