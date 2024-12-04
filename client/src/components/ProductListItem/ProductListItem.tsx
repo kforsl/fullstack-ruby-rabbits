@@ -37,4 +37,7 @@ export default ProductListItem;
  *
  * Ändrat: Magnus
  * Komponent skickar nu ned size och productItem för användning när man lägger till saker från meny till cart.
+ 
+ * Ändrat: Magnus
+ * Renderar nu ut description istället för ingredients. Gjort det responsivt för mobil. Omdesignat för mobilt läge som nu visar bild.
  */

@@ -47,7 +47,11 @@ export default Header;
  * titeln renderas ut med span för att kunna sätta storlek och position per bokstav. Svg bakgrund behöver fixas för responsivitet.
  */
 
-/**
+/*
  * Ändrat: Kim
  * Lagt till funktion för att kunna visa två olika headers baserat på vilken sida som visas.
+ */
+/*
+ * Ändrat: Magnus
+ * Gjort header responsive.
  */
