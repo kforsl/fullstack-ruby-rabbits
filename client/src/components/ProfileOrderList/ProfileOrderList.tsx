@@ -3,13 +3,23 @@ import './profileOrderList.css';
 import { useGetOrders } from '../../services/queries/useGetOrders';
 import { OrderType } from '../../interfaces/interfaceOrder';
 import { socket } from '../../services/webSocket/ioSocket';
+import { useEffect } from 'react';
 
 interface Props {
     id: string;
 }
 
 const ProfileOrderList = ({ id }: Props) => {
-    const { data, isLoading, isError, error } = useGetOrders(id);
+    const { data, isLoading, isError, error, refetch } = useGetOrders(id);
+
+    useEffect(() => {
+        socket.on('newOrderStatus', refetch);
+
+        return () => {
+            socket.off('newOrderStatus', refetch);
+        };
+    }, [refetch]);
+
     if (isLoading) return <ul>Laddar...</ul>;
     if (isError)
         return (
@@ -20,6 +30,7 @@ const ProfileOrderList = ({ id }: Props) => {
                 </ul>
             </section>
         );
+
     return (
         <section className='profile-order-list'>
             {data !== null ? (
@@ -36,7 +47,14 @@ const ProfileOrderList = ({ id }: Props) => {
                                 data.filter(
                                     (order: OrderType) => order.state !== 'history' && order.state !== 'annulled'
                                 ) as OrderType[]
-                            ).map((order: OrderType) => <OrderListItem order={order} key={order._id} />)
+                            )
+                                .reverse()
+                                .map((order: OrderType, index) => {
+                                    if (index < 2) {
+                                        socket.emit('joinOrderRoom', order._id);
+                                        return <OrderListItem order={order} key={order._id} />;
+                                    }
+                                })
                         )}
                     </ul>
                     <ul>
@@ -51,10 +69,13 @@ const ProfileOrderList = ({ id }: Props) => {
                                 data.filter(
                                     (order: OrderType) => order.state === 'history' || order.state === 'annulled'
                                 ) as OrderType[]
-                            ).map((order: OrderType) => {
-                                socket.emit('joinOrderRoom', order._id);
-                                return <OrderListItem order={order} key={order._id} />;
-                            })
+                            )
+                                .reverse()
+                                .map((order: OrderType, index) => {
+                                    if (index < 5) {
+                                        return <OrderListItem order={order} key={order._id} />;
+                                    }
+                                })
                         )}
                     </ul>
                 </>
