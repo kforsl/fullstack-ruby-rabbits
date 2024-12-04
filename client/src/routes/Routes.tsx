@@ -4,6 +4,7 @@ import AboutUsPage from '../pages/AboutUsPage/AboutUsPage';
 import ProfilePage from '../pages/ProfilePage/ProfilePage';
 import FinalizeOrder from '../pages/FinalizeOrderPage/FinalizeOrder';
 import OrderPage from '../pages/OrderPage/OrderPage';
+import ErrorPage from '../pages/ErrorPage/ErrorPage';
 
 const RoutesComponent: React.FC = () => {
     return (
@@ -13,6 +14,7 @@ const RoutesComponent: React.FC = () => {
             <Route path='/profil' element={<ProfilePage />} />
             <Route path='/orderbekraftelse' element={<FinalizeOrder />} />
             <Route path='/ordrar/:id' element={<OrderPage />} />
+            <Route path='/error' element={<ErrorPage />} />
         </Routes>
     );
 };
@@ -25,4 +27,7 @@ export default RoutesComponent;
  
  * Ändrat: Magnus
  * Lade till ordrar route.
+ * 
+ * Ändrat: Magnus
+ * Lade till error-route.
  */

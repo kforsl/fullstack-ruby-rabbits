@@ -3,12 +3,14 @@ import ProductList from '../../components/ProductList/ProductList';
 import './menuPage.css';
 import { useGetMenu } from '../../services/queries';
 import { ProductType } from '../../interfaces/interfaceProduct';
+import { useNavigate } from 'react-router-dom';
 
 const MenuPage: React.FC = () => {
-    const { data, isLoading, isError, error } = useGetMenu();
+    const { data, isLoading, isError } = useGetMenu();
+    const navigate = useNavigate();
 
     if (isLoading) return <p>Loading...</p>;
-    if (isError) return <p>{`${error.message}`}</p>;
+    isError && navigate('/error');
 
     const specials = data?.data.filter((item) => item.isSpecial === true) as ProductType[];
     const iceCream = data?.data.filter((item) => item.type === 'icecream') as ProductType[];
@@ -48,5 +50,5 @@ export default MenuPage;
  * Implementerade useQuery istället för zustand-store/useEffect för att rendera ut menyn.
  
  * Ändrat: Magnus
- * Första passering av responsivitet gjord. Popularitems behöver ändras och kanske border på sections samt paddingblock.
+ * Första passering av responsivitet gjord. Popularitems behöver ändras och kanske border på sections samt paddingblock. Navigerar till errorpage om det blir fel när man hämtar menyn.
  */
