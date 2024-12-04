@@ -24,3 +24,10 @@
     font-size: var(--font-size-xl);
     align-self: end;
 }
+
+@media screen and (max-width: 550px) {
+    .menu-to-cart-incrementer {
+        gap: var(--spacing-xs);
+        width: unset;
+    }
+}

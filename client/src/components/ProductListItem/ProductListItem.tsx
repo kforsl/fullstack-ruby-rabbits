@@ -12,11 +12,13 @@ const ProductListItem = ({ productItem }: Props) => {
             <img className='product-list-item__image' src={productItem.imageUrl} alt={`${productItem.name} image`} />
             <section className='product-list-item__item-info'>
                 <h2 className='product-list-item__title'> {productItem.name}</h2>
-                <ul className='product-list-item__ingredients-list'>
+                <p className='product-list-item__description'>{productItem.description}</p>
+                {/* <ul className='product-list-item__ingredients-list'>
+                    
                     {productItem.ingredients.map((product) => (
                         <li key={product.ingredient._id}>{product.ingredient.name},</li>
-                    ))}
-                </ul>
+                    ))} 
+                </ul> */}
             </section>
             <section className='product-list-item__price-wrapper'>
                 {productItem.sizes.map((item) => (
