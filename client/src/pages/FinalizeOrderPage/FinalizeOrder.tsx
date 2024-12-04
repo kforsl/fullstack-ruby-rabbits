@@ -13,7 +13,7 @@ const FinalizeOrder: React.FC = () => {
     const { setOrder } = useOrderStore();
     const [comment, setComment] = useState('');
     const navigate = useNavigate();
-    const { mutate: createOrder, isPending, isError, error } = useCreateOrder();
+    const { mutate: createOrder, isPending, isError } = useCreateOrder();
 
     const calculateTotalPrice = (): number =>
         cart.reduce((totalCost: number, cartItem: CartItem) => totalCost + cartItem.price * cartItem.quantity, 0);
@@ -52,32 +52,28 @@ const FinalizeOrder: React.FC = () => {
             },
         });
     };
-
+    isError && navigate('/error');
     return (
         <main className='finalize-page wrapper'>
-            {isError ? (
-                <h1 className='finalize-page__title'>{error.message}</h1>
-            ) : (
-                <article className='finalize-page__confirmation-wrapper'>
-                    <h1 className='finalize-page__title'>DIN ORDER:</h1>
-                    <ul className='finalize-page__order-list'>
-                        {cart.map((item) => (
-                            <CartItemComponent key={item.id + item.size} cartItem={item} />
-                        ))}
-                    </ul>
-                    <form className='finalize-page__comment-form'>
-                        <textarea
-                            placeholder='HAR DU ÖNSKEMÅL PÅ DIN BESTÄLLNING? SKRIV HÄR...'
-                            name='orderComment'
-                            id='orderComment'
-                            className='finalize-page__textarea'
-                            onChange={(e) => setComment(e.target.value)}></textarea>
-                    </form>
-                    {cart.length !== 0 && (
-                        <TextButton onClick={createNewOrder}>{isPending ? 'Loading...' : 'SKICKA ORDER'}</TextButton>
-                    )}
-                </article>
-            )}
+            <article className='finalize-page__confirmation-wrapper'>
+                <h1 className='finalize-page__title'>DIN ORDER:</h1>
+                <ul className='finalize-page__order-list'>
+                    {cart.map((item) => (
+                        <CartItemComponent key={item.id + item.size} cartItem={item} />
+                    ))}
+                </ul>
+                <form className='finalize-page__comment-form'>
+                    <textarea
+                        placeholder='HAR DU ÖNSKEMÅL PÅ DIN BESTÄLLNING? SKRIV HÄR...'
+                        name='orderComment'
+                        id='orderComment'
+                        className='finalize-page__textarea'
+                        onChange={(e) => setComment(e.target.value)}></textarea>
+                </form>
+                {cart.length !== 0 && (
+                    <TextButton onClick={createNewOrder}>{isPending ? 'Loading...' : 'SKICKA ORDER'}</TextButton>
+                )}
+            </article>
         </main>
     );
 };
