@@ -11,3 +11,11 @@
     font-size: var(--font-size-l);
     color: var(--color-black);
 }
+
+@media screen and (max-width: 550px) {
+    .product-size-quantity-item {
+        min-height: 4rem;
+        max-width: fit-content;
+        justify-self: center;
+    }
+}
