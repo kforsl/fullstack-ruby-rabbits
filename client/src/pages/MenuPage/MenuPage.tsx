@@ -50,5 +50,5 @@ export default MenuPage;
  * Implementerade useQuery istället för zustand-store/useEffect för att rendera ut menyn.
  
  * Ändrat: Magnus
- * Första passering av responsivitet gjord. Popularitems behöver ändras och kanske border på sections samt paddingblock. Navigerar till errorpage om det blir fel när man hämtar menyn.
+ * Första passering av responsivitet gjord. Navigerar till errorpage om det blir fel när man hämtar menyn. Popularitems får sidoscroll vid ipad storlek ungefär.
  */

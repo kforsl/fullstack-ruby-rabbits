@@ -24,7 +24,7 @@ const NavigationMenu: React.FC = () => {
     };
 
     useEffect(() => {
-        const breakpoint: number = 550;
+        const breakpoint: number = 551;
         if (!isBurgerShowing) if (windowWidth < breakpoint) setIsBurgerShowing(true);
 
         if (isBurgerShowing) if (windowWidth > breakpoint) setIsBurgerShowing(false);

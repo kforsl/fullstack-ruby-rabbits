@@ -72,12 +72,20 @@
 }
 
 
-@media screen and (max-width: 460px) {
+@media screen and (max-width: 500px) {
+    .product-list-item {
+        padding-bottom: var(--spacing-l);
+        border-bottom: 2px dotted var(--color-black);
+    }
+
+    .product-list-item:last-of-type {
+
+        border-bottom: 2px solid var(--color-black);
+    }
 
     .product-list-item__image {
         max-width: 6rem;
         grid-row: 1/2;
-
     }
 
     .product-list-item__price-wrapper {
