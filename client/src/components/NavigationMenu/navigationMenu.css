@@ -113,6 +113,7 @@
     top: var(--spacing-s);
     justify-self: center;
     max-width: 5rem;
+    cursor: pointer;
 }
 
 @media screen and (max-width: 550px) {
