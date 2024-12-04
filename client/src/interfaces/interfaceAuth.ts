@@ -56,3 +56,13 @@ export interface PasswordForm {
     newPassword: string;
     verifyPassword: string;
 }
+
+export interface FormInputs {
+    inputName: string;
+    placeholder: string;
+    type: 'email' | 'password' | 'text' | 'tel';
+    inputId: string;
+    value: string;
+    onChangeFunc?: (event: React.FormEvent) => void;
+    dataFormType?: string;
+}
