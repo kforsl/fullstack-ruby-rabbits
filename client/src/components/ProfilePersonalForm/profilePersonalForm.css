@@ -3,8 +3,10 @@
     flex-direction: column;
     gap: var(--spacing-s);
     padding: var(--spacing-s);
+
     max-width: 600px;
     margin: 0 auto;
+    margin-top: var(--spacing-l);
     background-color: var(--bg-primary);
     align-items: start;
 
@@ -44,6 +46,7 @@
     display: grid;
     grid-template-columns: 1fr 0.5fr;
     gap: var(--spacing-s);
+    width: 100%;
 }
 
 .personal-form__adress-label {
@@ -54,4 +57,29 @@
 }
 .personal-form__zip-label {
     grid-column: 2;
+}
+
+@media screen and (max-width: 850px) {
+    .personal-form {
+        margin-top: 0;
+        padding-bottom: var(--spacing-m);
+        grid-row: 2;
+        grid-column: 1 / -1;
+    }
+}
+
+@media screen and (max-width: 650px) {
+    .personal-form__name-section {
+        grid-template-columns: 1fr;
+        width: 100%;
+    }
+}
+
+@media screen and (max-width: 650px) {
+    .personal-form__city-label {
+        grid-column: 1 / -1;
+    }
+    .personal-form__zip-label {
+        grid-column: 1 / -1;
+    }
 }

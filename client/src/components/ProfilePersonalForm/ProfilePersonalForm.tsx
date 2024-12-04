@@ -14,6 +14,8 @@ const ProfilePersonalForm = () => {
     const [city, setCity] = useState<string>('');
     const [zipcode, setZipcode] = useState<string>('');
 
+    const [isEditing, setIsEditing] = useState<boolean>(false);
+
     useEffect(() => {
         const storageInformation: string | null = sessionStorage.getItem('user');
         const storageObject: Customer = storageInformation && JSON.parse(storageInformation);
@@ -33,21 +35,22 @@ const ProfilePersonalForm = () => {
 
     const updateDataInDB = (e: React.FormEvent) => {
         e.preventDefault();
-        updatePersonalData({
-            firstName,
-            lastName,
-            socialSecurityNumber,
-            email,
-            phone,
-            address,
-            zipcode,
-            city,
-        });
+        if (!isEditing) {
+            updatePersonalData({
+                firstName,
+                lastName,
+                socialSecurityNumber,
+                email,
+                phone,
+                address,
+                zipcode,
+                city,
+            });
+        }
     };
 
     return (
         <form onSubmit={updateDataInDB} className='personal-form'>
-            <h2 className='personal-form__title'> PersonUppgifter: </h2>
             <section className='personal-form__name-section'>
                 <label className='personal-form__label'>
                     Förnamn:
@@ -58,6 +61,7 @@ const ProfilePersonalForm = () => {
                         value={firstName}
                         onChange={(e) => setFirstName(e.target.value)}
                         required
+                        disabled={!isEditing}
                     />
                 </label>
                 <label className='personal-form__label'>
@@ -69,6 +73,7 @@ const ProfilePersonalForm = () => {
                         value={lastName}
                         onChange={(e) => setLastName(e.target.value)}
                         required
+                        disabled={!isEditing}
                     />
                 </label>
             </section>
@@ -81,6 +86,7 @@ const ProfilePersonalForm = () => {
                     value={socialSecurityNumber}
                     onChange={(e) => setSocialSecurityNumber(e.target.value)}
                     required
+                    disabled={!isEditing}
                 />
             </label>
             <label className='personal-form__label'>
@@ -92,6 +98,7 @@ const ProfilePersonalForm = () => {
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     required
+                    disabled={!isEditing}
                 />
             </label>
             <label className='personal-form__label'>
@@ -103,6 +110,7 @@ const ProfilePersonalForm = () => {
                     value={phone}
                     onChange={(e) => setPhone(e.target.value)}
                     required
+                    disabled={!isEditing}
                 />
             </label>
             <section className='personal-form__adress-section'>
@@ -115,6 +123,7 @@ const ProfilePersonalForm = () => {
                         value={address}
                         onChange={(e) => setAddress(e.target.value)}
                         required
+                        disabled={!isEditing}
                     />
                 </label>
                 <label className='personal-form__city-label'>
@@ -126,6 +135,7 @@ const ProfilePersonalForm = () => {
                         value={city}
                         onChange={(e) => setCity(e.target.value)}
                         required
+                        disabled={!isEditing}
                     />
                 </label>
                 <label className='personal-form__zip-label'>
@@ -137,10 +147,15 @@ const ProfilePersonalForm = () => {
                         value={zipcode}
                         onChange={(e) => setZipcode(e.target.value)}
                         required
+                        disabled={!isEditing}
                     />
                 </label>
             </section>
-            <TextButton children='Ändra' />
+            {isEditing ? (
+                <TextButton onClick={() => setIsEditing(false)}> SPARA ÄNDRING </TextButton>
+            ) : (
+                <TextButton onClick={() => setIsEditing(true)}> ÄNDRA </TextButton>
+            )}
         </form>
     );
 };

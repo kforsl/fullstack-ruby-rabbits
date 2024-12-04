@@ -22,3 +22,10 @@
     border-bottom: 1px solid var(--color-black);
     user-select: none;
 }
+
+@media screen and (max-width: 850px) {
+    .profile-order-list {
+        grid-column: 1 / -1;
+        grid-row: 3;
+    }
+}
