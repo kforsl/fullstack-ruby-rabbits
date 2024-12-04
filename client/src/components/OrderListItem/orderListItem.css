@@ -1,6 +1,6 @@
 .order-list-item {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    grid-template-columns: repeat(4, auto);
     gap: var(--spacing-s);
     padding-inline: var(--spacing-s);
     padding-block: var(--spacing-s) var(--font-size-m);
@@ -20,4 +20,16 @@
 .order-list-item__date,
 .order-list-item__price {
     place-self: end;
+}
+
+@media screen and (max-width: 464px) {
+    .order-list-item {
+        grid-template-columns: repeat(2, auto);
+        gap: none;
+        justify-content: space-between;
+    }
+    .order-list-item__date,
+    .order-list-item__price {
+        place-self: start;
+    }
 }

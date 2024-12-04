@@ -7,11 +7,12 @@ import { useUpdatePaymentOptions } from '../../services/mutations/useUpdatePayme
 import { useNavigate } from 'react-router-dom';
 
 const ProfilePaymentOptionsForm = () => {
-    const { mutate: updatePaymentOptions, isPending: isUpdating, isSuccess: isUpdated } = useUpdatePaymentOptions();
+    const { mutate: updatePaymentOptions } = useUpdatePaymentOptions();
     const { customer } = useAuthStore();
     const [swishPaymentOption, setSwishPaymentOption] = useState<PaymentOption>();
     const [cardPaymentOption, setCardPaymentOption] = useState<PaymentOption>();
     const [checkboxes, setCheckboxes] = useState<{ swish: boolean; card: boolean }>({ swish: false, card: false });
+    const [isEditing, setIsEditing] = useState<boolean>(false);
     const navigate = useNavigate();
     useEffect(() => {
         if (customer === null) navigate('/');
@@ -38,11 +39,11 @@ const ProfilePaymentOptionsForm = () => {
     const handleChangeInput = (e: React.FormEvent) => {
         const { name, value } = e.target as HTMLInputElement;
         if (name === 'Swish') {
-            setSwishPaymentOption((prevValue) => {
+            setSwishPaymentOption(() => {
                 return { paymentOption: name, paymentDetails: value };
             });
         } else {
-            setCardPaymentOption((prevValue) => {
+            setCardPaymentOption(() => {
                 return { paymentOption: name, paymentDetails: value };
             });
         }
@@ -55,23 +56,25 @@ const ProfilePaymentOptionsForm = () => {
     };
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
-        const paymentOptions: PaymentOption[] = [];
+        if (!isEditing) {
+            const paymentOptions: PaymentOption[] = [];
 
-        if (checkboxes.swish && swishPaymentOption !== undefined) paymentOptions.push(swishPaymentOption);
-        if (checkboxes.card && cardPaymentOption !== undefined) paymentOptions.push(cardPaymentOption);
-        if (paymentOptions !== undefined) {
-            updatePaymentOptions({ paymentOptions });
-            if (customer !== null) {
-                customer.paymentOptions = paymentOptions;
-                sessionStorage.setItem('user', JSON.stringify(customer));
+            if (checkboxes.swish && swishPaymentOption !== undefined) paymentOptions.push(swishPaymentOption);
+            if (checkboxes.card && cardPaymentOption !== undefined) paymentOptions.push(cardPaymentOption);
+            if (paymentOptions !== undefined) {
+                updatePaymentOptions({ paymentOptions });
+                if (customer !== null) {
+                    customer.paymentOptions = paymentOptions;
+                    sessionStorage.setItem('user', JSON.stringify(customer));
+                }
             }
+            console.log('fungerar');
         }
-        console.log('fungerar');
     };
     return (
         <>
             <form className='payment-form' onSubmit={handleSubmit}>
-                <h2 className='payment-form__title'> Betalningsalternativ: </h2>
+                {/* <h2 className='payment-form__title'> Betalningsalternativ: </h2> */}
 
                 <section className='payment-form__input-section'>
                     <label className='payment-form__label'>Swish</label>
@@ -81,6 +84,7 @@ const ProfilePaymentOptionsForm = () => {
                         type='checkbox'
                         checked={checkboxes.swish}
                         onChange={handleCheckbox}
+                        disabled={!isEditing}
                     />
                     {checkboxes.swish && (
                         <section className='payment-form__extra-info'>
@@ -93,6 +97,7 @@ const ProfilePaymentOptionsForm = () => {
                                     placeholder='0701234567'
                                     value={swishPaymentOption?.paymentDetails}
                                     onChange={handleChangeInput}
+                                    disabled={!isEditing}
                                 />
                             </label>
                         </section>
@@ -106,6 +111,7 @@ const ProfilePaymentOptionsForm = () => {
                         type='checkbox'
                         checked={checkboxes.card}
                         onChange={handleCheckbox}
+                        disabled={!isEditing}
                     />
                     {checkboxes.card && (
                         <section className='payment-form__extra-info'>
@@ -118,12 +124,17 @@ const ProfilePaymentOptionsForm = () => {
                                     placeholder='1234567890123456'
                                     value={cardPaymentOption?.paymentDetails}
                                     onChange={handleChangeInput}
+                                    disabled={!isEditing}
                                 />
                             </label>
                         </section>
                     )}
                 </section>
-                <TextButton>Spara</TextButton>
+                {isEditing ? (
+                    <TextButton onClick={() => setIsEditing(false)}> SPARA ÄNDRING </TextButton>
+                ) : (
+                    <TextButton onClick={() => setIsEditing(true)}> ÄNDRA </TextButton>
+                )}
             </form>
         </>
     );

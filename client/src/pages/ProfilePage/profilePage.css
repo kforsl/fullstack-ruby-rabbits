@@ -3,3 +3,11 @@
     padding: var(--spacing-m);
     min-height: 100svh;
 }
+
+.profile-page__under-construction {
+    font-size: var(--font-size-m);
+    font-family: var(--title-font);
+    display: grid;
+    place-content: center;
+    padding-bottom: var(--spacing-m);
+}
