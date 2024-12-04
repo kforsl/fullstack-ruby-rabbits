@@ -13,7 +13,7 @@ import { useCreateProduct } from '../../services/mutations/useCreateProduct';
 import { handleImageUpload } from '../../services/api/imageUpload';
 
 const ProductForm = () => {
-    const { productToEdit, isEditingProduct } = useAdminStore();
+    const { productToEdit, isEditingProduct, setIsEditingProduct } = useAdminStore();
 
     const { mutate: updateProduct } = useUpdateProduct();
     const { mutate: createProduct } = useCreateProduct();
@@ -36,10 +36,58 @@ const ProductForm = () => {
     const [formProductPriceM, setFormProductPriceM] = useState<number>(0);
     const [formProductPriceL, setFormProductPriceL] = useState<number>(0);
     const [isProductSpecial, setIsProductSpecial] = useState<boolean>(false);
-    const [formImage, setFormImage] = useState<File>();
+    const [formImage, setFormImage] = useState<File | null>();
     const [newIngredient, setNewIngredient] = useState<string>('');
     const [quantityIngredient, setQuantityIngredient] = useState<number>(0);
     const [addedIngredients, setAddedIngredients] = useState<IngredientType[]>([]);
+    const [errorMessage, setErrorMessage] = useState<string>('');
+
+    const clearFormInputs = () => {
+        setIsEditingProduct(false);
+        setFormProductName('');
+        setFormProductDescription('');
+        setFormProductType('');
+        setFormProductPriceS(0);
+        setFormProductPriceM(0);
+        setFormProductPriceL(0);
+        setIsProductSpecial(false);
+        setFormImage(null);
+        setNewIngredient('');
+        setQuantityIngredient(0);
+        setAddedIngredients([]);
+    };
+
+    const validateForm = () => {
+        if (formProductName.length < 1) {
+            setErrorMessage('Ange ett produktnamn');
+            return false;
+        }
+        if (formProductDescription.length < 1) {
+            setErrorMessage('Ange en produkt beskrivning');
+            return false;
+        }
+        if (formProductPriceS < 1 && formProductPriceM < 1 && formProductPriceL < 1) {
+            setErrorMessage('Ange pris för small, medium och large');
+            return false;
+        }
+        if (addedIngredients.length < 1) {
+            setErrorMessage('Lägg till minst en ingrediens');
+            return false;
+        }
+        return true;
+    };
+
+    const validateIngredientForm = () => {
+        if (newIngredient.length < 1) {
+            setErrorMessage('Välj en ingrediens att lägga till');
+            return false;
+        }
+        if (quantityIngredient < 1) {
+            setErrorMessage('Ange hur många gram av ingrediensen');
+            return false;
+        }
+        return true;
+    };
 
     const { data, isLoading, isError, error } = useGetIngredient();
 
@@ -47,66 +95,69 @@ const ProductForm = () => {
     if (isError) return <p>{`${error}`}</p>;
 
     const submitProductInformation = async () => {
-        const ingredientsToAdd: UpdateIngredientType[] = [];
+        if (validateForm()) {
+            setErrorMessage('');
+            const ingredientsToAdd: UpdateIngredientType[] = [];
 
-        addedIngredients.forEach((ingredient) => {
-            ingredientsToAdd.push({
-                ingredient: ingredient.ingredient._id,
-                quantityInGrams: ingredient.quantityInGrams,
+            addedIngredients.forEach((ingredient) => {
+                ingredientsToAdd.push({
+                    ingredient: ingredient.ingredient._id,
+                    quantityInGrams: ingredient.quantityInGrams,
+                });
             });
-        });
 
-        let imageUrl = isEditingProduct
-            ? productToEdit.imageUrl
-            : 'https://happymess-images.s3.eu-north-1.amazonaws.com/Image-not-found.png';
+            let imageUrl = isEditingProduct
+                ? productToEdit.imageUrl
+                : 'https://happymess-images.s3.eu-north-1.amazonaws.com/Image-not-found.png';
 
-        if (formImage) {
-            imageUrl = await handleImageUpload(formImage);
-        }
+            if (formImage) {
+                imageUrl = await handleImageUpload(formImage);
+            }
 
-        const productInformation: UpdateProductType = {
-            name: formProductName,
-            description: formProductDescription,
-            type: formProductType as 'icecream' | 'milkshake',
-            imageUrl,
-            ingredients: ingredientsToAdd,
-            isSpecial: isProductSpecial,
-            sizes: [
-                {
-                    size: 'small',
-                    price: formProductPriceS,
-                },
-                {
-                    size: 'medium',
-                    price: formProductPriceM,
-                },
-                {
-                    size: 'large',
-                    price: formProductPriceL,
-                },
-            ],
-        };
-        if (productToEdit._id.length > 0) {
-            console.log('update');
-            updateProduct({ id: productToEdit._id, product: productInformation });
-        } else {
-            console.log('create');
-            createProduct(productInformation);
+            const productInformation: UpdateProductType = {
+                name: formProductName,
+                description: formProductDescription,
+                type: formProductType as 'icecream' | 'milkshake',
+                imageUrl,
+                ingredients: ingredientsToAdd,
+                isSpecial: isProductSpecial,
+                sizes: [
+                    {
+                        size: 'small',
+                        price: formProductPriceS,
+                    },
+                    {
+                        size: 'medium',
+                        price: formProductPriceM,
+                    },
+                    {
+                        size: 'large',
+                        price: formProductPriceL,
+                    },
+                ],
+            };
+            if (productToEdit._id.length > 0) {
+                updateProduct({ id: productToEdit._id, product: productInformation });
+            } else {
+                createProduct(productInformation);
+            }
+            clearFormInputs();
         }
     };
 
     const submitIngredientForm = (e: React.SyntheticEvent<HTMLFormElement>) => {
         e.preventDefault();
-        console.log(newIngredient);
-        const foundIngredient = data?.find((ingredient) => ingredient.name === newIngredient) as IngredientItemType;
-        setAddedIngredients([
-            ...addedIngredients,
-            {
-                ingredient: foundIngredient,
-                quantityInGrams: quantityIngredient,
-            },
-        ]);
-        setQuantityIngredient(0);
+        if (validateIngredientForm()) {
+            const foundIngredient = data?.find((ingredient) => ingredient.name === newIngredient) as IngredientItemType;
+            setAddedIngredients([
+                ...addedIngredients,
+                {
+                    ingredient: foundIngredient,
+                    quantityInGrams: quantityIngredient,
+                },
+            ]);
+            setQuantityIngredient(0);
+        }
     };
 
     const removeIngredient = (ingredient: string) => {
@@ -117,6 +168,7 @@ const ProductForm = () => {
     return (
         <section className='product-form'>
             <h2 className='product-form__title'> {isEditingProduct ? 'Ändra Produkt' : 'Lägg till ny Produkt'}</h2>
+
             <section className='product-form__form-section'>
                 <form className='product-form__form'>
                     <label className='product-form__label'>
@@ -211,6 +263,7 @@ const ProductForm = () => {
                             Ingrediens
                             <select
                                 className='product-form__input'
+                                required
                                 onChange={(e) => {
                                     setNewIngredient(e.target.value);
                                 }}>
@@ -231,6 +284,7 @@ const ProductForm = () => {
                                 className='product-form__input'
                                 type='number'
                                 value={quantityIngredient}
+                                required
                                 onChange={(e) => {
                                     setQuantityIngredient(parseInt(e.target.value));
                                 }}
@@ -250,6 +304,7 @@ const ProductForm = () => {
                     </ul>
                 </form>
             </section>
+            <p className='produkt-form__error-msg'> {errorMessage} </p>
             <button onClick={submitProductInformation} className='product-form__btn'>
                 {isEditingProduct ? 'Ändra Produkten' : 'Lägg till Produkten'}
             </button>

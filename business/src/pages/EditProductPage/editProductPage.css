@@ -2,7 +2,7 @@
     display: grid;
     grid-template-columns: var(--main-grid);
     gap: var(--spacing-s);
-    max-height: 100svh;
+    height: 100svh;
     overflow: hidden;
     position: relative;
 }
@@ -10,7 +10,7 @@
 .edit-product__wrapper {
     padding-block: var(--spacing-s);
     grid-column: 1 / span 5;
-    max-height: 100svh;
+    height: 100svh;
 }
 
 .edit-product__title {
@@ -24,6 +24,7 @@
 }
 
 .checkoutMenu__edit-section {
-    padding-block: var(--spacing-s);
+    padding: var(--spacing-s);
     grid-column: 6 / -1;
+    border-left: 1px solid var(--color-black);
 }

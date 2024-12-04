@@ -63,7 +63,7 @@ const EditProductCard = ({ product }: Props) => {
                         alt={`Produktbild för ${product.name}`}
                     />
                 </figure>
-                <div className=''>
+                <div className='edit-product-card__desc-container'>
                     <h3 className='edit-product-card__title'>{product.name}</h3>
                     <p className='edit-product-card__desc'> {product.description}</p>
                 </div>

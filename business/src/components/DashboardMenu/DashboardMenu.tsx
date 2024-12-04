@@ -1,19 +1,19 @@
 import './dashboardMenu.css';
 import useAuthStore from '../../stores/authStore';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { socket } from '../../services/webSocket/ioSocket';
 
 const DashboardMenu = () => {
     const location = useLocation();
     const navigate = useNavigate();
     const { employee, setEmployee, menuIsExpanded, setMenuIsExpanded } = useAuthStore();
-    const navigation = [
+    const [navigation, setNavigation] = useState([
         { name: 'KASSA-VY', route: '/kassa' },
         { name: 'KOCK-VY', route: '/kock' },
         { name: 'LAGERSALDO', route: '/lager' },
-        { name: 'PRODUKTER', route: '/admin/produkt' },
-    ];
+    ]);
+
     useEffect(() => {
         if (navigation.some((item) => item.route === location.pathname)) {
             if (!employee) {
@@ -21,6 +21,10 @@ const DashboardMenu = () => {
             } else {
                 socket.emit('joinEmployeeRoom');
             }
+        }
+
+        if (employee?.role !== 'employee') {
+            setNavigation([...navigation, { name: 'PRODUKTER', route: '/admin/produkt' }]);
         }
     }, []);
 
