@@ -8,7 +8,7 @@ import ProfilePaymentOptionsForm from '../../components/ProfilePaymentOptionsFor
 import ProfilePasswordForm from '../../components/ProfilePasswordForm/ProfilePasswordForm';
 const ProfilePage: React.FC = () => {
     const { customer } = useAuthStore();
-    const [formToShow, setFormToShow] = useState<string>('personal');
+    const [formToShow, setFormToShow] = useState<'personal' | 'payment' | 'password' | 'allergies'>('personal');
     const changeNavOption = (navOption: 'personal' | 'payment' | 'password' | 'allergies') => {
         setFormToShow(navOption);
     };
@@ -17,7 +17,7 @@ const ProfilePage: React.FC = () => {
         <>
             <main className='profile-page'>
                 <div className='wrapper'>
-                    <ProfileNav onClick={changeNavOption} />
+                    <ProfileNav onClick={changeNavOption} active={formToShow} />
                     {formToShow === 'personal' && <ProfilePersonalForm />}
                     {formToShow === 'payment' && <ProfilePaymentOptionsForm />}
                     {formToShow === 'password' && <ProfilePasswordForm />}

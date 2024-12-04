@@ -20,3 +20,9 @@
     font-family: var(--title-font);
     cursor: pointer;
 }
+
+.profile-nav__list-item--active {
+    text-decoration: underline;
+    text-decoration-color: var(--color-accent1);
+    text-underline-offset: var(--spacing-xs);
+}
