@@ -17,7 +17,7 @@
 .menu-page__menu-wrapper {
     display: grid;
     grid-template-columns: var(--main-grid);
-    row-gap: var(--spacing-m);
+    row-gap: var(--spacing-2xl);
 }
 
 

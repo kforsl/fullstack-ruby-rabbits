@@ -4,7 +4,7 @@ const AboutUsPage: React.FC = () => {
     return (
         <>
             <main className='about-page wrapper'>
-                <h1 className='about-page__title'>OM OSS:</h1>
+                <h1 className='about-page__title'>HÄR JOBBAR VI!</h1>
                 <section className='about-page__info-wrapper'>
                     <p className='about-page__paragraph'>
                         Happymess är en charmig glassbar i retrostil, där varje besök känns som en nostalgisk resa

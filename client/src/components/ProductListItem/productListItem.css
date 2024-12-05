@@ -58,6 +58,11 @@
         gap: var(--spacing-xs);
     }
 
+    .product-list-item__title {
+        margin-bottom: 0;
+
+    }
+
     .product-list-item:last-of-type {
         border-bottom: 2px solid var(--color-black);
     }
@@ -66,6 +71,8 @@
         display: grid;
         grid-row: 1/2;
         grid-column: 2/-1;
+        grid-template-rows: auto 1fr;
+        row-gap: 3px;
     }
 
     .product-list-item__price-wrapper {

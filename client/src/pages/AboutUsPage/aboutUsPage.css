@@ -16,14 +16,18 @@
 
 .about-page__title {
     grid-column: 1/-1;
+    font-size: var(--font-size-3xl);
     font-family: var(--title-font);
-    font-size: var(--font-size-xl);
+    color: var(--color-accent2);
+    text-shadow: var(--text-outline);
+    filter: drop-shadow(2px 2px 0 var(--color-black)) drop-shadow(2px 2px 0 var(--color-accent1));
     padding-bottom: var(--spacing-m);
 }
 
 .about-page__paragraph {
     font-family: var(--bread-font);
     letter-spacing: 0.05rem;
+    line-height: 1.5;
     padding-bottom: var(--spacing-s);
 }
 
