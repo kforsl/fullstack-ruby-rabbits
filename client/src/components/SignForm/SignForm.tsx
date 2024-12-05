@@ -54,7 +54,7 @@ const SignForm = () => {
             const data: Customer | AxiosError = await agent.Authenticate.signIn(signInForm);
 
             if ((data as Customer).email) {
-                sessionStorage.setItem('user', JSON.stringify(data));
+                sessionStorage.setItem('user', JSON.stringify(data as Customer));
                 setCustomer(data as Customer);
                 setIsLoading(false);
                 setTimeout(() => {
