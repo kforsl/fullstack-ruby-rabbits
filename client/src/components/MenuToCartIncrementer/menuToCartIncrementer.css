@@ -3,7 +3,7 @@
     gap: var(--spacing-s);
     grid-template-columns: repeat(3, minmax(0, 1fr));
     place-items: center;
-    width: 5.5rem;
+
 }
 
 .menu-to-cart-incrementer__button {
@@ -28,6 +28,5 @@
 @media screen and (max-width: 550px) {
     .menu-to-cart-incrementer {
         gap: var(--spacing-xs);
-        width: unset;
     }
 }

@@ -38,12 +38,12 @@ const DashboardMenu = () => {
                             : 'dashboard-menu__wrapper--hidden'
                         : 'dashboard-menu__wrapper--inactive'
                 }`}>
-                <section className='hamburger-wrapper'>
-                    <button
-                        className={`hamburger-button hamburger-button--${menuIsExpanded ? 'active' : 'inactive'}`}
-                        onClick={() => {
-                            setMenuIsExpanded(!menuIsExpanded);
-                        }}>
+                <section
+                    className='hamburger-wrapper'
+                    onClick={() => {
+                        setMenuIsExpanded(!menuIsExpanded);
+                    }}>
+                    <button className={`hamburger-button hamburger-button--${menuIsExpanded ? 'active' : 'inactive'}`}>
                         <span></span>
                         <span></span>
                         <span></span>
