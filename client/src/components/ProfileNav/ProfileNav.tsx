@@ -3,13 +3,13 @@ import './profileNav.css';
 import useWindowSizeStore from '../../stores/windowSizeStore';
 
 interface Props {
-    onClick: (navOption: 'personal' | 'payment' | 'password' | 'allergies') => void;
-    active: 'personal' | 'payment' | 'password' | 'allergies';
+    onClick: (navOption: 'personal' | 'payment' | 'password' | 'allergies' | 'signout') => void;
+    active: 'personal' | 'payment' | 'password' | 'allergies' | 'signout';
 }
 
 interface navigationItem {
     text: string;
-    navOption: 'personal' | 'payment' | 'password' | 'allergies';
+    navOption: 'personal' | 'payment' | 'password' | 'allergies' | 'signout';
 }
 
 const ProfileNav = ({ onClick, active }: Props) => {
@@ -41,6 +41,10 @@ const ProfileNav = ({ onClick, active }: Props) => {
             text: 'Allergier',
             navOption: 'allergies',
         },
+        {
+            text: 'Logga ut',
+            navOption: 'signout',
+        },
     ];
 
     return (
@@ -49,7 +53,9 @@ const ProfileNav = ({ onClick, active }: Props) => {
                 <select
                     value={active}
                     className='profile-nav__dropdown'
-                    onChange={(e) => onClick(e.target.value as 'personal' | 'payment' | 'password' | 'allergies')}>
+                    onChange={(e) =>
+                        onClick(e.target.value as 'personal' | 'payment' | 'password' | 'allergies' | 'signout')
+                    }>
                     {navigationItems.map((nav) => (
                         <option key={nav.navOption} value={nav.navOption} className={`profile-nav__dropdown-item`}>
                             {nav.text}

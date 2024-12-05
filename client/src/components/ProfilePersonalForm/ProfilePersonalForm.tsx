@@ -3,8 +3,10 @@ import TextButton from '../TextButton/TextButton';
 import './profilePersonalForm.css';
 import { Customer } from '../../interfaces/interfaceAuth';
 import { useUpdatePersonalData } from '../../services/mutations/useUpdatePersonalData';
+import { useNavigate } from 'react-router-dom';
 
 const ProfilePersonalForm = () => {
+    const navigate = useNavigate();
     const [firstName, setFirstName] = useState<string>('');
     const [lastName, setLastName] = useState<string>('');
     const [socialSecurityNumber, setSocialSecurityNumber] = useState<string>('');
@@ -15,9 +17,9 @@ const ProfilePersonalForm = () => {
     const [zipcode, setZipcode] = useState<string>('');
 
     const [isEditing, setIsEditing] = useState<boolean>(false);
-
     useEffect(() => {
         const storageInformation: string | null = sessionStorage.getItem('user');
+        if (storageInformation === null) navigate('/');
         const storageObject: Customer = storageInformation && JSON.parse(storageInformation);
         if (storageObject) {
             setFirstName(storageObject.firstName);

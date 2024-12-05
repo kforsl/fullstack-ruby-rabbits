@@ -67,7 +67,7 @@ const Authenticate = {
                 refreshToken: customer.refreshToken,
             })
             .then((response) => response.data[0]),
-    signOut: () => requests.get(`auth/signout`).catch(() => {}),
+    signOut: () => requests.get(`auth/customer/signout`),
 };
 
 const Profile = {
