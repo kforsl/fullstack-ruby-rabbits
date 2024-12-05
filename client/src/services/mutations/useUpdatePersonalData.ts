@@ -7,7 +7,7 @@ export const useUpdatePersonalData = () => {
         mutationFn: (userInformation: Customer) => agent.Profile.updatePersonalData(userInformation),
 
         onSuccess: (response) => {
-            console.log('Success', response);
+            // console.log('Success', response);
             sessionStorage.setItem('user', JSON.stringify(response));
         },
     });

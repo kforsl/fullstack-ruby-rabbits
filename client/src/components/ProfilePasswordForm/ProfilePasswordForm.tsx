@@ -31,7 +31,7 @@ const ProfilePasswordForm = () => {
                     setVerifyPassword('');
                 },
                 onError: (error) => {
-                    console.error('Order creation failed:', error);
+                    console.error('Password change failed:', error);
                     setIsErrorShowing(true);
                 },
             });
