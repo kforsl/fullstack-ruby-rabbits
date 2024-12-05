@@ -6,20 +6,21 @@ import { useCreateOrder } from '../../services/mutations';
 import TextButton from '../../components/TextButton/TextButton';
 import { CartItem, CartToOrder } from '../../interfaces/interfaceCart';
 import useOrderStore from '../../stores/orderStore';
-import { useNavigate } from 'react-router-dom';
+import { useMatch, useNavigate } from 'react-router-dom';
 
 const FinalizeOrder: React.FC = () => {
     const { cart, setCart } = useCartStore();
     const { setOrder } = useOrderStore();
     const [comment, setComment] = useState('');
     const navigate = useNavigate();
-    const { mutate: createOrder, isPending, isError } = useCreateOrder();
+    const orderpage = useMatch('/ordrar/:id');
+    const { mutate: createOrder, isPending, isError, isSuccess } = useCreateOrder();
 
     const calculateTotalPrice = (): number =>
         cart.reduce((totalCost: number, cartItem: CartItem) => totalCost + cartItem.price * cartItem.quantity, 0);
 
     useEffect(() => {
-        if (cart.length === 0) {
+        if (cart.length === 0 && !isPending && !isError && !isSuccess && !orderpage) {
             navigate('/');
         }
     }, [cart]);
@@ -43,9 +44,9 @@ const FinalizeOrder: React.FC = () => {
                 if (response) {
                     setOrder(response[0]);
                     navigate(`/ordrar/${response[0]._id}`);
+                    setComment('');
+                    setCart([]);
                 }
-                setComment('');
-                setCart([]);
             },
             onError: (error) => {
                 console.error('Order creation failed:', error);
@@ -94,5 +95,8 @@ export default FinalizeOrder;
  * Om cart är tom när du direktnavigerar till /orderbekraftelse så skickas du tillbaka till menyn.
  *
  * Ändrat: Magnus
- * Tagit bort komponent för att rendera ut färdig order. Istället navigerar du till ordrar page. OnSuccess i mutation ger dig inte direkt tillgång till data. Så har ändrat data till response
+ * Tagit bort komponent för att rendera ut färdig order. Istället navigerar du till ordrar page. OnSuccess i mutation ger dig inte direkt tillgång till data. Så har ändrat data till response.
+ *
+ * Ändrat: Magnus
+ * Om du tömmer cart helt navigerar du till menyn.
  */

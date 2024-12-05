@@ -55,6 +55,13 @@
 
 @media screen and (max-width: 630px) {
     .PopularProductCarousel {
+        margin-bottom: var(--spacing-xl);
+    }
+}
+
+
+@media screen and (max-width: 630px) {
+    .PopularProductCarousel {
         min-height: 350px;
     }
 

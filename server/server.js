@@ -20,35 +20,35 @@ const profileRoute = require('./routes/profileRoute');
 const PORT = process.env.PORT | 3000;
 
 app.use(express.json());
-app.use(
-    helmet.contentSecurityPolicy({
-        directives: {
-            scriptSrc: ["'self'", 'http://localhost:3000'],
-            defaultSrc: ["'self'", 'http://localhost:3000'],
-            fontSrc: ["'self'"],
-            imgSrc: ["'self'", 'https://happymess-images.s3.eu-north-1.amazonaws.com'],
-            connectSrc: [
-                "'self'",
-                'https://drpn0wxpzl77r.cloudfront.net',
-                'https://dxcrvzvfdmi0n.cloudfront.net',
-                'http://localhost:1337',
-                'http://localhost:1338',
-            ],
-        },
-    })
-);
-app.use(
-    cors({
-        credentials: true,
-        origin: [
-            'http://localhost:3000',
-            'http://localhost:1337',
-            'http://localhost:1338',
-            'https://drpn0wxpzl77r.cloudfront.net',
-            'https://dxcrvzvfdmi0n.cloudfront.net',
-        ],
-    })
-);
+// app.use(
+//     helmet.contentSecurityPolicy({
+//         directives: {
+//             scriptSrc: ["'self'", 'http://localhost:3000'],
+//             defaultSrc: ["'self'", 'http://localhost:3000'],
+//             fontSrc: ["'self'"],
+//             imgSrc: ["'self'", 'https://happymess-images.s3.eu-north-1.amazonaws.com'],
+//             connectSrc: [
+//                 "'self'",
+//                 'https://drpn0wxpzl77r.cloudfront.net',
+//                 'https://dxcrvzvfdmi0n.cloudfront.net',
+//                 'http://localhost:1337',
+//                 'http://localhost:1338',
+//             ],
+//         },
+//     })
+// );
+// app.use(
+//     cors({
+//         credentials: true,
+//         origin: [
+//             'http://localhost:3000',
+//             'http://localhost:1337',
+//             'http://localhost:1338',
+//             'https://drpn0wxpzl77r.cloudfront.net',
+//             'https://dxcrvzvfdmi0n.cloudfront.net',
+//         ],
+//     })
+// );
 app.use(cookieParser(process.env.COOKIE_SECRET));
 
 app.use('/api/ingredients', ingredientRoute);

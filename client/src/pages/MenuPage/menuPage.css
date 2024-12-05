@@ -16,7 +16,7 @@
     }
 }
 
-@media screen and (max-width: 1000px) {
+/* @media screen and (max-width: 1000px) {
     .menu-page__popular-wrapper {
         margin-bottom: var(--spacing-l);
         -webkit-overflow-scrolling: touch;
@@ -40,5 +40,11 @@
         width: 200px;
         scroll-snap-align: start;
         scroll-snap-stop: always;
+    }
+} */
+
+@media screen and (max-width: 700px) {
+    .menu-page__menu-wrapper {
+        row-gap: var(--spacing-l);
     }
 }
