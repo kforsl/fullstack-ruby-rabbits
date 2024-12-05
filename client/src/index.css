@@ -82,3 +82,12 @@ body {
     max-width: var(--max-width);
     margin: 0 auto;
 }
+
+@media screen and (max-width: 600px) {
+    body {
+        background-image: none;
+        background-position: none;
+        background-repeat: none;
+        overflow-y: scroll;
+    }
+}

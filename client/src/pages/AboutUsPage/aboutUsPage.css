@@ -39,7 +39,7 @@
     display: grid;
     place-items: center;
     background-color: var(--color-accent2);
-    background-image: url(../../../public/images/blotches/u-e-t-a-darkblue-pink-white-cola.svg);
+    background-image: url(/images/blotches/u-e-t-a-darkblue-pink-white-cola.svg);
     background-size: cover;
     background-position: 50%;
     position: relative;

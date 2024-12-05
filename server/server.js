@@ -33,6 +33,7 @@ app.use(
                 'https://dxcrvzvfdmi0n.cloudfront.net',
                 'http://localhost:1337',
                 'http://localhost:1338',
+                '*', //TA BORT MIG!
             ],
         },
     })
@@ -46,6 +47,7 @@ app.use(
             'http://localhost:1338',
             'https://drpn0wxpzl77r.cloudfront.net',
             'https://dxcrvzvfdmi0n.cloudfront.net',
+            '*', //TA BORT MIG!
         ],
     })
 );

@@ -8,7 +8,7 @@
     row-gap: var(--spacing-m);
     margin-block: var(--spacing-l);
     padding: var(--spacing-m);
-    background-image: url(../../../public/images/error-page.png);
+    background-image: url(/images/error-page.png);
     background-repeat: no-repeat;
     background-position: bottom 20vh right 1rem;
     background-size: 30rem;

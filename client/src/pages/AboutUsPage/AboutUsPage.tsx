@@ -38,11 +38,7 @@ const AboutUsPage: React.FC = () => {
                 <section className='employees'>
                     <figure className='employees__employee-card employees__employee-card--large'>
                         <div className='employees__image-wrapper'>
-                            <img
-                                src='../../../public/images/employees/mr-mustachio-no-bg.png'
-                                alt=''
-                                className='employees__image'
-                            />
+                            <img src='/images/employees/mr-mustachio-no-bg.png' alt='' className='employees__image' />
                         </div>
                         <figcaption className='employees__caption'>
                             <h2 className='employees__employee-name'>Mr. Mustachio</h2>
@@ -51,7 +47,7 @@ const AboutUsPage: React.FC = () => {
                     </figure>
                     <figure className='employees__employee-card'>
                         <div className='employees__image-wrapper'>
-                            <img src='../../../public/images/employees/harry.png' alt='' className='employees__image' />
+                            <img src='/images/employees/harry.png' alt='' className='employees__image' />
                         </div>
                         <figcaption className='employees__caption'>
                             <h2 className='employees__employee-name'>Ärlige Harry</h2>
@@ -60,11 +56,7 @@ const AboutUsPage: React.FC = () => {
                     </figure>
                     <figure className='employees__employee-card'>
                         <div className='employees__image-wrapper'>
-                            <img
-                                src='../../../public/images/employees/brotein.png'
-                                alt=''
-                                className='employees__image'
-                            />
+                            <img src='/images/employees/brotein.png' alt='' className='employees__image' />
                         </div>
 
                         <figcaption className='employees__caption'>
@@ -74,7 +66,7 @@ const AboutUsPage: React.FC = () => {
                     </figure>
                     <figure className='employees__employee-card'>
                         <div className='employees__image-wrapper'>
-                            <img src='../../../public/images/employees/test.png' alt='' className='employees__image' />
+                            <img src='/images/employees/test.png' alt='' className='employees__image' />
                         </div>
 
                         <figcaption className='employees__caption'>
