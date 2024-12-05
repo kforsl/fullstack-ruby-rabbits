@@ -1,7 +1,7 @@
 const asyncHandler = require('express-async-handler');
 const { EmployeeModel } = require('../models/employeeModel');
 const { CustomerModel } = require('../models/customerModel');
-
+const { v4: uuidv4 } = require('uuid');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
@@ -128,7 +128,7 @@ exports.authenticateCustomer = asyncHandler(async (req, res) => {
         // customer.refreshToken = refreshToken;
 
         const accessToken = jwt.sign(customer.toJSON(), process.env.JWT_SECRET, { expiresIn: '1h' });
-        customer.hash = null;
+        delete customer.hash;
 
         res.cookie('ato', accessToken, {
             httpOnly: true,
