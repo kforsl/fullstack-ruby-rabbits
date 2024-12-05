@@ -53,10 +53,21 @@
     .product-list {
         border: none;
         border-radius: 0;
-        border-top: 4px solid var(--color-black);
         margin-top: var(--spacing-m);
         padding: 0;
         padding-inline: var(--spacing-xs);
         padding-top: var(--spacing-l);
+    }
+
+    .product-list__title {
+        font-size: var(--font-size-3xl);
+        font-family: var(--title-font);
+        color: var(--color-accent2);
+        text-shadow: var(--text-outline);
+        filter: drop-shadow(2px 2px 0 var(--color-black)) drop-shadow(2px 2px 0 var(--color-accent1));
+        position: unset;
+        grid-column: 1/-1;
+        justify-self: start;
+        background-color: unset;
     }
 }

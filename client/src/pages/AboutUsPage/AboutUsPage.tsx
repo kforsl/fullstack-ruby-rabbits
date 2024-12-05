@@ -4,7 +4,7 @@ const AboutUsPage: React.FC = () => {
     return (
         <>
             <main className='about-page wrapper'>
-                <h1 className='about-page__title'>OM OSS:</h1>
+                <h1 className='about-page__title'>HÄR JOBBAR VI!</h1>
                 <section className='about-page__info-wrapper'>
                     <p className='about-page__paragraph'>
                         Happymess är en charmig glassbar i retrostil, där varje besök känns som en nostalgisk resa
@@ -37,7 +37,7 @@ const AboutUsPage: React.FC = () => {
                 </section>
                 <section className='employees'>
                     <figure className='employees__employee-card employees__employee-card--large'>
-                        <div className='employees__image-wrapper'>
+                        <div className='employees__image-wrapper employees__image-wrapper--first'>
                             <img src='/images/employees/mr-mustachio-no-bg.png' alt='' className='employees__image' />
                         </div>
                         <figcaption className='employees__caption'>
@@ -46,7 +46,7 @@ const AboutUsPage: React.FC = () => {
                         </figcaption>
                     </figure>
                     <figure className='employees__employee-card'>
-                        <div className='employees__image-wrapper'>
+                        <div className='employees__image-wrapper employees__image-wrapper--second'>
                             <img src='/images/employees/harry.png' alt='' className='employees__image' />
                         </div>
                         <figcaption className='employees__caption'>
@@ -55,7 +55,7 @@ const AboutUsPage: React.FC = () => {
                         </figcaption>
                     </figure>
                     <figure className='employees__employee-card'>
-                        <div className='employees__image-wrapper'>
+                        <div className='employees__image-wrapper employees__image-wrapper--third'>
                             <img src='/images/employees/brotein.png' alt='' className='employees__image' />
                         </div>
 
@@ -65,7 +65,7 @@ const AboutUsPage: React.FC = () => {
                         </figcaption>
                     </figure>
                     <figure className='employees__employee-card'>
-                        <div className='employees__image-wrapper'>
+                        <div className='employees__image-wrapper employees__image-wrapper--fourth'>
                             <img src='/images/employees/test.png' alt='' className='employees__image' />
                         </div>
 

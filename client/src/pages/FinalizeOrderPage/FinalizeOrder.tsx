@@ -22,7 +22,7 @@ const FinalizeOrder: React.FC = () => {
         if (cart.length === 0) {
             navigate('/');
         }
-    }, []);
+    }, [cart]);
 
     const createNewOrder = () => {
         const cartToOrder = cart.map(({ id, quantity, size }) => ({

@@ -1,6 +1,7 @@
 .about-page {
     margin-block: var(--spacing-2xl);
     padding-inline: var(--spacing-s);
+    padding-bottom: var(--spacing-2xl);
     grid-template-columns: auto 1fr;
     grid-template-rows: auto 1fr;
     gap: var(--spacing-s);
@@ -16,14 +17,18 @@
 
 .about-page__title {
     grid-column: 1/-1;
+    font-size: var(--font-size-3xl);
     font-family: var(--title-font);
-    font-size: var(--font-size-xl);
+    color: var(--color-accent2);
+    text-shadow: var(--text-outline);
+    filter: drop-shadow(2px 2px 0 var(--color-black)) drop-shadow(2px 2px 0 var(--color-accent1));
     padding-bottom: var(--spacing-m);
 }
 
 .about-page__paragraph {
     font-family: var(--bread-font);
     letter-spacing: 0.05rem;
+    line-height: 1.5;
     padding-bottom: var(--spacing-s);
 }
 
@@ -41,9 +46,24 @@
     background-color: var(--color-accent2);
     background-image: url(/images/blotches/u-e-t-a-darkblue-pink-white-cola.svg);
     background-size: cover;
-    background-position: 50%;
     position: relative;
     min-height: 12rem;
+}
+
+.employees__image-wrapper--first {
+    background-position: 0%;
+}
+
+.employees__image-wrapper--second {
+    background-position: bottom 10px left 60px;
+}
+
+.employees__image-wrapper--third {
+    background-position: bottom 100px right 0px;
+}
+
+.employees__image-wrapper--fourth {
+    background-position: bottom 200px left 10px;
 }
 
 .employees__employee-card {
