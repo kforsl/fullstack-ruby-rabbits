@@ -16,9 +16,7 @@
 
 @media screen and (max-width: 550px) {
     .product-size-quantity-item {
-        min-height: 4rem;
         justify-self: center;
-        gap: var(--spacing-xs)
     }
 
 }
