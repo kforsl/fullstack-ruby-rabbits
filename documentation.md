@@ -69,33 +69,13 @@ Som registrerad kund kan du på profilsidan ändra lösenord, välja betalningss
 > [!TIP] ANSTÄLLDA:
 > [**HAPPYMESS: ANSTÄLLD**](https://dxcrvzvfdmi0n.cloudfront.net)
 
-**ÄRLIGE HARRY (ADMIN):**
-
-`email: notsodirtyharry@happymess.se`
-
-`password: Marackas2!`
-
-<br>
-
-**MR MUSTACHIO (ADMIN):**
-
-`email: iscreamforicescream@happymess.se`
-
-`password: Bananer2!`
-
-<br>
-
-**BROTEIN ICECREAM (EMPLOYEE)**
-
-`email: isoiledmyself@happymess.se`
-
-`password: Pyjamas32!`
+OBS: Ni får användaruppgifter från oss.
 
 <br>
 
 ## Anställdas sida:
 
-Vi tänker att anställdas sida existerar bara som en app lokalt på restuarangen. Man kan inte skapa sin egen profil utan det måste admin göra. Se inloggningsuppgifter ni kan använda ovan.
+Vi tänker att anställdas sida existerar bara som en app lokalt på restuarangen. Man kan inte skapa sin egen profil utan det måste admin göra. Ni får inloggning av oss.
 
 Vi har tre typer av användare. Employee, manager och admin.
 
