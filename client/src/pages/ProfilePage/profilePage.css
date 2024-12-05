@@ -1,6 +1,7 @@
 .profile-page {
     flex: 1;
-    padding: var(--spacing-m);
+    padding: var(--spacing-m) var(--spacing-m) var(--spacing-2xl) var(--spacing-m);
+    margin-bottom: var(--spacing-2xl);
     min-height: 100svh;
 }
 

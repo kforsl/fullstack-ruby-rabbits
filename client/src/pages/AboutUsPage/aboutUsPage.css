@@ -1,6 +1,7 @@
 .about-page {
     margin-block: var(--spacing-2xl);
     padding-inline: var(--spacing-s);
+    padding-bottom: var(--spacing-2xl);
     grid-template-columns: auto 1fr;
     grid-template-rows: auto 1fr;
     gap: var(--spacing-s);

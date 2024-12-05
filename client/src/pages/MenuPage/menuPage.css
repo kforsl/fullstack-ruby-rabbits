@@ -1,5 +1,6 @@
 .menu-page {
     margin-block: var(--spacing-2xl);
+    padding-bottom: var(--spacing-2xl);
     padding-inline: var(--spacing-s);
 }
 

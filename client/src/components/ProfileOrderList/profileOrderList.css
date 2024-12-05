@@ -2,7 +2,7 @@
     grid-column: 1 / span 2;
     grid-row: 2;
     display: grid;
-    gap: var(--font-size-l);
+    gap: var(--spacing-l);
     background-color: var(--bg-primary);
 }
 
