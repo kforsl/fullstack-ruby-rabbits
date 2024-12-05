@@ -52,12 +52,12 @@ const NavigationMenu: React.FC = () => {
                             </button>
                         </li>
                     </ul>
-                    <section className='hamburger-wrapper'>
-                        <button
-                            className={`hamburger-button hamburger-button--${isNavOpen ? 'active' : 'inactive'}`}
-                            onClick={() => {
-                                setIsNavOpen(!isNavOpen);
-                            }}>
+                    <section
+                        className='hamburger-wrapper'
+                        onClick={() => {
+                            setIsNavOpen(!isNavOpen);
+                        }}>
+                        <button className={`hamburger-button hamburger-button--${isNavOpen ? 'active' : 'inactive'}`}>
                             <span></span>
                             <span></span>
                             <span></span>
