@@ -224,6 +224,7 @@ const SignForm = () => {
                             {isSigningIn
                                 ? formInputs.signIn.map((form) => (
                                       <SignFormInput
+                                          key={form.inputId}
                                           inputName={form.inputName}
                                           placeholder={form.placeholder}
                                           type={form.type}
@@ -235,6 +236,7 @@ const SignForm = () => {
                                   ))
                                 : formInputs.register.map((form) => (
                                       <SignFormInput
+                                          key={form.inputId}
                                           inputName={form.inputName}
                                           placeholder={form.placeholder}
                                           type={form.type}
