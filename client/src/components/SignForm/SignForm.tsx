@@ -60,6 +60,7 @@ const SignForm = () => {
                 setTimeout(() => {
                     setIsShowingLoadingSection(false);
                     setIsShowingForm(false);
+                    clearForm();
                     navigate('/profil');
                 }, 100);
             } else {

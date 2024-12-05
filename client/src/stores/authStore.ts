@@ -5,7 +5,7 @@ import agent from '../services/api/agent';
 
 interface AuthStore {
     customer: Customer | null;
-    setCustomer: (customer: Customer) => void;
+    setCustomer: (customer: Customer | null) => void;
 
     orders: OrderType[] | null;
     setOrders: (id: string) => void;
