@@ -83,11 +83,11 @@ body {
     margin: 0 auto;
 }
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 700px) {
     body {
         background-image: none;
-        background-position: none;
-        background-repeat: none;
+        background-position: unset;
+        background-repeat: unset;
         overflow-y: scroll;
     }
 }

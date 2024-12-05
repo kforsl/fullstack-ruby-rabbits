@@ -3,13 +3,13 @@ import './navigationMenu.css';
 import Cart from '../Cart/Cart';
 import useAuthStore from '../../stores/authStore';
 import { useEffect, useState } from 'react';
-import useSize from '../../utils/useSize';
+import useWindowSizeStore from '../../stores/windowSizeStore';
+
 const NavigationMenu: React.FC = () => {
     const { setIsShowingForm, customer } = useAuthStore();
-    const { windowWidth } = useSize();
     const [isBurgerShowing, setIsBurgerShowing] = useState<boolean>(false);
     const [isNavOpen, setIsNavOpen] = useState<boolean>(false);
-
+    const { width } = useWindowSizeStore();
     const navigate = useNavigate();
     const navigation = [
         { name: 'MENU', route: '/' },
@@ -25,10 +25,10 @@ const NavigationMenu: React.FC = () => {
 
     useEffect(() => {
         const breakpoint: number = 551;
-        if (!isBurgerShowing) if (windowWidth < breakpoint) setIsBurgerShowing(true);
+        if (!isBurgerShowing) if (width < breakpoint) setIsBurgerShowing(true);
 
-        if (isBurgerShowing) if (windowWidth > breakpoint) setIsBurgerShowing(false);
-    }, [windowWidth]);
+        if (isBurgerShowing) if (width > breakpoint) setIsBurgerShowing(false);
+    }, [width]);
     return (
         <nav className={isBurgerShowing ? 'navigation-burger' : 'navigation-menu'}>
             {isBurgerShowing ? (
@@ -106,4 +106,7 @@ export default NavigationMenu;
  *
  * Ändrat: Magnus
  * Skapat logotyp för att visa i mobilt-läge. Om man klickar scrollar den upp dig. Ändrat storlek på navigation i burgare, kanske för stort. Padding ligger nu på knappar istället för wrapper.
+ 
+ * Ändrat: Magnus
+ * Ändrade useState hook för window-size till en store istället så vi bara har en eventlystnare som returnerar värdet på bredden.
  */
