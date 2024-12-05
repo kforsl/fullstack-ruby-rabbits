@@ -9,6 +9,7 @@
 }
 
 .about-page__info-wrapper {
+    box-shadow: 0 0 0 2rem var(--bg-primary);
     background-color: var(--bg-primary);
     color: var(--color-black);
     max-width: 55ch;
@@ -27,6 +28,7 @@
 
 .about-page__paragraph {
     font-family: var(--bread-font);
+    font-size: var(--font-size-m);
     letter-spacing: 0.05rem;
     line-height: 1.5;
     padding-bottom: var(--spacing-s);
@@ -36,8 +38,12 @@
 .employees {
     grid-template-columns: repeat(3, minmax(0, 1fr));
     display: grid;
-    gap: var(--spacing-xs);
+    gap: var(--spacing-l) var(--spacing-xs);
+    background-color: var(--bg-primary);
+    box-shadow: 2rem 0 0 2rem var(--bg-primary);
 }
+
+
 
 .employees__image-wrapper {
     width: 100%;
@@ -48,6 +54,19 @@
     background-size: cover;
     position: relative;
     min-height: 12rem;
+}
+
+.employees__employee-card {
+    background-color: var(--color-white);
+    padding: var(--spacing-xs);
+    display: grid;
+    grid-template-rows: 1fr auto;
+
+
+}
+
+.employees__employee-card--large {
+    grid-column: 1/-1;
 }
 
 .employees__image-wrapper--first {
@@ -66,16 +85,7 @@
     background-position: bottom 200px left 10px;
 }
 
-.employees__employee-card {
-    background-color: var(--color-white);
-    padding: var(--spacing-xs);
-    display: grid;
-    grid-template-rows: 1fr auto;
-}
 
-.employees__employee-card--large {
-    grid-column: 1/-1;
-}
 
 .employees__image {
     max-width: 100%;
@@ -122,6 +132,7 @@
 @media (max-width: 970px) {
     .employees {
         grid-template-columns: 1fr;
+        gap: var(--spacing-xs);
     }
 
     .employees__image-wrapper {

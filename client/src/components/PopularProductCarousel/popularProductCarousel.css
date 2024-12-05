@@ -47,6 +47,7 @@
 }
 
 .PopularProductCarousel__button-text {
+    user-select: none;
     font-size: var(--font-size-3xl);
     color: var(--color-accent1);
     filter: drop-shadow(var(--shadow-s));
