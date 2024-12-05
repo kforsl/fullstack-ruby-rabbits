@@ -37,7 +37,7 @@ const AboutUsPage: React.FC = () => {
                 </section>
                 <section className='employees'>
                     <figure className='employees__employee-card employees__employee-card--large'>
-                        <div className='employees__image-wrapper'>
+                        <div className='employees__image-wrapper employees__image-wrapper--first'>
                             <img src='/images/employees/mr-mustachio-no-bg.png' alt='' className='employees__image' />
                         </div>
                         <figcaption className='employees__caption'>
@@ -46,7 +46,7 @@ const AboutUsPage: React.FC = () => {
                         </figcaption>
                     </figure>
                     <figure className='employees__employee-card'>
-                        <div className='employees__image-wrapper'>
+                        <div className='employees__image-wrapper employees__image-wrapper--second'>
                             <img src='/images/employees/harry.png' alt='' className='employees__image' />
                         </div>
                         <figcaption className='employees__caption'>
@@ -55,7 +55,7 @@ const AboutUsPage: React.FC = () => {
                         </figcaption>
                     </figure>
                     <figure className='employees__employee-card'>
-                        <div className='employees__image-wrapper'>
+                        <div className='employees__image-wrapper employees__image-wrapper--third'>
                             <img src='/images/employees/brotein.png' alt='' className='employees__image' />
                         </div>
 
@@ -65,7 +65,7 @@ const AboutUsPage: React.FC = () => {
                         </figcaption>
                     </figure>
                     <figure className='employees__employee-card'>
-                        <div className='employees__image-wrapper'>
+                        <div className='employees__image-wrapper employees__image-wrapper--fourth'>
                             <img src='/images/employees/test.png' alt='' className='employees__image' />
                         </div>
 
