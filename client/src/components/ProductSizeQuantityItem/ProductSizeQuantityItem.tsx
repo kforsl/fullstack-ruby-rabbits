@@ -9,9 +9,10 @@ import './productSizeQuantityItem.css';
 interface Props {
     product: ProductType;
     size: SizeType;
+    showSize?: boolean;
 }
 
-const ProductSizeQuantityItem = ({ product, size }: Props) => {
+const ProductSizeQuantityItem = ({ product, size, showSize }: Props) => {
     const { addToCart, cart } = useCartStore();
     const { width } = useWindowSizeStore();
     const foundProduct = cart.find((cartItem) => cartItem.id === product._id && cartItem.size === size.size);
@@ -29,7 +30,7 @@ const ProductSizeQuantityItem = ({ product, size }: Props) => {
             <p className='product-size-quantity-item__price'> {size.price} kr </p>
             {!foundProduct ? (
                 <TextButton onClick={() => addToCart(cartItem)}>
-                    {width > 700 ? 'KÖP' : `KÖP ${size.size.charAt(0)}`}
+                    {showSize ? `KÖP ${size.size.charAt(0)}` : width > 700 ? 'KÖP' : `KÖP ${size.size.charAt(0)}`}
                 </TextButton>
             ) : (
                 <MenuToCartIncrementer item={foundProduct} />

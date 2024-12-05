@@ -39,7 +39,7 @@ const PopularProductCarousel = ({ specials }: Props) => {
                     <button
                         className='PopularProductCarousel__navigation-btn'
                         onClick={() => moveProducts(specialProducts, setSpecialProducts, 'left')}>
-                        <span className='menu-to-cart-incrementer__button-text'>&#10094;</span>
+                        <span className='PopularProductCarousel__button-text'>&#10094;</span>
                     </button>
                 </div>
                 <ul className='PopularProductCarousel__productContainer'>
@@ -51,7 +51,7 @@ const PopularProductCarousel = ({ specials }: Props) => {
                     <button
                         className='PopularProductCarousel__navigation-btn'
                         onClick={() => moveProducts(specialProducts, setSpecialProducts, 'right')}>
-                        <span className='menu-to-cart-incrementer__button-text'>&#10095;</span>
+                        <span className='PopularProductCarousel__button-text'>&#10095;</span>
                     </button>
                 </div>
             </section>
