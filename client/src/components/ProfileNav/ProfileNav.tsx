@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
-import useSize from '../../utils/useSize';
 import './profileNav.css';
+import useWindowSizeStore from '../../stores/windowSizeStore';
 
 interface Props {
     onClick: (navOption: 'personal' | 'payment' | 'password' | 'allergies') => void;
@@ -13,15 +13,16 @@ interface navigationItem {
 }
 
 const ProfileNav = ({ onClick, active }: Props) => {
-    const { windowWidth } = useSize();
+    const { width } = useWindowSizeStore();
+
     const [isDropDownMenu, setIsDropDownMenu] = useState<boolean>(false);
 
     useEffect(() => {
         const breakpoint: number = 850;
-        if (!isDropDownMenu) if (windowWidth < breakpoint) setIsDropDownMenu(true);
+        if (!isDropDownMenu) if (width < breakpoint) setIsDropDownMenu(true);
 
-        if (isDropDownMenu) if (windowWidth > breakpoint) setIsDropDownMenu(false);
-    }, [windowWidth]);
+        if (isDropDownMenu) if (width > breakpoint) setIsDropDownMenu(false);
+    }, [width]);
 
     const navigationItems: navigationItem[] = [
         {
@@ -77,10 +78,11 @@ export default ProfileNav;
 
 /*
  * Författare: Kim
- *
  * Skapat komponent för att ändra vilket formulär som ska visas för användaren.
  *
  * Ändrat: Kim
- *
  * Lagt till navigationItems och map samt active
+ *
+ * Ändrat: Magnus
+ * Ändrade så komponent använder width från windowSizeStore istället för egen useState.
  */

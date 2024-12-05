@@ -1,9 +1,11 @@
 .product-size-quantity-item {
     height: 100%;
     min-height: 5rem;
+    width: 5.5rem;
     display: grid;
     grid-template-rows: auto 1fr;
     place-items: center;
+    justify-self: center;
 }
 
 .product-size-quantity-item__price {
@@ -14,8 +16,7 @@
 
 @media screen and (max-width: 550px) {
     .product-size-quantity-item {
-        min-height: 4rem;
-        max-width: fit-content;
         justify-self: center;
     }
+
 }
