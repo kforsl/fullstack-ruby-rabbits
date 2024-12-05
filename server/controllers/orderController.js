@@ -1,5 +1,6 @@
 const asyncHandler = require('express-async-handler');
 const { OrderModel } = require('../models/orderModel');
+const { ProductModel } = require('../models/productModel');
 
 exports.createOrder = asyncHandler(async (req, res) => {
     const { customer } = req;
@@ -118,15 +119,25 @@ exports.getOrderById = asyncHandler(async (req, res) => {
 exports.updateOrderById = asyncHandler(async (req, res) => {
     try {
         const { order } = req;
-        // if (order.order) {
-        //     order.price = order.order
-        //         .map((item) => Number(item.product.sizes.find((x) => x.size === item.size).price) * item.quantity)
-        //         .reduce((a, b) => a + b);
-        // }
-
+        if (order.order) {
+            const products = await ProductModel.find({
+                _id: { $in: order.order.map((item) => item.product) },
+            }).populate('sizes'); //Hämtar ut alla produkter från ordern med storlekarna förberedda i sin helhet så man kan få hela objekten, då man endast returnerar ID per produkt.
+            if (products) {
+                order.order.forEach((item) => {
+                    const foundProduct = products.find((x) => x._id.equals(item.product));
+                    console.log(foundProduct);
+                    item.product = foundProduct;
+                });
+                order.price = order.order
+                    .map((item) => Number(item.product.sizes.find((x) => x.size === item.size).price) * item.quantity)
+                    .reduce((a, b) => a + b);
+            }
+        }
+        order.updatedAt = new Date();
         const updatedOrder = await OrderModel.findByIdAndUpdate(
             req.params.id,
-            { ...order, updatedAt: new Date() },
+            { ...order },
             {
                 new: true,
                 runValidators: true,
@@ -162,5 +173,6 @@ exports.updateOrderById = asyncHandler(async (req, res) => {
  *
  * Ändrad: Johan
  * Ordnade med middleware som sköter viss validering av data som kommer in, t.ex om ordern har produkter eller inte med sig.
+ * Har även sett till att UpdateOrder nu uppdaterar produkterna och totala priset om produkter kommer med i anropet.
  *
  */
