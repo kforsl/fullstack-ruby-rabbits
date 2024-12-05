@@ -19,7 +19,7 @@ const PopularProductItem = ({ product, index }: Props) => {
                     </section>
                     <section className='popular-product-item__price-wrapper'>
                         {product.sizes.map((item) => (
-                            <ProductSizeQuantityItem key={item._id} size={item} product={product} />
+                            <ProductSizeQuantityItem key={item._id} size={item} product={product} showSize={true} />
                         ))}
                     </section>
                 </>

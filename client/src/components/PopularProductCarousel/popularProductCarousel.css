@@ -11,7 +11,7 @@
     color: var(--color-accent2);
     text-shadow: var(--text-outline);
     filter: drop-shadow(2px 2px 0 var(--color-black)) drop-shadow(2px 2px 0 var(--color-accent1));
-    margin-bottom: var(--spacing-m);
+    margin-bottom: var(--spacing-l);
     text-align: center;
 }
 
@@ -46,6 +46,13 @@
     pointer-events: all;
 }
 
+.PopularProductCarousel__button-text {
+    font-size: var(--font-size-3xl);
+    color: var(--color-accent1);
+    filter: drop-shadow(var(--shadow-s));
+    text-shadow: var(--text-outline);
+}
+
 @media screen and (max-width: 630px) {
     .PopularProductCarousel {
         min-height: 350px;
@@ -54,6 +61,10 @@
     .PopularProductCarousel__fade-left,
     .PopularProductCarousel__fade-right {
         align-items: end;
+    }
+
+    .PopularProductCarousel__navigation-btn {
+        padding-bottom: 0;
     }
 
     .PopularProductCarousel__productContainer {
