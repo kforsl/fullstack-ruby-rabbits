@@ -35,8 +35,10 @@
     --color-disabled: rgb(165, 162, 162);
 
     --shadow-s: 2px 2px 0 var(--color-black);
+    --shadow-m: 4px 4px 0 var(--color-accent1);
 
-    --text-outline: 1px 1px var(--color-black), -1px -1px var(--color-black), 1px -1px var(--color-black), -1px 1px var(--color-black);
+    --text-outline: 1px 1px var(--color-black), -1px -1px var(--color-black), 1px -1px var(--color-black),
+        -1px 1px var(--color-black);
 
     --spacing-xs: 0.5rem;
     --spacing-s: 1rem;

@@ -4,6 +4,7 @@ import './menuPage.css';
 import { useGetMenu } from '../../services/queries';
 import { ProductType } from '../../interfaces/interfaceProduct';
 import { useNavigate } from 'react-router-dom';
+import PopularProductCarousel from '../../components/PopularProductCarousel/PopularProductCarousel';
 
 const MenuPage: React.FC = () => {
     const { data, isLoading, isError } = useGetMenu();
@@ -19,11 +20,12 @@ const MenuPage: React.FC = () => {
     return (
         <main className='menu-page'>
             <div className='wrapper'>
-                <ul className='menu-page__popular-wrapper'>
+                <PopularProductCarousel specials={specials} />
+                {/* <ul className='menu-page__popular-wrapper'>
                     {specials?.map((special) => (
                         <PopularProductItem product={special} key={special._id} />
                     ))}
-                </ul>
+                </ul> */}
 
                 <section className='menu-page__menu-wrapper'>
                     <ProductList title='Ice Cream' position='left' productItems={iceCream} />

@@ -3,24 +3,11 @@
     padding-inline: var(--spacing-s);
 }
 
-.menu-page__popular-wrapper {
-    width: 100%;
-    display: grid;
-    grid-template-columns: repeat(5, minmax(0, 1fr));
-    gap: var(--spacing-s);
-
-    padding-bottom: var(--spacing-xs);
-}
-
-
-
 .menu-page__menu-wrapper {
     display: grid;
     grid-template-columns: var(--main-grid);
     row-gap: var(--spacing-m);
 }
-
-
 
 @media screen and (max-width: 1120px) {
     .product-list {
