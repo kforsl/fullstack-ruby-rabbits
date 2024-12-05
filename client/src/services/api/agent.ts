@@ -4,7 +4,6 @@ import { Customer, PasswordForm, PaymentOption, SignInForm } from '../../interfa
 import { CartToOrder } from '../../interfaces/interfaceCart';
 import { BASE_URL } from '../../../../constants.ts';
 import { OrderType } from '../../interfaces/interfaceOrder.ts';
-
 // axios.defaults.baseURL = 'Här får vi byta ut och ta vår adress när vi har en
 axios.defaults.baseURL = `${BASE_URL}/api`;
 
@@ -17,14 +16,6 @@ const requests = {
     delete: <T>(url: string) => axios.delete<T>(`${url}`, { withCredentials: true }).then(responseBody),
 };
 
-//Exempel på objekt som kan användas i Agent
-// const Messages = {
-//     list: () => requests.get<MessageModel[]>(`messages`),
-//     get: (id: string) => requests.get<MessageModel>(`messages/${id}`),
-//     create: (message: { text: string; username: string }) => requests.post<string>(`messages`, message),
-//     update: (id: string, message: MessageModel) => requests.put<string>(`messages/${id}`, message),
-//     delete: (id: string) => requests.delete<string>(`messages/${id}`),
-// };
 interface ProductResponse {
     message: string;
     data: ProductType[];
@@ -70,6 +61,13 @@ const Authenticate = {
             .post<AgentResponse<Customer>>(`auth/customer/register`, credentials)
             .then((response) => response.data[0])
             .catch((error) => error),
+    refreshToken: (customer: Customer) =>
+        requests
+            .post<AgentResponse<Customer>>(`auth/customer/${customer._id}/refresh`, {
+                refreshToken: customer.refreshToken,
+            })
+            .then((response) => response.data[0]),
+    signOut: () => requests.get(`auth/signout`).catch(() => {}),
 };
 
 const Profile = {

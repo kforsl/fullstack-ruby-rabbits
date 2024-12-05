@@ -18,6 +18,7 @@ export interface Customer {
     address: string;
     zipcode: string;
     city: string;
+    refreshToken?: string;
     paymentOptions?: PaymentOption[];
     createdAt?: Date;
     updatedAt?: Date;

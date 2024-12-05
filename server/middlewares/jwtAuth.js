@@ -2,28 +2,40 @@ const jwt = require('jsonwebtoken');
 
 exports.validateAccessToken = async (req, res, next) => {
     const { ato } = req.signedCookies;
+
     try {
         const employee = jwt.verify(ato, process.env.JWT_SECRET);
         req.employee = employee;
         next();
     } catch (error) {
         if (ato) res.clearCookie('ato');
-        else res.clearCookie('rto');
 
         return res.status(401).json({ message: 'Invalid Token' });
     }
 };
 
-exports.validateRefreshToken = async (req, res, next) => {
-    const { rto } = req.signedCookies;
+exports.validateRefreshTokenStrict = async (req, res, next) => {
+    const { refreshToken } = req.body;
+    const { id } = req.params;
     try {
-        const employee = jwt.verify(rto, process.env.REFRESH_SECRET);
-        req.employee = employee;
+        req.refreshToken = refreshToken;
+        req.id = id;
         next();
     } catch (error) {
-        res.clearCookie('rto');
-        return res.status(401).json({ message: 'Invalid Refresh token' });
+        return res.status(401).json({ message: 'Invalid token' });
     }
+};
+
+exports.validateRefreshToken = async (req, res, next) => {
+    const { refreshToken } = req.body;
+    const { id } = req.params;
+    console.log(rto);
+    try {
+        const refreshToken = jwt.verify(rto, process.env.REFRESH_SECRET);
+        req.id = id;
+        req.rto = refreshToken;
+    } catch (error) {}
+    next();
 };
 
 exports.validateUserAsAdmin = async (req, res, next) => {
@@ -42,6 +54,7 @@ exports.validateUserAsAdmin = async (req, res, next) => {
 exports.validateUserAsEmployee = async (req, res, next) => {
     try {
         const employee = req.employee;
+        console.log('HEJSAN');
         if (employee.role === 'employee') next();
         else if (employee.role === 'manager') next();
         else throw new Error('You do not have access to this endpoint');
