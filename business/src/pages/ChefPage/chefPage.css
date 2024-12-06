@@ -19,7 +19,6 @@
 .active-order {
     grid-column: 6 / span 3;
     padding: var(--spacing-m) var(--spacing-m) var(--spacing-m) var(--spacing-s);
-    ;
 
 
 }
