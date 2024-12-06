@@ -11,6 +11,11 @@
     cursor: pointer;
     background-color: var(--bg-primary);
     border: none;
+    transition: all .2s ease-in-out;
+}
+
+.menu-to-cart-incrementer__button:active {
+    scale: .7;
 }
 
 .menu-to-cart-incrementer__button-text {
