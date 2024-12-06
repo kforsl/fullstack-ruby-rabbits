@@ -7,8 +7,12 @@
 }
 
 .finalize-page__title {
+    grid-column: 1/-1;
+    font-size: var(--font-size-2xl);
     font-family: var(--title-font);
-    font-size: var(--font-size-xl);
+    color: var(--color-accent2);
+    text-shadow: var(--text-outline);
+    filter: drop-shadow(2px 2px 0 var(--color-black)) drop-shadow(2px 2px 0 var(--color-accent1));
 }
 
 .finalize-page__order-list {
@@ -17,8 +21,7 @@
     overflow-y: auto;
     max-height: 40svh;
     display: grid;
-    grid-template-rows: repeat(auto-fill, minmax(var(--spacing-2xl), auto));
-    gap: var(--spacing-m);
+    gap: var(--spacing-s);
 }
 
 .finalize-page__confirmation-wrapper {
@@ -26,6 +29,12 @@
     display: grid;
     grid-template-rows: auto 1fr auto;
     gap: var(--spacing-m);
+}
+
+.finalize-page__total-price {
+    grid-column: 1/-1;
+    justify-self: end;
+    font-weight: 600;
 }
 
 .finalize-page__comment-form {
