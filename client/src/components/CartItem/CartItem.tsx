@@ -11,9 +11,10 @@ const CartItemComponent: React.FC<Props> = ({ cartItem }) => {
 
     return (
         <li className='cart-item'>
-            <h3 className='cart-item__title'>{cartItem.name}</h3>
+            <h3 className='cart-item__title'>{`${cartItem.name} - ${cartItem.size.charAt(0).toUpperCase()}`}</h3>
+
             <h3 className='cart-item__price-of-item'>{`${priceOfItem}kr`}</h3>
-            <h3 className='cart-item__size'>{cartItem.size}</h3>
+
             <div className='cart-item__button-wrapper'>
                 <MenuToCartIncrementer item={cartItem} />
             </div>

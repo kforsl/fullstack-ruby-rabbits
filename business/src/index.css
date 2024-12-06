@@ -58,7 +58,8 @@ body {
     overflow-y: hidden;
     padding-left: var(--spacing-l);
 }
-:-webkit-scrollbar {
+
+::-webkit-scrollbar {
     width: 8px;
 }
 

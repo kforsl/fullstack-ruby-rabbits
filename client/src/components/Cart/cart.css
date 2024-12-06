@@ -49,7 +49,7 @@
     position: absolute;
     top: 3.2rem;
     right: 0rem;
-    min-width: 20rem;
+    min-width: 22rem;
     border-radius: 6px;
 }
 
@@ -57,13 +57,14 @@
     padding-right: var(--spacing-m);
     display: grid;
     overflow-y: auto;
-    max-height: 26rem;
+    max-height: 25rem;
     gap: var(--spacing-s);
     min-width: fit-content;
     list-style-type: none;
 }
 
 .cart__total-price {
+    font-weight: 600;
     padding-right: var(--spacing-m);
     justify-self: end;
 }
