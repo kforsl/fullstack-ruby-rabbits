@@ -6,9 +6,10 @@
 
 .order-card--small {
     background-color: #e2ecd3;
-    max-width: fit-content;
+    width: 100%;
     padding: var(--spacing-xs) var(--spacing-s);
     border: 1px solid black;
+    place-items: center;
 }
 
 .order-card__order-id {
@@ -18,7 +19,6 @@
 .order-card__time {
     font-size: var(--font-size-m);
     color: gray;
-    place-self: center;
 }
 
 .order-card--medium {
