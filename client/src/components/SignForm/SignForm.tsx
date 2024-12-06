@@ -3,7 +3,7 @@ import TextButton from '../TextButton/TextButton';
 import Loading from '../Loading/Loading';
 import useAuthStore from '../../stores/authStore';
 import { authSchema, signUpSchema } from '../../utils/models/authSchema';
-import { FormEvent, useState } from 'react';
+import { FormEvent, useEffect, useState } from 'react';
 import agent from '../../services/api/agent';
 import { AxiosError } from 'axios';
 import { Customer, FormInputs } from '../../interfaces/interfaceAuth';
@@ -26,8 +26,23 @@ const SignForm = () => {
         setCustomer,
     } = useAuthStore();
     const [IsShowingError, setIsShowingError] = useState<boolean>(false);
+    const [IsStartingToShow, setIsStartingToShow] = useState<boolean>(false);
     const navigate = useNavigate();
 
+    useEffect(() => {
+        if (isShowingForm) {
+            setTimeout(() => {
+                setIsStartingToShow(true);
+            }, 1);
+        }
+    }, [isShowingForm]);
+    useEffect(() => {
+        if (!IsStartingToShow) {
+            setTimeout(() => {
+                setIsShowingForm(false);
+            }, 200);
+        }
+    }, [IsStartingToShow]);
     const FormDefaultPreventer = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
     };
@@ -37,7 +52,7 @@ const SignForm = () => {
     };
     const onPressingBackButton = () => {
         clearForm();
-        setIsShowingForm(false);
+        setIsStartingToShow(false);
         setIsSigningIn(true);
     };
 
@@ -55,12 +70,12 @@ const SignForm = () => {
 
             if ((data as Customer).email) {
                 sessionStorage.setItem('user', JSON.stringify(data as Customer));
+                clearForm();
                 setCustomer(data as Customer);
                 setIsLoading(false);
                 setTimeout(() => {
                     setIsShowingLoadingSection(false);
                     setIsShowingForm(false);
-                    clearForm();
                     navigate('/profil');
                 }, 100);
             } else {
@@ -93,6 +108,7 @@ const SignForm = () => {
             if ((data as Customer).email) {
                 sessionStorage.setItem('user', JSON.stringify(data));
                 setIsLoading(false);
+                clearForm();
                 setTimeout(() => {
                     setIsShowingLoadingSection(false);
                     setIsShowingForm(false);
@@ -209,7 +225,10 @@ const SignForm = () => {
     return (
         <>
             {isShowingForm && (
-                <article className={`authentication-forms__container authentication-forms__container--active`}>
+                <article
+                    className={`authentication-forms__container authentication-forms__container--${
+                        IsStartingToShow ? 'active' : 'inactive'
+                    }`}>
                     {isShowingLoadingSection && <Loading isLoading={isLoading} />}
 
                     <section className={`authentication-form__wrapper`}>
