@@ -14,12 +14,10 @@ const ChefPage: React.FC = () => {
 
     useEffect(() => {
         const handleNewOrder = () => {
-            console.log('logging newOrder');
             refetch();
         };
 
         const handleNewOrderStatus = () => {
-            console.log('logging newOrderStatus');
             refetch();
         };
 

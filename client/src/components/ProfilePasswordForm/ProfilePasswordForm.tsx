@@ -22,10 +22,8 @@ const ProfilePasswordForm = () => {
                 verifyPassword,
             };
 
-            console.log(passwordDetails);
             updatePassword(passwordDetails, {
                 onSuccess: () => {
-                    console.log('success');
                     setPassword('');
                     setNewPassword('');
                     setVerifyPassword('');

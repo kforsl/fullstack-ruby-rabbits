@@ -47,7 +47,6 @@ const AuthForm = () => {
             }, 200);
         } else {
             const data = await agent.Authenticate(signInForm);
-            console.log(data);
             if (typeof data[0] !== 'string') {
                 sessionStorage.setItem('employee', JSON.stringify(data));
                 setEmployee(data);

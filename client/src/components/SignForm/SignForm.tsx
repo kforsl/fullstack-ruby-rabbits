@@ -79,7 +79,6 @@ const SignForm = () => {
                     navigate('/profil');
                 }, 100);
             } else {
-                console.log(data);
                 setIsShowingError(true);
                 setTimeout(() => setIsShowingError(false), 3000);
                 setIsLoading(false);
@@ -98,7 +97,7 @@ const SignForm = () => {
         if (error) {
             setIsShowingError(true);
             setTimeout(() => setIsShowingError(false), 3000);
-            console.log(error);
+
             setIsLoading(false);
             setTimeout(() => {
                 setIsShowingLoadingSection(false);
@@ -115,7 +114,6 @@ const SignForm = () => {
                     navigate('/profil');
                 }, 100);
             } else {
-                console.log(data);
                 setIsShowingError(true);
                 setTimeout(() => setIsShowingError(false), 3000);
                 setIsLoading(false);

@@ -68,7 +68,6 @@ const ProfilePaymentOptionsForm = () => {
                     sessionStorage.setItem('user', JSON.stringify(customer));
                 }
             }
-            console.log('fungerar');
         }
     };
     return (

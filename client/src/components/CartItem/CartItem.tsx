@@ -1,5 +1,4 @@
 import { CartItem } from '../../interfaces/interfaceCart';
-import useCartStore from '../../stores/cartStore';
 import MenuToCartIncrementer from '../MenuToCartIncrementer/MenuToCartIncrementer';
 import './cartItem.css';
 
