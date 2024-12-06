@@ -1,5 +1,5 @@
 .about-page {
-    margin-block: var(--spacing-2xl);
+    margin-block: var(--spacing-xl);
     padding-inline: var(--spacing-s);
     padding-bottom: var(--spacing-2xl);
     grid-template-columns: auto 1fr;
@@ -159,7 +159,6 @@
     }
 
     .about-page {
-
         grid-template-columns: 1fr;
     }
 

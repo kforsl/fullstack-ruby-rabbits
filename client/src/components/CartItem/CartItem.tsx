@@ -10,6 +10,7 @@ const CartItemComponent: React.FC<Props> = ({ cartItem }) => {
 
     return (
         <li className='cart-item'>
+            <img src={cartItem.imageUrl} alt={cartItem.name} className='cart-item__product-image' />
             <h3 className='cart-item__title'>{`${cartItem.name} - ${cartItem.size.charAt(0).toUpperCase()}`}</h3>
 
             <h3 className='cart-item__price-of-item'>{`${priceOfItem}kr`}</h3>
