@@ -30,7 +30,8 @@
 
     --shadow-s: 2px 2px 0 var(--color-black);
 
-    --text-outline: 1px 1px var(--color-black), -1px -1px var(--color-black), 1px -1px var(--color-black), -1px 1px var(--color-black);
+    --text-outline: 1px 1px var(--color-black), -1px -1px var(--color-black), 1px -1px var(--color-black),
+        -1px 1px var(--color-black);
 
     --spacing-xs: 0.5rem;
     --spacing-s: 1rem;
@@ -56,6 +57,22 @@ body {
     font-family: var(--bread-font);
     overflow-y: hidden;
     padding-left: var(--spacing-l);
+}
+:-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--bg-primary);
+}
+
+::-webkit-scrollbar-thumb {
+    background: #bdbdbd;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--color-accent1);
 }
 
 #root {

@@ -60,12 +60,30 @@
     /* outline: 2px solid red; */
 }
 
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--bg-primary);
+}
+
+::-webkit-scrollbar-thumb {
+    background: #bdbdbd;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--color-accent1);
+}
+
 body {
     background-color: var(--bg-primary);
     font-family: var(--bread-font);
     background-image: url(/images/blotches/by0-pink-cola-blue.svg), url(/images/blotches/cSe-cola-pink-blue.svg),
         url(/images/blotches/491-blue-pink-cola.svg), url(/images/blotches/dotHb-cola-blue-pink.svg),
-        url(../../client/public/images/blotches/u-e-t-a-darkblue-pink-white-cola.svg), url(/images/blotches/by0-pink-cola-blue.svg), url(/images/blotches/cSe-cola-pink-blue.svg);
+        url(../../client/public/images/blotches/u-e-t-a-darkblue-pink-white-cola.svg),
+        url(/images/blotches/by0-pink-cola-blue.svg), url(/images/blotches/cSe-cola-pink-blue.svg);
     background-position: left 90svh, right 100svh, right 110svh, left 150svh, left 180svh, right 200svh, left 240svh;
     background-repeat: no-repeat;
     background-size: 50rem;
