@@ -7,6 +7,7 @@
 }
 
 .product-list-item__image {
+    user-select: none;
     border: 2px solid var(--color-black);
     border-radius: 6px;
     padding: var(--spacing-xs);

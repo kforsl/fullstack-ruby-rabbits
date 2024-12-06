@@ -3,6 +3,7 @@
     gap: var(--spacing-s);
     grid-template-columns: repeat(3, minmax(0, 1fr));
     place-items: center;
+    user-select: none;
 
 }
 
