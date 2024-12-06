@@ -1,4 +1,3 @@
-import PopularProductItem from '../../components/PopularProductItem/PopularProductItem';
 import ProductList from '../../components/ProductList/ProductList';
 import './menuPage.css';
 import { useGetMenu } from '../../services/queries';
