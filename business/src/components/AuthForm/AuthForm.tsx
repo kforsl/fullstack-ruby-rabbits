@@ -47,6 +47,7 @@ const AuthForm = () => {
             }, 200);
         } else {
             const data = await agent.Authenticate(signInForm);
+            console.log(data);
             if (typeof data[0] !== 'string') {
                 sessionStorage.setItem('employee', JSON.stringify(data));
                 setEmployee(data);
@@ -57,6 +58,14 @@ const AuthForm = () => {
                     setIsShowingLoadingSection(false);
                     navigate('/kassa');
                 }, 100);
+            } else {
+                setErrorMessage('Det blev något fel, var god försök igen!');
+                setIsShowingErrorMessage(true);
+                setTimeout(() => setIsShowingErrorMessage(false), 3000);
+                setIsLoading(false);
+                setTimeout(() => {
+                    setIsShowingLoadingSection(false);
+                }, 200);
             }
         }
     };
