@@ -11,12 +11,16 @@
 .order-queue {
     grid-column: 1 / span 5;
     height: 100%;
-    padding: var(--spacing-m);
+    padding: var(--spacing-m) 0 var(--spacing-m) var(--spacing-m);
+
+
 }
 
 .active-order {
     grid-column: 6 / span 3;
-    padding: var(--spacing-m) var(--spacing-m) var(--spacing-m) 0;
+    padding: var(--spacing-m) var(--spacing-m) var(--spacing-m) var(--spacing-s);
+
+
 }
 
 .order-queue__order-list {
@@ -25,6 +29,8 @@
     grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
     grid-template-rows: repeat(auto-fill, minmax(200px, auto));
     overflow-y: auto;
+    scrollbar-gutter: stable;
+    padding-right: var(--spacing-s);
 }
 
 .order-queue,
@@ -33,6 +39,7 @@
     display: grid;
     grid-template-rows: auto 1fr;
     max-height: 100vh;
+
 }
 
 .order-queue__title,
