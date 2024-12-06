@@ -5,7 +5,6 @@
 .product-list__title {
     font-size: var(--font-size-l);
     font-family: var(--bread-font);
-    margin-bottom: var(--spacing-s);
 }
 
 .product-list__wrapper {

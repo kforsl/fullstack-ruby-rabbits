@@ -2,7 +2,7 @@
     display: grid;
     grid-template-columns: var(--main-grid);
     gap: var(--spacing-s);
-    max-height: 100svh;
+    height: 100svh;
     overflow: hidden;
     position: relative;
 }

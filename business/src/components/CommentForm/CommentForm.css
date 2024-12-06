@@ -1,0 +1,37 @@
+.comment-form {
+    margin-right: var(--spacing-s);
+    grid-template-rows: auto 1fr;
+    display: grid;
+    gap: var(--spacing-xs);
+    grid-template-columns: auto auto 1fr;
+}
+
+.comment-form__input {
+    grid-column: 1/-1;
+    padding: var(--spacing-s);
+    margin-bottom: var(--spacing-s);
+    resize: none;
+    font-size: var(--font-size-m);
+}
+
+.comment-form__button {
+    aspect-ratio: 1;
+    width: 3rem;
+    display: grid;
+    place-items: center;
+    border: none;
+    justify-self: end;
+    color: white;
+    font-size: var(--font-size-l);
+    border-radius: 8px;
+}
+
+.comment-form__button--red {
+    background-color: red;
+    font-weight: 600;
+}
+
+.comment-form__button--green {
+    background-color: green;
+    font-weight: 900;
+}

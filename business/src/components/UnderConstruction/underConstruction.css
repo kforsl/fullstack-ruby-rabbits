@@ -1,0 +1,11 @@
+.under-construction {
+    max-width: var(--max-width);
+    display: grid;
+    justify-content: center;
+    height: 100svh;
+}
+
+.under-construction__image {
+    margin: auto;
+    width: 100%;
+}

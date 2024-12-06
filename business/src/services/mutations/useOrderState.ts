@@ -12,9 +12,9 @@ export const useOrderState = () => {
     return useMutation({
         mutationFn: ({ id, state }: MutationParameters) => agent.Orders.updateState(id, state),
 
-        onSuccess: () => {
+        onSuccess: (orderList) => {
             queryClient.invalidateQueries({ queryKey: ['orders'] });
-            socket.emit('updateOrderStatus');
+            socket.emit('updateOrderStatus', orderList[0]._id);
         },
     });
 };
@@ -28,6 +28,6 @@ export const useOrderState = () => {
  * mutate är en funktion som tar ett object med två parametrar vilket definieras av MutationParameters-interface ovan.
  * ex: mutate({id, state})
  *
- *  * Ändrat: Kim
+ * Ändrat: Kim
  * Laggt till socket.emit
  */

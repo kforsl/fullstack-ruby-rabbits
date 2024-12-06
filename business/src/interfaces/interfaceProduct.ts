@@ -15,12 +15,12 @@ export interface SizeType {
     ingredientMultiplier: number;
 }
 
-interface IngredientType {
-    ingredientItem: IngredientItemType;
-    quantity: number;
+export interface IngredientType {
+    ingredient: IngredientItemType;
+    quantityInGrams: number;
 }
 
-interface IngredientItemType {
+export interface IngredientItemType {
     _id: string;
     name: string;
     description: string;
@@ -33,7 +33,29 @@ interface AllergensType {
     description: string;
 }
 
+export interface UpdateProductType {
+    name: string;
+    description: string;
+    type: 'milkshake' | 'icecream';
+    imageUrl: string;
+    ingredients: UpdateIngredientType[];
+    isSpecial: boolean;
+    sizes: UpdateSizeType[];
+}
+
+export interface UpdateIngredientType {
+    ingredient: string;
+    quantityInGrams: number;
+}
+
+interface UpdateSizeType {
+    size: 'small' | 'medium' | 'large';
+    price: number;
+}
+
 /*
  * Författare: Kim
  * Skapat interface för ProductType, SizeType, IngredientType, IngredientItemType, AllergensType
+ * Ändrat: Kim
+ * Laggt till UpdateProductType, UpdateIngredientType och UpdateSizeType
  */

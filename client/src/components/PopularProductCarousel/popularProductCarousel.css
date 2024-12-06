@@ -1,0 +1,119 @@
+.PopularProductCarousel {
+    position: relative;
+    min-height: 255px;
+    margin-bottom: var(--spacing-2xl);
+    overflow: hidden;
+}
+
+.PopularProductCarousel__title {
+    font-size: var(--font-size-3xl);
+    font-family: var(--title-font);
+    color: var(--color-accent2);
+    text-shadow: var(--text-outline);
+    filter: drop-shadow(2px 2px 0 var(--color-black)) drop-shadow(2px 2px 0 var(--color-accent1));
+    margin-bottom: var(--spacing-l);
+    text-align: center;
+}
+
+.PopularProductCarousel__fade-left,
+.PopularProductCarousel__fade-right {
+    height: 100%;
+    width: 25%;
+    position: absolute;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    pointer-events: none;
+    top: 0;
+}
+
+.PopularProductCarousel__fade-left {
+    background: linear-gradient(90deg, var(--bg-primary) 20%, rgba(254, 250, 241, 0) 100%);
+}
+
+.PopularProductCarousel__fade-right {
+    background: linear-gradient(270deg, var(--bg-primary) 20%, rgba(254, 250, 241, 0) 100%);
+    left: auto;
+    right: 0;
+    justify-content: flex-end;
+}
+
+.PopularProductCarousel__navigation-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 1rem;
+    pointer-events: all;
+    transition: all .2s ease-in-out;
+}
+
+.PopularProductCarousel__navigation-btn:active {
+    scale: .8;
+}
+
+.PopularProductCarousel__button-text {
+    user-select: none;
+    font-size: var(--font-size-3xl);
+    color: var(--color-accent1);
+    filter: drop-shadow(var(--shadow-s));
+    text-shadow: var(--text-outline);
+}
+
+@media screen and (max-width: 630px) {
+    .PopularProductCarousel {
+        margin-bottom: var(--spacing-xl);
+    }
+}
+
+
+@media screen and (max-width: 630px) {
+    .PopularProductCarousel {
+        min-height: 350px;
+        overflow: unset;
+    }
+
+    .PopularProductCarousel__fade-left,
+    .PopularProductCarousel__fade-right {
+        align-items: end;
+    }
+
+    .PopularProductCarousel__navigation-btn {
+        padding-bottom: 0;
+    }
+
+    .PopularProductCarousel__productContainer {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        place-items: end;
+        max-width: 400px;
+        margin: 0 auto;
+        height: 100%;
+    }
+}
+
+@media screen and (max-width: 530px) {
+    .PopularProductCarousel {
+        min-height: 340px;
+    }
+
+    .PopularProductCarousel__productContainer {
+        max-width: 350px;
+        overflow: hidden;
+    }
+
+    .PopularProductCarousel__navigation-btn {
+        padding-inline: var(--spacing-xs);
+    }
+}
+
+@media screen and (max-width: 425px) {
+    .PopularProductCarousel {
+        min-height: 325px;
+    }
+
+    .PopularProductCarousel__productContainer {
+        max-width: 260px;
+        overflow: hidden;
+    }
+
+}

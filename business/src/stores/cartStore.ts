@@ -52,7 +52,7 @@ export default useCartStore;
  *Startat upp en array för cart samt funktionalitet att lägga till och ta bort cart items. removeFromCart filtrerar bort cart item istället för att visa 0.
  */
 
-/**
+/*
  * författare: Kim
  * Lagt till deleteFromCart och ändrat så att den kollar så hela objektet stämmer och inte bara id.
  */

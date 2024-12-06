@@ -23,7 +23,7 @@ const useProductStore = create<ProductStore>((set) => ({
             set((state) => ({ milkshake: state.products.filter((item) => item.type === 'milkshake') }));
             set((state) => ({ specials: state.products.filter((item) => item.isSpecial === true) }));
         } catch (error) {
-            console.log(error);
+            console.error(error);
         }
     },
 }));

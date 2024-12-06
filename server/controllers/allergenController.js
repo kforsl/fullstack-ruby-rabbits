@@ -5,7 +5,7 @@ exports.getAllAllergens = asyncHandler(async (req, res) => {
     try {
         const allergens = await AllergenModel.find({});
         res.status(200).json({
-            message: 'Allergens succesfully found',
+            message: 'Allergens successfully found',
             data: allergens,
         });
     } catch (error) {
@@ -23,7 +23,7 @@ exports.createAllergen = asyncHandler(async (req, res) => {
         await allergen.save();
 
         res.status(201).json({
-            message: 'Succesfully created Allergen',
+            message: 'successfully created Allergen',
             data: [allergen],
         });
     } catch (error) {
@@ -44,7 +44,7 @@ exports.getAllergenById = asyncHandler(async (req, res) => {
             });
         } else {
             res.status(200).json({
-                message: 'Allergens succesfully found',
+                message: 'Allergens successfully found',
                 data: [allergen],
             });
         }

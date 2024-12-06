@@ -23,11 +23,12 @@
 }
 
 .checkoutOrder__order-list {
-    display: flex;
-    flex-wrap: wrap;
-    gap: var(--spacing-s);
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: var(--spacing-xs);
     max-height: 95%;
     overflow-y: auto;
+    padding-right: var(--spacing-xs);
 }
 
 .checkoutOrder__btn {

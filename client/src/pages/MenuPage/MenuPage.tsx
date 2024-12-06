@@ -1,14 +1,16 @@
-import PopularProductItem from '../../components/PopularProductItem/PopularProductItem';
 import ProductList from '../../components/ProductList/ProductList';
 import './menuPage.css';
 import { useGetMenu } from '../../services/queries';
 import { ProductType } from '../../interfaces/interfaceProduct';
+import { useNavigate } from 'react-router-dom';
+import PopularProductCarousel from '../../components/PopularProductCarousel/PopularProductCarousel';
 
 const MenuPage: React.FC = () => {
-    const { data, isLoading, isError, error } = useGetMenu();
+    const { data, isLoading, isError } = useGetMenu();
+    const navigate = useNavigate();
 
     if (isLoading) return <p>Loading...</p>;
-    if (isError) return <p>{`${error}`}</p>;
+    isError && navigate('/error');
 
     const specials = data?.data.filter((item) => item.isSpecial === true) as ProductType[];
     const iceCream = data?.data.filter((item) => item.type === 'icecream') as ProductType[];
@@ -17,11 +19,12 @@ const MenuPage: React.FC = () => {
     return (
         <main className='menu-page'>
             <div className='wrapper'>
-                <ul className='menu-page__popular-wrapper'>
+                <PopularProductCarousel specials={specials} />
+                {/* <ul className='menu-page__popular-wrapper'>
                     {specials?.map((special) => (
                         <PopularProductItem product={special} key={special._id} />
                     ))}
-                </ul>
+                </ul> */}
 
                 <section className='menu-page__menu-wrapper'>
                     <ProductList title='Ice Cream' position='left' productItems={iceCream} />
@@ -46,4 +49,7 @@ export default MenuPage;
  *
  * Ändrat: Magnus
  * Implementerade useQuery istället för zustand-store/useEffect för att rendera ut menyn.
+ 
+ * Ändrat: Magnus
+ * Första passering av responsivitet gjord. Navigerar till errorpage om det blir fel när man hämtar menyn. Popularitems får sidoscroll vid ipad storlek ungefär.
  */

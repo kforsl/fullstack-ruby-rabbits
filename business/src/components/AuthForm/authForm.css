@@ -20,7 +20,23 @@
     -moz-user-select: none;
     -webkit-user-select: none;
 }
-
+.error-message {
+    color: red;
+    font-size: var(--font-size-m);
+    font-weight: 700;
+    text-align: center;
+    transition: all 0.2s ease-in-out;
+    user-select: none;
+    overflow: hidden;
+}
+.error-message--active {
+    height: 5rem;
+    padding-top: var(--spacing-m);
+}
+.error-message--inactive {
+    padding-top: 0;
+    height: 0;
+}
 .main-form {
     position: relative;
     top: 0;

@@ -1,0 +1,34 @@
+.order-confirmation-editor {
+    display: grid;
+    gap: var(--spacing-xs);
+    grid-template-columns: repeat(3, auto);
+    place-items: center;
+    width: 4rem;
+}
+
+.order-confirmation-editor__button {
+    cursor: pointer;
+    background-color: var(--bg-primary);
+    border: none;
+}
+
+.order-confirmation-editor__button-text {
+    font-size: var(--font-size-l);
+    color: var(--color-accent2);
+    filter: drop-shadow(var(--shadow-s));
+    text-shadow: var(--text-outline);
+}
+
+.order-confirmation-editor__amount {
+    color: var(--color-black);
+    font-size: var(--font-size-l);
+    align-self: end;
+}
+
+.order-confirmation-editor__button--disabled {
+    opacity: .5;
+
+    .order-confirmation-editor__button-text {
+        color: rgb(189, 179, 179);
+    }
+}

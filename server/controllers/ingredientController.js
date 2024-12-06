@@ -8,7 +8,7 @@ exports.createIngredient = asyncHandler(async (req, res) => {
         await ingredient.save();
 
         res.status(201).json({
-            message: 'Succesfully created ingredient',
+            message: 'successfully created ingredient',
             data: [ingredient],
         });
     } catch (error) {
@@ -23,7 +23,7 @@ exports.getAllIngredients = asyncHandler(async (req, res) => {
     try {
         const ingredients = await IngredientModel.find({}).populate('allergens');
         res.status(200).json({
-            message: 'Succesfully found ingredients',
+            message: 'successfully found ingredients',
             data: ingredients,
         });
     } catch (error) {
@@ -44,7 +44,7 @@ exports.getIngredientById = asyncHandler(async (req, res) => {
             });
         } else {
             res.status(200).json({
-                message: 'Succesfully found ingredient',
+                message: 'successfully found ingredient',
                 data: [ingredient],
             });
         }

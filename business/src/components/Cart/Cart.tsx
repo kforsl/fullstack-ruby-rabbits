@@ -4,15 +4,18 @@ import useCartStore from '../../stores/cartStore';
 import CartProductItem from '../CartProductItem/CartProductItem';
 import './cart.css';
 import { useCreateOrder } from '../../services/mutations';
+import CommentForm from '../CommentForm/CommentForm';
 
 interface Props {
     changeview: () => void;
+    comment: string;
+    setComment: (comment: string) => void;
 }
 
-const Cart = ({ changeview }: Props) => {
+const Cart = ({ changeview, comment, setComment }: Props) => {
     const { cart, setCart } = useCartStore();
     const [isPayByCard, setIsPayByCard] = useState<boolean>(true);
-    const [comment, setComment] = useState('');
+    const [isCommenting, setIsCommenting] = useState<boolean>(false);
     const { mutate: createOrder, isPending } = useCreateOrder();
 
     const calculateTotalPrice = (): number =>
@@ -47,13 +50,26 @@ const Cart = ({ changeview }: Props) => {
     return (
         <section className='cart'>
             <h2 className='cart__title'>Kundkorg</h2>
-            <ul className='cart__product-list'>
-                {cart.map((product, i) => (
-                    <CartProductItem product={product} key={i} />
-                ))}
-            </ul>
+            {isCommenting ? (
+                <CommentForm
+                    comment={comment}
+                    setComment={setComment}
+                    onSave={() => setIsCommenting((prev) => !prev)}
+                    onAbort={() => {
+                        setIsCommenting((prev) => !prev);
+                        setComment('');
+                    }}
+                />
+            ) : (
+                <ul className='cart__product-list'>
+                    {cart.map((product, i) => (
+                        <CartProductItem product={product} key={i} />
+                    ))}
+                </ul>
+            )}
+
             <section className='cart__information'>
-                <figure className='cart__information__comment'>
+                <figure className='cart__information__comment' onClick={() => setIsCommenting((prev) => !prev)}>
                     <img src='/assets/fluent_notepad-edit-16-filled.svg' alt='notepad' />
                     <figcaption className='cart__information__comment-prev'> {comment} </figcaption>
                 </figure>
@@ -92,6 +108,10 @@ export default Cart;
  * Komponent som visar de produkter som finns i varukorgem och möjligheten att öka och minska antalet.
  *
  * Ändrat: Magnus
- * Fixat createNewOrder funtkionen som använder useMutate för att skapa en ny order.
+ * Fixat createNewOrder funktionen som använder useMutate för att skapa en ny order.
  * Använder isPending för att rendera textinnehåll i betalaknappen och är då disabled.
+ *
+ * Ändrat: Magnus
+ * Skapade useState-variabel (isCommenting) som togglas om man håller på att lägga kommentar eller inte. Renderar CommentForm-komponent eller cart__product-list beroende av state på variabeln.
+ *
  */

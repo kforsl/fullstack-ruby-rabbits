@@ -1,0 +1,35 @@
+.order-list-item {
+    display: grid;
+    grid-template-columns: repeat(4, auto);
+    gap: var(--spacing-s);
+    padding-inline: var(--spacing-s);
+    padding-block: var(--spacing-s) var(--font-size-m);
+    font-size: var(--font-size-m);
+    color: var(--color-black);
+    border-bottom: 1px solid var(--color-black);
+}
+
+.order-list-item__link {
+    color: var(--color-black);
+}
+
+.order-list-item__link:hover {
+    color: var(--color-accent1);
+}
+
+.order-list-item__date,
+.order-list-item__price {
+    place-self: end;
+}
+
+@media screen and (max-width: 464px) {
+    .order-list-item {
+        grid-template-columns: repeat(2, auto);
+        gap: none;
+        justify-content: space-between;
+    }
+    .order-list-item__date,
+    .order-list-item__price {
+        place-self: start;
+    }
+}
