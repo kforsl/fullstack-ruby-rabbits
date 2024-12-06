@@ -64,8 +64,12 @@
 }
 
 .cart__total-price {
+    border-top: 2px solid var(--color-accent1);
+    width: 90%;
+    text-align: end;
+    padding-top: var(--spacing-s);
     font-weight: 600;
-    padding-right: var(--spacing-m);
+    margin-right: var(--spacing-m);
     justify-self: end;
 }
 
@@ -77,8 +81,7 @@
 
 @media (hover: hover) and (pointer: fine) {
     .cart__button:hover {
-        scale: 1.02;
-        transform: translateY(-5px);
+        transform: translateY(-3px);
     }
 
     .cart__button--disabled:hover {

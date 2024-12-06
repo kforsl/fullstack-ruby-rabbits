@@ -63,20 +63,23 @@ const FinalizeOrder: React.FC = () => {
                         <CartItemComponent key={item.id + item.size} cartItem={item} />
                     ))}
                 </ul>
-                <h2 className='finalize-page__total-price'>{`TOTALPRIS: ${calculateTotalPrice()}kr`}</h2>
-                <form className='finalize-page__comment-form'>
-                    <textarea
-                        maxLength={150}
-                        placeholder='HAR DU ÖNSKEMÅL PÅ DIN BESTÄLLNING? SKRIV HÄR...'
-                        name='orderComment'
-                        id='orderComment'
-                        className='finalize-page__textarea'
-                        onChange={(e) => setComment(e.target.value)}></textarea>
-                    <span className='finalize-page__comment-count'>{`${comment.length}/150`}</span>
-                </form>
-                {cart.length !== 0 && (
-                    <TextButton onClick={createNewOrder}>{isPending ? 'Loading...' : 'SKICKA ORDER'}</TextButton>
-                )}
+                <div className='finalize-page__control-wrapper'>
+                    <h2 className='finalize-page__total-price'>{`TOTALT: ${calculateTotalPrice()}kr`}</h2>
+                    {cart.length !== 0 && (
+                        <TextButton onClick={createNewOrder}>{isPending ? 'Loading...' : 'SKICKA ORDER'}</TextButton>
+                    )}
+
+                    <form className='finalize-page__comment-form'>
+                        <textarea
+                            maxLength={150}
+                            placeholder='HAR DU ÖNSKEMÅL PÅ DIN BESTÄLLNING? SKRIV HÄR...'
+                            name='orderComment'
+                            id='orderComment'
+                            className='finalize-page__textarea'
+                            onChange={(e) => setComment(e.target.value)}></textarea>
+                        <span className='finalize-page__comment-count'>{`${comment.length}/150`}</span>
+                    </form>
+                </div>
             </article>
         </main>
     );
