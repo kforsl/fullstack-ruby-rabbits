@@ -63,6 +63,7 @@ const FinalizeOrder: React.FC = () => {
                         <CartItemComponent key={item.id + item.size} cartItem={item} />
                     ))}
                 </ul>
+                <h2 className='finalize-page__total-price'>{`TOTALPRIS: ${calculateTotalPrice()}kr`}</h2>
                 <form className='finalize-page__comment-form'>
                     <textarea
                         maxLength={150}

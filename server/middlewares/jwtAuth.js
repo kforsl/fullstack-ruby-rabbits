@@ -54,7 +54,6 @@ exports.validateUserAsAdmin = async (req, res, next) => {
 exports.validateUserAsEmployee = async (req, res, next) => {
     try {
         const employee = req.employee;
-        console.log('HEJSAN');
         if (employee.role === 'employee') next();
         else if (employee.role === 'manager') next();
         else throw new Error('You do not have access to this endpoint');

@@ -15,7 +15,7 @@ export const handleImageUpload = async (imageFile: File) => {
         const data: UploadResponse = await response.json();
         return data.url;
     } catch (error) {
-        console.log(error);
+        console.error(error);
         return 'https://happymess-images.s3.eu-north-1.amazonaws.com/Image-not-found.png';
     }
 };
