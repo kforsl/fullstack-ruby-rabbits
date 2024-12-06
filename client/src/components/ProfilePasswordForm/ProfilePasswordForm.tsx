@@ -6,7 +6,7 @@ import { useUpdatePassword } from './../../services/mutations/useUpdatePassword'
 
 const ProfilePasswordForm = () => {
     const [isErrorShowing, setIsErrorShowing] = useState<boolean>(false);
-    const { mutate: updatePassword, isPending } = useUpdatePassword();
+    const { mutate: updatePassword } = useUpdatePassword();
 
     const [password, setPassword] = useState<string>('');
     const [newPassword, setNewPassword] = useState<string>('');
