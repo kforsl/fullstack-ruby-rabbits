@@ -8,11 +8,20 @@
     background-color: var(--bg-primary);
     padding: var(--spacing-s);
     border: 2px solid var(--color-black);
+    opacity: 0;
 }
 
 .popular-product-item__image {
     width: 150px;
     user-select: none;
+}
+
+.popular-product-item-1,
+.popular-product-item-2,
+.popular-product-item-3,
+.popular-product-item-4,
+.popular-product-item-5 {
+    opacity: 1;
 }
 
 .popular-product-item-1 {
@@ -164,7 +173,6 @@
 }
 
 @media screen and (max-width: 530px) {
-
     .popular-product-item-1,
     .popular-product-item-2,
     .popular-product-item-4,
@@ -174,7 +182,6 @@
 }
 
 @media screen and (max-width: 420px) {
-
     .popular-product-item-1,
     .popular-product-item-2,
     .popular-product-item-4,
