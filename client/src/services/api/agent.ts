@@ -61,12 +61,8 @@ const Authenticate = {
             .post<AgentResponse<Customer>>(`auth/customer/register`, credentials)
             .then((response) => response.data[0])
             .catch((error) => error),
-    refreshToken: (customer: Customer) =>
-        requests
-            .post<AgentResponse<Customer>>(`auth/customer/${customer._id}/refresh`, {
-                refreshToken: customer.refreshToken,
-            })
-            .then((response) => response.data[0]),
+    refreshToken: () =>
+        requests.get<{ data: { accessToken: string } }>(`auth/customer/refresh`).then((response) => response),
     signOut: () => requests.get(`auth/customer/signout`),
 };
 
@@ -87,6 +83,7 @@ const agent = {
     Product,
     Orders,
     Profile,
+    Configs: axios,
 };
 
 export default agent;

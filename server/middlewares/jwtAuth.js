@@ -10,7 +10,7 @@ exports.validateAccessToken = async (req, res, next) => {
     } catch (error) {
         if (ato) res.clearCookie('ato');
 
-        return res.status(401).json({ message: 'Invalid Token' });
+        return res.status(401).json({ message: 'Unauthorized' });
     }
 };
 
@@ -22,7 +22,7 @@ exports.validateRefreshTokenStrict = async (req, res, next) => {
         req.id = id;
         next();
     } catch (error) {
-        return res.status(401).json({ message: 'Invalid token' });
+        return res.status(401).json({ message: 'Unauthorized' });
     }
 };
 
@@ -93,7 +93,6 @@ exports.validateIfUserIsCustomerStrict = async (req, res, next) => {
         next();
     } catch (error) {
         if (ato) res.clearCookie('ato');
-        else res.clearCookie('rto');
 
         return res.status(401).json({ message: 'Invalid Token' });
     }

@@ -28,14 +28,15 @@ exports.authenticateEmployee = asyncHandler(async (req, res) => {
 
         await employee.save();
 
-        const accessToken = jwt.sign(employee.toJSON(), process.env.JWT_SECRET, { expiresIn: '1d' });
+        const accessToken = jwt.sign(employee.toJSON(), process.env.JWT_SECRET, { expiresIn: '15m' });
+        employee.refreshToken = null;
 
-        res.cookie('ato', accessToken, {
+        res.cookie('ato', refreshToken, {
             httpOnly: true,
             secure: true,
             signed: true,
             sameSite: 'none',
-            maxAge: 24 * 60 * 60 * 1000,
+            maxAge: 30 * 24 * 60 * 60 * 1000,
         });
 
         employee.hash = null;
@@ -217,12 +218,12 @@ exports.refreshTokenForEmployee = asyncHandler(async (req, res) => {
 
         const employee = await EmployeeModel.findById(id);
 
-        if (!customer)
+        if (!employee)
             return res.status(404).json({
                 message: 'Error',
                 data: `No customer with ID: ${id}.`,
             });
-        if (customer.refreshToken !== rto)
+        if (employee.refreshToken !== rto)
             return res.status(401).json({
                 message: 'Error',
                 data: `Invalid token.`,
@@ -230,21 +231,23 @@ exports.refreshTokenForEmployee = asyncHandler(async (req, res) => {
 
         const refreshToken = uuidv4();
         employee.refreshToken = refreshToken;
-
-        const accessToken = jwt.sign(customer.toJSON(), process.env.JWT_SECRET, { expiresIn: '1d' });
         await employee.save();
+        employee.refreshToken = null;
         employee.hash = null;
-        res.cookie('ato', accessToken, {
+
+        const accessToken = jwt.sign(employee.toJSON(), process.env.JWT_SECRET, { expiresIn: '15m' });
+
+        res.cookie('ato', refreshToken, {
             httpOnly: true,
             secure: true,
             signed: true,
             sameSite: 'none',
-            maxAge: 24 * 60 * 60 * 1000,
+            maxAge: 15 * 60 * 1000,
         });
 
         return res.status(200).json({
             message: 'Refresh token succesfully updated',
-            data: [employee],
+            data: accessToken,
         });
     } catch (error) {
         res.status(401).json({
