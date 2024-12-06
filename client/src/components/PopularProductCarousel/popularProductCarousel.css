@@ -44,6 +44,11 @@
     cursor: pointer;
     padding: 1rem;
     pointer-events: all;
+    transition: all .2s ease-in-out;
+}
+
+.PopularProductCarousel__navigation-btn:active {
+    scale: .8;
 }
 
 .PopularProductCarousel__button-text {
@@ -104,5 +109,9 @@
     .PopularProductCarousel__productContainer {
         max-width: 260px;
         overflow: hidden;
+    }
+
+    .PopularProductCarousel__navigation-btn {
+        padding-inline: var(--spacing-xs);
     }
 }
