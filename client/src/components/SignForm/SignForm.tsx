@@ -69,7 +69,6 @@ const SignForm = () => {
             const response: tokenResponse = (await agent.Authenticate.signIn(signInForm)) as tokenResponse;
 
             if (response !== null) {
-                console.log(response);
                 sessionStorage.setItem('user', JSON.stringify(response.data));
                 sessionStorage.setItem('ato', response.token);
                 clearForm();

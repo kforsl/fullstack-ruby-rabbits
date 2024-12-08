@@ -93,6 +93,7 @@ const Authenticate = {
             .get<TokenResponse>(`auth/refresh`)
             .then((response) => response)
             .catch((error) => error),
+    signOut: () => requests.get(`auth/signout`).then((response) => response),
 };
 const agent = {
     Authenticate,
