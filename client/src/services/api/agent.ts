@@ -1,21 +1,49 @@
 import axios, { AxiosResponse } from 'axios';
 import { ProductType } from '../../interfaces/interfaceProduct';
-import { Customer, PasswordForm, PaymentOption, SignInForm } from '../../interfaces/interfaceAuth';
+import { Customer, PasswordForm, PaymentOption, SignInForm, tokenResponse } from '../../interfaces/interfaceAuth';
 import { CartToOrder } from '../../interfaces/interfaceCart';
 import { BASE_URL } from '../../../../constants.ts';
 import { OrderType } from '../../interfaces/interfaceOrder.ts';
-// axios.defaults.baseURL = 'Här får vi byta ut och ta vår adress när vi har en
+
 axios.defaults.baseURL = `${BASE_URL}/api`;
 
 const responseBody = <T>(response: AxiosResponse<T>) => response.data;
 
 const requests = {
-    get: <T>(url: string) => axios.get<T>(`${url}`, { withCredentials: true }).then(responseBody),
-    post: <T>(url: string, body: {}) => axios.post<T>(`${url}`, body, { withCredentials: true }).then(responseBody),
-    put: <T>(url: string, body: {}) => axios.put<T>(`${url}`, body, { withCredentials: true }).then(responseBody),
-    delete: <T>(url: string) => axios.delete<T>(`${url}`, { withCredentials: true }).then(responseBody),
+    get: <T>(url: string) =>
+        axios
+            .get<T>(`${url}`, {
+                withCredentials: true,
+                headers: { Authorization: `Bearer ${sessionStorage.getItem('ato')}` },
+            })
+            .then(responseBody),
+    post: <T>(url: string, body: {}) =>
+        axios
+            .post<T>(`${url}`, body, {
+                withCredentials: true,
+                headers: { Authorization: `Bearer ${sessionStorage.getItem('ato')}` },
+            })
+            .then(responseBody),
+    put: <T>(url: string, body: {}) =>
+        axios
+            .put<T>(`${url}`, body, {
+                withCredentials: true,
+                headers: { Authorization: `Bearer ${sessionStorage.getItem('ato')}` },
+            })
+            .then(responseBody),
+    delete: <T>(url: string) =>
+        axios
+            .delete<T>(`${url}`, {
+                withCredentials: true,
+                headers: { Authorization: `Bearer ${sessionStorage.getItem('ato')}` },
+            })
+            .then(responseBody),
 };
-
+interface testInterface {
+    data: Customer;
+    token: string;
+    message: string;
+}
 interface ProductResponse {
     message: string;
     data: ProductType[];
@@ -24,7 +52,10 @@ interface AgentResponse<T = object> {
     message: string;
     data: T[];
 }
-
+interface TokenResponse {
+    message: string;
+    data: string;
+}
 const Product = {
     list: () => requests.get<ProductResponse>('products'),
 };
@@ -51,10 +82,12 @@ const Orders = {
 };
 
 const Authenticate = {
+    validateToken: (token: string) =>
+        requests.post<TokenResponse>(`auth/token`, { accessToken: token }).then((response) => response),
     signIn: (credentials: SignInForm) =>
         requests
-            .post<AgentResponse<Customer>>(`auth/customer`, credentials)
-            .then((response) => response.data[0])
+            .post<AgentResponse<testInterface>>(`auth/customer`, credentials)
+            .then((response) => response)
             .catch((error) => error),
     signUp: (credentials: Customer) =>
         requests
@@ -62,11 +95,15 @@ const Authenticate = {
             .then((response) => response.data[0])
             .catch((error) => error),
     refreshToken: () =>
-        requests.get<{ data: { accessToken: string } }>(`auth/customer/refresh`).then((response) => response),
+        requests
+            .get<tokenResponse>(`auth/refresh`)
+            .then((response) => response)
+            .catch((error) => error),
     signOut: () => requests.get(`auth/customer/signout`),
 };
 
 const Profile = {
+    getProfile: () => requests.get<AgentResponse<Customer>>('profile/me').then((response) => response.data),
     updatePaymentOptions: (paymentOptions: PaymentOption[]) =>
         requests.put<AgentResponse<Customer>>(`profile/payment`, paymentOptions).then((response) => response.data),
     updatePersonalData: (userInformation: Customer) =>
@@ -83,7 +120,7 @@ const agent = {
     Product,
     Orders,
     Profile,
-    Configs: axios,
+    api: axios,
 };
 
 export default agent;

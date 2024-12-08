@@ -6,7 +6,7 @@ import { authSchema, signUpSchema } from '../../utils/models/authSchema';
 import { FormEvent, useEffect, useState } from 'react';
 import agent from '../../services/api/agent';
 import { AxiosError } from 'axios';
-import { Customer, FormInputs } from '../../interfaces/interfaceAuth';
+import { Customer, FormInputs, tokenResponse } from '../../interfaces/interfaceAuth';
 import { useNavigate } from 'react-router-dom';
 import SignFormInput from '../SignFormInput/SignFormInput';
 const SignForm = () => {
@@ -66,12 +66,14 @@ const SignForm = () => {
             setIsShowingError(true);
             setTimeout(() => setIsShowingError(false), 3000);
         } else {
-            const data: Customer | AxiosError = await agent.Authenticate.signIn(signInForm);
+            const response: tokenResponse = (await agent.Authenticate.signIn(signInForm)) as tokenResponse;
 
-            if ((data as Customer).email) {
-                sessionStorage.setItem('user', JSON.stringify(data as Customer));
+            if (response !== null) {
+                console.log(response);
+                sessionStorage.setItem('user', JSON.stringify(response.data));
+                sessionStorage.setItem('ato', response.token);
                 clearForm();
-                setCustomer(data as Customer);
+                setCustomer(response.data as Customer);
                 setIsLoading(false);
                 setTimeout(() => {
                     setIsShowingLoadingSection(false);
