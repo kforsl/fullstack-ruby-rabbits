@@ -1,6 +1,6 @@
 import axios, { AxiosResponse } from 'axios';
 import { IngredientItemType, ProductType, UpdateProductType } from '../../interfaces/interfaceProduct';
-import { SignInForm } from '../../interfaces/interfaceAuth';
+import { TokenResponse, SignInForm } from '../../interfaces/interfaceAuth';
 import { OrderType } from '../../interfaces/interfaceOrder';
 import { CartToOrder } from '../../interfaces/interfaceCart';
 import { BASE_URL } from '../../../../constants.ts';
@@ -10,10 +10,34 @@ axios.defaults.baseURL = `${BASE_URL}/api`;
 const responseBody = <T>(response: AxiosResponse<T>) => response.data;
 
 const requests = {
-    get: <T>(url: string) => axios.get<T>(`${url}`, { withCredentials: true }).then(responseBody),
-    post: <T>(url: string, body: {}) => axios.post<T>(`${url}`, body, { withCredentials: true }).then(responseBody),
-    put: <T>(url: string, body: {}) => axios.put<T>(`${url}`, body, { withCredentials: true }).then(responseBody),
-    delete: <T>(url: string) => axios.delete<T>(`${url}`, { withCredentials: true }).then(responseBody),
+    get: <T>(url: string) =>
+        axios
+            .get<T>(`${url}`, {
+                withCredentials: true,
+                headers: { Authorization: `Bearer ${sessionStorage.getItem('ato')}` },
+            })
+            .then(responseBody),
+    post: <T>(url: string, body: {}) =>
+        axios
+            .post<T>(`${url}`, body, {
+                withCredentials: true,
+                headers: { Authorization: `Bearer ${sessionStorage.getItem('ato')}` },
+            })
+            .then(responseBody),
+    put: <T>(url: string, body: {}) =>
+        axios
+            .put<T>(`${url}`, body, {
+                withCredentials: true,
+                headers: { Authorization: `Bearer ${sessionStorage.getItem('ato')}` },
+            })
+            .then(responseBody),
+    delete: <T>(url: string) =>
+        axios
+            .delete<T>(`${url}`, {
+                withCredentials: true,
+                headers: { Authorization: `Bearer ${sessionStorage.getItem('ato')}` },
+            })
+            .then(responseBody),
 };
 
 //Exempel på objekt som kan användas i Agent
@@ -58,13 +82,20 @@ const Orders = {
 const Ingredient = {
     list: () => requests.get<AgentResponse<IngredientItemType>>('ingredients').then((response) => response.data),
 };
-
-const agent = {
-    Authenticate: (credentials: SignInForm) =>
+const Authenticate = {
+    signIn: (credentials: SignInForm) =>
         requests
             .post<AgentResponse<SignInForm>>(`auth`, credentials)
-            .then((response) => response.data)
+            .then((response) => response)
             .catch((error) => error.message),
+    refreshToken: () =>
+        requests
+            .get<TokenResponse>(`auth/refresh`)
+            .then((response) => response)
+            .catch((error) => error),
+};
+const agent = {
+    Authenticate,
     Products,
     Orders,
     Ingredient,

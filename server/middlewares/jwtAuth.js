@@ -1,46 +1,46 @@
 const jwt = require('jsonwebtoken');
+const { CustomerModel } = require('../models/customerModel');
 
 exports.validateAccessToken = async (req, res, next) => {
-    const { ato } = req.signedCookies;
-
     try {
-        const employee = jwt.verify(ato, process.env.JWT_SECRET);
-        req.employee = employee;
+        const token = req.headers.authorization.split(' ')[1];
+        const accessToken = jwt.verify(token, process.env.JWT_SECRET);
+        if (accessToken) {
+            req.userId = accessToken.token;
+        }
         next();
-    } catch (error) {
-        if (ato) res.clearCookie('ato');
-
+    } catch {
         return res.status(401).json({ message: 'Unauthorized' });
     }
 };
 
 exports.validateRefreshTokenStrict = async (req, res, next) => {
-    const { refreshToken } = req.body;
-    const { id } = req.params;
+    const { rto } = req.signedCookies;
     try {
-        req.refreshToken = refreshToken;
-        req.id = id;
+        const verifiedRefreshToken = jwt.verify(rto, process.env.REFRESH_SECRET);
+
+        req.refreshToken = verifiedRefreshToken.token;
+
         next();
-    } catch (error) {
+    } catch {
         return res.status(401).json({ message: 'Unauthorized' });
     }
 };
 
 exports.validateRefreshToken = async (req, res, next) => {
-    const { refreshToken } = req.body;
+    const { rto } = req.signedCookies;
     const { id } = req.params;
-    console.log(rto);
     try {
-        const refreshToken = jwt.verify(rto, process.env.REFRESH_SECRET);
+        const verifiedRefreshToken = jwt.verify(rto, process.env.REFRESH_SECRET);
         req.id = id;
-        req.rto = refreshToken;
-    } catch (error) {}
+        req.refreshToken = verifiedRefreshToken.token;
+    } catch {}
     next();
 };
 
 exports.validateUserAsAdmin = async (req, res, next) => {
     try {
-        const employee = req.employee;
+        const employee = req.accessToken;
         if (employee.role === 'admin') next();
         else throw new Error('You do not have access to this endpoint');
     } catch (error) {
@@ -53,7 +53,7 @@ exports.validateUserAsAdmin = async (req, res, next) => {
 
 exports.validateUserAsEmployee = async (req, res, next) => {
     try {
-        const employee = req.employee;
+        const employee = req.accessToken;
         if (employee.role === 'employee') next();
         else if (employee.role === 'manager') next();
         else throw new Error('You do not have access to this endpoint');
@@ -66,7 +66,7 @@ exports.validateUserAsEmployee = async (req, res, next) => {
 };
 exports.validateUserAsManager = async (req, res, next) => {
     try {
-        const employee = req.employee;
+        const employee = req.accessToken;
         if (employee.role === 'manager') next();
         else throw new Error('You do not have access to this endpoint');
     } catch (error) {
@@ -78,22 +78,22 @@ exports.validateUserAsManager = async (req, res, next) => {
 };
 
 exports.validateIfUserIsCustomer = async (req, res, next) => {
-    const { ato } = req.signedCookies;
+    const { userId } = req;
+
     try {
-        const customer = jwt.verify(ato, process.env.JWT_SECRET);
+        const customer = await CustomerModel.findById(userId);
+        if (!customer) throw new Error('You do not have access to this endpoint');
         req.customer = customer;
     } catch (error) {}
     next();
 };
 exports.validateIfUserIsCustomerStrict = async (req, res, next) => {
-    const { ato } = req.signedCookies;
+    const { userId } = req;
     try {
-        const customer = jwt.verify(ato, process.env.JWT_SECRET);
+        const customer = await CustomerModel.findById(userId);
         req.customer = customer;
         next();
     } catch (error) {
-        if (ato) res.clearCookie('ato');
-
         return res.status(401).json({ message: 'Invalid Token' });
     }
 };

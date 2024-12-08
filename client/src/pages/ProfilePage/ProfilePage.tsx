@@ -21,9 +21,12 @@ const ProfilePage: React.FC = () => {
     };
     const signOut = async () => {
         const response = await agent.Authenticate.signOut();
+
+        console.log(response);
         if (response) {
             setCustomer(null);
             sessionStorage.removeItem('user');
+            sessionStorage.removeItem('ato');
             navigate('/');
         }
     };

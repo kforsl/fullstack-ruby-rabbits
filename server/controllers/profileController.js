@@ -3,7 +3,21 @@ const asyncHandler = require('express-async-handler');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const { CustomerModel } = require('../models/customerModel');
+const generateAccessToken = async (data) =>
+    await jwt.sign({ token: data }, process.env.JWT_SECRET, { expiresIn: '15min' });
+exports.getCustomer = asyncHandler(async (req, res) => {
+    const { userId } = req;
+    const customer = CustomerModel.findById(userId);
+    if (!customer) return res.status(404).json({ message: 'no user found.', data: '' });
+    customer.refreshToken = '';
+    customer.hash = '';
 
+    await customer.save();
+    return res.status(200).json({
+        message: 'successfully got customer',
+        data: customer,
+    });
+});
 exports.updateAllergen = asyncHandler(async (req, res) => {
     try {
         res.status(200).json({
@@ -62,16 +76,6 @@ exports.updatePassword = asyncHandler(async (req, res) => {
             { new: true }
         );
 
-        const accessToken = jwt.sign(updatedUser.toJSON(), process.env.JWT_SECRET, { expiresIn: '1h' });
-        updatedUser.hash = null;
-
-        res.cookie('ato', accessToken, {
-            httpOnly: true,
-            secure: true,
-            signed: true,
-            maxAge: 9000000,
-        });
-
         res.status(200).json({
             message: 'successfully update Password',
             data: [updatedUser],
@@ -122,15 +126,8 @@ exports.updatePersonalData = asyncHandler(async (req, res) => {
             { new: true }
         );
 
-        const accessToken = jwt.sign(updatedUser.toJSON(), process.env.JWT_SECRET, { expiresIn: '1h' });
         updatedUser.hash = null;
 
-        res.cookie('ato', accessToken, {
-            httpOnly: true,
-            secure: true,
-            signed: true,
-            maxAge: 9000000,
-        });
         res.status(200).json({
             message: 'successfully updated Personal data.',
             data: [updatedUser],

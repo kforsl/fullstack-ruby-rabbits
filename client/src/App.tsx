@@ -11,16 +11,23 @@ function App() {
     const { customer } = useAuthStore();
 
     useEffect(() => {
+        if (!customer) {
+            agent.Authenticate.refreshToken().then((response: tokenResponse) => {
+                if (response.token) {
+                    sessionStorage.setItem('ato', response.token);
+                    sessionStorage.setItem('user', JSON.stringify(response.data));
+                }
+            });
+        }
         setInterval(() => {
             if (customer) {
                 agent.Authenticate.refreshToken().then((response: tokenResponse) => {
                     if (response.token) {
                         sessionStorage.setItem('ato', response.token);
                     }
-                    return response;
                 });
             }
-        }, 25000);
+        }, 1000 * 60 * 5);
     }, []);
 
     return (

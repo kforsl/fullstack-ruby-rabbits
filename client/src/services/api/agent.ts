@@ -39,11 +39,6 @@ const requests = {
             })
             .then(responseBody),
 };
-interface testInterface {
-    data: Customer;
-    token: string;
-    message: string;
-}
 interface ProductResponse {
     message: string;
     data: ProductType[];
@@ -54,7 +49,8 @@ interface AgentResponse<T = object> {
 }
 interface TokenResponse {
     message: string;
-    data: string;
+    data: Customer;
+    token: string;
 }
 const Product = {
     list: () => requests.get<ProductResponse>('products'),
@@ -86,7 +82,7 @@ const Authenticate = {
         requests.post<TokenResponse>(`auth/token`, { accessToken: token }).then((response) => response),
     signIn: (credentials: SignInForm) =>
         requests
-            .post<AgentResponse<testInterface>>(`auth/customer`, credentials)
+            .post<AgentResponse<TokenResponse>>(`auth/customer`, credentials)
             .then((response) => response)
             .catch((error) => error),
     signUp: (credentials: Customer) =>
@@ -99,7 +95,7 @@ const Authenticate = {
             .get<tokenResponse>(`auth/refresh`)
             .then((response) => response)
             .catch((error) => error),
-    signOut: () => requests.get(`auth/customer/signout`),
+    signOut: () => requests.get(`auth/signout`).then((response) => response),
 };
 
 const Profile = {
