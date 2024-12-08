@@ -1,0 +1,77 @@
+.employees__employee-card {
+    background-color: var(--color-white);
+    padding: var(--spacing-xs);
+    display: grid;
+    grid-template-rows: 1fr auto;
+}
+
+.employees__image-wrapper {
+    width: 100%;
+    display: grid;
+    place-items: center;
+    background-color: var(--color-accent2);
+    background-image: url(/images/blotches/u-e-t-a-darkblue-pink-white-cola.svg);
+    background-size: cover;
+    position: relative;
+    min-height: 12rem;
+}
+
+.employees__image-wrapper--first {
+    background-position: 0%;
+}
+
+.employees__image-wrapper--second {
+    background-position: bottom 10px left 60px;
+}
+
+.employees__image-wrapper--third {
+    background-position: bottom 100px right 0px;
+}
+
+.employees__image-wrapper--fourth {
+    background-position: bottom 200px left 10px;
+}
+
+
+
+.employees__caption {
+    padding: var(--spacing-xs) var(--spacing-s);
+    width: 100%;
+}
+
+.employees__employee-name {
+    font-size: var(--font-size-m);
+}
+
+.employees__description {
+    font-size: var(--font-size-s);
+}
+
+.employees__image {
+    max-width: 100%;
+    object-fit: contain;
+    padding: .5rem;
+}
+
+
+
+@media (max-width: 970px) {
+    .employees__image-wrapper {
+        min-height: 15rem;
+    }
+
+}
+
+@media (max-width: 550px) {
+    .employees__image-wrapper {
+        min-height: 12rem;
+    }
+
+}
+
+@media (max-width: 420px) {
+    .employees__image-wrapper {
+        min-height: 10rem;
+    }
+
+}

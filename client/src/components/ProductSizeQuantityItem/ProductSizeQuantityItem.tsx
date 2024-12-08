@@ -33,18 +33,18 @@ const ProductSizeQuantityItem = ({ product, size, showSize }: Props) => {
                 {foundProduct ? (
                     <motion.div
                         key='incrementer'
-                        initial={{ rotateY: 90 }}
-                        animate={{ rotateY: 0 }}
-                        exit={{ rotateY: 90 }}
+                        initial={{ rotateX: 180 }}
+                        animate={{ rotateX: 0 }}
+                        exit={{ rotateX: 180 }}
                         transition={{ duration: 0.1 }}>
                         <MenuToCartIncrementer item={foundProduct} />
                     </motion.div>
                 ) : (
                     <motion.div
                         key='button'
-                        initial={{ rotateY: 90 }}
-                        animate={{ rotateY: 0 }}
-                        exit={{ rotateY: 90 }}
+                        initial={{ rotateX: 180 }}
+                        animate={{ rotateX: 0 }}
+                        exit={{ rotateX: 180 }}
                         transition={{ duration: 0.1 }}>
                         <TextButton onClick={() => addToCart(cartItem)}>
                             {showSize || width <= 700 ? `KÖP ${size.size.charAt(0)}` : 'KÖP'}
@@ -67,4 +67,7 @@ export default ProductSizeQuantityItem;
  *
  * Ändrat: Magnus
  * Nu renderas texten ut beroende på skärmstorlek. Små storlekar står storleken direkt i knappen.
+ *
+ * Ändrat: Magnus
+ * Lagt till animering via framer.
  */
