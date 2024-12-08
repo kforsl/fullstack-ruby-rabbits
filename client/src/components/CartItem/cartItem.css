@@ -6,10 +6,11 @@
     text-wrap: nowrap;
     padding-bottom: var(--spacing-s);
     border-bottom: 2px dotted var(--color-accent1);
-    gap: var(--spacing-s);
+    gap: var(--spacing-xs);
     /* Går att kombinera nedan, container: cartItem/inline-size; */
     container-type: inline-size;
     container-name: cartItem;
+    height: fit-content;
 }
 
 .cart-item__product-image {
@@ -62,6 +63,7 @@
 
 @container cartItem (min-width: 400px) {
 
+
     .cart-item__product-image {
         display: block;
         max-width: 5rem;
@@ -77,9 +79,11 @@
         grid-column: 2/3;
     }
 
+
 }
 
 @container cartItem (min-width: 350px) {
+
 
     .cart-item__product-image {
         display: block;
