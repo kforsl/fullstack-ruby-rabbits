@@ -1,5 +1,6 @@
 const jwt = require('jsonwebtoken');
 const { CustomerModel } = require('../models/customerModel');
+const { EmployeeModel } = require('../models/employeeModel');
 
 exports.validateAccessToken = async (req, res, next) => {
     try {
@@ -40,7 +41,9 @@ exports.validateRefreshToken = async (req, res, next) => {
 
 exports.validateUserAsAdmin = async (req, res, next) => {
     try {
-        const employee = req.accessToken;
+        const { userId } = req;
+        const employee = await EmployeeModel.findById(userId);
+        if (!employee) throw new Error('No employer with this ID found');
         if (employee.role === 'admin') next();
         else throw new Error('You do not have access to this endpoint');
     } catch (error) {
@@ -53,12 +56,17 @@ exports.validateUserAsAdmin = async (req, res, next) => {
 
 exports.validateUserAsEmployee = async (req, res, next) => {
     try {
-        const employee = req.accessToken;
+        const { userId } = req;
+
+        const employee = await EmployeeModel.findById(userId);
+        if (!employee) throw new Error('No employer with this ID found');
+
         if (employee.role === 'employee') next();
         else if (employee.role === 'manager') next();
+        else if (employee.role === 'admin') next();
         else throw new Error('You do not have access to this endpoint');
     } catch (error) {
-        return res.status(401).json({
+        return res.status(403).json({
             message: 'Error',
             data: error.message,
         });
@@ -66,8 +74,12 @@ exports.validateUserAsEmployee = async (req, res, next) => {
 };
 exports.validateUserAsManager = async (req, res, next) => {
     try {
-        const employee = req.accessToken;
+        const { userId } = req;
+
+        const employee = await EmployeeModel.findById(userId);
+        if (!employee) throw new Error('No employer with this ID found');
         if (employee.role === 'manager') next();
+        if (employee.role === 'admin') next();
         else throw new Error('You do not have access to this endpoint');
     } catch (error) {
         return res.status(401).json({
