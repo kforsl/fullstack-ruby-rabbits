@@ -6,13 +6,13 @@ import SignForm from './components/SignForm/SignForm';
 import RoutesComponent from './routes/Routes';
 import agent from './services/api/agent';
 import useAuthStore from './stores/authStore';
-import { tokenResponse } from './interfaces/interfaceAuth';
+import { TokenResponse } from './interfaces/interfaceAuth';
 function App() {
     const { customer } = useAuthStore();
 
     useEffect(() => {
         if (!customer) {
-            agent.Authenticate.refreshToken().then((response: tokenResponse) => {
+            agent.Authenticate.refreshToken().then((response: TokenResponse) => {
                 if (response.token) {
                     sessionStorage.setItem('ato', response.token);
                     sessionStorage.setItem('user', JSON.stringify(response.data));
@@ -21,7 +21,7 @@ function App() {
         }
         setInterval(() => {
             if (customer) {
-                agent.Authenticate.refreshToken().then((response: tokenResponse) => {
+                agent.Authenticate.refreshToken().then((response: TokenResponse) => {
                     if (response.token) {
                         sessionStorage.setItem('ato', response.token);
                     }

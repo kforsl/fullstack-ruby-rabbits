@@ -81,7 +81,6 @@ exports.updatePassword = asyncHandler(async (req, res) => {
             data: [updatedUser],
         });
     } catch (error) {
-        console.log(error);
         res.status(400).json({
             message: 'Error',
             data: [error],
@@ -92,7 +91,6 @@ exports.updatePayment = asyncHandler(async (req, res) => {
     try {
         const customer = req.customer;
         const paymentOptions = req.body;
-        console.log(req.body);
         const updatedCustomer = await CustomerModel.findByIdAndUpdate(
             customer._id,
             { ...customer, paymentOptions: [...paymentOptions] },

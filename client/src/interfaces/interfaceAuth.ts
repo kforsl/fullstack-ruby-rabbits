@@ -7,7 +7,7 @@ export interface SignUpForm extends Customer {
     password: string;
     verifyPassword: string;
 }
-export interface tokenResponse {
+export interface TokenResponse {
     data: Customer;
     message: string;
     token: string;
