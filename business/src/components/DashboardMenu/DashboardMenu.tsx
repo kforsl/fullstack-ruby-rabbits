@@ -16,6 +16,21 @@ const DashboardMenu = () => {
     ]);
 
     useEffect(() => {
+        if (employee) {
+            setNavigation([
+                { name: 'KASSA-VY', route: '/kassa' },
+                { name: 'KOCK-VY', route: '/kock' },
+                { name: 'LAGERSALDO', route: '/lager' },
+            ]);
+            if (employee.role === 'admin' || employee.role === 'manager') {
+                setNavigation([
+                    { name: 'KASSA-VY', route: '/kassa' },
+                    { name: 'KOCK-VY', route: '/kock' },
+                    { name: 'LAGERSALDO', route: '/lager' },
+                    { name: 'PRODUKTER', route: '/admin/produkt' },
+                ]);
+            }
+        }
         if (navigation.some((item) => item.route === location.pathname)) {
             if (!employee) {
                 navigate('/');
@@ -23,11 +38,7 @@ const DashboardMenu = () => {
                 socket.emit('joinEmployeeRoom');
             }
         }
-
-        if (employee?.role !== 'employee') {
-            setNavigation([...navigation, { name: 'PRODUKTER', route: '/admin/produkt' }]);
-        }
-    }, []);
+    }, [employee]);
 
     return (
         <>
@@ -74,7 +85,8 @@ const DashboardMenu = () => {
                             onClick={async () => {
                                 const response = await agent.Authenticate.signOut();
                                 if (response) {
-                                    sessionStorage.clear();
+                                    sessionStorage.removeItem('employee');
+                                    sessionStorage.removeItem('ato');
                                     setEmployee(null);
                                     navigate('/');
                                 }

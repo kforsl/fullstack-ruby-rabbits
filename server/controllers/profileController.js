@@ -113,7 +113,6 @@ exports.updatePayment = asyncHandler(async (req, res) => {
 exports.updatePersonalData = asyncHandler(async (req, res) => {
     try {
         const user = req.customer;
-
         if (!user) {
             throw new Error('You do not have access to this endpoint');
         }
@@ -133,7 +132,7 @@ exports.updatePersonalData = asyncHandler(async (req, res) => {
     } catch (error) {
         res.status(400).json({
             message: 'Error',
-            data: [error],
+            data: [error.message],
         });
     }
 });
