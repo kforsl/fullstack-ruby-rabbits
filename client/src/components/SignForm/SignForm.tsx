@@ -6,7 +6,7 @@ import { authSchema, signUpSchema } from '../../utils/models/authSchema';
 import { FormEvent, useEffect, useState } from 'react';
 import agent from '../../services/api/agent';
 import { AxiosError } from 'axios';
-import { Customer, FormInputs, tokenResponse } from '../../interfaces/interfaceAuth';
+import { Customer, FormInputs, TokenResponse } from '../../interfaces/interfaceAuth';
 import { useNavigate } from 'react-router-dom';
 import SignFormInput from '../SignFormInput/SignFormInput';
 const SignForm = () => {
@@ -66,9 +66,8 @@ const SignForm = () => {
             setIsShowingError(true);
             setTimeout(() => setIsShowingError(false), 3000);
         } else {
-            const response: tokenResponse = (await agent.Authenticate.signIn(signInForm)) as tokenResponse;
-
-            if (response !== null) {
+            const response: TokenResponse = (await agent.Authenticate.signIn(signInForm)) as TokenResponse;
+            if (response.message === 'successfully logged in as customer.') {
                 sessionStorage.setItem('user', JSON.stringify(response.data));
                 sessionStorage.setItem('ato', response.token);
                 clearForm();

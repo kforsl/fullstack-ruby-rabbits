@@ -126,7 +126,6 @@ exports.updateOrderById = asyncHandler(async (req, res) => {
             if (products) {
                 order.order.forEach((item) => {
                     const foundProduct = products.find((x) => x._id.equals(item.product));
-                    console.log(foundProduct);
                     item.product = foundProduct;
                 });
                 order.price = order.order

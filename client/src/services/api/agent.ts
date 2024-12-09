@@ -1,6 +1,6 @@
 import axios, { AxiosResponse } from 'axios';
 import { ProductType } from '../../interfaces/interfaceProduct';
-import { Customer, PasswordForm, PaymentOption, SignInForm, tokenResponse } from '../../interfaces/interfaceAuth';
+import { Customer, PasswordForm, PaymentOption, SignInForm, TokenResponse } from '../../interfaces/interfaceAuth';
 import { CartToOrder } from '../../interfaces/interfaceCart';
 import { BASE_URL } from '../../../../constants.ts';
 import { OrderType } from '../../interfaces/interfaceOrder.ts';
@@ -47,11 +47,7 @@ interface AgentResponse<T = object> {
     message: string;
     data: T[];
 }
-interface TokenResponse {
-    message: string;
-    data: Customer;
-    token: string;
-}
+
 const Product = {
     list: () => requests.get<ProductResponse>('products'),
 };
@@ -92,7 +88,7 @@ const Authenticate = {
             .catch((error) => error),
     refreshToken: () =>
         requests
-            .get<tokenResponse>(`auth/refresh`)
+            .get<TokenResponse>(`auth/refresh`)
             .then((response) => response)
             .catch((error) => error),
     signOut: () => requests.get(`auth/signout`).then((response) => response),
