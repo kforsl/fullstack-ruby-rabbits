@@ -86,7 +86,7 @@
 
 }
 
-@container cartItem (min-width: 350px) {
+@container cartItem (min-width: 330px) {
 
     .cart-item__product-image {
         display: block;
@@ -104,6 +104,7 @@
     }
 
 }
+
 
 @media (hover: hover) and (pointer: fine) {
     .cart-item__button:hover {
