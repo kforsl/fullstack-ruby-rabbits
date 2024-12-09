@@ -10,6 +10,18 @@ exports.validateAccessToken = async (req, res, next) => {
             req.userId = accessToken.token;
         }
         next();
+    } catch {}
+    next();
+};
+
+exports.validateAccessTokenStrict = async (req, res, next) => {
+    try {
+        const token = req.headers.authorization.split(' ')[1];
+        const accessToken = jwt.verify(token, process.env.JWT_SECRET);
+        if (accessToken) {
+            req.userId = accessToken.token;
+        }
+        next();
     } catch {
         return res.status(401).json({ message: 'Unauthorized' });
     }
@@ -103,6 +115,7 @@ exports.validateIfUserIsCustomerStrict = async (req, res, next) => {
     const { userId } = req;
     try {
         const customer = await CustomerModel.findById(userId);
+        console.log(customer);
         req.customer = customer;
         next();
     } catch (error) {
