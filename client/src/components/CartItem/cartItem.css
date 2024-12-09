@@ -6,7 +6,9 @@
     text-wrap: nowrap;
     padding-bottom: var(--spacing-s);
     border-bottom: 2px dotted var(--color-accent1);
-    gap: var(--spacing-xs);
+
+    gap: var(--spacing-s);
+
     /* Går att kombinera nedan, container: cartItem/inline-size; */
     container-type: inline-size;
     container-name: cartItem;
@@ -61,8 +63,10 @@
     align-self: center;
 }
 
-@container cartItem (min-width: 400px) {
 
+
+
+@container cartItem (min-width: 400px) {
 
     .cart-item__product-image {
         display: block;
@@ -84,7 +88,6 @@
 
 @container cartItem (min-width: 350px) {
 
-
     .cart-item__product-image {
         display: block;
         max-width: 5rem;
@@ -101,7 +104,6 @@
     }
 
 }
-
 
 @media (hover: hover) and (pointer: fine) {
     .cart-item__button:hover {
