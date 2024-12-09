@@ -1,13 +1,13 @@
 const express = require('express');
 const controller = require('../controllers/productController');
-const { validateAccessToken, validateUserAsEmployee } = require('../middlewares/jwtAuth');
+const { validateAccessTokenStrict, validateUserAsManager } = require('../middlewares/jwtAuth');
 
 const router = express.Router();
 
 //Get all menu items
 router.get('/', controller.getAllProducts);
 router.get('/:id', controller.getProductById);
-router.post('/', validateAccessToken, validateUserAsEmployee, controller.createProduct);
-router.put('/:id', validateAccessToken, validateUserAsEmployee, controller.updateProductById);
+router.post('/', validateAccessTokenStrict, validateUserAsManager, controller.createProduct);
+router.put('/:id', validateAccessTokenStrict, validateUserAsManager, controller.updateProductById);
 
 module.exports = router;

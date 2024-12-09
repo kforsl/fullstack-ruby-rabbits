@@ -97,19 +97,19 @@ exports.getOrderById = asyncHandler(async (req, res) => {
     try {
         const order = await OrderModel.findById(req.params.id).populate('order.product').populate('customer');
         if (!order)
-            res.status(404).json({
+            return res.status(404).json({
                 message: 'Error',
                 data: 'Order not found.',
             });
 
         if (order.customer) order.customer.hash = null;
 
-        res.status(200).json({
+        return res.status(200).json({
             message: 'successfully found order.',
             data: [order],
         });
     } catch (error) {
-        res.status(500).json({
+        return res.status(500).json({
             message: 'Error',
             data: [error.message],
         });
