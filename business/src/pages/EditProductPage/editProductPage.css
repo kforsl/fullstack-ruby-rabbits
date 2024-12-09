@@ -1,0 +1,30 @@
+.edit-product {
+    display: grid;
+    grid-template-columns: var(--main-grid);
+    gap: var(--spacing-s);
+    height: 100svh;
+    overflow: hidden;
+    position: relative;
+}
+
+.edit-product__wrapper {
+    padding-block: var(--spacing-s);
+    grid-column: 1 / span 5;
+    height: 100svh;
+}
+
+.edit-product__title {
+    font-size: var(--font-size-xl);
+    text-align: center;
+}
+
+.edit-product__products-section {
+    overflow-y: scroll;
+    height: 100%;
+}
+
+.checkoutMenu__edit-section {
+    padding: var(--spacing-s);
+    grid-column: 6 / -1;
+    border-left: 1px solid var(--color-black);
+}

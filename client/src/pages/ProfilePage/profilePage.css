@@ -1,4 +1,14 @@
 .profile-page {
     flex: 1;
-    align-content: flex-end;
+    padding: var(--spacing-xl) var(--spacing-m);
+    margin-bottom: var(--spacing-2xl);
+    min-height: 100svh;
+}
+
+.profile-page__under-construction {
+    font-size: var(--font-size-m);
+    font-family: var(--title-font);
+    display: grid;
+    place-content: center;
+    padding-bottom: var(--spacing-m);
 }

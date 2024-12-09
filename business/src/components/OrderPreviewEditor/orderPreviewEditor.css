@@ -1,0 +1,39 @@
+.order-preview-editor {
+    display: grid;
+    gap: var(--spacing-xs);
+    grid-template-columns: repeat(3, auto);
+    place-items: center;
+    width: 4rem;
+}
+
+
+.order-preview-editor__button-text {
+    display: inline;
+    font-size: var(--font-size-l);
+    color: var(--color-accent2);
+    filter: drop-shadow(var(--shadow-s));
+    text-shadow: var(--text-outline);
+
+}
+
+.order-preview-editor__button {
+    height: 100%;
+    width: 100%;
+    background-color: var(--bg-primary);
+    cursor: pointer;
+    border: none;
+}
+
+.order-preview-editor__amount {
+    color: var(--color-black);
+    font-size: var(--font-size-l);
+    align-self: end;
+}
+
+.order-preview-editor__button--disabled {
+    opacity: .5;
+
+    .order-preview-editor__button-text {
+        color: rgb(189, 179, 179);
+    }
+}

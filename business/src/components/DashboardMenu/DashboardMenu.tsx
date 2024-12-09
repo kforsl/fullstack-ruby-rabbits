@@ -1,15 +1,32 @@
 import './dashboardMenu.css';
 import useAuthStore from '../../stores/authStore';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { socket } from '../../services/webSocket/ioSocket';
 
 const DashboardMenu = () => {
     const location = useLocation();
-    const { employee, menuIsExpanded, setMenuIsExpanded } = useAuthStore();
-    const navigation = [
+    const navigate = useNavigate();
+    const { employee, setEmployee, menuIsExpanded, setMenuIsExpanded } = useAuthStore();
+    const [navigation, setNavigation] = useState([
         { name: 'KASSA-VY', route: '/kassa' },
         { name: 'KOCK-VY', route: '/kock' },
         { name: 'LAGERSALDO', route: '/lager' },
-    ];
+    ]);
+
+    useEffect(() => {
+        if (navigation.some((item) => item.route === location.pathname)) {
+            if (!employee) {
+                navigate('/');
+            } else {
+                socket.emit('joinEmployeeRoom');
+            }
+        }
+
+        if (employee?.role !== 'employee') {
+            setNavigation([...navigation, { name: 'PRODUKTER', route: '/admin/produkt' }]);
+        }
+    }, []);
 
     return (
         <>
@@ -21,12 +38,12 @@ const DashboardMenu = () => {
                             : 'dashboard-menu__wrapper--hidden'
                         : 'dashboard-menu__wrapper--inactive'
                 }`}>
-                <section className='hamburger-wrapper'>
-                    <button
-                        className={`hamburger-button hamburger-button--${menuIsExpanded ? 'active' : 'inactive'}`}
-                        onClick={() => {
-                            setMenuIsExpanded(!menuIsExpanded);
-                        }}>
+                <section
+                    className='hamburger-wrapper'
+                    onClick={() => {
+                        setMenuIsExpanded(!menuIsExpanded);
+                    }}>
+                    <button className={`hamburger-button hamburger-button--${menuIsExpanded ? 'active' : 'inactive'}`}>
                         <span></span>
                         <span></span>
                         <span></span>
@@ -55,7 +72,8 @@ const DashboardMenu = () => {
                             className='menu-list__logout'
                             onClick={() => {
                                 window.sessionStorage.clear();
-                                window.location.href = '/';
+                                setEmployee(null);
+                                navigate('/');
                             }}>
                             LOGGA UT
                         </button>

@@ -1,11 +1,22 @@
 .product-size-quantity-item {
-    width: fit-content;
     height: 100%;
-    padding-inline: 0.5rem;
+    min-height: 5rem;
+    width: 5.5rem;
+    display: grid;
+    grid-template-rows: auto 1fr;
+    place-items: center;
+    justify-self: center;
 }
 
 .product-size-quantity-item__price {
     font-family: var(--title-font);
     font-size: var(--font-size-l);
     color: var(--color-black);
+}
+
+@media screen and (max-width: 550px) {
+    .product-size-quantity-item {
+        justify-self: center;
+    }
+
 }

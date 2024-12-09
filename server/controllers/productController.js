@@ -8,7 +8,7 @@ exports.createProduct = asyncHandler(async (req, res) => {
         await product.save();
 
         res.status(201).json({
-            message: 'Succesfully created product',
+            message: 'successfully created product',
             data: [product],
         });
     } catch (error) {
@@ -24,7 +24,7 @@ exports.getAllProducts = asyncHandler(async (req, res) => {
         const products = await ProductModel.find({}).populate('ingredients.ingredient');
 
         res.status(200).json({
-            message: 'Succesfully found products',
+            message: 'successfully found products',
             data: products,
         });
     } catch (error) {
@@ -42,7 +42,7 @@ exports.updateProductById = asyncHandler(async (req, res) => {
             { new: true }
         );
         res.status(200).json({
-            message: 'Succesfully updated product.',
+            message: 'successfully updated product.',
             data: [product],
         });
     } catch (error) {
@@ -55,7 +55,7 @@ exports.updateProductById = asyncHandler(async (req, res) => {
 
 exports.getProductById = asyncHandler(async (req, res) => {
     try {
-        const product = await ProductModel.findById(req.params.id);
+        const product = await ProductModel.findById(req.params.id).populate('ingredients.ingredient');
         if (!product) {
             res.status(404).json({
                 message: 'Error',
@@ -63,7 +63,7 @@ exports.getProductById = asyncHandler(async (req, res) => {
             });
         }
         res.status(200).json({
-            message: 'Succesfully found product.',
+            message: 'successfully found product.',
             data: [product],
         });
     } catch (error) {

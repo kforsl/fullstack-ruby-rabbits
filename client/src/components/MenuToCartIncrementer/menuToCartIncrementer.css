@@ -1,0 +1,38 @@
+.menu-to-cart-incrementer {
+    display: grid;
+    gap: var(--spacing-s);
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    place-items: center;
+    user-select: none;
+
+}
+
+.menu-to-cart-incrementer__button {
+    cursor: pointer;
+    background-color: var(--bg-primary);
+    border: none;
+    transition: all .2s ease-in-out;
+}
+
+.menu-to-cart-incrementer__button:active {
+    scale: .7;
+}
+
+.menu-to-cart-incrementer__button-text {
+    font-size: var(--font-size-xl);
+    color: var(--color-accent2);
+    filter: drop-shadow(var(--shadow-s));
+    text-shadow: var(--text-outline);
+}
+
+.menu-to-cart-incrementer__amount {
+    color: var(--color-black);
+    font-size: var(--font-size-xl);
+    align-self: end;
+}
+
+@media screen and (max-width: 550px) {
+    .menu-to-cart-incrementer {
+        gap: var(--spacing-xs);
+    }
+}

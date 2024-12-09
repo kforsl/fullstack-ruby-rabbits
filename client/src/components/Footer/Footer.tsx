@@ -4,7 +4,9 @@ const Footer = () => {
     return (
         <footer className='footer'>
             <section className='footer__wrapper'>
-                <h2 className='footer__logo'> Happymess </h2>
+                <h2 className='footer__logo' onClick={() => window.scrollTo(0, 0)} title='Back to top!'>
+                    Happymess
+                </h2>
                 <ul className='footer__list'>
                     <h4 className='footer__list-title'>Öppettider</h4>
                     <li className='footer__list-item'>Mån - Fre: 10:00 - 18:00</li>
@@ -31,11 +33,15 @@ const Footer = () => {
 
 export default Footer;
 
-/**
+/*
  * Författare: Kim
  * Skapat grundläggande layout av footer.
  */
-/**
+/*
  * Ändrat: Kim
  * ändrat spacing i footer och ändrat text-align
+ */
+/*
+ * Ändrat: Magnus
+ * Fixade responsivitet och layout vid mindre skärmstorlekar. Lade till back-to-top funktionalitet om man klickar "happymess"
  */

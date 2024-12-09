@@ -6,9 +6,10 @@
 
 .order-card--small {
     background-color: #e2ecd3;
-    max-width: fit-content;
+    width: 100%;
     padding: var(--spacing-xs) var(--spacing-s);
     border: 1px solid black;
+    place-items: center;
 }
 
 .order-card__order-id {
@@ -18,7 +19,6 @@
 .order-card__time {
     font-size: var(--font-size-m);
     color: gray;
-    place-self: center;
 }
 
 .order-card--medium {
@@ -29,36 +29,40 @@
 .order-card--large {
     gap: var(--spacing-s);
     padding: var(--spacing-s);
+    grid-template-columns: 1fr auto;
 }
 
 .order-card--large {
-    max-width: 300px;
+    max-width: 400px;
     overflow: hidden;
     grid-template-rows: auto 1fr auto;
+    border: 2px dotted var(--color-accent3);
 }
 
 .order-card__info-section {
     display: grid;
+    row-gap: var(--spacing-s);
+    grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
 .order-card__list {
+
     overflow-y: auto;
+    grid-column: 1 / -1;
 }
 
 .order-card__date {
+    grid-column: 1/-1;
     font-size: var(--font-size-l);
     color: gray;
     justify-self: end;
 }
 
 .order-card__amount {
+    grid-column: 1/-1;
     display: grid;
     grid-template-columns: 1fr auto;
     font-size: var(--font-size-m);
-}
-
-.order-card--large {
-    border: 2px dotted red;
 }
 
 .order-card__order-item {
@@ -68,6 +72,7 @@
     grid-template-columns: repeat(2, 1fr);
     border-bottom: 1px dotted gray;
     padding-block: var(--spacing-s) var(--spacing-m);
+    padding-right: var(--spacing-m);
 }
 
 .order-card__product-name {
@@ -84,4 +89,14 @@
 
 .order-card button {
     justify-self: center;
+    align-self: end;
+    grid-column: 1/-1;
+}
+
+.order-card__comment-icon {
+    justify-self: end;
+}
+
+.order-card--comment {
+    border: 2px dotted var(--color-error);
 }

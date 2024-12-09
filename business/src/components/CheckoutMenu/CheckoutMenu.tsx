@@ -3,6 +3,7 @@ import { ProductType } from '../../interfaces/interfaceProduct';
 import { useGetMenu } from '../../services/queries';
 import Cart from '../Cart/Cart';
 import ProductList from '../ProductList/ProductList';
+import { useState } from 'react';
 
 interface Props {
     changeview: () => void;
@@ -10,6 +11,8 @@ interface Props {
 
 const CheckoutMenu = ({ changeview }: Props) => {
     const { data, isLoading, isError, error } = useGetMenu();
+
+    const [comment, setComment] = useState('');
 
     if (isLoading) return <p>Loading...</p>;
     if (isError) return <p>{`${error}`}</p>;
@@ -27,7 +30,10 @@ const CheckoutMenu = ({ changeview }: Props) => {
                     className='checkoutMenu__back-btn'
                     src='/assets/icon-park-outline_back.svg'
                     alt='tillbaka'
-                    onClick={changeview}
+                    onClick={() => {
+                        changeview();
+                        setComment('');
+                    }}
                 />
                 <section className='checkoutMenu__menu-section'>
                     <ProductList title='Ice cream' products={iceCream} />
@@ -35,7 +41,7 @@ const CheckoutMenu = ({ changeview }: Props) => {
                 </section>
             </article>
             <article className='checkoutMenu__cart-section'>
-                <Cart changeview={changeview} />
+                <Cart changeview={changeview} comment={comment} setComment={setComment} />
             </article>
         </section>
     );
@@ -56,4 +62,7 @@ export default CheckoutMenu;
 /*
  * Ändrat: Magnus
  * Förenklat filtermetoderna efter att svaren alltid är en array.
+ *
+ * Ändrat: Magnus
+ * Flyttade useState för comment hit så att komponenterna som behöver den har åtkomst.
  */
