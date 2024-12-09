@@ -13,5 +13,6 @@ router.put('/allergen', validateIfUserIsCustomer, controller.updateAllergen);
 router.put('/password', validateAccessToken, validateIfUserIsCustomer, controller.updatePassword);
 router.put('/payment', validateAccessToken, validateIfUserIsCustomerStrict, controller.updatePayment);
 router.put('/data', validateIfUserIsCustomer, controller.updatePersonalData);
+router.get('/me', validateAccessToken, controller.getCustomer);
 
 module.exports = router;

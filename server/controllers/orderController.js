@@ -70,9 +70,9 @@ exports.getAllOrders = asyncHandler(async (req, res) => {
 
 exports.getAllOrdersByCustomerId = asyncHandler(async (req, res) => {
     try {
-        const { id } = req.params;
+        const { userId } = req;
 
-        const orders = await OrderModel.find({ customer: id }).populate('order.product');
+        const orders = await OrderModel.find({ customer: userId }).populate('order.product');
 
         if (orders.length < 1) {
             res.status(204).json({

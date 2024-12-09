@@ -3,6 +3,7 @@ import useAuthStore from '../../stores/authStore';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { socket } from '../../services/webSocket/ioSocket';
+import agent from '../../services/api/agent';
 
 const DashboardMenu = () => {
     const location = useLocation();
@@ -70,10 +71,13 @@ const DashboardMenu = () => {
                     <li className='menu-list__logout-wrapper'>
                         <button
                             className='menu-list__logout'
-                            onClick={() => {
-                                window.sessionStorage.clear();
-                                setEmployee(null);
-                                navigate('/');
+                            onClick={async () => {
+                                const response = await agent.Authenticate.signOut();
+                                if (response) {
+                                    sessionStorage.clear();
+                                    setEmployee(null);
+                                    navigate('/');
+                                }
                             }}>
                             LOGGA UT
                         </button>

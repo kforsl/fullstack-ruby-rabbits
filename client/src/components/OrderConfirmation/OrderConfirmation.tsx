@@ -64,7 +64,7 @@ const OrderConfirmation: React.FC = () => {
                 {handleStateInfo(newOrder.state).state}
             </h2>
             <h1 className='order-confirmation__title'>{handleStateInfo(newOrder.state).description}</h1>
-            <h2 className='order-confirmation__subtitle'>{`Ordernummer: ${orderNumber}`}</h2>
+            <h2 className='order-confirmation__subtitle'>{`Ordernummer: ${orderNumber.toUpperCase()}`}</h2>
             {customer ? (
                 <p className='order-confirmation__info'>Din beställning har sparats i din profil!</p>
             ) : (

@@ -3,50 +3,67 @@ const { EmployeeModel } = require('../models/employeeModel');
 const { CustomerModel } = require('../models/customerModel');
 const { v4: uuidv4 } = require('uuid');
 const bcrypt = require('bcryptjs');
+const errorMessages = require('../responses/responses');
 const jwt = require('jsonwebtoken');
+
+const passwordRegex = /^(?=.*\d)(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z]).{8,}$/;
+
+const generateRefreshToken = async (data) =>
+    await jwt.sign({ token: data }, process.env.REFRESH_SECRET, { expiresIn: '30d' });
+const generateAccessToken = async (data) =>
+    await jwt.sign({ token: data }, process.env.JWT_SECRET, { expiresIn: '15min' });
 
 exports.authenticateEmployee = asyncHandler(async (req, res) => {
     try {
         const { email, password } = req.body;
 
+        if (!email || !password) return res.status(400).json(errorMessages.invalidCredentials.message);
+
         const employee = await EmployeeModel.findOne({ email: email });
 
-        if (!employee) {
-            res.status(401).json({
-                message: 'Error',
-                data: ['Invalid credentials'],
-            });
-        }
-        if (!(await bcrypt.compare(password, employee.hash))) {
-            res.status(401).json({
-                message: 'Error',
-                data: ['Invalid credentials'],
-            });
-        }
-        const refreshToken = uuidv4();
-        employee.refreshToken = refreshToken;
+        if (!employee) throw new Error(errorMessages.invalidCredentials.message);
+        if (!(await bcrypt.compare(password, employee.hash)))
+            return res.status(400).json(errorMessages.invalidCredentials.message);
+        employee.refreshToken = uuidv4();
+        const refreshToken = await generateRefreshToken(employee.refreshToken);
 
         await employee.save();
 
-        const accessToken = jwt.sign(employee.toJSON(), process.env.JWT_SECRET, { expiresIn: '1d' });
+        const accessToken = await generateAccessToken(employee._id);
 
-        res.cookie('ato', accessToken, {
+        const employeeData = {
+            _id: employee._id,
+            firstName: employee.firstName,
+            lastName: employee.lastName,
+            email: employee.email,
+            role: employee.role,
+            address: employee.address,
+            zipcode: employee.zipcode,
+            city: employee.city,
+            socialSecurityNumber: employee.socialSecurityNumber,
+            phone: employee.phone,
+            createdAt: employee.createdAt,
+            updatedAt: employee.updatedAt,
+            __v: employee.__v,
+        };
+
+        res.cookie('rto', refreshToken, {
             httpOnly: true,
             secure: true,
             signed: true,
             sameSite: 'none',
-            maxAge: 24 * 60 * 60 * 1000,
+            maxAge: 30 * 24 * 60 * 60 * 1000,
         });
 
-        employee.hash = null;
         return res.status(200).json({
             message: 'successfully logged in',
-            data: employee,
+            data: employeeData,
+            token: accessToken,
         });
     } catch (error) {
-        return res.status(400).json({
-            message: 'Error',
-            data: error.message,
+        return res.status(500).json({
+            message: 'ERROR',
+            data: [error.message],
         });
     }
 });
@@ -56,24 +73,11 @@ exports.registerEmployee = asyncHandler(async (req, res) => {
         const user = req.body;
         const password = user.password;
         delete user.password;
-        if (!user) throw new Error('Invalid request');
+        if (!user) throw new Error(errorMessages.invalidCredentials());
 
-        const passwordRegex = /^(?=.*\d)(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z]).{8,}$/;
+        if (!password || password.length < 8) return res.status(400).json(errorMessages.passwordNotLongEnough);
+        if (!passwordRegex.test(password)) return res.status(400).json(errorMessages.passwordNotRegexValid);
 
-        if (!password || password.length < 8) {
-            return res.status(401).json({
-                message: 'Error',
-                data: ['Lösenordet måste vara åtminstone 8 karaktärer långt!'],
-            });
-        }
-        if (!passwordRegex.test(password)) {
-            return res.status(401).json({
-                message: 'Error',
-                data: [
-                    'Lösenordet måste innehålla minst 1 stor bokstav, 1 liten bokstav, 1 siffra och 1 specialtecken!',
-                ],
-            });
-        }
         user.hash = await bcrypt.hash(password, 10);
 
         const employee = new EmployeeModel(user);
@@ -83,26 +87,40 @@ exports.registerEmployee = asyncHandler(async (req, res) => {
 
         await employee.save();
 
-        const accessToken = jwt.sign(employee.toJSON(), process.env.JWT_SECRET, { expiresIn: '1d' });
+        const accessToken = await generateAccessToken(employee._id);
 
-        res.cookie('ato', accessToken, {
+        res.cookie('rto', refreshToken, {
             httpOnly: true,
             secure: true,
             signed: true,
             sameSite: 'none',
-            maxAge: 24 * 60 * 60 * 1000,
+            maxAge: 30 * 24 * 60 * 60 * 1000,
         });
 
-        employee.hash = null;
-
+        const employeeData = {
+            _id: employee._id,
+            firstName: employee.firstName,
+            lastName: employee.lastName,
+            email: employee.email,
+            role: employee.role,
+            address: employee.address,
+            zipcode: employee.zipcode,
+            city: employee.city,
+            socialSecurityNumber: employee.socialSecurityNumber,
+            phone: employee.phone,
+            createdAt: employee.createdAt,
+            updatedAt: employee.updatedAt,
+            __v: employee.__v,
+        };
         return res.status(201).json({
             message: 'successfully created new employee',
-            data: [employee],
+            data: employeeData,
+            token: accessToken,
         });
     } catch (error) {
         return res.status(500).json({
             message: 'Error',
-            data: [error.toString()],
+            data: [error],
         });
     }
 });
@@ -110,40 +128,53 @@ exports.registerEmployee = asyncHandler(async (req, res) => {
 exports.authenticateCustomer = asyncHandler(async (req, res) => {
     try {
         const { email, password } = req.body;
-        if (!email || !password) throw new Error('Invalid request');
 
-        const customer = await CustomerModel.findOne({ email: email });
-        if (!customer) throw new Error('Invalid email or password');
+        if (!email || !password) throw new Error(errorMessages.invalidCredentials.message);
 
-        if (!(await bcrypt.compare(password, customer.hash))) {
-            return res.status(401).json({
-                message: 'Error',
-                data: ['Invalid credentials'],
-            });
-        }
-        const refreshToken = uuidv4();
-        customer.refreshToken = refreshToken;
+        const customer = await CustomerModel.findOne({ email: email }).populate('paymentOptions');
 
-        const accessToken = jwt.sign(customer.toJSON(), process.env.JWT_SECRET, { expiresIn: '1d' });
+        if (!customer) throw new Error(errorMessages.invalidCredentials.message);
 
-        customer.hash = null;
+        if (!(await bcrypt.compare(password, customer.hash))) throw new Error(errorMessages.invalidCredentials.message);
 
-        res.cookie('ato', accessToken, {
+        customer.refreshToken = uuidv4();
+        const refreshToken = await generateRefreshToken(customer.refreshToken);
+
+        await customer.save();
+
+        const accessToken = await generateAccessToken(customer._id);
+
+        const customerData = {
+            _id: customer._id,
+            firstName: customer.firstName,
+            lastName: customer.lastName,
+            email: customer.email,
+            address: customer.address,
+            zipcode: customer.zipcode,
+            city: customer.city,
+            socialSecurityNumber: customer.socialSecurityNumber,
+            phone: customer.phone,
+            createdAt: customer.createdAt,
+            updatedAt: customer.updatedAt,
+            __v: customer.__v,
+            paymentOptions: customer.paymentOptions,
+        };
+        res.cookie('rto', refreshToken, {
             httpOnly: true,
             secure: true,
             signed: true,
             sameSite: 'none',
-            maxAge: 24 * 60 * 60 * 1000,
+            maxAge: 30 * 24 * 60 * 60 * 1000,
         });
-
         return res.status(200).json({
             message: 'successfully logged in as customer.',
-            data: [customer],
+            data: customerData,
+            token: accessToken,
         });
     } catch (error) {
         return res.status(500).json({
-            message: 'Error',
-            data: [error.message],
+            message: 'ERROR',
+            data: [error],
         });
     }
 });
@@ -154,25 +185,12 @@ exports.registerCustomer = asyncHandler(async (req, res) => {
         const { password, verifyPassword } = user;
         delete user.password;
         delete user.verifyPassword;
-        if (!user) throw new Error('Invalid request');
 
-        const passwordRegex = /^(?=.*\d)(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z]).{8,}$/;
+        if (!user) throw new Error(errorMessages.invalidCredentials);
 
-        if (!password || password.length < 8) {
-            return res.status(400).json({
-                message: 'Error',
-                data: ['Lösenordet måste vara åtminstone 8 karaktärer långt!'],
-            });
-        }
+        if (!password || password.length < 8) throw new Error(errorMessages.passwordNotLongEnough);
 
-        if (!passwordRegex.test(password)) {
-            return res.status(400).json({
-                message: 'Error',
-                data: [
-                    'Lösenordet måste innehålla minst 1 stor bokstav, 1 liten bokstav, 1 siffra och 1 specialtecken!',
-                ],
-            });
-        }
+        if (!passwordRegex.test(password)) throw new Error(errorMessages.passwordNotRegexValid);
 
         if (password !== verifyPassword) {
             return res.status(400).json({
@@ -187,20 +205,20 @@ exports.registerCustomer = asyncHandler(async (req, res) => {
         customer.refreshToken = refreshToken;
 
         await customer.save();
-        customer.hash = null;
 
-        const accessToken = jwt.sign(customer.toJSON(), process.env.JWT_SECRET, { expiresIn: '1d' });
+        const accessToken = await generateAccessToken(customer._id);
 
-        res.cookie('ato', accessToken, {
+        res.cookie('rto', refreshToken, {
             httpOnly: true,
             secure: true,
             signed: true,
             sameSite: 'none',
-            maxAge: 24 * 60 * 60 * 1000,
+            maxAge: 30 * 24 * 60 * 60 * 1000,
         });
         return res.status(201).json({
             message: 'successfully created new customer',
-            data: [customer],
+            data: customerData,
+            token: accessToken,
         });
     } catch (error) {
         return res.status(500).json({
@@ -210,97 +228,108 @@ exports.registerCustomer = asyncHandler(async (req, res) => {
     }
 });
 
-exports.refreshTokenForEmployee = asyncHandler(async (req, res) => {
+exports.refreshToken = asyncHandler(async (req, res) => {
     try {
-        const { rto } = req;
-        const { id } = req.params;
+        const { refreshToken } = req;
+        const customer = await CustomerModel.findOne({ refreshToken: refreshToken });
+        const employee = await EmployeeModel.findOne({ refreshToken: refreshToken });
+        if (!customer && !employee) throw new Error('User data is not valid.');
+        if (customer) {
+            customer.refreshToken = uuidv4();
 
-        const employee = await EmployeeModel.findById(id);
+            await customer.save();
+            const newRefreshToken = await generateRefreshToken(customer.refreshToken);
 
-        if (!customer)
-            return res.status(404).json({
-                message: 'Error',
-                data: `No customer with ID: ${id}.`,
+            const accessToken = await generateAccessToken(customer._id);
+
+            res.cookie('rto', newRefreshToken, {
+                httpOnly: true,
+                secure: true,
+                signed: true,
+                sameSite: 'none',
+                maxAge: 30 * 24 * 60 * 60 * 1000,
             });
-        if (customer.refreshToken !== rto)
-            return res.status(401).json({
-                message: 'Error',
-                data: `Invalid token.`,
+            const customerData = {
+                _id: customer._id,
+                firstName: customer.firstName,
+                lastName: customer.lastName,
+                email: customer.email,
+                address: customer.address,
+                zipcode: customer.zipcode,
+                city: customer.city,
+                socialSecurityNumber: customer.socialSecurityNumber,
+                phone: customer.phone,
+                createdAt: customer.createdAt,
+                updatedAt: customer.updatedAt,
+                __v: customer.__v,
+                paymentOptions: customer.paymentOptions,
+            };
+            return res.status(200).json({
+                message: 'Refresh token succesfully updated',
+                data: customerData,
+                token: accessToken,
+            });
+        } else {
+            employee.refreshToken = uuidv4();
+
+            await employee.save();
+            const newRefreshToken = await generateRefreshToken(employee.refreshToken);
+
+            const accessToken = await generateAccessToken(employee._id);
+            res.cookie('rto', newRefreshToken, {
+                httpOnly: true,
+                secure: true,
+                signed: true,
+                sameSite: 'none',
+                maxAge: 30 * 24 * 60 * 60 * 1000,
             });
 
-        const refreshToken = uuidv4();
-        employee.refreshToken = refreshToken;
+            const employeeData = {
+                _id: employee._id,
+                firstName: employee.firstName,
+                lastName: employee.lastName,
+                email: employee.email,
+                role: employee.role,
+                address: employee.address,
+                zipcode: employee.zipcode,
+                city: employee.city,
+                socialSecurityNumber: employee.socialSecurityNumber,
+                phone: employee.phone,
+                createdAt: employee.createdAt,
+                updatedAt: employee.updatedAt,
+                __v: employee.__v,
+            };
+            return res.status(200).json({
+                message: 'Refresh token succesfully updated',
+                data: employeeData,
+                token: accessToken,
+            });
+        }
+    } catch (error) {
+        res.status(500).json({
+            message: 'ERROR',
+            data: error.message,
+        });
+    }
+});
 
-        const accessToken = jwt.sign(customer.toJSON(), process.env.JWT_SECRET, { expiresIn: '1d' });
+exports.signOut = asyncHandler(async (req, res) => {
+    const { userId } = req;
+    const customer = await CustomerModel.findById(userId);
+    const employee = await EmployeeModel.findById(userId);
+
+    if (!employee && !customer) return res.status(404).json({ message: 'no user found.', data: [] });
+    if (employee) {
+        employee.refreshToken = '';
         await employee.save();
-        employee.hash = null;
-        res.cookie('ato', accessToken, {
-            httpOnly: true,
-            secure: true,
-            signed: true,
-            sameSite: 'none',
-            maxAge: 24 * 60 * 60 * 1000,
-        });
-
-        return res.status(200).json({
-            message: 'Refresh token succesfully updated',
-            data: [employee],
-        });
-    } catch (error) {
-        res.status(401).json({
-            message: 'Error',
-            data: 'There was something wrong with the refresh token.',
-        });
     }
-});
-
-exports.refreshTokenForCustomer = asyncHandler(async (req, res) => {
-    try {
-        const { refreshToken, id } = req;
-        const customer = await CustomerModel.findById(id);
-        console.log(customer);
-
-        if (!customer)
-            return res.status(404).json({
-                message: 'Error',
-                data: `No customer with ID: ${id}.`,
-            });
-        if (customer.refreshToken !== refreshToken)
-            return res.status(400).json({
-                message: 'Error',
-                data: `Invalid token.`,
-            });
-
-        const newRefreshToken = uuidv4();
-        customer.refreshToken = newRefreshToken;
-
-        const accessToken = jwt.sign(customer.toJSON(), process.env.JWT_SECRET, { expiresIn: '1d' });
+    if (customer) {
+        customer.refreshToken = '';
         await customer.save();
-
-        customer.hash = null;
-        res.cookie('ato', accessToken, {
-            httpOnly: true,
-            secure: true,
-            signed: true,
-            sameSite: 'none',
-            maxAge: 24 * 60 * 60 * 1000,
-        });
-
-        return res.status(200).json({
-            message: 'Refresh token succesfully updated',
-            data: [customer],
-        });
-    } catch (error) {
-        res.status(400).json({
-            message: 'Error',
-            data: 'There was something wrong with the refresh token.',
-        });
     }
-});
-
-exports.signOutCustomer = asyncHandler(async (req, res) => {
     try {
-        res.clearCookie('ato');
+        res.clearCookie('rto');
+
         return res.status(200).json({
             message: 'Logged out succesfully',
             data: [],
@@ -309,6 +338,20 @@ exports.signOutCustomer = asyncHandler(async (req, res) => {
         return res.status(400).json({
             message: 'Logging out was unsuccessfull',
             data: [],
+        });
+    }
+});
+
+exports.verifyAccessToken = asyncHandler(async (req, res) => {
+    if (req.accessToken) {
+        return res.status(200).json({
+            message: 'Access token verified',
+            data: req.body.accessToken,
+        });
+    } else {
+        return res.status(401).json({
+            message: 'Unauthorized',
+            data: '',
         });
     }
 });
