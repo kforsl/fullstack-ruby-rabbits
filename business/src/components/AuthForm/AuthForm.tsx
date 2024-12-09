@@ -46,10 +46,11 @@ const AuthForm = () => {
                 setIsShowingLoadingSection(false);
             }, 200);
         } else {
-            const data = await agent.Authenticate(signInForm);
-            if (typeof data[0] !== 'string') {
-                sessionStorage.setItem('employee', JSON.stringify(data));
-                setEmployee(data);
+            const response = await agent.Authenticate.signIn(signInForm);
+            if (typeof response[0] !== 'string') {
+                sessionStorage.setItem('employee', JSON.stringify(response.data));
+                sessionStorage.setItem('ato', response.token);
+                setEmployee(response.data);
                 setIsLoading(false);
 
                 socket.emit('joinEmployeeRoom');

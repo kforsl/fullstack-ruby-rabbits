@@ -27,3 +27,8 @@ export interface Employee {
     createdAt?: Date;
     updatedAt?: Date;
 }
+export interface TokenResponse {
+    message: string;
+    data: Employee;
+    token: string;
+}

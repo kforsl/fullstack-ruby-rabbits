@@ -7,7 +7,11 @@ export interface SignUpForm extends Customer {
     password: string;
     verifyPassword: string;
 }
-
+export interface tokenResponse {
+    data: Customer;
+    message: string;
+    token: string;
+}
 export interface Customer {
     _id?: string;
     firstName: string;

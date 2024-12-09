@@ -1,10 +1,35 @@
+import { useEffect } from 'react';
 import Footer from './components/Footer/Footer';
 import Header from './components/Header/Header';
 import ScrollToTop from './components/ScrollToTop/ScrollToTop';
 import SignForm from './components/SignForm/SignForm';
 import RoutesComponent from './routes/Routes';
-
+import agent from './services/api/agent';
+import useAuthStore from './stores/authStore';
+import { tokenResponse } from './interfaces/interfaceAuth';
 function App() {
+    const { customer } = useAuthStore();
+
+    useEffect(() => {
+        if (!customer) {
+            agent.Authenticate.refreshToken().then((response: tokenResponse) => {
+                if (response.token) {
+                    sessionStorage.setItem('ato', response.token);
+                    sessionStorage.setItem('user', JSON.stringify(response.data));
+                }
+            });
+        }
+        setInterval(() => {
+            if (customer) {
+                agent.Authenticate.refreshToken().then((response: tokenResponse) => {
+                    if (response.token) {
+                        sessionStorage.setItem('ato', response.token);
+                    }
+                });
+            }
+        }, 1000 * 60 * 5);
+    }, []);
+
     return (
         <>
             <ScrollToTop />
