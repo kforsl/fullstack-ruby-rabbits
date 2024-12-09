@@ -77,6 +77,8 @@
 
 .popular-product-item__item-info {
     display: grid;
+    grid-template-rows: auto 1fr;
+    row-gap: var(--spacing-xs);
     grid-row: 1/2;
     grid-column: 2/3;
 }
@@ -173,6 +175,7 @@
 }
 
 @media screen and (max-width: 530px) {
+
     .popular-product-item-1,
     .popular-product-item-2,
     .popular-product-item-4,
@@ -182,10 +185,15 @@
 }
 
 @media screen and (max-width: 420px) {
+
     .popular-product-item-1,
     .popular-product-item-2,
     .popular-product-item-4,
     .popular-product-item-5 {
         width: 50px;
+    }
+
+    .popular-product-item__item-info {
+        min-height: 7.5rem;
     }
 }

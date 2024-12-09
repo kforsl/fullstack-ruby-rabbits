@@ -1,4 +1,4 @@
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import './navigationMenu.css';
 import Cart from '../Cart/Cart';
 import useAuthStore from '../../stores/authStore';
@@ -11,6 +11,7 @@ const NavigationMenu: React.FC = () => {
     const [isNavOpen, setIsNavOpen] = useState<boolean>(false);
     const { width } = useWindowSizeStore();
     const navigate = useNavigate();
+    const location = useLocation();
     const navigation = [
         { name: 'MENU', route: '/' },
         { name: 'OM OSS', route: '/om-oss' },
@@ -67,7 +68,7 @@ const NavigationMenu: React.FC = () => {
                         src='/images/logotype.png'
                         alt='Leende blå person med h och m som ögon'
                         className='navigation-menu__logotype'
-                        onClick={() => window.scrollTo(0, 0)}
+                        onClick={() => (location.pathname !== '/' ? navigate('/') : window.scrollTo(0, 0))}
                     />
                 </>
             ) : (

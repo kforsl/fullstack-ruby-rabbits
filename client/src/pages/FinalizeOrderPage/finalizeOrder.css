@@ -16,7 +16,7 @@
 }
 
 .finalize-page__order-list {
-    padding-right: var(--spacing-m);
+    padding-right: var(--spacing-s);
     background-color: var(--bg-primary);
     overflow-y: auto;
     max-height: 40svh;
@@ -85,17 +85,23 @@
 
 @media screen and (max-width: 500px) {
     .finalize-page__control-wrapper {
-        gap: var(--spacing-xs);
+        column-gap: var(--spacing-xs);
+        padding-top: var(--spacing-m);
+        row-gap: 0;
     }
-
-
-
-
 }
 
 
 @media screen and (max-width: 400px) {
     .finalize-page__order-list {
         padding-right: var(--spacing-s);
+    }
+
+    .finalize-page .text-button {
+        align-self: start;
+    }
+
+    .finalize-page__confirmation-wrapper {
+        gap: var(--spacing-xs);
     }
 }

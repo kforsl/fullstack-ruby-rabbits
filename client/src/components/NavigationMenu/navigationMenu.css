@@ -70,7 +70,7 @@
 .hamburger-wrapper {
     cursor: pointer;
     position: relative;
-    z-index: 999;
+    z-index: 998;
     width: 100%;
     padding-left: var(--spacing-xs);
 }
