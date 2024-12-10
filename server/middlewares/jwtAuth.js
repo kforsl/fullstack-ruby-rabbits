@@ -103,19 +103,19 @@ exports.validateUserAsManager = async (req, res, next) => {
 
 exports.validateIfUserIsCustomer = async (req, res, next) => {
     const { userId } = req;
-
     try {
         const customer = await CustomerModel.findById(userId);
-        if (!customer) throw new Error('You do not have access to this endpoint');
+        if (!customer) return res.status(400).json({ message: 'You have no access to this seciton' });
+
         req.customer = customer;
-    } catch (error) {}
+        console.log(customer);
+    } catch {}
     next();
 };
 exports.validateIfUserIsCustomerStrict = async (req, res, next) => {
     const { userId } = req;
     try {
         const customer = await CustomerModel.findById(userId);
-        console.log(customer);
         req.customer = customer;
         next();
     } catch (error) {
