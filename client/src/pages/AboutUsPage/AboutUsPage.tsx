@@ -1,6 +1,39 @@
+import EmployeeCard from '../../components/EmployeeCard/EmployeeCard';
+import { EmployeeInfo } from '../../interfaces/interfaceEmployeeInfo';
 import './aboutUsPage.css';
 
 const AboutUsPage: React.FC = () => {
+    const employees: EmployeeInfo[] = [
+        {
+            name: 'Mr. Mustachio',
+            desc: 'Äger allt. Även dig.',
+            alt: 'Mustaschprydd gentleman som står vid en rullvagn och säljer glass.',
+            src: '/images/employees/mr-mustachio-no-bg.png',
+            order: 'first',
+            size: 'large',
+        },
+        {
+            name: 'Ärlige Harry',
+            desc: 'Säljer allt. Även dig.',
+            alt: 'Harry med sitt säljande leende.',
+            src: '/images/employees/harry.png',
+            order: 'second',
+        },
+        {
+            name: 'Brotein Icecream',
+            desc: 'Bänkar 200l glass',
+            alt: 'En muskulös men orolig grabb.',
+            src: '/images/employees/brotein.png',
+            order: 'third',
+        },
+        {
+            name: 'King Dingeling',
+            desc: 'Glasstekniker',
+            alt: 'Grabb som faller in i kategorin "13 eller 30?"',
+            src: '/images/employees/test.png',
+            order: 'fourth',
+        },
+    ];
     return (
         <>
             <main className='about-page wrapper'>
@@ -30,44 +63,9 @@ const AboutUsPage: React.FC = () => {
                     </p>
                 </section>
                 <section className='employees'>
-                    <figure className='employees__employee-card employees__employee-card--large'>
-                        <div className='employees__image-wrapper employees__image-wrapper--first'>
-                            <img src='/images/employees/mr-mustachio-no-bg.png' alt='' className='employees__image' />
-                        </div>
-                        <figcaption className='employees__caption'>
-                            <h2 className='employees__employee-name'>Mr. Mustachio</h2>
-                            <h3 className='employees__description'>Äger allt. Även dig.</h3>
-                        </figcaption>
-                    </figure>
-                    <figure className='employees__employee-card'>
-                        <div className='employees__image-wrapper employees__image-wrapper--second'>
-                            <img src='/images/employees/harry.png' alt='' className='employees__image' />
-                        </div>
-                        <figcaption className='employees__caption'>
-                            <h2 className='employees__employee-name'>Ärlige Harry</h2>
-                            <h3 className='employees__description'>Säljer allt. Även dig.</h3>
-                        </figcaption>
-                    </figure>
-                    <figure className='employees__employee-card'>
-                        <div className='employees__image-wrapper employees__image-wrapper--third'>
-                            <img src='/images/employees/brotein.png' alt='' className='employees__image' />
-                        </div>
-
-                        <figcaption className='employees__caption'>
-                            <h2 className='employees__employee-name'>Brotein Icecream</h2>
-                            <h3 className='employees__description'>Bänkar 200l glass</h3>
-                        </figcaption>
-                    </figure>
-                    <figure className='employees__employee-card'>
-                        <div className='employees__image-wrapper employees__image-wrapper--fourth'>
-                            <img src='/images/employees/test.png' alt='' className='employees__image' />
-                        </div>
-
-                        <figcaption className='employees__caption'>
-                            <h2 className='employees__employee-name'>King Dingeling</h2>
-                            <h3 className='employees__description'>Glasstekniker</h3>
-                        </figcaption>
-                    </figure>
+                    {employees.map((employee, i) => (
+                        <EmployeeCard key={i} employee={employee} />
+                    ))}
                 </section>
             </main>
         </>
@@ -85,4 +83,7 @@ export default AboutUsPage;
  *
  * Ändrat: Magnus
  * Gjort om grid, lagt in figures med innehåll och gjort sidan responsiv.
+ *
+ * Ändrat: Magnus
+ * Gjort figures till komponenter och gjorde array som loopas ut.
  */

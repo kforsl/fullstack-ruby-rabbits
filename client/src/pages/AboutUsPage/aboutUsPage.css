@@ -43,56 +43,6 @@
     box-shadow: 2rem 0 0 2rem var(--bg-primary);
 }
 
-
-
-.employees__image-wrapper {
-    width: 100%;
-    display: grid;
-    place-items: center;
-    background-color: var(--color-accent2);
-    background-image: url(/images/blotches/u-e-t-a-darkblue-pink-white-cola.svg);
-    background-size: cover;
-    position: relative;
-    min-height: 12rem;
-}
-
-.employees__employee-card {
-    background-color: var(--color-white);
-    padding: var(--spacing-xs);
-    display: grid;
-    grid-template-rows: 1fr auto;
-
-
-}
-
-.employees__employee-card--large {
-    grid-column: 1/-1;
-}
-
-.employees__image-wrapper--first {
-    background-position: 0%;
-}
-
-.employees__image-wrapper--second {
-    background-position: bottom 10px left 60px;
-}
-
-.employees__image-wrapper--third {
-    background-position: bottom 100px right 0px;
-}
-
-.employees__image-wrapper--fourth {
-    background-position: bottom 200px left 10px;
-}
-
-
-
-.employees__image {
-    max-width: 100%;
-    object-fit: contain;
-    padding: .5rem;
-}
-
 /* Targetar bild 2 och framåt av employee-card */
 .employees__employee-card:nth-child(n+2) .employees__image {
     filter: drop-shadow(2px 2px 2px gray);
@@ -100,18 +50,11 @@
     bottom: -1.2rem;
 }
 
-.employees__caption {
-    padding: var(--spacing-xs) var(--spacing-s);
-    width: 100%;
+.employees__employee-card--large {
+    grid-column: 1/-1;
 }
 
-.employees__employee-name {
-    font-size: var(--font-size-m);
-}
 
-.employees__description {
-    font-size: var(--font-size-s);
-}
 
 @media (max-width: 1170px) {
     .employees__employee-card--large {
@@ -134,22 +77,6 @@
         grid-template-columns: 1fr;
         gap: var(--spacing-xs);
     }
-
-    .employees__image-wrapper {
-        min-height: 15rem;
-    }
-
-}
-
-@media (max-width: 970px) {
-    .employees {
-        grid-template-columns: 1fr;
-    }
-
-    .employees__image-wrapper {
-        min-height: 15rem;
-    }
-
 }
 
 @media (max-width: 850px) {
@@ -165,20 +92,4 @@
     .employees {
         grid-template-columns: repeat(2, minmax(0, 1fr));
     }
-
-
-}
-
-@media (max-width: 550px) {
-    .employees__image-wrapper {
-        min-height: 12rem;
-    }
-
-}
-
-@media (max-width: 420px) {
-    .employees__image-wrapper {
-        min-height: 10rem;
-    }
-
 }
