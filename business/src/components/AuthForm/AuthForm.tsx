@@ -14,6 +14,7 @@ const AuthForm = () => {
     const {
         signInForm,
         onFormChanged,
+        clearForm,
         isLoading,
         setIsLoading,
         isShowingLoadingSection,
@@ -56,6 +57,7 @@ const AuthForm = () => {
                 socket.emit('joinEmployeeRoom');
                 setTimeout(() => {
                     setIsShowingLoadingSection(false);
+                    clearForm();
                     navigate('/kassa');
                 }, 100);
             } else {

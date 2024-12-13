@@ -9,9 +9,9 @@ const jwt = require('jsonwebtoken');
 const passwordRegex = /^(?=.*\d)(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z]).{8,}$/;
 
 const generateRefreshToken = async (data) =>
-    await jwt.sign({ token: data }, process.env.REFRESH_SECRET, { expiresIn: '30d' });
+    await jwt.sign({ token: data }, process.env.REFRESH_SECRET, { expiresIn: '1d' }); //ÄNDRA DETTA SENARE NÄR AUTHENTICATION FUNGERAR SOM DET SKA
 const generateAccessToken = async (data) =>
-    await jwt.sign({ token: data }, process.env.JWT_SECRET, { expiresIn: '15min' });
+    await jwt.sign({ token: data }, process.env.JWT_SECRET, { expiresIn: '1d' }); //ÄNDRA DETTA SENARE NÄR AUTHENTICATION FUNGERAR SOM DET SKA
 
 exports.authenticateEmployee = asyncHandler(async (req, res) => {
     try {

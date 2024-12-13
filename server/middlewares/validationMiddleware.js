@@ -9,7 +9,7 @@ exports.validateOrder = async (req, res, next) => {
         }
         req.order = order;
 
-        next();
+        return next();
     } catch (error) {
         return res.status(400).json({
             message: 'Error',
@@ -26,7 +26,7 @@ exports.validateOrderStrict = async (req, res, next) => {
 
         req.order = order;
 
-        next();
+        return next();
     } catch (error) {
         return res.status(400).json({
             message: 'Error',
