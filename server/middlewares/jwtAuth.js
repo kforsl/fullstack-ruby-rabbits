@@ -9,9 +9,11 @@ exports.validateAccessToken = async (req, res, next) => {
         if (accessToken) {
             req.userId = accessToken.token;
         }
+        return next();
+    } catch (error) {
+        console.log(error);
         next();
-    } catch {}
-    next();
+    }
 };
 
 exports.validateAccessTokenStrict = async (req, res, next) => {
@@ -21,7 +23,7 @@ exports.validateAccessTokenStrict = async (req, res, next) => {
         if (accessToken) {
             req.userId = accessToken.token;
         }
-        next();
+        return next();
     } catch {
         return res.status(401).json({ message: 'Unauthorized' });
     }
@@ -34,7 +36,7 @@ exports.validateRefreshTokenStrict = async (req, res, next) => {
 
         req.refreshToken = verifiedRefreshToken.token;
 
-        next();
+        return next();
     } catch {
         return res.status(401).json({ message: 'Unauthorized' });
     }
@@ -47,8 +49,11 @@ exports.validateRefreshToken = async (req, res, next) => {
         const verifiedRefreshToken = jwt.verify(rto, process.env.REFRESH_SECRET);
         req.id = id;
         req.refreshToken = verifiedRefreshToken.token;
-    } catch {}
-    next();
+
+        return next();
+    } catch {
+        next();
+    }
 };
 
 exports.validateUserAsAdmin = async (req, res, next) => {
@@ -56,7 +61,7 @@ exports.validateUserAsAdmin = async (req, res, next) => {
         const { userId } = req;
         const employee = await EmployeeModel.findById(userId);
         if (!employee) throw new Error('No employer with this ID found');
-        if (employee.role === 'admin') next();
+        if (employee.role === 'admin') return next();
         else throw new Error('You do not have access to this endpoint');
     } catch (error) {
         return res.status(401).json({
@@ -73,10 +78,10 @@ exports.validateUserAsEmployee = async (req, res, next) => {
         const employee = await EmployeeModel.findById(userId);
         if (!employee) throw new Error('No employer with this ID found');
 
-        if (employee.role === 'employee') next();
-        else if (employee.role === 'manager') next();
-        else if (employee.role === 'admin') next();
-        else throw new Error('You do not have access to this endpoint');
+        if (employee.role === 'employee') return next();
+        if (employee.role === 'manager') return next();
+        if (employee.role === 'admin') return next();
+        throw new Error('You do not have access to this endpoint');
     } catch (error) {
         return res.status(403).json({
             message: 'Error',
@@ -101,23 +106,40 @@ exports.validateUserAsManager = async (req, res, next) => {
     }
 };
 
-exports.validateIfUserIsCustomer = async (req, res, next) => {
-    const { userId } = req;
-
-    try {
-        const customer = await CustomerModel.findById(userId);
-        if (!customer) throw new Error('You do not have access to this endpoint');
-        req.customer = customer;
-    } catch (error) {}
-    next();
-};
-exports.validateIfUserIsCustomerStrict = async (req, res, next) => {
+exports.validateUserAsCustomer = async (req, res, next) => {
     const { userId } = req;
     try {
         const customer = await CustomerModel.findById(userId);
-        console.log(customer);
+        console.log('INNE I VALIDATEASCUSTOMER', customer);
         req.customer = customer;
+        return next();
+    } catch {
         next();
+    }
+};
+exports.validateUserAsCustomerStrict = async (req, res, next) => {
+    const { userId } = req;
+    try {
+        const customer = await CustomerModel.findById(userId);
+        if (!customer) return res.status(400).json({ message: 'You have no access to this section' });
+        req.customer = customer;
+        return next();
+    } catch (error) {
+        return res.status(401).json({ message: 'Invalid Token' });
+    }
+};
+exports.validateUserAsCustomerOrEmployeeStrict = async (req, res, next) => {
+    const { userId } = req;
+    try {
+        const customer = await CustomerModel.findById(userId);
+        if (!customer) {
+            const employee = await EmployeeModel.findById(userId);
+            if (!employee) return res.status(400).json({ message: 'You have no access to this section' });
+            req.employee = employee;
+            return next();
+        }
+        req.customer = customer;
+        return next();
     } catch (error) {
         return res.status(401).json({ message: 'Invalid Token' });
     }

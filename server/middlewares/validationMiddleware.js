@@ -9,9 +9,9 @@ exports.validateOrder = async (req, res, next) => {
         }
         req.order = order;
 
-        next();
+        return next();
     } catch (error) {
-        res.status(400).json({
+        return res.status(400).json({
             message: 'Error',
             data: [error.message],
         });
@@ -26,9 +26,9 @@ exports.validateOrderStrict = async (req, res, next) => {
 
         req.order = order;
 
-        next();
+        return next();
     } catch (error) {
-        res.status(400).json({
+        return res.status(400).json({
             message: 'Error',
             data: [error.message],
         });

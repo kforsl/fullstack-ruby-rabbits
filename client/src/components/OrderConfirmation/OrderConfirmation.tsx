@@ -9,6 +9,7 @@ import { useGetOrderById } from '../../services/queries';
 import OrderConfirmationListItem from '../OrderConfirmationListItem/OrderConfirmationListItem';
 import useOrderStore from '../../stores/orderStore';
 import { useUpdateOrder } from '../../services/mutations/useUpdateOrder';
+import { useNavigate } from 'react-router-dom';
 
 const OrderConfirmation: React.FC = () => {
     const { order: newOrder, setOrder: setNewOrder, originalOrder, setOriginalOrder } = useOrderStore();
@@ -19,7 +20,7 @@ const OrderConfirmation: React.FC = () => {
     const { mutate: editOrderState, isPending: isChangingEditState } = useChangeOrderState();
     const { mutate: updateOrder } = useUpdateOrder();
     const { refetch, isFetching } = useGetOrderById(newOrder?._id);
-
+    const navigate = useNavigate();
     useEffect(() => {
         const handleNewOrderStatus = async () => {
             const { data, isError } = await refetch();

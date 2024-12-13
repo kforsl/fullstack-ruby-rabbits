@@ -5,6 +5,7 @@ const { ProductModel } = require('../models/productModel');
 exports.createOrder = asyncHandler(async (req, res) => {
     const { customer } = req;
     const order = new OrderModel(req.body);
+    console.log(customer);
     if (customer) {
         order.customer = customer._id;
     }
@@ -15,7 +16,7 @@ exports.createOrder = asyncHandler(async (req, res) => {
         .reduce((a, b) => a + b);
     await order.save();
 
-    return res.status(201).json({
+    res.status(200).json({
         message: 'successfully created order',
         data: [order],
     });
